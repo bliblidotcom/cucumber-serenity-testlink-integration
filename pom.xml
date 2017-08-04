@@ -4,7 +4,7 @@
 
     <groupId>com.gdn.qa.util</groupId>
     <artifactId>serenity-testlink-integration</artifactId>
-    <version>2.0.0</version>
+    <version>2.0.1-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
 
     <name>serenity-testlink-integration</name>
@@ -14,7 +14,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.plugin.api.version>3.0</maven.plugin.api.version>
         <maven.plugin.annotations.version>3.4</maven.plugin.annotations.version>
-        <gdn.qa.util.version>2.0.0</gdn.qa.util.version>
         <junit.version>4.12</junit.version>
         <testlink.java.api.version>1.9.14-0</testlink.java.api.version>
     </properties>
