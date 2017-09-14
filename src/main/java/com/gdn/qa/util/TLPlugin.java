@@ -131,11 +131,11 @@ public class TLPlugin {
             Execution lastExecution = api.getLastExecutionResult(tpID.getId(), testCases.getId(), null);
             if (lastExecution != null) {
                 api.deleteExecution(lastExecution.getId());
-                api.addTestCaseToTestPlan(projectID, tpID.getId(), testCases.getId(), testCases.getVersion(), null, testCases.getOrder(), null);
             }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
+            api.addTestCaseToTestPlan(projectID, tpID.getId(), testCases.getId(), testCases.getVersion(), null, testCases.getOrder(), null);
             ReportTCResultResponse reportTCResponse = api.reportTCResult(tcExternalID, tcInternalID, tpID.getId(),
                     ExecutionStatus.PASSED, null, build, "Test Case ini dieksekusi Otomatis", null, null, null, platFormName, null, true);
             System.out.println(reportTCResponse.getMessage());
@@ -156,10 +156,10 @@ public class TLPlugin {
             if (lastExecution != null) {
                 api.deleteExecution(lastExecution.getId());
             }
-            api.addTestCaseToTestPlan(projectID, tpID.getId(), testCases.getId(), testCases.getVersion(), null, null, null);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
+            api.addTestCaseToTestPlan(projectID, tpID.getId(), testCases.getId(), testCases.getVersion(), null, null, null);
             ReportTCResultResponse reportTCResponse = api.reportTCResult(tcExternalID, tcInternalID, tpID.getId(),
                     ExecutionStatus.FAILED, null, build, notes, null, null, null, platFormName, null, true);
             System.out.println(reportTCResponse.getMessage());
