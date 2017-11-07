@@ -19,8 +19,8 @@
     </properties>
 
     <scm>
-        <connection>scm:git:ssh://git@wallet-repository.gdn-app.com:7999/qa/surabaya-client-testlink.git</connection>
-        <developerConnection>scm:git:ssh://git@wallet-repository.gdn-app.com:7999/qa/surabaya-client-testlink.git</developerConnection>
+        <connection>scm:git:ssh://git@wallet-repository.gdn-app.com:7999/qa/smartbliqjmeterarchetype.git</connection>
+        <developerConnection>scm:git:ssh://git@wallet-repository.gdn-app.com:7999/qa/smartbliqjmeterarchetype.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
@@ -93,15 +93,15 @@
     </build>
 
     <distributionManagement>
-       <repository>
-            <id>libs-releases-local.artifactory.gdn-app.com</id>
-            <name>libs-releases-local.artifactory.gdn-app.com</name>
-            <url>https://wallet-artifactory.gdn-app.com/artifactory/libs-releases-local</url>
-        </repository>
+        <repository>
+			<id>libs-releases-local.wallet-artifactory.gdn-app.com</id>
+			<name>artifactory-01-releases</name>
+			<url>https://wallet-artifactory.gdn-app.com/artifactory/libs-releases-local</url>
+		</repository>
         <snapshotRepository>
-            <id>libs-snapshots-local.wallet-artifactory.gdn-app.com</id>
-            <name>libs-snapshots-local.wallet-artifactory.gdn-app.com</name>
-            <url>https://wallet-artifactory.gdn-app.com/artifactory/libs-snapshots-local</url>
-        </snapshotRepository>
+			<id>libs-snapshots-local.wallet-artifactory.gdn-app.com</id>
+			<name>artifactory-01-snapshots</name>
+			<url>https://wallet-artifactory.gdn-app.com/artifactory/libs-snapshots-local</url>
+		</snapshotRepository>
     </distributionManagement>
 </project>
