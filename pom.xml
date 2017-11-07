@@ -1,0 +1,108 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.gdn.qa.util</groupId>
+    <artifactId>serenity-testlink-integration</artifactId>
+    <version>2.0.1</version>
+    <packaging>maven-plugin</packaging>
+
+    <name>serenity-testlink-integration</name>
+    <url>https://artifactory.gdn-app.com</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.plugin.api.version>3.0</maven.plugin.api.version>
+        <maven.plugin.annotations.version>3.4</maven.plugin.annotations.version>
+        <junit.version>4.12</junit.version>
+        <testlink.java.api.version>1.9.14-0</testlink.java.api.version>
+    </properties>
+
+    <scm>
+        <connection>scm:git:ssh://git@stash.gdn-app.com:7999/qa/testlink-serenity-integration.git</connection>
+        <developerConnection>scm:git:ssh://git@stash.gdn-app.com:7999/qa/testlink-serenity-integration.git
+        </developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <repositories>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>central</id>
+            <name>bintray</name>
+            <url>http://jcenter.bintray.com</url>
+        </repository>
+        <repository>
+            <id>libs-releases-local.artifactory.gdn-app.com</id>
+            <name>libs-releases-local.artifactory.gdn-app.com</name>
+            <url>https://artifactory.gdn-app.com/artifactory/libs-releases-local/</url>
+            <layout>default</layout>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>libs-snapshots-local.artifactory.gdn-app.com</id>
+            <name>libs-snapshots-local.artifactory.gdn-app.com</name>
+            <url>https://artifactory.gdn-app.com/artifactory/libs-snapshots-local/</url>
+            <layout>default</layout>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-plugin-api</artifactId>
+            <version>${maven.plugin.api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugin-tools</groupId>
+            <artifactId>maven-plugin-annotations</artifactId>
+            <version>${maven.plugin.annotations.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/br.eti.kinoshita/testlink-java-api -->
+        <dependency>
+            <groupId>br.eti.kinoshita</groupId>
+            <artifactId>testlink-java-api</artifactId>
+            <version>${testlink.java.api.version}</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.2</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <distributionManagement>
+        <repository>
+            <id>libs-releases-local.artifactory.gdn-app.com</id>
+            <name>libs-releases-local.artifactory.gdn-app.com</name>
+            <url>https://artifactory.gdn-app.com/artifactory/libs-releases-local</url>
+        </repository>
+        <snapshotRepository>
+            <id>libs-snapshots-local.artifactory.gdn-app.com</id>
+            <name>libs-snapshots-local.artifactory.gdn-app.com</name>
+            <url>https://artifactory.gdn-app.com/artifactory/libs-snapshots-local</url>
+        </snapshotRepository>
+    </distributionManagement>
+</project>
