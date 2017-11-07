@@ -8,7 +8,7 @@
     <packaging>maven-plugin</packaging>
 
     <name>serenity-testlink-integration</name>
-    <url>https://artifactory.gdn-app.com</url>
+    <url>https://wallet-repository.gdn-app.com</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -19,9 +19,8 @@
     </properties>
 
     <scm>
-        <connection>scm:git:ssh://git@stash.gdn-app.com:7999/qa/testlink-serenity-integration.git</connection>
-        <developerConnection>scm:git:ssh://git@stash.gdn-app.com:7999/qa/testlink-serenity-integration.git
-        </developerConnection>
+        <connection>scm:git:ssh://git@wallet-repository.gdn-app.com:7999/qa/surabaya-client-testlink.git</connection>
+        <developerConnection>scm:git:ssh://git@wallet-repository.gdn-app.com:7999/qa/surabaya-client-testlink.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
@@ -34,10 +33,10 @@
             <name>bintray</name>
             <url>http://jcenter.bintray.com</url>
         </repository>
-        <repository>
-            <id>libs-releases-local.artifactory.gdn-app.com</id>
-            <name>libs-releases-local.artifactory.gdn-app.com</name>
-            <url>https://artifactory.gdn-app.com/artifactory/libs-releases-local/</url>
+       <repository>
+            <id>libs-releases-local.wallet-artifactory.gdn-app.com</id>
+            <name>libs-releases-local.wallet-artifactory.gdn-app.com</name>
+            <url>https://wallet-artifactory.gdn-app.com/artifactory/libs-releases-local</url>
             <layout>default</layout>
             <releases>
                 <enabled>true</enabled>
@@ -47,9 +46,9 @@
             </snapshots>
         </repository>
         <repository>
-            <id>libs-snapshots-local.artifactory.gdn-app.com</id>
-            <name>libs-snapshots-local.artifactory.gdn-app.com</name>
-            <url>https://artifactory.gdn-app.com/artifactory/libs-snapshots-local/</url>
+            <id>libs-snapshots-local.wallet-artifactory.gdn-app.com</id>
+            <name>libs-snapshots-local.wallet-artifactory.gdn-app.com</name>
+            <url>https://wallet-artifactory.gdn-app.com/artifactory/libs-snapshots-local</url>
             <layout>default</layout>
             <releases>
                 <enabled>false</enabled>
@@ -94,15 +93,15 @@
     </build>
 
     <distributionManagement>
-        <repository>
+       <repository>
             <id>libs-releases-local.artifactory.gdn-app.com</id>
             <name>libs-releases-local.artifactory.gdn-app.com</name>
-            <url>https://artifactory.gdn-app.com/artifactory/libs-releases-local</url>
+            <url>https://wallet-artifactory.gdn-app.com/artifactory/libs-releases-local</url>
         </repository>
         <snapshotRepository>
-            <id>libs-snapshots-local.artifactory.gdn-app.com</id>
-            <name>libs-snapshots-local.artifactory.gdn-app.com</name>
-            <url>https://artifactory.gdn-app.com/artifactory/libs-snapshots-local</url>
+            <id>libs-snapshots-local.wallet-artifactory.gdn-app.com</id>
+            <name>libs-snapshots-local.wallet-artifactory.gdn-app.com</name>
+            <url>https://wallet-artifactory.gdn-app.com/artifactory/libs-snapshots-local</url>
         </snapshotRepository>
     </distributionManagement>
 </project>
