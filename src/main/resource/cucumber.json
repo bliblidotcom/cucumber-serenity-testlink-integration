@@ -1,0 +1,238 @@
+[
+  {
+    "line": 1,
+    "elements": [
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 4777743186,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.beforeRun()"
+            }
+          }
+        ],
+        "line": 2,
+        "name": "Login with correct username and password",
+        "description": "",
+        "id": "login-on-blibli-home-page;login-with-correct-username-and-password",
+        "after": [
+          {
+            "result": {
+              "duration": 25232,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.afterRun()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 170480968,
+              "status": "passed"
+            },
+            "line": 3,
+            "name": "user open blibli home page",
+            "match": {
+              "location": "HomeSteps.userOpenBlibliHomePage()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 396006,
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "user click masuk",
+            "match": {
+              "location": "HomeSteps.userClickMasuk()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 310903,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "the pop up login should be appear",
+            "match": {
+              "location": "HomeSteps.thePopUpLoginShouldBeAppear()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "error_message": "java.lang.AssertionError: Ini gagal\nExpected: \u003cfalse\u003e\n     but: was \u003ctrue\u003e\r\n\tat org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)\r\n\tat com.gdn.qa.module.ui.test.steps.HomeSteps.userInputUsernameUsernameAndPasswordPassword(HomeSteps.java:37)\r\n\tat ✽.user input username \u0027hendri.antomy@gdn-commerce.com\u0027 and password \u0027hndri1234\u0027(src/test/resources/features/Login.feature:6)\r\n",
+              "duration": 10036997,
+              "status": "failed"
+            },
+            "line": 6,
+            "name": "user input username \u0027hendri.antomy@gdn-commerce.com\u0027 and password \u0027hndri1234\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "hendri.antomy@gdn-commerce.com",
+                  "offset": 21
+                },
+                {
+                  "val": "hndri1234",
+                  "offset": 67
+                }
+              ],
+              "location": "HomeSteps.userInputUsernameUsernameAndPasswordPassword(String,String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 7,
+            "name": "user click login",
+            "match": {
+              "location": "HomeSteps.userClickLogin()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 8,
+            "name": "user should successfully login into blibli.com",
+            "match": {
+              "location": "HomeSteps.userShouldSuccessfullyLoginIntoBlibliCom()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      }
+    ],
+    "name": "Login on Blibli home page",
+    "description": "",
+    "id": "login-on-blibli-home-page",
+    "keyword": "Feature",
+    "uri": "src/test/resources/features/Login.feature",
+    "tags": []
+  },
+  {
+    "line": 1,
+    "elements": [
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 22101919,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.beforeRun()"
+            }
+          }
+        ],
+        "line": 2,
+        "name": "Login with correct username and password 2",
+        "description": "",
+        "id": "login-on-blibli-home-page;login-with-correct-username-and-password-2",
+        "after": [
+          {
+            "result": {
+              "duration": 24804,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.afterRun()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 36469320,
+              "status": "passed"
+            },
+            "line": 3,
+            "name": "user open blibli home page",
+            "match": {
+              "location": "HomeSteps.userOpenBlibliHomePage()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 263006,
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "user click masuk",
+            "match": {
+              "location": "HomeSteps.userClickMasuk()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "error_message": "java.lang.AssertionError: Ini gagal\nExpected: \u003cfalse\u003e\n     but: was \u003ctrue\u003e\r\n\tat org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)\r\n\tat com.gdn.qa.module.ui.test.steps.HomeSteps.userInputUsernameUsernameAndPasswordPassword(HomeSteps.java:37)\r\n\tat ✽.user input username \u0027hendri.antomy@gdn-commerce.com\u0027 and password \u0027lalala\u0027(src/test/resources/features/Login2.feature:5)\r\n",
+              "duration": 667138,
+              "status": "failed"
+            },
+            "line": 5,
+            "name": "user input username \u0027hendri.antomy@gdn-commerce.com\u0027 and password \u0027lalala\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "hendri.antomy@gdn-commerce.com",
+                  "offset": 21
+                },
+                {
+                  "val": "lalala",
+                  "offset": 67
+                }
+              ],
+              "location": "HomeSteps.userInputUsernameUsernameAndPasswordPassword(String,String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 6,
+            "name": "user click login",
+            "match": {
+              "location": "HomeSteps.userClickLogin()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 7,
+            "name": "user should successfully login into blibli.com",
+            "match": {
+              "location": "HomeSteps.userShouldSuccessfullyLoginIntoBlibliCom()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      }
+    ],
+    "name": "Login on Blibli home page",
+    "description": "",
+    "id": "login-on-blibli-home-page",
+    "keyword": "Feature",
+    "uri": "src/test/resources/features/Login2.feature",
+    "tags": []
+  }
+]
