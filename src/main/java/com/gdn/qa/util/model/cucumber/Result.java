@@ -1,14 +1,11 @@
 
 package com.gdn.qa.util.model.cucumber;
 
+import com.fasterxml.jackson.annotation.*;
+
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -18,19 +15,21 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class Result {
 
     @JsonProperty("duration")
-    private Integer duration;
+    private Timestamp duration;
     @JsonProperty("status")
     private String status;
+    @JsonProperty("error_message")
+    private String errorMessage;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     @JsonProperty("duration")
-    public Integer getDuration() {
+    public Timestamp getDuration() {
         return duration;
     }
 
     @JsonProperty("duration")
-    public void setDuration(Integer duration) {
+    public void setDuration(Timestamp duration) {
         this.duration = duration;
     }
 
@@ -42,6 +41,16 @@ public class Result {
     @JsonProperty("status")
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @JsonProperty("error_message")
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    @JsonProperty("error_message")
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 
     @JsonAnyGetter

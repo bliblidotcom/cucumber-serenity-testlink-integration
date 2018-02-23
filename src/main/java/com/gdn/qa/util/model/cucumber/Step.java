@@ -1,14 +1,10 @@
 
 package com.gdn.qa.util.model.cucumber;
 
+import com.fasterxml.jackson.annotation.*;
+
 import java.util.HashMap;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -21,25 +17,25 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class Step {
 
     @JsonProperty("result")
-    private Result__ result;
+    private Result result;
     @JsonProperty("line")
     private Integer line;
     @JsonProperty("name")
     private String name;
     @JsonProperty("match")
-    private Match__ match;
+    private Match match;
     @JsonProperty("keyword")
     private String keyword;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     @JsonProperty("result")
-    public Result__ getResult() {
+    public Result getResult() {
         return result;
     }
 
     @JsonProperty("result")
-    public void setResult(Result__ result) {
+    public void setResult(Result result) {
         this.result = result;
     }
 
@@ -64,12 +60,12 @@ public class Step {
     }
 
     @JsonProperty("match")
-    public Match__ getMatch() {
+    public Match getMatch() {
         return match;
     }
 
     @JsonProperty("match")
-    public void setMatch(Match__ match) {
+    public void setMatch(Match match) {
         this.match = match;
     }
 

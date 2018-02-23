@@ -1,15 +1,11 @@
 
 package com.gdn.qa.util.model.cucumber;
 
+import com.fasterxml.jackson.annotation.*;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -39,7 +35,7 @@ public class CucumberModel {
     @JsonProperty("uri")
     private String uri;
     @JsonProperty("tags")
-    private List<Object> tags = null;
+    private List<Tags> tags = null;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -114,12 +110,12 @@ public class CucumberModel {
     }
 
     @JsonProperty("tags")
-    public List<Object> getTags() {
+    public List<Tags> getTags() {
         return tags;
     }
 
     @JsonProperty("tags")
-    public void setTags(List<Object> tags) {
+    public void setTags(List<Tags> tags) {
         this.tags = tags;
     }
 

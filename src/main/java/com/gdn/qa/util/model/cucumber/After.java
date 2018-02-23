@@ -1,46 +1,42 @@
 
 package com.gdn.qa.util.model.cucumber;
 
+import com.fasterxml.jackson.annotation.*;
+
 import java.util.HashMap;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "result",
-    "match"
+        "result",
+        "match"
 })
 public class After {
 
     @JsonProperty("result")
-    private Result_ result;
+    private Result result;
     @JsonProperty("match")
-    private Match_ match;
+    private Match match;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     @JsonProperty("result")
-    public Result_ getResult() {
+    public Result getResult() {
         return result;
     }
 
     @JsonProperty("result")
-    public void setResult(Result_ result) {
+    public void setResult(Result result) {
         this.result = result;
     }
 
     @JsonProperty("match")
-    public Match_ getMatch() {
+    public Match getMatch() {
         return match;
     }
 
     @JsonProperty("match")
-    public void setMatch(Match_ match) {
+    public void setMatch(Match match) {
         this.match = match;
     }
 

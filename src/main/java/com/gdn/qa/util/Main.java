@@ -6,6 +6,8 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
+import java.io.File;
+
 /**
  * Created by hendri.antomy on 8/2/2017.
  *
@@ -62,10 +64,23 @@ public class Main extends AbstractMojo {
         System.out.println("Platform Name : " + platformName);
         System.out.println("===End Of Config===");
         System.out.println("===Process Started===");
+        // check if cucumebr json exist
+        String cucumberPath = System.getProperty("user.dir") + "/target/destination/cucumber.json";
+        File cucumberFile = new File(cucumberPath);
         TestResultReader testResultReader = new TestResultReader();
         testResultReader.initialize(testlinkURL, devKey,
                 projectName, testPlanName, buildName, platformName);
-        testResultReader.readResult();
+        if(!cucumberFile.exists()){
+            System.out.println("=== Run with Jbehave ===");
+            testResultReader.readResult();
+        }else{
+            System.out.println("=== Run with Cucumber ===");
+            try {
+                testResultReader.readWithCucumber(cucumberPath);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         System.out.println("===Process Ended===");
     }
 

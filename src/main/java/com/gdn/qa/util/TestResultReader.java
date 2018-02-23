@@ -1,5 +1,9 @@
 package com.gdn.qa.util;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gdn.qa.util.model.cucumber.CucumberModel;
+import com.gdn.qa.util.model.cucumber.Step;
+import com.gdn.qa.util.model.cucumber.Tags;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -48,7 +52,7 @@ public class TestResultReader {
 //        System.out.println(System.getProperty("user.dir"));
 //        System.out.println(pathTourl.getFile());
         //File dirXml = new File(pathTourl.getFile());
-        File dirXml = new File(System.getProperty("user.dir")+"/target/classes/");
+        File dirXml = new File(System.getProperty("user.dir") + "/target/classes/");
         /// Get Parent Directory
         String parentDirectory = dirXml.getParent();
         File folder = new File(parentDirectory + "/jbehave");
@@ -67,6 +71,7 @@ public class TestResultReader {
     }
 
 
+    // Run With Jbehave
     public Map<String, String> readXML(String pathFile) {
         Map<String, String> result = new HashMap<>();
 
@@ -127,7 +132,7 @@ public class TestResultReader {
 
             ///// Cek apabila tidak ada TestSuiteID
             if (result.get("TestSuiteID") == null) {
-                result.put("TestSuiteID", DEFAULT_ID_TEST_LINK);
+                System.out.println("Testlink Suite id is Null , No action Needed");
             }
 
             /// Get All List scenario
@@ -159,7 +164,7 @@ public class TestResultReader {
                         Element vSteps = (Element) steps.item(cSteps);
 
                         /// check if outcome is empty
-                        if(vSteps.getAttribute("outcome").isEmpty()){
+                        if (vSteps.getAttribute("outcome").isEmpty()) {
                             continue;
                         }
 
@@ -176,20 +181,20 @@ public class TestResultReader {
                             /// Clean data when fail
                             NodeList failures = vSteps.getElementsByTagName("failure");
                             Element failure = null;
-                            if (failures.getLength() > 0 ) {
+                            if (failures.getLength() > 0) {
                                 failure = (Element) failures.item(0);
-                                reasonFail= failure.getTextContent();
+                                reasonFail = failure.getTextContent();
                             }
-                            stepsDefinition = stepsDefinition.replace(reasonFail,"");
+                            stepsDefinition = stepsDefinition.replace(reasonFail, "");
                             passed = false;
                         }
-                        String[] stepsResult = {stepsDefinition, Boolean.toString(passed),reasonFail};
+                        String[] stepsResult = {stepsDefinition, Boolean.toString(passed), reasonFail};
                         testCaseSteps.add(totalSteps++, stepsResult);
                     }
 
                     /// Digunakan Untuk Pengecekan di semua test Case Steps
-                    for (String[] testCaseStep : testCaseSteps){
-                        if(testCaseStep[1].equalsIgnoreCase(Boolean.toString(false))){
+                    for (String[] testCaseStep : testCaseSteps) {
+                        if (testCaseStep[1].equalsIgnoreCase(Boolean.toString(false))) {
                             passed = false;
                             break;
                         }
@@ -200,14 +205,14 @@ public class TestResultReader {
 
             /// Add Test Suite ID
             TLPlugin testLinkPlugin = new TLPlugin();
-            if (result.get("PreConditions")!=null) {
+            if (result.get("PreConditions") != null) {
                 testLinkPlugin.setPreCondition(result.get("PreConditions"));
             }
-            if (result.get("Title")!=null) {
+            if (result.get("Title") != null) {
                 testLinkPlugin.setpTitle(result.get("Title"));
             }
 
-            if (result.get("Summary")!=null) {
+            if (result.get("Summary") != null) {
                 testLinkPlugin.setSummary(result.get("Summary"));
             }
 
@@ -225,6 +230,81 @@ public class TestResultReader {
             e.printStackTrace();
         }
         return result;
+    }
+
+    /**
+     * Run With Cucumber
+     *
+     * @param cucumberJsonPath
+     * @throws Exception
+     */
+    public void readWithCucumber(String cucumberJsonPath) throws Exception {
+        ObjectMapper objectMapper = new ObjectMapper();
+        if (cucumberJsonPath == "" || cucumberJsonPath.isEmpty()) {
+            cucumberJsonPath = System.getProperty("user.dir") + "/target/destination/cucumber.json";
+        }
+        File cucumberFile = new File(cucumberJsonPath);
+        if (!cucumberFile.exists()) {
+            System.out.println("Cucumber Path : " + cucumberJsonPath);
+            throw new Exception("Cucumber Json is not exist can't Post To Testlink , is your setup is right ? ");
+        }
+        CucumberModel[] cucumberModels = objectMapper.readValue(cucumberFile, CucumberModel[].class);
+
+        // Read Read Each Test Feature
+        for (CucumberModel cucumberModel : cucumberModels) {
+            ArrayList<String[]> testCaseSteps = new ArrayList<>();
+            String testLinkId = "";
+            String testSuiteId = null;
+            Boolean passed = true;
+            String reasonFail = "";
+            // Get tag TestlinkID or TestSuiteId
+            Tags tags = cucumberModel.getTags().stream().filter(x -> {
+                if (x.getName().toLowerCase().contains("testlinkid") || x.getName().toLowerCase().contains("testSuiteId"))
+                    return true;
+                return false;
+            }).findAny().orElse(null);
+            // Lanjutkan Looping Jika Tidak ditemuin
+            if (tags == null) {
+                continue;
+            }
+            if (tags.getName().toLowerCase().contains("testlinkid")) {
+                testLinkId = tags.getName().split("=")[1];
+            } else {
+                testSuiteId = tags.getName().split("=")[1];
+            }
+            // Read Each Steps
+            for (Step step : cucumberModel.getElements().get(0).getSteps()) {
+                String[] stepsResult = {step.getName(), Boolean.toString((step.getResult().getStatus().equalsIgnoreCase("passed")) ? true : false), (step.getResult().getErrorMessage() == null) ? "" : step.getResult().getErrorMessage()};
+                // Check Sucess or Not
+                if (!step.getResult().getStatus().equalsIgnoreCase("passed") && passed ) {
+                    passed = false;
+                    reasonFail = step.getResult().getErrorMessage();
+                }
+                testCaseSteps.add(stepsResult);
+            }
+            if (testSuiteId == null) {
+                testSuiteId = "0";
+            }
+            TLPlugin testLinkPlugin = new TLPlugin();
+            testLinkPlugin.TLPluginInitialize(testLinkId,
+                    testCaseSteps, Integer.parseInt(testSuiteId), cucumberModel.getName(), urlTestlink, DEVKEY, testProject, testPlan,
+                    build, platFormName);
+            if (passed) {
+                testLinkPlugin.updateTestcasePassed();
+            }else{
+                testLinkPlugin.updateTestcaseFail(reasonFail);
+            }
+        }
+
+    }
+
+    /**
+     * Digunakan untuk Overloading sajah ,
+     *
+     * @throws Exception
+     */
+    public void readWithCucumber() throws Exception {
+        this.readWithCucumber("");
     }
 
 }
