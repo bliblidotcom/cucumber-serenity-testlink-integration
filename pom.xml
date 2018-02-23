@@ -20,8 +20,7 @@
 
     <scm>
         <connection>scm:git:ssh://git@stash.gdn-app.com:7999/qa/testlink-serenity-integration.git</connection>
-        <developerConnection>scm:git:ssh://git@stash.gdn-app.com:7999/qa/testlink-serenity-integration.git
-        </developerConnection>
+        <developerConnection>scm:git:ssh://git@stash.gdn-app.com:7999/qa/testlink-serenity-integration.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
