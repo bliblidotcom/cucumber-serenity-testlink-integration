@@ -116,7 +116,7 @@
         ],
         "tags": [
           {
-            "name": "@TestlinkId\u003dSBY-2"
+            "name": "@TestlinkId"
           }
         ]
       },
@@ -234,7 +234,7 @@
         ],
         "tags": [
           {
-            "name": "@TestlinkId\u003dSBY-2"
+            "name": "@TestlinkId"
           }
         ]
       }
@@ -246,7 +246,7 @@
     "uri": "src/test/resources/features/Login.feature",
     "tags": [
       {
-        "name": "@TestlinkId\u003dSBY-2",
+        "name": "@TestlinkId",
         "type": "Tag",
         "location": {
           "line": 1,

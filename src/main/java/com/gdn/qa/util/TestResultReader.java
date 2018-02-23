@@ -268,15 +268,22 @@ public class TestResultReader {
                 continue;
             }
             if (tags.getName().toLowerCase().contains("testlinkid")) {
-                testLinkId = tags.getName().split("=")[1];
+                if(tags.getName().split("=").length > 1){
+                    testLinkId = tags.getName().split("=")[1].trim();
+                }else{
+                    System.out.println("=== Test Link ID not found , please use @TESTLINKID=TEStLINKID on " + cucumberModel.getName()+" ===");
+                    continue;
+                }
             } else {
-                testSuiteId = tags.getName().split("=")[1];
+                testSuiteId = tags.getName().split("=")[1].trim();
             }
+
+
             // Read Each Steps
             for (Step step : cucumberModel.getElements().get(0).getSteps()) {
                 String[] stepsResult = {step.getName(), Boolean.toString((step.getResult().getStatus().equalsIgnoreCase("passed")) ? true : false), (step.getResult().getErrorMessage() == null) ? "" : step.getResult().getErrorMessage()};
                 // Check Sucess or Not
-                if (!step.getResult().getStatus().equalsIgnoreCase("passed") && passed ) {
+                if (!step.getResult().getStatus().equalsIgnoreCase("passed") && passed) {
                     passed = false;
                     reasonFail = step.getResult().getErrorMessage();
                 }
@@ -291,7 +298,7 @@ public class TestResultReader {
                     build, platFormName);
             if (passed) {
                 testLinkPlugin.updateTestcasePassed();
-            }else{
+            } else {
                 testLinkPlugin.updateTestcaseFail(reasonFail);
             }
         }
