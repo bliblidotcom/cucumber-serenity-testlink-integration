@@ -267,13 +267,14 @@ public class TestResultReader {
             if (tags == null) {
                 continue;
             }
+            // check jika ada spasi setelah sama dengan.
+            if (tags.getName().split("=").length  == 1) {
+                System.out.println("=== Test Link ID not found , please use @TESTLINKID=TESTLINKID (Ex. @TestlinkId=123) - Without Space on : " + cucumberModel.getName() + " ===");
+                continue;
+            }
+
             if (tags.getName().toLowerCase().contains("testlinkid")) {
-                if(tags.getName().split("=").length > 1){
-                    testLinkId = tags.getName().split("=")[1].trim();
-                }else{
-                    System.out.println("=== Test Link ID not found , please use @TESTLINKID=TEStLINKID on " + cucumberModel.getName()+" ===");
-                    continue;
-                }
+                testLinkId = tags.getName().split("=")[1].trim();
             } else {
                 testSuiteId = tags.getName().split("=")[1].trim();
             }
