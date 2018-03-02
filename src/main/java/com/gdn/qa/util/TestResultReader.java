@@ -214,6 +214,8 @@ public class TestResultReader {
 
             if (result.get("Summary") != null) {
                 testLinkPlugin.setSummary(result.get("Summary"));
+            }else{
+                testLinkPlugin.setSummary(result.get("Title"));
             }
 
             testLinkPlugin.TLPluginInitialize(result.get("testLinkID"),
