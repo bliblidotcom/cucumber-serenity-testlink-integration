@@ -66,6 +66,7 @@ public class Main extends AbstractMojo {
         System.out.println("===Process Started===");
         // check if cucumebr json exist
         String cucumberPath = System.getProperty("user.dir") + "/src/main/resource/cucumber.json";
+        System.out.println("Cucumber Path : " + cucumberPath);
         File cucumberFile = new File(cucumberPath);
         TestResultReader testResultReader = new TestResultReader();
         testResultReader.initialize(testlinkURL, devKey,
