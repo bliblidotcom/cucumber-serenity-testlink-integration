@@ -114,7 +114,7 @@ public class TLPlugin {
         }
 
         title = judul;
-        if (tLinkID != null) {
+        if (!tLinkID.isEmpty()) {
             testCases = api.getTestCaseByExternalId(tLinkID, null);
         } else {
             createTestCase(steps);
