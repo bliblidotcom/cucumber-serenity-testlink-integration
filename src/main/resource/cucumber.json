@@ -3,376 +3,291 @@
     "line": 2,
     "elements": [
       {
-        "before": [
-          {
-            "result": {
-              "duration": 4687826325,
-              "status": "passed"
-            },
-            "match": {
-              "location": "CucumberHooks.beforeRun()"
-            }
-          }
-        ],
-        "line": 3,
-        "name": "Login with correct username and password",
+        "line": 7,
+        "name": "Create tolerance",
         "description": "",
-        "id": "login-on-blibli-home-page;login-with-correct-username-and-password",
-        "after": [
-          {
-            "result": {
-              "duration": 27370,
-              "status": "passed"
-            },
-            "match": {
-              "location": "CucumberHooks.afterRun()"
-            }
-          }
-        ],
+        "id": "create-tolerance;create-tolerance",
         "type": "scenario",
         "keyword": "Scenario",
         "steps": [
           {
             "result": {
-              "duration": 132563189,
+              "duration": 14951143047,
               "status": "passed"
             },
-            "line": 4,
-            "name": "user open blibli home page",
+            "line": 8,
+            "name": "User Login with username \u0027user-dev-bolivia\u0027 and password \u0027user-dev-bolivia\u0027",
             "match": {
-              "location": "HomeSteps.userOpenBlibliHomePage()"
+              "arguments": [
+                {
+                  "val": "user-dev-bolivia",
+                  "offset": 26
+                },
+                {
+                  "val": "user-dev-bolivia",
+                  "offset": 58
+                }
+              ],
+              "location": "LoginScenario.userLogin(String,String)"
             },
             "keyword": "Given "
           },
           {
             "result": {
-              "duration": 313897,
+              "duration": 1275303862,
               "status": "passed"
             },
-            "line": 5,
-            "name": "user click masuk",
+            "line": 9,
+            "name": "User click menu Tolerance",
             "match": {
-              "location": "HomeSteps.userClickMasuk()"
+              "location": "CreateToleranceScenario.thenClickTolerance()"
             },
             "keyword": "When "
           },
           {
             "result": {
-              "duration": 225800,
+              "duration": 587737416,
               "status": "passed"
             },
-            "line": 6,
-            "name": "the pop up login should be appear",
-            "match": {
-              "location": "HomeSteps.thePopUpLoginShouldBeAppear()"
-            },
-            "keyword": "Then "
-          },
-          {
-            "result": {
-              "error_message": "java.lang.AssertionError: Ini gagal\nExpected: \u003cfalse\u003e\n     but: was \u003ctrue\u003e\r\n\tat org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)\r\n\tat com.gdn.qa.module.ui.test.steps.HomeSteps.userInputUsernameUsernameAndPasswordPassword(HomeSteps.java:37)\r\n\tat ✽.user input username \u0027hendri.antomy@gdn-commerce.com\u0027 and password \u0027hndri1234\u0027(src/test/resources/features/Login.feature:7)\r\n",
-              "duration": 9354891,
-              "status": "failed"
-            },
-            "line": 7,
-            "name": "user input username \u0027hendri.antomy@gdn-commerce.com\u0027 and password \u0027hndri1234\u0027",
+            "line": 10,
+            "name": "User enter value percentage of Total Shipping \u00275\u0027",
             "match": {
               "arguments": [
                 {
-                  "val": "hendri.antomy@gdn-commerce.com",
-                  "offset": 21
-                },
-                {
-                  "val": "hndri1234",
-                  "offset": 67
+                  "val": "5",
+                  "offset": 47
                 }
               ],
-              "location": "HomeSteps.userInputUsernameUsernameAndPasswordPassword(String,String)"
-            },
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "status": "skipped"
-            },
-            "line": 8,
-            "name": "user click login",
-            "match": {
-              "location": "HomeSteps.userClickLogin()"
-            },
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "status": "skipped"
-            },
-            "line": 9,
-            "name": "user should successfully login into blibli.com",
-            "match": {
-              "location": "HomeSteps.userShouldSuccessfullyLoginIntoBlibliCom()"
+              "location": "CreateToleranceScenario.thenEnterPercentTS(String)"
             },
             "keyword": "Then "
-          }
-        ],
-        "tags": [
-          {
-            "name": "@TestlinkId"
-          }
-        ]
-      },
-      {
-        "before": [
+          },
           {
             "result": {
-              "duration": 17650060,
+              "duration": 609007962,
               "status": "passed"
             },
+            "line": 11,
+            "name": "User enter value amount of Total Shipping \u002710000\u0027",
             "match": {
-              "location": "CucumberHooks.beforeRun()"
-            }
-          }
-        ],
-        "line": 11,
-        "name": "Login with correct username and password 2",
-        "description": "",
-        "id": "login-on-blibli-home-page;login-with-correct-username-and-password-2",
-        "after": [
-          {
-            "result": {
-              "duration": 22665,
-              "status": "passed"
+              "arguments": [
+                {
+                  "val": "10000",
+                  "offset": 43
+                }
+              ],
+              "location": "CreateToleranceScenario.thenEnterAmountTS(String)"
             },
-            "match": {
-              "location": "CucumberHooks.afterRun()"
-            }
-          }
-        ],
-        "type": "scenario",
-        "keyword": "Scenario",
-        "steps": [
+            "keyword": "Then "
+          },
           {
             "result": {
-              "duration": 13340610,
+              "duration": 549495851,
               "status": "passed"
             },
             "line": 12,
-            "name": "user open blibli home page",
+            "name": "User enter value percentage of Price/Kg \u002710\u0027",
             "match": {
-              "location": "HomeSteps.userOpenBlibliHomePage()"
+              "arguments": [
+                {
+                  "val": "10",
+                  "offset": 41
+                }
+              ],
+              "location": "CreateToleranceScenario.thenEnterPercentP(String)"
             },
-            "keyword": "Given "
+            "keyword": "Then "
           },
           {
             "result": {
-              "duration": 295935,
+              "duration": 549503122,
               "status": "passed"
             },
             "line": 13,
-            "name": "user click masuk",
+            "name": "User enter value amount of Price/Kg \u00275000\u0027",
             "match": {
-              "location": "HomeSteps.userClickMasuk()"
+              "arguments": [
+                {
+                  "val": "5000",
+                  "offset": 37
+                }
+              ],
+              "location": "CreateToleranceScenario.thenEnterAmountP(String)"
             },
-            "keyword": "When "
+            "keyword": "Then "
           },
           {
             "result": {
-              "duration": 268566,
+              "duration": 542373453,
               "status": "passed"
             },
             "line": 14,
-            "name": "the pop up login should be appear",
+            "name": "User enter value percentage of Insurance Charge \u00275\u0027",
             "match": {
-              "location": "HomeSteps.thePopUpLoginShouldBeAppear()"
+              "arguments": [
+                {
+                  "val": "5",
+                  "offset": 49
+                }
+              ],
+              "location": "CreateToleranceScenario.thenEnterPercentIC(String)"
             },
             "keyword": "Then "
           },
           {
             "result": {
-              "error_message": "java.lang.AssertionError: Ini gagal\nExpected: \u003cfalse\u003e\n     but: was \u003ctrue\u003e\r\n\tat org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)\r\n\tat com.gdn.qa.module.ui.test.steps.HomeSteps.userInputUsernameUsernameAndPasswordPassword(HomeSteps.java:37)\r\n\tat ✽.user input username \u0027hendri.antomy@gdn-commerce.com\u0027 and password \u0027hndri1234\u0027(src/test/resources/features/Login.feature:15)\r\n",
-              "duration": 504630,
-              "status": "failed"
+              "duration": 541603696,
+              "status": "passed"
             },
             "line": 15,
-            "name": "user input username \u0027hendri.antomy@gdn-commerce.com\u0027 and password \u0027hndri1234\u0027",
+            "name": "User enter value amount of Insurance Charge \u002710000\u0027",
             "match": {
               "arguments": [
                 {
-                  "val": "hendri.antomy@gdn-commerce.com",
-                  "offset": 21
-                },
-                {
-                  "val": "hndri1234",
-                  "offset": 67
+                  "val": "10000",
+                  "offset": 45
                 }
               ],
-              "location": "HomeSteps.userInputUsernameUsernameAndPasswordPassword(String,String)"
+              "location": "CreateToleranceScenario.thenEnterAmountIC(String)"
             },
-            "keyword": "And "
+            "keyword": "Then "
           },
           {
             "result": {
-              "status": "skipped"
+              "duration": 506294480,
+              "status": "passed"
             },
             "line": 16,
-            "name": "user click login",
-            "match": {
-              "location": "HomeSteps.userClickLogin()"
-            },
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "status": "skipped"
-            },
-            "line": 17,
-            "name": "user should successfully login into blibli.com",
-            "match": {
-              "location": "HomeSteps.userShouldSuccessfullyLoginIntoBlibliCom()"
-            },
-            "keyword": "Then "
-          }
-        ],
-        "tags": [
-          {
-            "name": "@TestlinkId"
-          }
-        ]
-      }
-    ],
-    "name": "Login on Blibli home page",
-    "description": "",
-    "id": "login-on-blibli-home-page",
-    "keyword": "Feature",
-    "uri": "src/test/resources/features/Login.feature",
-    "tags": [
-      {
-        "name": "@TestlinkId",
-        "type": "Tag",
-        "location": {
-          "line": 1,
-          "column": 1
-        }
-      }
-    ]
-  },
-  {
-    "line": 2,
-    "elements": [
-      {
-        "before": [
-          {
-            "result": {
-              "duration": 11393936,
-              "status": "passed"
-            },
-            "match": {
-              "location": "CucumberHooks.beforeRun()"
-            }
-          }
-        ],
-        "line": 3,
-        "name": "Login with correct username and password 2",
-        "description": "",
-        "id": "login-on-blibli-home-page;login-with-correct-username-and-password-2",
-        "after": [
-          {
-            "result": {
-              "duration": 21383,
-              "status": "passed"
-            },
-            "match": {
-              "location": "CucumberHooks.afterRun()"
-            }
-          }
-        ],
-        "type": "scenario",
-        "keyword": "Scenario",
-        "steps": [
-          {
-            "result": {
-              "duration": 15540452,
-              "status": "passed"
-            },
-            "line": 4,
-            "name": "user open blibli home page",
-            "match": {
-              "location": "HomeSteps.userOpenBlibliHomePage()"
-            },
-            "keyword": "Given "
-          },
-          {
-            "result": {
-              "duration": 154810,
-              "status": "passed"
-            },
-            "line": 5,
-            "name": "user click masuk",
-            "match": {
-              "location": "HomeSteps.userClickMasuk()"
-            },
-            "keyword": "When "
-          },
-          {
-            "result": {
-              "error_message": "java.lang.AssertionError: Ini gagal\nExpected: \u003cfalse\u003e\n     but: was \u003ctrue\u003e\r\n\tat org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)\r\n\tat com.gdn.qa.module.ui.test.steps.HomeSteps.userInputUsernameUsernameAndPasswordPassword(HomeSteps.java:37)\r\n\tat ✽.user input username \u0027hendri.antomy@gdn-commerce.com\u0027 and password \u0027lalala\u0027(src/test/resources/features/Login2.feature:6)\r\n",
-              "duration": 392157,
-              "status": "failed"
-            },
-            "line": 6,
-            "name": "user input username \u0027hendri.antomy@gdn-commerce.com\u0027 and password \u0027lalala\u0027",
+            "name": "User enter value percentage of Weight \u002710\u0027",
             "match": {
               "arguments": [
                 {
-                  "val": "hendri.antomy@gdn-commerce.com",
-                  "offset": 21
-                },
-                {
-                  "val": "lalala",
-                  "offset": 67
+                  "val": "10",
+                  "offset": 39
                 }
               ],
-              "location": "HomeSteps.userInputUsernameUsernameAndPasswordPassword(String,String)"
+              "location": "CreateToleranceScenario.thenEnterPercentW(String)"
             },
-            "keyword": "And "
+            "keyword": "Then "
           },
           {
             "result": {
-              "status": "skipped"
+              "duration": 567308046,
+              "status": "passed"
             },
-            "line": 7,
-            "name": "user click login",
+            "line": 17,
+            "name": "User enter value amount of Weight \u002710000\u0027",
             "match": {
-              "location": "HomeSteps.userClickLogin()"
+              "arguments": [
+                {
+                  "val": "10000",
+                  "offset": 35
+                }
+              ],
+              "location": "CreateToleranceScenario.thenEnterAmountW(String)"
             },
-            "keyword": "And "
+            "keyword": "Then "
           },
           {
             "result": {
-              "status": "skipped"
+              "duration": 468569935,
+              "status": "passed"
             },
-            "line": 8,
-            "name": "user should successfully login into blibli.com",
+            "line": 18,
+            "name": "User enter value percentage of Other Charge \u00275\u0027",
             "match": {
-              "location": "HomeSteps.userShouldSuccessfullyLoginIntoBlibliCom()"
+              "arguments": [
+                {
+                  "val": "5",
+                  "offset": 45
+                }
+              ],
+              "location": "CreateToleranceScenario.thenEnterPercentOC(String)"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 878595945,
+              "status": "passed"
+            },
+            "line": 19,
+            "name": "User enter value amount of Other Charge \u002720000\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "20000",
+                  "offset": 41
+                }
+              ],
+              "location": "CreateToleranceScenario.thenEnterAmountOC(String)"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 481638284,
+              "status": "passed"
+            },
+            "line": 20,
+            "name": "User enter value percentage of Gift Wrap Charge \u002710\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "10",
+                  "offset": 49
+                }
+              ],
+              "location": "CreateToleranceScenario.thenEnterPercentGW(String)"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 543179133,
+              "status": "passed"
+            },
+            "line": 21,
+            "name": "User enter value amount of Gift Wrap Charge \u002710000\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "10000",
+                  "offset": 45
+                }
+              ],
+              "location": "CreateToleranceScenario.thenEnterAmountGW(String)"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 449814788,
+              "status": "passed"
+            },
+            "line": 22,
+            "name": "User click button Submit Tolerance Value",
+            "match": {
+              "location": "CreateToleranceScenario.thenClickSubmit()"
             },
             "keyword": "Then "
           }
         ],
         "tags": [
           {
-            "name": "@TestlinkId\u003dPAR-123"
+            "name": "@TestSuiteID\u003d8331008"
           }
         ]
       }
     ],
-    "name": "Login on Blibli home page",
-    "description": "",
-    "id": "login-on-blibli-home-page",
+    "name": "Create Tolerance",
+    "description": "  Narrative:\n  As a user\n  I want to create tolerance",
+    "id": "create-tolerance",
     "keyword": "Feature",
-    "uri": "src/test/resources/features/Login2.feature",
+    "uri": "src/test/resources/features/release_0.3.0/CreateToleranceData.feature",
     "tags": [
       {
-        "name": "@TestlinkId\u003dPAR-123",
+        "name": "@TestSuiteID\u003d8331008",
         "type": "Tag",
         "location": {
           "line": 1,

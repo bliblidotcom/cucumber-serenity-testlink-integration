@@ -261,7 +261,7 @@ public class TestResultReader {
             String reasonFail = "";
             // Get tag TestlinkID or TestSuiteId
             Tags tags = cucumberModel.getTags().stream().filter(x -> {
-                if (x.getName().toLowerCase().contains("testlinkid") || x.getName().toLowerCase().contains("testSuiteId"))
+                if (x.getName().toLowerCase().contains("testlinkid") || x.getName().toLowerCase().contains("testsuiteid"))
                     return true;
                 return false;
             }).findAny().orElse(null);
