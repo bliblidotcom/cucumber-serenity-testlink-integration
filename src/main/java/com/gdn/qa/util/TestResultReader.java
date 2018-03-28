@@ -244,6 +244,7 @@ public class TestResultReader {
         ObjectMapper objectMapper = new ObjectMapper();
         if (cucumberJsonPath == "" || cucumberJsonPath.isEmpty()) {
             cucumberJsonPath = System.getProperty("user.dir") + "/target/destination/cucumber.json";
+//            cucumberJsonPath = System.getProperty("user.dir") + "/main/resource/cucumber3.json";
         }
         File cucumberFile = new File(cucumberJsonPath);
         if (!cucumberFile.exists()) {
@@ -254,6 +255,7 @@ public class TestResultReader {
 
         // Read Read Each Test Feature
         for (CucumberModel cucumberModel : cucumberModels) {
+            System.out.println("Check " + cucumberModel.getName());
             ArrayList<String[]> testCaseSteps = new ArrayList<>();
             String testLinkId = "";
             String testSuiteId = null;
@@ -277,21 +279,28 @@ public class TestResultReader {
 
             if (tags.getName().toLowerCase().contains("testlinkid")) {
                 testLinkId = tags.getName().split("=")[1].trim();
+                System.out.println("Testlink ID" + testLinkId);
             } else {
                 testSuiteId = tags.getName().split("=")[1].trim();
+                System.out.println("Test Suite ID " + testSuiteId);
             }
 
 
             // Read Each Steps
-            for (Step step : cucumberModel.getElements().get(0).getSteps()) {
-                String[] stepsResult = {step.getName(), Boolean.toString((step.getResult().getStatus().equalsIgnoreCase("passed")) ? true : false), (step.getResult().getErrorMessage() == null) ? "" : step.getResult().getErrorMessage()};
-                // Check Sucess or Not
-                if (!step.getResult().getStatus().equalsIgnoreCase("passed") && passed) {
-                    passed = false;
-                    reasonFail = step.getResult().getErrorMessage();
+            for(com.gdn.qa.util.model.cucumber.Element cucumberElemnt : cucumberModel.getElements()){
+                for (Step step : cucumberElemnt.getSteps()) {
+                    String[] stepsResult = {step.getName(), Boolean.toString((step.getResult().getStatus().equalsIgnoreCase("passed")) ? true : false), (step.getResult().getErrorMessage() == null) ? "" : step.getResult().getErrorMessage()};
+                    // Check Sucess or Not
+                    if (!step.getResult().getStatus().equalsIgnoreCase("passed") && passed) {
+                        passed = false;
+                        reasonFail = step.getResult().getErrorMessage();
+                    }
+                    testCaseSteps.add(stepsResult);
+                    System.out.println("Test Steps in cucumber " + stepsResult[0]);
                 }
-                testCaseSteps.add(stepsResult);
             }
+
+
             if (testSuiteId == null) {
                 testSuiteId = "0";
             }
