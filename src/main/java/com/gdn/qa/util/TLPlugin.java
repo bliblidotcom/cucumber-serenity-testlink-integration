@@ -95,7 +95,7 @@ public class TLPlugin {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        System.out.println(api.ping());
+        System.out.println("Estabilishing connection to Testlink..."+api.ping());
         tpID = api.getTestPlanByName(testPlan, testProject);
         /// Get project ID and TestSuite ID
         TestProject project = api.getTestProjectByName(testProject);
@@ -174,8 +174,8 @@ public class TLPlugin {
         List<TestCaseStep> testCaseSteps = new ArrayList<TestCaseStep>();
         for (int i = 0; i < steps.size(); i++) {
             TestCaseStep testCaseStep = new TestCaseStep();
-            System.out.println(steps.get(i)[0]);
-            System.out.println(steps.get(i)[1]);
+/*            System.out.println(steps.get(i)[0]);
+            System.out.println(steps.get(i)[1]);*/
             testCaseStep.setActions(steps.get(i)[0]); /// Set Actions
             testCaseStep.setExecutionType(ExecutionType.AUTOMATED); /// Set Type Action
             if (!Boolean.parseBoolean(steps.get(i)[1])) {
@@ -207,11 +207,8 @@ public class TLPlugin {
                 api.addTestCaseToTestPlan(projectID, tpID.getId(), testCases.getId(), testCases.getVersion(), null, testCases.getOrder(), null);
             } catch (TestLinkAPIException e) {
                 e.printStackTrace();
-            } finally {
-                System.out.println("gagal");
             }
         }
-
     }
 
 
@@ -257,7 +254,5 @@ public class TLPlugin {
         System.out.println("Test Step Tidak berubah , Mengembalikan Existing....");
         return tcServer;
     }
-
-
 }
 

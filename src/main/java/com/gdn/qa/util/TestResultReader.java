@@ -3,7 +3,6 @@ package com.gdn.qa.util;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gdn.qa.util.model.cucumber.CucumberModel;
 import com.gdn.qa.util.model.cucumber.Step;
-import com.gdn.qa.util.model.cucumber.Tags;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -14,7 +13,9 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class TestResultReader {
     private static String DEFAULT_ID_TEST_LINK = "414";
@@ -36,6 +37,8 @@ public class TestResultReader {
 
     //Enter Your test Platform Name
     String platFormName = "UAT";
+
+    ScenarioData data;
 
     public void initialize(String testLinkURL, String testLinkDevKey, String testLinkProjectName,
                            String testLinkPlanName, String testLinkBuildName, String testLinkPlatFormName) {
@@ -214,7 +217,7 @@ public class TestResultReader {
 
             if (result.get("Summary") != null) {
                 testLinkPlugin.setSummary(result.get("Summary"));
-            }else{
+            } else {
                 testLinkPlugin.setSummary(result.get("Title"));
             }
 
@@ -251,70 +254,94 @@ public class TestResultReader {
             System.out.println("Cucumber Path : " + cucumberJsonPath);
             throw new Exception("Cucumber Json is not exist can't Post To Testlink , is your setup is right ? ");
         }
-        CucumberModel[] cucumberModels = objectMapper.readValue(cucumberFile, CucumberModel[].class);
+        CucumberModel[] features = objectMapper.readValue(cucumberFile, CucumberModel[].class);
 
         // Read Read Each Test Feature
-        for (CucumberModel cucumberModel : cucumberModels) {
-            System.out.println("Check " + cucumberModel.getName());
-            ArrayList<String[]> testCaseSteps = new ArrayList<>();
-            String testLinkId = "";
-            String testSuiteId = null;
-            Boolean passed = true;
-            String reasonFail = "";
-            // Get tag TestlinkID or TestSuiteId
-            Tags tags = cucumberModel.getTags().stream().filter(x -> {
-                if (x.getName().toLowerCase().contains("testlinkid") || x.getName().toLowerCase().contains("testsuiteid"))
-                    return true;
-                return false;
-            }).findAny().orElse(null);
-            // Lanjutkan Looping Jika Tidak ditemuin
-            if (tags == null) {
-                continue;
-            }
-            // check jika ada spasi setelah sama dengan.
-            if (tags.getName().split("=").length  == 1) {
-                System.out.println("=== Test Link ID not found , please use @TESTLINKID=TESTLINKID (Ex. @TestlinkId=123) - Without Space on : " + cucumberModel.getName() + " ===");
-                continue;
-            }
+        for (CucumberModel feature : features) {
+            System.out.println("Checking features " + feature.getName());
+            //get default testsuiteid or test case id
+            List<TestlinkTags> defaultTags = TagsReader.readTags(feature.getTags());
+            //loop per scenario
+            feature.getElements().stream()
+                    //filter to get element with keyword scenario only
+                    .filter(ft -> ft.getKeyword().equalsIgnoreCase("scenario"))
+                    .forEach(scenario -> {
+                        data = new ScenarioData();
+                        data.setName(scenario.getName());
+                        //get tags for scenario
+                        List<TestlinkTags> scenarioTags = TagsReader.readTags(scenario.getTags());
+                        if(defaultTags.size() !=0 || scenarioTags.size() !=0) {
+                            ArrayList<String[]> steps = readSteps(scenario.getSteps());
+                            TestlinkTags tagsToUse;
+                            //kalo di scenario gaada maka pake yg default
+                            if(scenarioTags.size() == 0){
+                                tagsToUse = defaultTags.get(0);
+                            }else if(scenarioTags.size() != 0 && defaultTags.size() !=0){
+                               //must filter because inherit tags
+                                List<TestlinkTags> tagsft = scenarioTags.stream().filter(t -> {
+                                    if (t.getTestLinkId().equalsIgnoreCase(defaultTags.get(0).getTestLinkId()) && !t.getTestLinkId().isEmpty())
+                                        return false;
+                                    if (t.getTestSuiteId().equalsIgnoreCase(defaultTags.get(0).getTestSuiteId()) && !t.getTestSuiteId().equals("0"))
+                                        return false;
+                                    return true;
+                                }).collect(Collectors.toList());
+                                if(tagsft.size() == 0){
+                                    tagsToUse = defaultTags.get(0);
+                                }else{
+                                    tagsToUse = tagsft.get(0);
+                                }
+                            }else{
+                                tagsToUse = scenarioTags.get(0);
+                            }
+                            data.setTestlinkTags(tagsToUse);
+                            printDetail(steps);
+                            updateTestlink(steps);
+                        }
 
-            if (tags.getName().toLowerCase().contains("testlinkid")) {
-                testLinkId = tags.getName().split("=")[1].trim();
-                System.out.println("Testlink ID" + testLinkId);
-            } else {
-                testSuiteId = tags.getName().split("=")[1].trim();
-                System.out.println("Test Suite ID " + testSuiteId);
-            }
+                    });
 
-
-            // Read Each Steps
-            for(com.gdn.qa.util.model.cucumber.Element cucumberElemnt : cucumberModel.getElements()){
-                for (Step step : cucumberElemnt.getSteps()) {
-                    String[] stepsResult = {step.getName(), Boolean.toString((step.getResult().getStatus().equalsIgnoreCase("passed")) ? true : false), (step.getResult().getErrorMessage() == null) ? "" : step.getResult().getErrorMessage()};
-                    // Check Sucess or Not
-                    if (!step.getResult().getStatus().equalsIgnoreCase("passed") && passed) {
-                        passed = false;
-                        reasonFail = step.getResult().getErrorMessage();
-                    }
-                    testCaseSteps.add(stepsResult);
-                    System.out.println("Test Steps in cucumber " + stepsResult[0]);
-                }
-            }
-
-
-            if (testSuiteId == null) {
-                testSuiteId = "0";
-            }
-            TLPlugin testLinkPlugin = new TLPlugin();
-            testLinkPlugin.TLPluginInitialize(testLinkId,
-                    testCaseSteps, Integer.parseInt(testSuiteId), cucumberModel.getName(), urlTestlink, DEVKEY, testProject, testPlan,
-                    build, platFormName);
-            if (passed) {
-                testLinkPlugin.updateTestcasePassed();
-            } else {
-                testLinkPlugin.updateTestcaseFail(reasonFail);
-            }
         }
 
+    }
+
+    private void updateTestlink(ArrayList<String[]> testCaseSteps) {
+        TLPlugin testLinkPlugin = new TLPlugin();
+        testLinkPlugin.TLPluginInitialize(data.getTestlinkTags().getTestLinkId(),
+                testCaseSteps, Integer.parseInt(data.getTestlinkTags().getTestSuiteId()), data.getName(), urlTestlink, DEVKEY, testProject, testPlan,
+                build, platFormName);
+        if (data.getPassed()) {
+            testLinkPlugin.updateTestcasePassed();
+        } else {
+            testLinkPlugin.updateTestcaseFail(data.getReasonFail());
+        }
+    }
+
+    private ArrayList<String[]> readSteps(List<Step> steps) {
+        ArrayList<String[]> testCaseSteps = new ArrayList<>();
+        steps.forEach(step -> {
+            String[] stepsResult = {step.getName(), Boolean.toString((step.getResult().getStatus().equalsIgnoreCase("passed")) ? true : false), (step.getResult().getErrorMessage() == null) ? "" : step.getResult().getErrorMessage()};
+            if (!step.getResult().getStatus().equalsIgnoreCase("passed") && data.getPassed()) {
+                data.setPassed(false);
+                data.setReasonFail(step.getResult().getErrorMessage());
+            }
+            testCaseSteps.add(stepsResult);
+        });
+        return testCaseSteps;
+    }
+
+    private void printDetail(ArrayList<String[]> steps){
+        System.out.println("================================================");
+        System.out.println("Title\t\t: "+data.getName());
+        System.out.println("Passed\t\t: "+data.getPassed());
+        System.out.println("Reason Fail\t: "+data.getReasonFail());
+        System.out.println("TestSuiteId\t: "+data.getTestlinkTags().getTestSuiteId());
+        System.out.println("TestLinkId\t: "+data.getTestlinkTags().getTestLinkId());
+
+        System.out.println("Steps:");
+        steps.forEach(step ->{
+            System.out.println(step[0]);
+        });
+        System.out.println("================================================");
     }
 
     /**
@@ -325,5 +352,6 @@ public class TestResultReader {
     public void readWithCucumber() throws Exception {
         this.readWithCucumber("");
     }
+
 
 }

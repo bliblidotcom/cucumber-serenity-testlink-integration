@@ -1,27 +1,24 @@
 
 package com.gdn.qa.util.model.cucumber;
 
+import com.fasterxml.jackson.annotation.*;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "before",
-    "line",
-    "name",
-    "description",
-    "id",
-    "after",
-    "type",
-    "keyword",
-    "steps"
+        "before",
+        "line",
+        "name",
+        "description",
+        "id",
+        "after",
+        "type",
+        "keyword",
+        "steps",
+        "tags"
 })
 public class Element {
 
@@ -43,6 +40,8 @@ public class Element {
     private String keyword;
     @JsonProperty("steps")
     private List<Step> steps = null;
+    @JsonProperty("tags")
+    private List<Tags> tags = null;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -139,6 +138,16 @@ public class Element {
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
+    }
+
+    @JsonProperty("tags")
+    public void setTags(List<Tags> tags) {
+        this.tags = tags;
+    }
+
+    @JsonProperty("tags")
+    public List<Tags> getTags() {
+        return tags;
     }
 
     @JsonAnySetter

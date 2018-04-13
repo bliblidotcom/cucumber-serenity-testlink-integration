@@ -59,7 +59,7 @@ public class Main extends AbstractMojo {
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
-        loadBanner();
+        Banner.loadBanner();
         System.out.println("===Config===");
         System.out.println("testlink URL : " + testlinkURL);
         System.out.println("DevKey : " + devKey);
@@ -69,8 +69,8 @@ public class Main extends AbstractMojo {
         System.out.println("Platform Name : " + platformName);
         System.out.println("===End Of Config===");
         System.out.println("===Process Started===");
+
         // check if cucumebr json exist
-//        String cucumberPath =  System.getProperty("user.dir") + "/src/main/resource/cucumber3.json";
         String cucumberPath = System.getProperty("user.dir") + "/target/destination/cucumber.json";
         System.out.println("Cucumber Path : " + cucumberPath);
         File cucumberFile = new File(cucumberPath);
@@ -91,9 +91,5 @@ public class Main extends AbstractMojo {
         }
 
         System.out.println("===Process Ended===");
-    }
-
-    private void loadBanner() {
-        System.out.println(Banner.textBanner);
     }
 }
