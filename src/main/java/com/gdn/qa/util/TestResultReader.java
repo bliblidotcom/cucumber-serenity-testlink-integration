@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 public class TestResultReader {
@@ -261,6 +262,13 @@ public class TestResultReader {
             System.out.println("Checking features " + feature.getName());
             //get default testsuiteid or test case id
             List<TestlinkTags> defaultTags = TagsReader.readTags(feature.getTags());
+
+            //read background steps
+            ArrayList<String[]> background = new ArrayList<>();
+            feature.getElements().stream().filter(ft -> ft.getKeyword().equalsIgnoreCase("Background")).forEach(b -> {
+                background.addAll(readSteps(b.getSteps()));
+            });
+
             //loop per scenario
             feature.getElements().stream()
                     //filter to get element with keyword scenario only
@@ -270,14 +278,15 @@ public class TestResultReader {
                         data.setName(scenario.getName());
                         //get tags for scenario
                         List<TestlinkTags> scenarioTags = TagsReader.readTags(scenario.getTags());
-                        if(defaultTags.size() !=0 || scenarioTags.size() !=0) {
+                        if (defaultTags.size() != 0 || scenarioTags.size() != 0) {
                             ArrayList<String[]> steps = readSteps(scenario.getSteps());
+                            steps.addAll(0, background);
                             TestlinkTags tagsToUse;
                             //kalo di scenario gaada maka pake yg default
-                            if(scenarioTags.size() == 0){
+                            if (scenarioTags.size() == 0) {
                                 tagsToUse = defaultTags.get(0);
-                            }else if(scenarioTags.size() != 0 && defaultTags.size() !=0){
-                               //must filter because inherit tags
+                            } else if (scenarioTags.size() != 0 && defaultTags.size() != 0) {
+                                //must filter because inherit tags
                                 List<TestlinkTags> tagsft = scenarioTags.stream().filter(t -> {
                                     if (t.getTestLinkId().equalsIgnoreCase(defaultTags.get(0).getTestLinkId()) && !t.getTestLinkId().isEmpty())
                                         return false;
@@ -285,12 +294,12 @@ public class TestResultReader {
                                         return false;
                                     return true;
                                 }).collect(Collectors.toList());
-                                if(tagsft.size() == 0){
+                                if (tagsft.size() == 0) {
                                     tagsToUse = defaultTags.get(0);
-                                }else{
+                                } else {
                                     tagsToUse = tagsft.get(0);
                                 }
-                            }else{
+                            } else {
                                 tagsToUse = scenarioTags.get(0);
                             }
                             data.setTestlinkTags(tagsToUse);
@@ -300,6 +309,65 @@ public class TestResultReader {
 
                     });
 
+            HashMap<String, ArrayList<String[]>> scenarioOutlineSteps = new HashMap<>();
+            HashMap<String, ScenarioData> scenarioOutlineData = new HashMap<>();
+            ArrayList<String[]> dw = new ArrayList<>();
+            //loop per scenario outline
+            feature.getElements().stream()
+                    //filter to get element with keyword scenario only
+                    .filter(ft -> ft.getKeyword().equalsIgnoreCase("Scenario Outline"))
+                    .forEach(scenario -> {
+                        if (!scenarioOutlineSteps.containsKey(scenario.getName())) {
+                            ArrayList<String[]> steps = new ArrayList<>();
+                            steps.addAll(0, background);
+                            ScenarioData data = new ScenarioData();
+                            data.setName(scenario.getName());
+                            scenarioOutlineSteps.put(scenario.getName(), steps);
+                            scenarioOutlineData.put(scenario.getName(), data);
+                        }
+                        ScenarioData tempData = scenarioOutlineData.get(scenario.getName());
+                        ArrayList<String[]> tempSteps = scenarioOutlineSteps.get(scenario.getName());
+                        List<TestlinkTags> scenarioTags = TagsReader.readTags(scenario.getTags());
+                        if (defaultTags.size() != 0 || scenarioTags.size() != 0) {
+                            ArrayList<String[]> steps = readSteps(scenario.getSteps());
+                            tempSteps.addAll(steps);
+                            TestlinkTags tagsToUse;
+                            //kalo di scenario gaada maka pake yg default
+                            if (scenarioTags.size() == 0) {
+                                tagsToUse = defaultTags.get(0);
+                            } else if (scenarioTags.size() != 0 && defaultTags.size() != 0) {
+                                //must filter because inherit tags
+                                List<TestlinkTags> tagsft = scenarioTags.stream().filter(t -> {
+                                    if (t.getTestLinkId().equalsIgnoreCase(defaultTags.get(0).getTestLinkId()) && !t.getTestLinkId().isEmpty())
+                                        return false;
+                                    if (t.getTestSuiteId().equalsIgnoreCase(defaultTags.get(0).getTestSuiteId()) && !t.getTestSuiteId().equals("0"))
+                                        return false;
+                                    return true;
+                                }).collect(Collectors.toList());
+                                if (tagsft.size() == 0) {
+                                    tagsToUse = defaultTags.get(0);
+                                } else {
+                                    tagsToUse = tagsft.get(0);
+                                }
+                            } else {
+                                tagsToUse = scenarioTags.get(0);
+                            }
+                            tempData.setTestlinkTags(tagsToUse);
+                        }
+                        tempData.setReasonFail(data.getReasonFail());
+                        if (tempData.getPassed())
+                            tempData.setPassed(data.getPassed());
+                        scenarioOutlineData.put(scenario.getName(), tempData);
+                        scenarioOutlineSteps.put(scenario.getName(), tempSteps);
+                    });
+            scenarioOutlineData.forEach((key, value) -> {
+                data.setPassed(value.getPassed());
+                data.setReasonFail(value.getReasonFail());
+                data.setName(value.getName());
+                data.setTestlinkTags(value.getTestlinkTags());
+                printDetail(scenarioOutlineSteps.get(key));
+                updateTestlink(scenarioOutlineSteps.get(key));
+            });
         }
 
     }
@@ -318,27 +386,29 @@ public class TestResultReader {
 
     private ArrayList<String[]> readSteps(List<Step> steps) {
         ArrayList<String[]> testCaseSteps = new ArrayList<>();
+        AtomicReference<Integer> counter = new AtomicReference<>(1);
         steps.forEach(step -> {
             String[] stepsResult = {step.getName(), Boolean.toString((step.getResult().getStatus().equalsIgnoreCase("passed")) ? true : false), (step.getResult().getErrorMessage() == null) ? "" : step.getResult().getErrorMessage()};
             if (!step.getResult().getStatus().equalsIgnoreCase("passed") && data.getPassed()) {
                 data.setPassed(false);
-                data.setReasonFail(step.getResult().getErrorMessage());
+                data.setReasonFail("This Test Case Failed on step " + counter.get() + ",Log: \n" + step.getResult().getErrorMessage());
             }
+            counter.set(counter.get() + 1);
             testCaseSteps.add(stepsResult);
         });
         return testCaseSteps;
     }
 
-    private void printDetail(ArrayList<String[]> steps){
+    private void printDetail(ArrayList<String[]> steps) {
         System.out.println("================================================");
-        System.out.println("Title\t\t: "+data.getName());
-        System.out.println("Passed\t\t: "+data.getPassed());
-        System.out.println("Reason Fail\t: "+data.getReasonFail());
-        System.out.println("TestSuiteId\t: "+data.getTestlinkTags().getTestSuiteId());
-        System.out.println("TestLinkId\t: "+data.getTestlinkTags().getTestLinkId());
+        System.out.println("Title\t\t: " + data.getName());
+        System.out.println("Passed\t\t: " + data.getPassed());
+        System.out.println("Reason Fail\t: " + data.getReasonFail());
+        System.out.println("TestSuiteId\t: " + data.getTestlinkTags().getTestSuiteId());
+        System.out.println("TestLinkId\t: " + data.getTestlinkTags().getTestLinkId());
 
         System.out.println("Steps:");
-        steps.forEach(step ->{
+        steps.forEach(step -> {
             System.out.println(step[0]);
         });
         System.out.println("================================================");
