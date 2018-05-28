@@ -1,4 +1,3 @@
-
 package com.gdn.qa.util.model.cucumber;
 
 import com.fasterxml.jackson.annotation.*;
@@ -8,11 +7,12 @@ import java.util.Map;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "result",
-    "line",
-    "name",
-    "match",
-    "keyword"
+        "result",
+        "line",
+        "name",
+        "match",
+        "keyword",
+        "rows"
 })
 public class Step {
 
@@ -26,6 +26,8 @@ public class Step {
     private Match match;
     @JsonProperty("keyword")
     private String keyword;
+    @JsonProperty("rows")
+    private Rows[] rows;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -77,6 +79,16 @@ public class Step {
     @JsonProperty("keyword")
     public void setKeyword(String keyword) {
         this.keyword = keyword;
+    }
+
+    @JsonProperty("rows")
+    public Rows[] getRows() {
+        return rows;
+    }
+
+    @JsonProperty("rows")
+    public void setRows(Rows[] rows) {
+        this.rows = rows;
     }
 
     @JsonAnyGetter

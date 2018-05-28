@@ -2,6 +2,7 @@ package com.gdn.qa.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gdn.qa.util.model.cucumber.CucumberModel;
+import com.gdn.qa.util.model.cucumber.Rows;
 import com.gdn.qa.util.model.cucumber.Step;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -11,35 +12,25 @@ import org.w3c.dom.NodeList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 public class TestResultReader {
     private static String DEFAULT_ID_TEST_LINK = "414";
-    //Enter your project API key here.
-    private String DEVKEY = "1cc94be3bb2e1c3e069fa67f7e9a24e1";
-
-    //Enter your Test Link URL here
-    private String urlTestlink = "http://172.17.21.92/testlink/lib/api/xmlrpc/v1/xmlrpc.php";
-
-
     //Enter your Test Project Name here
     String testProject = "GOSEND";
-
     //Enter your Test Plan here
     String testPlan = "GOSEND TestPlan";
-
     //Enter your Test build here
     String build = "Gosend - UAT Build";
-
     //Enter Your test Platform Name
     String platFormName = "UAT";
-
     ScenarioData data;
+    //Enter your project API key here.
+    private String DEVKEY = "1cc94be3bb2e1c3e069fa67f7e9a24e1";
+    //Enter your Test Link URL here
+    private String urlTestlink = "http://172.17.21.92/testlink/lib/api/xmlrpc/v1/xmlrpc.php";
 
     public void initialize(String testLinkURL, String testLinkDevKey, String testLinkProjectName,
                            String testLinkPlanName, String testLinkBuildName, String testLinkPlatFormName) {
@@ -270,12 +261,12 @@ public class TestResultReader {
                 background.addAll(readSteps(b.getSteps()));
             });
 
-            readCucumberSteps("scenario",defaultTags,feature,background);
-            readCucumberSteps("Scenario Outline",defaultTags,feature,background);
+            readCucumberSteps("scenario", defaultTags, feature, background);
+            readCucumberSteps("Scenario Outline", defaultTags, feature, background);
         }
     }
 
-    private void readCucumberSteps(String keyword,List<TestlinkTags> defaultTags,CucumberModel feature,ArrayList<String[]> background){
+    private void readCucumberSteps(String keyword, List<TestlinkTags> defaultTags, CucumberModel feature, ArrayList<String[]> background) {
         HashMap<String, ArrayList<String[]>> scenarioOutlineSteps = new HashMap<>();
         HashMap<String, ScenarioData> scenarioOutlineData = new HashMap<>();
         ArrayList<String[]> dw = new ArrayList<>();
@@ -360,17 +351,31 @@ public class TestResultReader {
         ArrayList<String[]> testCaseSteps = new ArrayList<>();
         AtomicReference<Integer> counter = new AtomicReference<>(1);
         steps.forEach(step -> {
-            String[] stepsResult = {step.getName(), Boolean.toString((step.getResult().getStatus().equalsIgnoreCase("passed")) ? true : false), (step.getResult().getErrorMessage() == null) ? "" : step.getResult().getErrorMessage()};
+            String[] stepsResult = {step.getName() + (getRowStep(step.getRows())) , Boolean.toString((step.getResult().getStatus().equalsIgnoreCase("passed")) ? true : false),
+                    (step.getResult().getErrorMessage() == null) ? "" : step.getResult().getErrorMessage()};
             if (!step.getResult().getStatus().equalsIgnoreCase("passed") && data.getPassed()) {
                 data.setPassed(false);
                 data.setReasonFail("This Test Case Failed on step " + counter.get() + ",Log: \n" + step.getResult().getErrorMessage());
-            }else{
+            } else {
                 data.setReasonFail("");
             }
             counter.set(counter.get() + 1);
             testCaseSteps.add(stepsResult);
         });
         return testCaseSteps;
+    }
+
+    private String getRowStep(Rows[] rows){
+        StringBuilder addedRow = new StringBuilder();
+        if(rows != null){
+            for (Rows eachRow : rows) {
+                if(eachRow != null){
+                    addedRow.append("<br>" + Arrays.toString(eachRow.getCells()));
+                }
+            }
+            return  addedRow.toString();
+        }
+        return "";
     }
 
     private void printDetail(ArrayList<String[]> steps) {
