@@ -13,27 +13,28 @@ import com.gdn.qa.util.service.CustomTestlinkService;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
 public class TLPlugin {
     //Enter your project API key here.
-    private String DEVKEY = "1cc94be3bb2e1c3e069fa67f7e9a24e1";
+    private String DEVKEY = null;
 
     //Enter your Test Link URL here
-    private String urlTestlink = "http://172.17.21.92/testlink/lib/api/xmlrpc/v1/xmlrpc.php";
+    private String urlTestlink = null;
 
     //Enter your Test Project Name here
-    String testProject = "GOSEND";
+    String testProject = null;
 
     //Enter your Test Plan here
-    String testPlan = "GOSEND TestPlan";
+    String testPlan = null;
 
     //Enter your Test build here
-    String build = "Gosend - UAT Build";
+    String build = null;
 
     //Enter Your test Platform Name
-    String platFormName = "UAT";
+    String platFormName = null;
     String testLinkID = null;
     TestLinkAPI api = null;
     CustomTestlinkService customTestlinkService = null;
@@ -80,7 +81,7 @@ public class TLPlugin {
 
     public void TLPluginInitialize(String tLinkID, ArrayList<String[]> steps, Integer testLinkSuiteID, String judul, String testLinkUrl,
                                    String testLinkDevKey, String testLinkProjectName, String testLinkPlanName, String testLinkBuildName,
-                                   String testLinkPlatformName) {
+                                   String testLinkPlatformName) throws Exception {
         /// Initialize Parameter
         urlTestlink = testLinkUrl;
         DEVKEY = testLinkDevKey;
@@ -106,10 +107,15 @@ public class TLPlugin {
 
         // Get BUild ID By Name
         Build[] builds = api.getBuildsForTestPlan(tpID.getId());
+        if(builds.length==0){
+            throw new Exception("Can't found Build on " + testProject + " / testplan "+tpID.getName()+ " Please Create build first. ");
+        }
         for (Build build : builds)
             if (build.getName().equalsIgnoreCase(testLinkBuildName))
                 buildId = build.getId();
-
+        if(buildId==0){
+            throw new Exception("Can't found Build " + testLinkBuildName + " on " + testProject + " / testplan "+tpID.getName() + " . Builds avaiable "+ Arrays.toString(builds));
+        }
         if (testLinkSuiteID != null) {
             testSuiteID = testLinkSuiteID;
         } else {
@@ -130,22 +136,24 @@ public class TLPlugin {
     public boolean updateTestcasePassed() {
         //  Integer testCaseID = api.getTestCaseIDByName("Pickup Order Gosend via MTA",testSuiteName,testProject,"");
         // api.reportTCResult(testCaseID);
-        try {
-//            Execution lastExecution = api.getLastExecutionResult(tpID.getId(), testCases.getId(), null);
-            Execution lastExecution = customTestlinkService.getLastExecutionResultByBuild(tpID.getId(), testCases.getId(), null , buildId);
-            if (lastExecution != null) {
-                System.out.println("Foudn Last Execution Status");
-                lastExecution.toString();
-                api.deleteExecution(lastExecution.getId());
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
+//        try {
+////            Execution lastExecution = api.getLastExecutionResult(tpID.getId(), testCases.getId(), null);
+//            Execution lastExecution = customTestlinkService.getLastExecutionResultByBuild(tpID.getId(), testCases.getId(), null , buildId);
+//            if (lastExecution != null) {
+//                System.out.println("Foudn Last Execution Status");
+//                lastExecution.toString();
+//                if(lastExecution.getBuildId() == buildId) {
+//                    api.deleteExecution(lastExecution.getId());
+//                }
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
             api.addTestCaseToTestPlan(projectID, tpID.getId(), testCases.getId(), testCases.getVersion(), null, testCases.getOrder(), null);
             ReportTCResultResponse reportTCResponse = api.reportTCResult(tcExternalID, tcInternalID, tpID.getId(),
                     ExecutionStatus.PASSED, null, build, "Test Case ini dieksekusi Otomatis", null, null, null, platFormName, null, true);
             System.out.println(reportTCResponse.getMessage());
-        }
+//        }
         return true;
     }
 
@@ -157,22 +165,24 @@ public class TLPlugin {
         if (notes == "") {
             notes = "Fail When Execute Test in step " + (indexFail + 1) + " : " + pSteps.get(indexFail)[2];
         }
-        try {
-//            Execution lastExecution = api.getLastExecutionResult(tpID.getId(), testCases.getId(), null);
-            Execution lastExecution = customTestlinkService.getLastExecutionResultByBuild(tpID.getId(), testCases.getId(), null ,buildId);
-            if (lastExecution != null) {
-                System.out.println("Foudn Last Execution Status");
-                lastExecution.toString();
-                api.deleteExecution(lastExecution.getId());
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
+//        try {
+////            Execution lastExecution = api.getLastExecutionResult(tpID.getId(), testCases.getId(), null);
+//            Execution lastExecution = customTestlinkService.getLastExecutionResultByBuild(tpID.getId(), testCases.getId(), null ,buildId);
+//            if (lastExecution != null) {
+//                System.out.println("Found Last Execution Status");
+//                System.out.println("Build ID : \t" + lastExecution.getBuildId());
+//                if(lastExecution.getBuildId() == buildId){
+//                    api.deleteExecution(lastExecution.getId());
+//                }
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
             api.addTestCaseToTestPlan(projectID, tpID.getId(), testCases.getId(), testCases.getVersion(), null, null, null);
             ReportTCResultResponse reportTCResponse = api.reportTCResult(tcExternalID, tcInternalID, tpID.getId(),
                     ExecutionStatus.FAILED, null, build, notes, null, null, null, platFormName, null, true);
             System.out.println(reportTCResponse.getMessage());
-        }
+//        }
         return true;
     }
 

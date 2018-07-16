@@ -337,9 +337,13 @@ public class TestResultReader {
 
     private void updateTestlink(ArrayList<String[]> testCaseSteps) {
         TLPlugin testLinkPlugin = new TLPlugin();
-        testLinkPlugin.TLPluginInitialize(data.getTestlinkTags().getTestLinkId(),
-                testCaseSteps, Integer.parseInt(data.getTestlinkTags().getTestSuiteId()), data.getName(), urlTestlink, DEVKEY, testProject, testPlan,
-                build, platFormName);
+        try {
+            testLinkPlugin.TLPluginInitialize(data.getTestlinkTags().getTestLinkId(),
+                    testCaseSteps, Integer.parseInt(data.getTestlinkTags().getTestSuiteId()), data.getName(), urlTestlink, DEVKEY, testProject, testPlan,
+                    build, platFormName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if (data.getPassed()) {
             testLinkPlugin.updateTestcasePassed();
         } else {

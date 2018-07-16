@@ -1,0 +1,124 @@
+[
+  {
+    "line": 2,
+    "elements": [
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 6104720566,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.beforeRun()"
+            }
+          }
+        ],
+        "line": 5,
+        "name": "Looking up the definition of \u0027apple\u0027",
+        "description": "",
+        "id": "lookup-a-definition;looking-up-the-definition-of--apple-",
+        "after": [
+          {
+            "result": {
+              "duration": 39560,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.afterRun()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 4702456047,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "the user is on the Wikionary home page",
+            "match": {
+              "location": "DefinitionSteps.theUserIsOnWikionaryHomePage()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 2138498176,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "the user looks up the definition of the word \u0027apple\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "apple",
+                  "offset": 46
+                }
+              ],
+              "location": "DefinitionSteps.theUserLooksUpTheDefinitionOfTheWordString(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 965239749,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "they should see the definition \u0027A common, round fruit produced by the tree Malus domestica, cultivated in temperate climates.\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "A common, round fruit produced by the tree Malus domestica, cultivated in temperate climates.",
+                  "offset": 32
+                }
+              ],
+              "location": "DefinitionSteps.theyShouldSeeTheDefinitionString(String)"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@LookUpFeature"
+          },
+          {
+            "name": "@TestSuiteId\u003d9245424"
+          },
+          {
+            "name": "@Positive"
+          },
+          {
+            "name": "@apple"
+          }
+        ]
+      }
+    ],
+    "name": "LookUp A Definition",
+    "description": "",
+    "id": "lookup-a-definition",
+    "keyword": "Feature",
+    "uri": "src/test/resources/features/LookUp.feature",
+    "tags": [
+      {
+        "name": "@LookUpFeature",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 1
+        }
+      },
+      {
+        "name": "@TestSuiteId\u003d9245424",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 16
+        }
+      }
+    ]
+  }
+]
