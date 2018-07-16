@@ -8,6 +8,7 @@ import br.eti.kinoshita.testlinkjavaapi.TestLinkAPI;
 import br.eti.kinoshita.testlinkjavaapi.constants.*;
 import br.eti.kinoshita.testlinkjavaapi.model.*;
 import br.eti.kinoshita.testlinkjavaapi.util.TestLinkAPIException;
+import com.gdn.qa.util.service.CustomTestlinkService;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -35,6 +36,7 @@ public class TLPlugin {
     String platFormName = "UAT";
     String testLinkID = null;
     TestLinkAPI api = null;
+    CustomTestlinkService customTestlinkService = null;
     //URL testLinkURL = null;
 
     Integer tcExternalID = null;
@@ -92,6 +94,7 @@ public class TLPlugin {
             api = new TestLinkAPI(new URL(
                     urlTestlink),
                     DEVKEY);
+            customTestlinkService = new CustomTestlinkService(api);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -128,8 +131,11 @@ public class TLPlugin {
         //  Integer testCaseID = api.getTestCaseIDByName("Pickup Order Gosend via MTA",testSuiteName,testProject,"");
         // api.reportTCResult(testCaseID);
         try {
-            Execution lastExecution = api.getLastExecutionResult(tpID.getId(), testCases.getId(), null);
+//            Execution lastExecution = api.getLastExecutionResult(tpID.getId(), testCases.getId(), null);
+            Execution lastExecution = customTestlinkService.getLastExecutionResultByBuild(tpID.getId(), testCases.getId(), null , buildId);
             if (lastExecution != null) {
+                System.out.println("Foudn Last Execution Status");
+                lastExecution.toString();
                 api.deleteExecution(lastExecution.getId());
             }
         } catch (Exception e) {
@@ -152,8 +158,11 @@ public class TLPlugin {
             notes = "Fail When Execute Test in step " + (indexFail + 1) + " : " + pSteps.get(indexFail)[2];
         }
         try {
-            Execution lastExecution = api.getLastExecutionResult(tpID.getId(), testCases.getId(), null);
+//            Execution lastExecution = api.getLastExecutionResult(tpID.getId(), testCases.getId(), null);
+            Execution lastExecution = customTestlinkService.getLastExecutionResultByBuild(tpID.getId(), testCases.getId(), null ,buildId);
             if (lastExecution != null) {
+                System.out.println("Foudn Last Execution Status");
+                lastExecution.toString();
                 api.deleteExecution(lastExecution.getId());
             }
         } catch (Exception e) {
