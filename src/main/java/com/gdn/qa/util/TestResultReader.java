@@ -273,7 +273,7 @@ public class TestResultReader {
         //loop per scenario outline
         feature.getElements().stream()
                 //filter to get element with keyword scenario only
-                .filter(ft -> ft.getKeyword().equalsIgnoreCase(keyword))
+                .filter(ft -> ft.getKeyword().equalsIgnoreCase(keyword) && (defaultTags.size() != 0 || TagsReader.readTags(ft.getTags()).size() != 0))
                 .forEach(scenario -> {
                     if (!scenarioOutlineSteps.containsKey(scenario.getName())) {
                         ArrayList<String[]> steps = new ArrayList<>();
