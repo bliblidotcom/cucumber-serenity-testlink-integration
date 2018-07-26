@@ -32,6 +32,9 @@ public class TestResultReader {
     //Enter your Test Link URL here
     private String urlTestlink = "http://172.17.21.92/testlink/lib/api/xmlrpc/v1/xmlrpc.php";
 
+    AtomicReference<Integer> passed = new AtomicReference<>(0);
+    AtomicReference<Integer> failed = new AtomicReference<>(0);
+
     public void initialize(String testLinkURL, String testLinkDevKey, String testLinkProjectName,
                            String testLinkPlanName, String testLinkBuildName, String testLinkPlatFormName) {
         urlTestlink = testLinkURL;
@@ -263,10 +266,12 @@ public class TestResultReader {
 
             readCucumberSteps("scenario", defaultTags, feature, background);
             readCucumberSteps("Scenario Outline", defaultTags, feature, background);
+            System.out.println(String.format("\nSummary: %d passed and %d failed",passed.get(),failed.get()));
         }
     }
 
     private void readCucumberSteps(String keyword, List<TestlinkTags> defaultTags, CucumberModel feature, ArrayList<String[]> background) {
+        Boolean tempResult = data.getPassed();
         HashMap<String, ArrayList<String[]>> scenarioOutlineSteps = new HashMap<>();
         HashMap<String, ScenarioData> scenarioOutlineData = new HashMap<>();
         ArrayList<String[]> dw = new ArrayList<>();
@@ -275,6 +280,7 @@ public class TestResultReader {
                 //filter to get element with keyword scenario only
                 .filter(ft -> ft.getKeyword().equalsIgnoreCase(keyword) && (defaultTags.size() != 0 || TagsReader.readTags(ft.getTags()).size() != 0))
                 .forEach(scenario -> {
+                    data.setPassed(tempResult);
                     if (!scenarioOutlineSteps.containsKey(scenario.getName())) {
                         ArrayList<String[]> steps = new ArrayList<>();
                         steps.addAll(0, background);
@@ -299,7 +305,13 @@ public class TestResultReader {
                     scenarioOutlineData.put(scenario.getName(), tempData);
                     scenarioOutlineSteps.put(scenario.getName(), tempSteps);
                 });
+
         scenarioOutlineData.forEach((key, value) -> {
+            if (value.getPassed()) {
+                passed.getAndSet(passed.get() + 1);
+            } else {
+                failed.getAndSet(failed.get() + 1);
+            }
             data.setPassed(value.getPassed());
             data.setReasonFail(value.getReasonFail());
             data.setName(value.getName());
