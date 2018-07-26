@@ -113,9 +113,9 @@ public class TestReadTags {
     public void testCucumber10() {
         String testlinkURL = "https://testlink.gdn-app.com/lib/api/xmlrpc/v1/xmlrpc.php";
         String devKey = "54087f0b956c4ea5f131585eb66869c8";
-        String projectName = "Surabaya Sample Project Rest Assured";
-        String testPlanName = "Rest Assured UAT1";
-        String buildName = "BUILD UAT1";
+        String projectName = "X-Search";
+        String testPlanName = "July26thRelease";
+        String buildName = "4.2.0-5";
         String platformName = "";
         String cucumberPath = System.getProperty("user.dir") + "/src/test/resources/cucumber10.json";
         System.out.println(cucumberPath);

@@ -139,24 +139,24 @@ public class TLPlugin {
     public boolean updateTestcasePassed() {
         //  Integer testCaseID = api.getTestCaseIDByName("Pickup Order Gosend via MTA",testSuiteName,testProject,"");
         // api.reportTCResult(testCaseID);
-//        try {
-////            Execution lastExecution = api.getLastExecutionResult(tpID.getId(), testCases.getId(), null);
-//            Execution lastExecution = customTestlinkService.getLastExecutionResultByBuild(tpID.getId(), testCases.getId(), null , buildId);
-//            if (lastExecution != null) {
-//                System.out.println("Foudn Last Execution Status");
-//                lastExecution.toString();
-//                if(lastExecution.getBuildId() == buildId) {
-//                    api.deleteExecution(lastExecution.getId());
-//                }
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
+        try {
+//            Execution lastExecution = api.getLastExecutionResult(tpID.getId(), testCases.getId(), null);
+            Execution lastExecution = customTestlinkService.getLastExecutionResultByBuild(tpID.getId(), testCases.getId(), null , buildId);
+            if (lastExecution != null) {
+                System.out.println("Foudn Last Execution Status");
+                lastExecution.toString();
+                if(lastExecution.getBuildId() == buildId) {
+                    api.deleteExecution(lastExecution.getId());
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
             api.addTestCaseToTestPlan(projectID, tpID.getId(), testCases.getId(), testCases.getVersion(), null, testCases.getOrder(), null);
             ReportTCResultResponse reportTCResponse = api.reportTCResult(tcExternalID, tcInternalID, tpID.getId(),
                     ExecutionStatus.PASSED, null, build, "Test Case ini dieksekusi Otomatis", null, null, null, platFormName, null, true);
             System.out.println(reportTCResponse.getMessage().equalsIgnoreCase("Success!") ? "Done!" : "Failed!");
-//        }
+        }
         return true;
     }
 
@@ -168,24 +168,24 @@ public class TLPlugin {
         if (notes == "") {
             notes = "Fail When Execute Test in step " + (indexFail + 1) + " : " + pSteps.get(indexFail)[2];
         }
-//        try {
-////            Execution lastExecution = api.getLastExecutionResult(tpID.getId(), testCases.getId(), null);
-//            Execution lastExecution = customTestlinkService.getLastExecutionResultByBuild(tpID.getId(), testCases.getId(), null ,buildId);
-//            if (lastExecution != null) {
-//                System.out.println("Found Last Execution Status");
-//                System.out.println("Build ID : \t" + lastExecution.getBuildId());
-//                if(lastExecution.getBuildId() == buildId){
-//                    api.deleteExecution(lastExecution.getId());
-//                }
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
+        try {
+//            Execution lastExecution = api.getLastExecutionResult(tpID.getId(), testCases.getId(), null);
+            Execution lastExecution = customTestlinkService.getLastExecutionResultByBuild(tpID.getId(), testCases.getId(), null ,buildId);
+            if (lastExecution != null) {
+                System.out.println("Found Last Execution Status");
+                System.out.println("Build ID : \t" + lastExecution.getBuildId());
+                if(lastExecution.getBuildId() == buildId){
+                    api.deleteExecution(lastExecution.getId());
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
             api.addTestCaseToTestPlan(projectID, tpID.getId(), testCases.getId(), testCases.getVersion(), null, null, null);
             ReportTCResultResponse reportTCResponse = api.reportTCResult(tcExternalID, tcInternalID, tpID.getId(),
                     ExecutionStatus.FAILED, null, build, notes, null, null, null, platFormName, null, true);
         System.out.println(reportTCResponse.getMessage().equalsIgnoreCase("Success!") ? "Done!" : "Failed!");
-//        }
+        }
         return true;
     }
 
