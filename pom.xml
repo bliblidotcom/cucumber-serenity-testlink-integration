@@ -4,7 +4,7 @@
 
     <groupId>com.gdn.qa.util</groupId>
     <artifactId>serenity-testlink-integration</artifactId>
-    <version>3.4.2</version>
+    <version>3.4.3</version>
     <packaging>maven-plugin</packaging>
 
     <name>serenity-testlink-integration</name>

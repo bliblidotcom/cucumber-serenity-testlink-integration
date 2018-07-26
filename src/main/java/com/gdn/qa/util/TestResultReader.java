@@ -32,6 +32,7 @@ public class TestResultReader {
     //Enter your Test Link URL here
     private String urlTestlink = "http://172.17.21.92/testlink/lib/api/xmlrpc/v1/xmlrpc.php";
 
+    Boolean tempResult;
     AtomicReference<Integer> passed = new AtomicReference<>(0);
     AtomicReference<Integer> failed = new AtomicReference<>(0);
 
@@ -263,7 +264,7 @@ public class TestResultReader {
             feature.getElements().stream().filter(ft -> ft.getKeyword().equalsIgnoreCase("Background")).forEach(b -> {
                 background.addAll(readSteps(b.getSteps()));
             });
-
+            this.tempResult = data.getPassed();
             readCucumberSteps("scenario", defaultTags, feature, background);
             readCucumberSteps("Scenario Outline", defaultTags, feature, background);
             System.out.println(String.format("\nSummary: %d passed and %d failed",passed.get(),failed.get()));
@@ -271,7 +272,6 @@ public class TestResultReader {
     }
 
     private void readCucumberSteps(String keyword, List<TestlinkTags> defaultTags, CucumberModel feature, ArrayList<String[]> background) {
-        Boolean tempResult = data.getPassed();
         HashMap<String, ArrayList<String[]>> scenarioOutlineSteps = new HashMap<>();
         HashMap<String, ScenarioData> scenarioOutlineData = new HashMap<>();
         ArrayList<String[]> dw = new ArrayList<>();
