@@ -261,7 +261,8 @@ public class TestResultReader {
             //read background steps
             data = new ScenarioData();
             ArrayList<String[]> background = new ArrayList<>();
-            feature.getElements().stream().filter(ft -> ft.getKeyword().equalsIgnoreCase("Background")).forEach(b -> {
+            feature.getElements().stream().filter(ft -> ft.getKeyword().equalsIgnoreCase("Background"))
+                    .findFirst().ifPresent(b -> {
                 background.addAll(readSteps(b.getSteps()));
             });
             this.tempResult = data.getPassed();
