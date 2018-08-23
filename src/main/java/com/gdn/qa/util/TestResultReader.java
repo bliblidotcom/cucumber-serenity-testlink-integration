@@ -368,12 +368,12 @@ public class TestResultReader {
         ArrayList<String[]> testCaseSteps = new ArrayList<>();
         AtomicReference<Integer> counter = new AtomicReference<>(1);
         steps.forEach(step -> {
-            String[] stepsResult = {step.getName() + (getRowStep(step.getRows())) , Boolean.toString((step.getResult().getStatus().equalsIgnoreCase("passed")) ? true : false),
+            String[] stepsResult = {step.getKeyword() + step.getName() + (getRowStep(step.getRows())) , Boolean.toString((step.getResult().getStatus().equalsIgnoreCase("passed")) ? true : false),
                     (step.getResult().getErrorMessage() == null) ? "" : step.getResult().getErrorMessage()};
             if (!step.getResult().getStatus().equalsIgnoreCase("passed") && data.getPassed()) {
                 data.setPassed(false);
                 data.setReasonFail("This Test Case Failed on step " + counter.get() + ",Log: \n" + step.getResult().getErrorMessage());
-            } else {
+            } else if(data.getPassed()) {
                 data.setReasonFail("");
             }
             counter.set(counter.get() + 1);
