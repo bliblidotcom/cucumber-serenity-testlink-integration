@@ -3,7 +3,7 @@ package com.gdn.qa.util;
 import org.junit.Test;
 
 public class TestReadTags {
-
+/*
     @Test
     public void testCucumber4() {
         String testlinkURL = "https://testlink.gdn-app.com/lib/api/xmlrpc/v1/xmlrpc.php";
@@ -170,6 +170,6 @@ public class TestReadTags {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
     
 }

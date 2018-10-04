@@ -20,6 +20,12 @@ public class Main extends AbstractMojo {
      * @parameter
      */
     @Parameter
+    private String sourceDir;
+
+    /**
+     * @parameter
+     */
+    @Parameter
     private String testlinkURL;
 //    private String testlinkURL = "https://testlink.gdn-app.com/lib/api/xmlrpc/v1/xmlrpc.php";
 
@@ -61,6 +67,7 @@ public class Main extends AbstractMojo {
     public void execute() throws MojoExecutionException, MojoFailureException {
         Banner.loadBanner();
         System.out.println("===Config===");
+        System.out.println("Source Directory: "+ sourceDir);
         System.out.println("testlink URL : " + testlinkURL);
         System.out.println("DevKey : " + devKey);
         System.out.println("Project Name : " + projectName);
@@ -70,8 +77,15 @@ public class Main extends AbstractMojo {
         System.out.println("===End Of Config===");
         System.out.println("===Process Started===");
 
+        String cucumberPath;
+        if(sourceDir == null || sourceDir.isEmpty()){
+            cucumberPath = System.getProperty("user.dir") + File.separator + "target/destination/cucumber.json";
+        }else{
+            cucumberPath = sourceDir;
+        }
+
         // check if cucumebr json exist
-        String cucumberPath = System.getProperty("user.dir") + "/target/destination/cucumber.json";
+
         System.out.println("Cucumber Path : " + cucumberPath);
         File cucumberFile = new File(cucumberPath);
         TestResultReader testResultReader = new TestResultReader();
