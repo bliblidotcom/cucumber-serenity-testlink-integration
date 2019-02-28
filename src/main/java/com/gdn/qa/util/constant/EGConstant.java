@@ -54,11 +54,12 @@ public class EGConstant {
 
   public static void printHelp() {
     System.out.println("Usage:  badak-integration [ARGUMENT]=[VALUE]");
-    System.out.println("\n");
+    System.out.println("");
     System.out.println("Arguments:");
-    System.out.println("--jsonFile=[String]                   : Specify json/report file location (mandatory)\n");
-    System.out.println("--setting=[String]                    : Specify testlink configuration file location (mandatory)");
-    System.out.println("--help                                : Displays help");
+    System.out.println("--jsonFile=[String]     : Specify json/report file location (mandatory)\n");
+    System.out.println("--setting=[String]      : Specify testlink configuration file location (mandatory)");
+    System.out.println("--help                  : Displays help");
+    System.out.println("");
   }
 
   public static void initializeTestlinkSetting(){
