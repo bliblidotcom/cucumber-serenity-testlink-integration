@@ -97,7 +97,7 @@ public class TLPlugin {
                     DEVKEY);
             customTestlinkService = new CustomTestlinkService(api);
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         System.out.print("Estabilishing connection to Testlink...");
         if(api.ping().equalsIgnoreCase("Hello!")){
@@ -150,7 +150,7 @@ public class TLPlugin {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         } finally {
             api.addTestCaseToTestPlan(projectID, tpID.getId(), testCases.getId(), testCases.getVersion(), null, testCases.getOrder(), null);
             ReportTCResultResponse reportTCResponse = api.reportTCResult(tcExternalID, tcInternalID, tpID.getId(),
@@ -179,7 +179,7 @@ public class TLPlugin {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            e.getMessage();
         } finally {
             api.addTestCaseToTestPlan(projectID, tpID.getId(), testCases.getId(), testCases.getVersion(), null, null, null);
             ReportTCResultResponse reportTCResponse = api.reportTCResult(tcExternalID, tcInternalID, tpID.getId(),
@@ -228,7 +228,7 @@ public class TLPlugin {
                         1, true, ActionOnDuplicate.CREATE_NEW_VERSION);
                 api.addTestCaseToTestPlan(projectID, tpID.getId(), testCases.getId(), testCases.getVersion(), null, testCases.getOrder(), null);
             } catch (TestLinkAPIException e) {
-                e.printStackTrace();
+                System.out.println(e.getMessage());
             }
         }
     }
@@ -250,6 +250,7 @@ public class TLPlugin {
             idtcServer = api.getTestCaseIDByName(title, testSuiteName, testProjectName, null);
         } catch (Exception e) {
             System.out.println("Test Case tidak ditemukan , akan membuat test case baru.....");
+            System.out.println(e.getMessage());
             return null;
         }
 

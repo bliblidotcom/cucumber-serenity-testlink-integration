@@ -534,7 +534,7 @@ public class TestResultReader {
           build,
           platFormName);
     } catch (Exception e) {
-      e.printStackTrace();
+      System.out.println(e.getMessage());
     }
     if (Boolean.parseBoolean(pass)) {
       testLinkPlugin.updateTestcasePassed();
