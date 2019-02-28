@@ -9,6 +9,7 @@ import com.gdn.qa.util.service.Utils;
 public class EarlGreyIntegration {
   public static void main(String[] args) throws InterruptedException{
     Utils utils = new Utils();
+    EGConstant.printTitle();
 
     try{
       EGConstant.readFromArgs(utils.getAllArgs(args));

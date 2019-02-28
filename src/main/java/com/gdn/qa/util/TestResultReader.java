@@ -485,10 +485,11 @@ public class TestResultReader {
           String testSuiteId = test2.getTestName().split("_")[2];
           test.put(testSuiteId, results);
         }
-        System.out.println("done");
         try {
           test.entrySet().stream().forEach(v -> {
             v.getValue().stream().forEach(t -> {
+              System.out.println("");
+              System.out.println("Reading test step...");
               updateTestlinkEarlGrey(v.getKey(), t);
             });
           });
