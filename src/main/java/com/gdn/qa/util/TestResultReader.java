@@ -483,7 +483,13 @@ public class TestResultReader {
             results.add(tr);
           }
           String testSuiteId = test2.getTestName().split("_")[2];
-          test.put(testSuiteId, results);
+          if(test.get(testSuiteId) == null) {
+            test.put(testSuiteId, results);
+          }else {
+            List<TestResult> combineResult = test.get(testSuiteId);
+            combineResult.addAll(results);
+            test.put(testSuiteId, combineResult);
+          }
         }
         try {
           test.entrySet().stream().forEach(v -> {

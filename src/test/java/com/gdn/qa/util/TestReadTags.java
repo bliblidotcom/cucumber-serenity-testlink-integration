@@ -12,7 +12,7 @@ public class TestReadTags {
     String testPlanName = "iOsAutomation";
     String buildName = "automation";
     String platformName = "";
-    String earlGreyPath = System.getProperty("user.dir") + "/" + "earlgrey.json";
+    String earlGreyPath = System.getProperty("user.dir") + "/" + "TestSummaries.json";
     System.out.println(earlGreyPath);
 
     TestResultReader testResultReader = new TestResultReader();
