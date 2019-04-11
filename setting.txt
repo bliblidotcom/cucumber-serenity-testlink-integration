@@ -1,0 +1,5 @@
+testlinkURL=https://testlink.gdn-app.com/lib/api/xmlrpc/v1/xmlrpc.php
+devKey=6ca063b6dfad21d0c4a9e9cafe6b9ff1
+projectName=Surabaya
+testPlanName=iOsAutomation
+buildName=automation
