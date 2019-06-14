@@ -8,33 +8,36 @@ import br.eti.kinoshita.testlinkjavaapi.TestLinkAPI;
 import br.eti.kinoshita.testlinkjavaapi.constants.*;
 import br.eti.kinoshita.testlinkjavaapi.model.*;
 import br.eti.kinoshita.testlinkjavaapi.util.TestLinkAPIException;
+import com.gdn.qa.util.service.CustomTestlinkService;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
 public class TLPlugin {
     //Enter your project API key here.
-    private String DEVKEY = "1cc94be3bb2e1c3e069fa67f7e9a24e1";
+    private String DEVKEY = null;
 
     //Enter your Test Link URL here
-    private String urlTestlink = "http://172.17.21.92/testlink/lib/api/xmlrpc/v1/xmlrpc.php";
+    private String urlTestlink = null;
 
     //Enter your Test Project Name here
-    String testProject = "GOSEND";
+    String testProject = null;
 
     //Enter your Test Plan here
-    String testPlan = "GOSEND TestPlan";
+    String testPlan = null;
 
     //Enter your Test build here
-    String build = "Gosend - UAT Build";
+    String build = null;
 
     //Enter Your test Platform Name
-    String platFormName = "UAT";
+    String platFormName = null;
     String testLinkID = null;
     TestLinkAPI api = null;
+    CustomTestlinkService customTestlinkService = null;
     //URL testLinkURL = null;
 
     Integer tcExternalID = null;
@@ -78,7 +81,7 @@ public class TLPlugin {
 
     public void TLPluginInitialize(String tLinkID, ArrayList<String[]> steps, Integer testLinkSuiteID, String judul, String testLinkUrl,
                                    String testLinkDevKey, String testLinkProjectName, String testLinkPlanName, String testLinkBuildName,
-                                   String testLinkPlatformName) {
+                                   String testLinkPlatformName) throws Exception {
         /// Initialize Parameter
         urlTestlink = testLinkUrl;
         DEVKEY = testLinkDevKey;
@@ -92,10 +95,14 @@ public class TLPlugin {
             api = new TestLinkAPI(new URL(
                     urlTestlink),
                     DEVKEY);
+            customTestlinkService = new CustomTestlinkService(api);
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
-        System.out.println(api.ping());
+        System.out.print("Estabilishing connection to Testlink...");
+        if(api.ping().equalsIgnoreCase("Hello!")){
+            System.out.println("Done!");
+        }
         tpID = api.getTestPlanByName(testPlan, testProject);
         /// Get project ID and TestSuite ID
         TestProject project = api.getTestProjectByName(testProject);
@@ -103,10 +110,15 @@ public class TLPlugin {
 
         // Get BUild ID By Name
         Build[] builds = api.getBuildsForTestPlan(tpID.getId());
+        if(builds.length==0){
+            throw new Exception("Can't found Build on " + testProject + " / testplan "+tpID.getName()+ " Please Create build first. ");
+        }
         for (Build build : builds)
             if (build.getName().equalsIgnoreCase(testLinkBuildName))
                 buildId = build.getId();
-
+        if(buildId==0){
+            throw new Exception("Can't found Build " + testLinkBuildName + " on " + testProject + " / testplan "+tpID.getName() + " . Builds avaiable "+ Arrays.toString(builds));
+        }
         if (testLinkSuiteID != null) {
             testSuiteID = testLinkSuiteID;
         } else {
@@ -114,7 +126,7 @@ public class TLPlugin {
         }
 
         title = judul;
-        if (tLinkID != null) {
+        if (!tLinkID.isEmpty()) {
             testCases = api.getTestCaseByExternalId(tLinkID, null);
         } else {
             createTestCase(steps);
@@ -128,17 +140,22 @@ public class TLPlugin {
         //  Integer testCaseID = api.getTestCaseIDByName("Pickup Order Gosend via MTA",testSuiteName,testProject,"");
         // api.reportTCResult(testCaseID);
         try {
-            Execution lastExecution = api.getLastExecutionResult(tpID.getId(), testCases.getId(), null);
+//            Execution lastExecution = api.getLastExecutionResult(tpID.getId(), testCases.getId(), null);
+            Execution lastExecution = customTestlinkService.getLastExecutionResultByBuild(tpID.getId(), testCases.getId(), null , buildId);
             if (lastExecution != null) {
-                api.deleteExecution(lastExecution.getId());
+                System.out.println("Foudn Last Execution Status");
+                lastExecution.toString();
+                if(lastExecution.getBuildId() == buildId) {
+                    api.deleteExecution(lastExecution.getId());
+                }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         } finally {
             api.addTestCaseToTestPlan(projectID, tpID.getId(), testCases.getId(), testCases.getVersion(), null, testCases.getOrder(), null);
             ReportTCResultResponse reportTCResponse = api.reportTCResult(tcExternalID, tcInternalID, tpID.getId(),
                     ExecutionStatus.PASSED, null, build, "Test Case ini dieksekusi Otomatis", null, null, null, platFormName, null, true);
-            System.out.println(reportTCResponse.getMessage());
+            System.out.println(reportTCResponse.getMessage().equalsIgnoreCase("Success!") ? "Done!" : "Failed!");
         }
         return true;
     }
@@ -146,23 +163,28 @@ public class TLPlugin {
     public boolean updateTestcaseFail(String notes) {
         //  Integer testCaseID = api.getTestCaseIDByName("Pickup Order Gosend via MTA",testSuiteName,testProject,"");
         // api.reportTCResult(testCaseID);
-        System.out.println(tcExternalID);
+//        System.out.println(tcExternalID);
 
         if (notes == "") {
             notes = "Fail When Execute Test in step " + (indexFail + 1) + " : " + pSteps.get(indexFail)[2];
         }
         try {
-            Execution lastExecution = api.getLastExecutionResult(tpID.getId(), testCases.getId(), null);
+//            Execution lastExecution = api.getLastExecutionResult(tpID.getId(), testCases.getId(), null);
+            Execution lastExecution = customTestlinkService.getLastExecutionResultByBuild(tpID.getId(), testCases.getId(), null ,buildId);
             if (lastExecution != null) {
-                api.deleteExecution(lastExecution.getId());
+                System.out.println("Found Last Execution Status");
+                System.out.println("Build ID : \t" + lastExecution.getBuildId());
+                if(lastExecution.getBuildId() == buildId){
+                    api.deleteExecution(lastExecution.getId());
+                }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            e.getMessage();
         } finally {
             api.addTestCaseToTestPlan(projectID, tpID.getId(), testCases.getId(), testCases.getVersion(), null, null, null);
             ReportTCResultResponse reportTCResponse = api.reportTCResult(tcExternalID, tcInternalID, tpID.getId(),
                     ExecutionStatus.FAILED, null, build, notes, null, null, null, platFormName, null, true);
-            System.out.println(reportTCResponse.getMessage());
+        System.out.println(reportTCResponse.getMessage().equalsIgnoreCase("Success!") ? "Done!" : "Failed!");
         }
         return true;
     }
@@ -174,8 +196,8 @@ public class TLPlugin {
         List<TestCaseStep> testCaseSteps = new ArrayList<TestCaseStep>();
         for (int i = 0; i < steps.size(); i++) {
             TestCaseStep testCaseStep = new TestCaseStep();
-            System.out.println(steps.get(i)[0]);
-            System.out.println(steps.get(i)[1]);
+/*            System.out.println(steps.get(i)[0]);
+            System.out.println(steps.get(i)[1]);*/
             testCaseStep.setActions(steps.get(i)[0]); /// Set Actions
             testCaseStep.setExecutionType(ExecutionType.AUTOMATED); /// Set Type Action
             if (!Boolean.parseBoolean(steps.get(i)[1])) {
@@ -206,12 +228,9 @@ public class TLPlugin {
                         1, true, ActionOnDuplicate.CREATE_NEW_VERSION);
                 api.addTestCaseToTestPlan(projectID, tpID.getId(), testCases.getId(), testCases.getVersion(), null, testCases.getOrder(), null);
             } catch (TestLinkAPIException e) {
-                e.printStackTrace();
-            } finally {
-                System.out.println("gagal");
+                System.out.println(e.getMessage());
             }
         }
-
     }
 
 
@@ -231,6 +250,7 @@ public class TLPlugin {
             idtcServer = api.getTestCaseIDByName(title, testSuiteName, testProjectName, null);
         } catch (Exception e) {
             System.out.println("Test Case tidak ditemukan , akan membuat test case baru.....");
+            System.out.println(e.getMessage());
             return null;
         }
 
@@ -239,25 +259,23 @@ public class TLPlugin {
         List<TestCaseStep> tsServers = tcServer.getSteps();
         //// Compare Title
         if (!title.equals(tcServer.getName())) { // Jika tidak sama langsung return false
-            System.out.println("Test Case tidak ditemukan , akan membuat test case baru.....");
+            System.out.println("Test case not found, creating new testcase.....");
             return null;
         } else { // Jika sama lanjutkan pengecekan
             if (tsServers.size() != tsInputted.size()) { // jika ukuran tidak sama langsung lewati
-                System.out.println("Test Step Ditambahin.");
+                System.out.println("Test step added");
                 return null;
             } else { // jika Ukuran sama lanjutkan pengecekan
                 for (int i = 0; i < tsInputted.size(); i++) {
                     if (!tsServers.get(i).getActions().equals(tsInputted.get(i).getActions())) {
-                        System.out.println("Test Step berubah create new.");
+                        System.out.println("Test step changed. Create new version...");
                         return null;
                     }
                 }
             }
         }
-        System.out.println("Test Step Tidak berubah , Mengembalikan Existing....");
+        System.out.print("Test step not changed, Updating the result....");
         return tcServer;
     }
-
-
 }
 

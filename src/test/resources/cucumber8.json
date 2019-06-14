@@ -1,0 +1,129 @@
+[
+  {
+    "line": 1,
+    "elements": [
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 7118305936,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.beforeRun()"
+            }
+          }
+        ],
+        "line": 2,
+        "name": "Successful Login with Valid Credentials",
+        "description": "",
+        "id": "test-test-test;successful-login-with-valid-credentials",
+        "after": [
+          {
+            "result": {
+              "duration": 39343,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.afterRun()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "error_message": "cucumber.api.PendingException: TODO: implement me\r\n\tat com.gdn.qa.module.ui.tes.steps.MemberSteps.userIsOnHomePage(MemberSteps.java:55)\r\n\tat ✽.User is on Home Page(src/test/resources/features/Scenario.feature:3)\r\n",
+              "duration": 198655222,
+              "status": "pending"
+            },
+            "line": 3,
+            "name": "User is on Home Page",
+            "match": {
+              "location": "MemberSteps.userIsOnHomePage()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 4,
+            "name": "User Navigate to LogIn Page",
+            "match": {
+              "location": "MemberSteps.userNavigateToLogInPage()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 5,
+            "name": "User enters Credentials to LogIn",
+            "match": {
+              "location": "MemberSteps.userEntersCredentialsToLogIn(DataTable)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "testuser_1",
+                  "Test@153"
+                ]
+              },
+              {
+                "cells": [
+                  "testuser_1",
+                  "Test@153", "testets"
+                ]
+              },
+              {
+                "cells": [
+                  "testuser_1",
+                  "Test@153", "tets"
+                ]
+              },
+              {
+                "cells": [
+                  "testuser_1",
+                  "Test@153", "test lagi"
+                ]
+              }
+            ],
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 7,
+            "name": "Message displayed Login Successfully",
+            "match": {
+              "location": "MemberSteps.messageDisplayedLoginSuccessfully()"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@TestSuiteID\u003d8530712"
+          }
+        ]
+      }
+    ],
+    "name": "test test test",
+    "description": "",
+    "id": "test-test-test",
+    "keyword": "Feature",
+    "uri": "src/test/resources/features/Scenario.feature",
+    "tags": [ {
+      "name": "@TestSuiteID\u003d8530712",
+      "type": "Tag",
+      "location": {
+        "line": 1,
+        "column": 16
+      }
+    }]
+  }
+]

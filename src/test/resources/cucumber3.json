@@ -1,0 +1,186 @@
+[
+  {
+    "line": 2,
+    "elements": [
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 3792866100,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.beforeRun()"
+            }
+          }
+        ],
+        "line": 9,
+        "name": "create member response must equals with request",
+        "description": "",
+        "id": "get-member-info;create-member-response-must-equals-with-request",
+        "after": [
+          {
+            "result": {
+              "duration": 28400,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.afterRun()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 131675200,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "[MemberSteps] create member request with userId \u0027hafiztesting@mailinator.com\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "hafiztesting@mailinator.com",
+                  "offset": 49
+                }
+              ],
+              "location": "MemberSteps.memberstepsCreateMemberRequest(String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 3666479200,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "[MemberSteps] send get member request",
+            "match": {
+              "location": "MemberSteps.memberstepsSendGetMemberRequest()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 2261300,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "[MemberSteps] create member response must equals with request",
+            "match": {
+              "location": "MemberSteps.memberstepsCreateMemberResponseMustEqualsWithRequest()"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@testsuiteid\u003d33790"
+          },
+          {
+            "name": "@member"
+          }
+        ]
+      },
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 20470000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.beforeRun()"
+            }
+          }
+        ],
+        "line": 15,
+        "name": "create member response must equals with request 2",
+        "description": "",
+        "id": "get-member-info;create-member-response-must-equals-with-request-2",
+        "after": [
+          {
+            "result": {
+              "duration": 27300,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.afterRun()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 15392700,
+              "status": "passed"
+            },
+            "line": 16,
+            "name": "[MemberSteps] create member request with userId \u0027hafiztesting@mailinator.com\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "hafiztesting@mailinator.com",
+                  "offset": 49
+                }
+              ],
+              "location": "MemberSteps.memberstepsCreateMemberRequest(String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 198270700,
+              "status": "passed"
+            },
+            "line": 17,
+            "name": "[MemberSteps] send get member request",
+            "match": {
+              "location": "MemberSteps.memberstepsSendGetMemberRequest()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 452600,
+              "status": "passed"
+            },
+            "line": 18,
+            "name": "[MemberSteps] create member response must equals with request",
+            "match": {
+              "location": "MemberSteps.memberstepsCreateMemberResponseMustEqualsWithRequest()"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@testsuiteid\u003d33790"
+          },
+          {
+            "name": "@member"
+          }
+        ]
+      }
+    ],
+    "name": "Get member info",
+    "description": "  Narrative:\n  As a merchant\n  I want to get my existing members",
+    "id": "get-member-info",
+    "keyword": "Feature",
+    "uri": "src/test/resources/features/GetMemberInfo.feature",
+    "tags": [
+      {
+        "name": "@testsuiteid\u003d33790",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 1
+        }
+      }
+    ]
+  }
+]

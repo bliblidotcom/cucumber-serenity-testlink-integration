@@ -1,0 +1,495 @@
+[
+  {
+    "line": 2,
+    "elements": [
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 6010656105,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.beforeRun()"
+            }
+          }
+        ],
+        "line": 5,
+        "name": "Looking up the definition of \u0027apple\u0027",
+        "description": "",
+        "id": "lookup-a-definition;looking-up-the-definition-of--apple-",
+        "after": [
+          {
+            "result": {
+              "duration": 23520,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.afterRun()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 8200355118,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "the user is on the Wikionary home page",
+            "match": {
+              "location": "DefinitionSteps.theUserIsOnWikionaryHomePage()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1945120507,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "the user looks up the definition of the word \u0027apple\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "apple",
+                  "offset": 46
+                }
+              ],
+              "location": "DefinitionSteps.theUserLooksUpTheDefinitionOfTheWordString(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 972843570,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "they should see the definition \u0027A common, round fruit produced by the tree Malus domestica, cultivated in temperate climates.\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "A common, round fruit produced by the tree Malus domestica, cultivated in temperate climates.",
+                  "offset": 32
+                }
+              ],
+              "location": "DefinitionSteps.theyShouldSeeTheDefinitionString(String)"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@LookUpFeature"
+          },
+          {
+            "name": "@TestSuiteID\u003d8530712"
+          },
+          {
+            "name": "@Positive"
+          },
+          {
+            "name": "@TestLinkID\u003dSPR-5"
+          }
+        ]
+      },
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 31271249,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.beforeRun()"
+            }
+          }
+        ],
+        "line": 11,
+        "name": "Looking up the definition of \u0027banana\u0027",
+        "description": "",
+        "id": "lookup-a-definition;looking-up-the-definition-of--banana-",
+        "after": [
+          {
+            "result": {
+              "duration": 26942,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.afterRun()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 4703405951,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "the user is on the Wikionary home page",
+            "match": {
+              "location": "DefinitionSteps.theUserIsOnWikionaryHomePage()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 2010908416,
+              "status": "passed"
+            },
+            "line": 13,
+            "name": "the user looks up the definition of the word \u0027banana\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "banana",
+                  "offset": 46
+                }
+              ],
+              "location": "DefinitionSteps.theUserLooksUpTheDefinitionOfTheWordString(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 589705343,
+              "status": "passed"
+            },
+            "line": 14,
+            "name": "they should see the definition \u0027An elongated curved tropical fruit that grows in bunches and has a creamy flesh and a smooth skin\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "An elongated curved tropical fruit that grows in bunches and has a creamy flesh and a smooth skin",
+                  "offset": 32
+                }
+              ],
+              "location": "DefinitionSteps.theyShouldSeeTheDefinitionString(String)"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@LookUpFeature"
+          },
+          {
+            "name": "@TestSuiteID\u003d8530712"
+          },
+          {
+            "name": "@Positive"
+          }
+        ]
+      },
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 19965977,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.beforeRun()"
+            }
+          }
+        ],
+        "line": 17,
+        "name": "Looking up the definition of \u0027kiwi\u0027",
+        "description": "",
+        "id": "lookup-a-definition;looking-up-the-definition-of--kiwi-",
+        "after": [
+          {
+            "result": {
+              "duration": 27797,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.afterRun()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 4148033380,
+              "status": "passed"
+            },
+            "line": 18,
+            "name": "the user is on the Wikionary home page",
+            "match": {
+              "location": "DefinitionSteps.theUserIsOnWikionaryHomePage()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1792104185,
+              "status": "passed"
+            },
+            "line": 19,
+            "name": "the user looks up the definition of the word \u0027kiwi\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "kiwi",
+                  "offset": 46
+                }
+              ],
+              "location": "DefinitionSteps.theUserLooksUpTheDefinitionOfTheWordString(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 456119156,
+              "status": "passed"
+            },
+            "line": 20,
+            "name": "they should see the definition \u0027A flightless bird of the genus Apteryx native to New Zealand.\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "A flightless bird of the genus Apteryx native to New Zealand.",
+                  "offset": 32
+                }
+              ],
+              "location": "DefinitionSteps.theyShouldSeeTheDefinitionString(String)"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@LookUpFeature"
+          },
+          {
+            "name": "@TestSuiteID\u003d8530712"
+          },
+          {
+            "name": "@Positive"
+          },
+          {
+            "name": "@TestSuiteID\u003d8530713"
+          }
+        ]
+      },
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 21833938,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.beforeRun()"
+            }
+          }
+        ],
+        "line": 23,
+        "name": "Looking up the definition of \u0027mango\u0027",
+        "description": "",
+        "id": "lookup-a-definition;looking-up-the-definition-of--mango-",
+        "after": [
+          {
+            "result": {
+              "duration": 26086,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.afterRun()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 4163824669,
+              "status": "passed"
+            },
+            "line": 24,
+            "name": "the user is on the Wikionary home page",
+            "match": {
+              "location": "DefinitionSteps.theUserIsOnWikionaryHomePage()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1577132525,
+              "status": "passed"
+            },
+            "line": 25,
+            "name": "the user looks up the definition of the word \u0027mango\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "mango",
+                  "offset": 46
+                }
+              ],
+              "location": "DefinitionSteps.theUserLooksUpTheDefinitionOfTheWordString(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 813894075,
+              "status": "passed"
+            },
+            "line": 26,
+            "name": "they should see the definition \u0027A tropical Asian fruit tree, Mangifera indica.\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "A tropical Asian fruit tree, Mangifera indica.",
+                  "offset": 32
+                }
+              ],
+              "location": "DefinitionSteps.theyShouldSeeTheDefinitionString(String)"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@LookUpFeature"
+          },
+          {
+            "name": "@TestSuiteID\u003d8530712"
+          },
+          {
+            "name": "@Positive"
+          }
+        ]
+      },
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 24061978,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.beforeRun()"
+            }
+          }
+        ],
+        "line": 29,
+        "name": "Looking up the definition of \u0027pear\u0027",
+        "description": "",
+        "id": "lookup-a-definition;looking-up-the-definition-of--pear-",
+        "after": [
+          {
+            "result": {
+              "duration": 26087,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.afterRun()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 4195606100,
+              "status": "passed"
+            },
+            "line": 30,
+            "name": "the user is on the Wikionary home page",
+            "match": {
+              "location": "DefinitionSteps.theUserIsOnWikionaryHomePage()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1701912608,
+              "status": "passed"
+            },
+            "line": 31,
+            "name": "the user looks up the definition of the word \u0027pear\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "pear",
+                  "offset": 46
+                }
+              ],
+              "location": "DefinitionSteps.theUserLooksUpTheDefinitionOfTheWordString(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "error_message": "java.lang.AssertionError: \nExpected: a collection containing a string containing \"Geblek\"\n     got: \u003c[An edible fruit produced by the pear tree, similar to an apple but elongated towards the stem., (also pear tree) A type of fruit tree (Pyrus communis)., The wood of the pear tree., Choke pear (a torture device).]\u003e\n\r\n\tat org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:21)\r\n\tat org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:8)\r\n\tat com.gdn.qa.module.api.restassured.steps.DefinitionSteps.theyShouldSeeTheDefinitionString(DefinitionSteps.java:38)\r\n\tat ✽.they should see the definition \u0027Geblek\u0027(src/test/resources/features/LookUp.feature:32)\r\n",
+              "duration": 503558877,
+              "status": "failed"
+            },
+            "line": 32,
+            "name": "they should see the definition \u0027Geblek\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Geblek",
+                  "offset": 32
+                }
+              ],
+              "location": "DefinitionSteps.theyShouldSeeTheDefinitionString(String)"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@LookUpFeature"
+          },
+          {
+            "name": "@TestSuiteID\u003d8530712"
+          },
+          {
+            "name": "@Positive"
+          },
+          {
+            "name": "@TestSuiteID\u003d8530713"
+          }
+        ]
+      }
+    ],
+    "name": "LookUp A Definition",
+    "description": "",
+    "id": "lookup-a-definition",
+    "keyword": "Feature",
+    "uri": "src/test/resources/features/LookUp.feature",
+    "tags": [
+      {
+        "name": "@LookUpFeature",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 1
+        }
+      },
+      {
+        "name": "@TestSuiteID\u003d8530712",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 16
+        }
+      }
+    ]
+  }
+]

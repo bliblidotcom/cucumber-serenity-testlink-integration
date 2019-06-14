@@ -1,0 +1,4660 @@
+[
+  {
+    "line": 2,
+    "elements": [
+      {
+        "line": 4,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 11912524499,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "[MTA-UI] user open mta homepage",
+            "match": {
+              "location": "LoginSteps.userOpenWeb()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1226721275,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "[MTA-UI] user login with username \u0027rizkaella.amp@mailinator.com\u0027 and password \u0027Testing12345\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "rizkaella.amp@mailinator.com",
+                  "offset": 35
+                },
+                {
+                  "val": "Testing12345",
+                  "offset": 79
+                }
+              ],
+              "location": "LoginSteps.userInputUsernameAndPassword(String,String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 1814608387,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "[MTA-UI] user click login button",
+            "match": {
+              "location": "LoginSteps.userClickLoginButton()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 556562288,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "[MTA-UI] user click internal button",
+            "match": {
+              "location": "LoginSteps.userClickInternalButton()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 9053700250,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "[MTA-UI] user should see internal dashboard",
+            "match": {
+              "location": "LoginSteps.userShouldSeeInternalDashboard()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 1929805347,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "[MTA-UI] user click menu \"Official\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Official",
+                  "offset": 26
+                }
+              ],
+              "location": "InternalDashboardSteps.mtaUIUserClickMenu(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 515219369,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "[OXFORD-UI] user on oxford internal page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnOxfordInternalPage()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 6961213992,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.beforeRun()"
+            }
+          }
+        ],
+        "line": 15,
+        "name": "Show all list contract with sort by newest contract and click detail contract randomly",
+        "description": "",
+        "id": "list-contract;show-all-list-contract-with-sort-by-newest-contract-and-click-detail-contract-randomly",
+        "after": [
+          {
+            "result": {
+              "duration": 23949,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.afterRun()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 307623818,
+              "status": "passed"
+            },
+            "line": 16,
+            "name": "[OXFORD-UI] user on oxford internal page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnOxfordInternalPage()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 526559324,
+              "status": "passed"
+            },
+            "line": 17,
+            "name": "[OXFORD-UI] user click menu contract",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserClickMenuContract()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 554193970,
+              "status": "passed"
+            },
+            "line": 18,
+            "name": "[OXFORD-UI] user select menu contract",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserSelectMenuContract()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 339491757,
+              "status": "passed"
+            },
+            "line": 19,
+            "name": "[OXFORD-UI] user on contract list page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnContractListPage()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 797707718,
+              "status": "passed"
+            },
+            "line": 20,
+            "name": "[OXFORD-UI] user click menu all contract",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserClickMenuAllContract()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "error_message": "org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {\"method\":\"tag name\",\"selector\":\"a\"}\n  (Session info: chrome\u003d68.0.3440.106)\n  (Driver info: chromedriver\u003d2.41.578737 (49da6702b16031c40d63e5618de03a32ff6c197e),platform\u003dWindows NT 6.1.7601 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)\nCommand duration or timeout: 0 milliseconds\nFor documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html\nBuild info: version: \u00273.11.0\u0027, revision: \u0027e59cfb3\u0027, time: \u00272018-03-11T20:26:55.152Z\u0027\nSystem info: host: \u0027DEV-LTP-073\u0027, ip: \u002710.177.17.18\u0027, os.name: \u0027Windows 7\u0027, os.arch: \u0027amd64\u0027, os.version: \u00276.1\u0027, java.version: \u00271.8.0_91\u0027\nDriver info: org.openqa.selenium.chrome.ChromeDriver\nCapabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.41.578737 (49da6702b16031..., userDataDir: C:\\Users\\RIZKAE~1.SET\\AppDa...}, cssSelectorsEnabled: true, databaseEnabled: false, goog:chromeOptions: {debuggerAddress: localhost:63984}, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 68.0.3440.106, webStorageEnabled: true}\nSession ID: 7195c7fa5f71f0e33dc529002550ce8e\n*** Element info: {Using\u003dtag name, value\u003da}\r\n\tat sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)\r\n\tat sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)\r\n\tat sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)\r\n\tat java.lang.reflect.Constructor.newInstance(Constructor.java:423)\r\n\tat org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:214)\r\n\tat org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:166)\r\n\tat org.openqa.selenium.remote.http.JsonHttpResponseCodec.reconstructValue(JsonHttpResponseCodec.java:40)\r\n\tat org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:80)\r\n\tat org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:44)\r\n\tat org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)\r\n\tat org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)\r\n\tat org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:279)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElement(RemoteWebElement.java:179)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElementByTagName(RemoteWebElement.java:271)\r\n\tat org.openqa.selenium.By$ByTagName.findElement(By.java:334)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElement(RemoteWebElement.java:175)\r\n\tat net.serenitybdd.core.pages.WebElementFacadeImpl.findBy(WebElementFacadeImpl.java:282)\r\n\tat net.serenitybdd.core.pages.WebElementFacadeImpl.find(WebElementFacadeImpl.java:289)\r\n\tat com.gdn.qa.module.ui.oxford.pages.ContractListPage.readTableContract(ContractListPage.java:100)\r\n\tat com.gdn.qa.module.ui.oxford.steps.ContractListSteps.oxfordUIUserReadTableContractList(ContractListSteps.java:105)\r\n\tat ✽.[OXFORD-UI] user read table contract list(src/test/resources/features/ContractList.feature:21)\r\n",
+              "duration": 2877067306,
+              "status": "failed"
+            },
+            "line": 21,
+            "name": "[OXFORD-UI] user read table contract list",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserReadTableContractList()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 22,
+            "name": "[OXFORD-UI] user can see all active and nonactive contract",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserCanSeeAllActiveAndNonactiveContract()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 23,
+            "name": "[OXFORD-UI] user select sort contract by \u0027Terbaru dibuat\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Terbaru dibuat",
+                  "offset": 42
+                }
+              ],
+              "location": "ContractListSteps.oxfordUIUserSelectSortContractBy(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 24,
+            "name": "[OXFORD-UI] user can see list contract sort by \u0027Terbaru dibuat\u0027 contract",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Terbaru dibuat",
+                  "offset": 48
+                }
+              ],
+              "location": "ContractListSteps.oxfordUIUserCanSeeListContractSortBy(String)"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 25,
+            "name": "[OXFORD-UI] user click one of detail contract",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserClickOneOfDetailContract()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 26,
+            "name": "[OXFORD-UI] user on page detail contract",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserOnPageDetailContract()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 27,
+            "name": "[OXFORD-UI] user can see correct detail contract",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserCanSeeCorrectDetailContract()"
+            },
+            "keyword": "And "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@ListContractFeature"
+          },
+          {
+            "name": "@TestSuiteID\u003d9224119"
+          },
+          {
+            "name": "@Positive"
+          },
+          {
+            "name": "@Sort"
+          },
+          {
+            "name": "@Done"
+          }
+        ]
+      },
+      {
+        "line": 4,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 7380537888,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "[MTA-UI] user open mta homepage",
+            "match": {
+              "location": "LoginSteps.userOpenWeb()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1123688348,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "[MTA-UI] user login with username \u0027rizkaella.amp@mailinator.com\u0027 and password \u0027Testing12345\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "rizkaella.amp@mailinator.com",
+                  "offset": 35
+                },
+                {
+                  "val": "Testing12345",
+                  "offset": 79
+                }
+              ],
+              "location": "LoginSteps.userInputUsernameAndPassword(String,String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 1422036899,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "[MTA-UI] user click login button",
+            "match": {
+              "location": "LoginSteps.userClickLoginButton()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 591951912,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "[MTA-UI] user click internal button",
+            "match": {
+              "location": "LoginSteps.userClickInternalButton()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 7654131149,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "[MTA-UI] user should see internal dashboard",
+            "match": {
+              "location": "LoginSteps.userShouldSeeInternalDashboard()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 2233390880,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "[MTA-UI] user click menu \"Official\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Official",
+                  "offset": 26
+                }
+              ],
+              "location": "InternalDashboardSteps.mtaUIUserClickMenu(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 377406646,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "[OXFORD-UI] user on oxford internal page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnOxfordInternalPage()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 18860154,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.beforeRun()"
+            }
+          }
+        ],
+        "line": 30,
+        "name": "Show active list contract with sort by oldest contract and click detail contract randomly",
+        "description": "",
+        "id": "list-contract;show-active-list-contract-with-sort-by-oldest-contract-and-click-detail-contract-randomly",
+        "after": [
+          {
+            "result": {
+              "duration": 25232,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.afterRun()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 325152275,
+              "status": "passed"
+            },
+            "line": 31,
+            "name": "[OXFORD-UI] user on oxford internal page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnOxfordInternalPage()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 485687674,
+              "status": "passed"
+            },
+            "line": 32,
+            "name": "[OXFORD-UI] user click menu contract",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserClickMenuContract()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 449400843,
+              "status": "passed"
+            },
+            "line": 33,
+            "name": "[OXFORD-UI] user select menu contract",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserSelectMenuContract()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 332697277,
+              "status": "passed"
+            },
+            "line": 34,
+            "name": "[OXFORD-UI] user on contract list page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnContractListPage()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 507797529,
+              "status": "passed"
+            },
+            "line": 35,
+            "name": "[OXFORD-UI] user click menu active contract",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserClickMenuActiveContract()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "error_message": "org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {\"method\":\"tag name\",\"selector\":\"a\"}\n  (Session info: chrome\u003d68.0.3440.106)\n  (Driver info: chromedriver\u003d2.41.578737 (49da6702b16031c40d63e5618de03a32ff6c197e),platform\u003dWindows NT 6.1.7601 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)\nCommand duration or timeout: 0 milliseconds\nFor documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html\nBuild info: version: \u00273.11.0\u0027, revision: \u0027e59cfb3\u0027, time: \u00272018-03-11T20:26:55.152Z\u0027\nSystem info: host: \u0027DEV-LTP-073\u0027, ip: \u002710.177.17.18\u0027, os.name: \u0027Windows 7\u0027, os.arch: \u0027amd64\u0027, os.version: \u00276.1\u0027, java.version: \u00271.8.0_91\u0027\nDriver info: org.openqa.selenium.chrome.ChromeDriver\nCapabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.41.578737 (49da6702b16031..., userDataDir: C:\\Users\\RIZKAE~1.SET\\AppDa...}, cssSelectorsEnabled: true, databaseEnabled: false, goog:chromeOptions: {debuggerAddress: localhost:64087}, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 68.0.3440.106, webStorageEnabled: true}\nSession ID: 9542170fb69e3c4cfba2d025bedfceb7\n*** Element info: {Using\u003dtag name, value\u003da}\r\n\tat sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)\r\n\tat sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)\r\n\tat sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)\r\n\tat java.lang.reflect.Constructor.newInstance(Constructor.java:423)\r\n\tat org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:214)\r\n\tat org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:166)\r\n\tat org.openqa.selenium.remote.http.JsonHttpResponseCodec.reconstructValue(JsonHttpResponseCodec.java:40)\r\n\tat org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:80)\r\n\tat org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:44)\r\n\tat org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)\r\n\tat org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)\r\n\tat org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:279)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElement(RemoteWebElement.java:179)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElementByTagName(RemoteWebElement.java:271)\r\n\tat org.openqa.selenium.By$ByTagName.findElement(By.java:334)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElement(RemoteWebElement.java:175)\r\n\tat net.serenitybdd.core.pages.WebElementFacadeImpl.findBy(WebElementFacadeImpl.java:282)\r\n\tat net.serenitybdd.core.pages.WebElementFacadeImpl.find(WebElementFacadeImpl.java:289)\r\n\tat com.gdn.qa.module.ui.oxford.pages.ContractListPage.readTableContract(ContractListPage.java:100)\r\n\tat com.gdn.qa.module.ui.oxford.steps.ContractListSteps.oxfordUIUserReadTableContractList(ContractListSteps.java:105)\r\n\tat ✽.[OXFORD-UI] user read table contract list(src/test/resources/features/ContractList.feature:36)\r\n",
+              "duration": 2766049755,
+              "status": "failed"
+            },
+            "line": 36,
+            "name": "[OXFORD-UI] user read table contract list",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserReadTableContractList()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 37,
+            "name": "[OXFORD-UI] user can see all active contract",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserCanSeeAllActiveContract()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 38,
+            "name": "[OXFORD-UI] user select sort contract by \u0027Terlama dibuat\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Terlama dibuat",
+                  "offset": 42
+                }
+              ],
+              "location": "ContractListSteps.oxfordUIUserSelectSortContractBy(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 39,
+            "name": "[OXFORD-UI] user can see list contract sort by \u0027Terlama dibuat\u0027 contract",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Terlama dibuat",
+                  "offset": 48
+                }
+              ],
+              "location": "ContractListSteps.oxfordUIUserCanSeeListContractSortBy(String)"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 40,
+            "name": "[OXFORD-UI] user read table contract list",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserReadTableContractList()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 41,
+            "name": "[OXFORD-UI] user click one of detail contract",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserClickOneOfDetailContract()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 42,
+            "name": "[OXFORD-UI] user on page detail contract",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserOnPageDetailContract()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 43,
+            "name": "[OXFORD-UI] user can see correct detail contract",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserCanSeeCorrectDetailContract()"
+            },
+            "keyword": "And "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@ListContractFeature"
+          },
+          {
+            "name": "@TestSuiteID\u003d9224119"
+          },
+          {
+            "name": "@Positive"
+          },
+          {
+            "name": "@Sort"
+          },
+          {
+            "name": "@Done"
+          }
+        ]
+      },
+      {
+        "line": 4,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 6383684098,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "[MTA-UI] user open mta homepage",
+            "match": {
+              "location": "LoginSteps.userOpenWeb()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1114947213,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "[MTA-UI] user login with username \u0027rizkaella.amp@mailinator.com\u0027 and password \u0027Testing12345\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "rizkaella.amp@mailinator.com",
+                  "offset": 35
+                },
+                {
+                  "val": "Testing12345",
+                  "offset": 79
+                }
+              ],
+              "location": "LoginSteps.userInputUsernameAndPassword(String,String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 1468278103,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "[MTA-UI] user click login button",
+            "match": {
+              "location": "LoginSteps.userClickLoginButton()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 640403204,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "[MTA-UI] user click internal button",
+            "match": {
+              "location": "LoginSteps.userClickInternalButton()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 8978811299,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "[MTA-UI] user should see internal dashboard",
+            "match": {
+              "location": "LoginSteps.userShouldSeeInternalDashboard()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 2637203538,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "[MTA-UI] user click menu \"Official\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Official",
+                  "offset": 26
+                }
+              ],
+              "location": "InternalDashboardSteps.mtaUIUserClickMenu(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 680728748,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "[OXFORD-UI] user on oxford internal page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnOxfordInternalPage()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 33448527,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.beforeRun()"
+            }
+          }
+        ],
+        "line": 46,
+        "name": "Show nonactive list contract and click detail contract randomly",
+        "description": "",
+        "id": "list-contract;show-nonactive-list-contract-and-click-detail-contract-randomly",
+        "after": [
+          {
+            "result": {
+              "duration": 34212,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.afterRun()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 335544561,
+              "status": "passed"
+            },
+            "line": 47,
+            "name": "[OXFORD-UI] user on oxford internal page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnOxfordInternalPage()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 614668172,
+              "status": "passed"
+            },
+            "line": 48,
+            "name": "[OXFORD-UI] user click menu contract",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserClickMenuContract()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 784838920,
+              "status": "passed"
+            },
+            "line": 49,
+            "name": "[OXFORD-UI] user select menu contract",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserSelectMenuContract()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 354042925,
+              "status": "passed"
+            },
+            "line": 50,
+            "name": "[OXFORD-UI] user on contract list page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnContractListPage()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 607871127,
+              "status": "passed"
+            },
+            "line": 51,
+            "name": "[OXFORD-UI] user click menu nonactive contract",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserClickMenuNonactiveContract()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "error_message": "org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {\"method\":\"tag name\",\"selector\":\"a\"}\n  (Session info: chrome\u003d68.0.3440.106)\n  (Driver info: chromedriver\u003d2.41.578737 (49da6702b16031c40d63e5618de03a32ff6c197e),platform\u003dWindows NT 6.1.7601 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)\nCommand duration or timeout: 0 milliseconds\nFor documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html\nBuild info: version: \u00273.11.0\u0027, revision: \u0027e59cfb3\u0027, time: \u00272018-03-11T20:26:55.152Z\u0027\nSystem info: host: \u0027DEV-LTP-073\u0027, ip: \u002710.177.17.18\u0027, os.name: \u0027Windows 7\u0027, os.arch: \u0027amd64\u0027, os.version: \u00276.1\u0027, java.version: \u00271.8.0_91\u0027\nDriver info: org.openqa.selenium.chrome.ChromeDriver\nCapabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.41.578737 (49da6702b16031..., userDataDir: C:\\Users\\RIZKAE~1.SET\\AppDa...}, cssSelectorsEnabled: true, databaseEnabled: false, goog:chromeOptions: {debuggerAddress: localhost:64188}, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 68.0.3440.106, webStorageEnabled: true}\nSession ID: c26f3a78101235e07c84003cd1aa381d\n*** Element info: {Using\u003dtag name, value\u003da}\r\n\tat sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)\r\n\tat sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)\r\n\tat sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)\r\n\tat java.lang.reflect.Constructor.newInstance(Constructor.java:423)\r\n\tat org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:214)\r\n\tat org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:166)\r\n\tat org.openqa.selenium.remote.http.JsonHttpResponseCodec.reconstructValue(JsonHttpResponseCodec.java:40)\r\n\tat org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:80)\r\n\tat org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:44)\r\n\tat org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)\r\n\tat org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)\r\n\tat org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:279)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElement(RemoteWebElement.java:179)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElementByTagName(RemoteWebElement.java:271)\r\n\tat org.openqa.selenium.By$ByTagName.findElement(By.java:334)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElement(RemoteWebElement.java:175)\r\n\tat net.serenitybdd.core.pages.WebElementFacadeImpl.findBy(WebElementFacadeImpl.java:282)\r\n\tat net.serenitybdd.core.pages.WebElementFacadeImpl.find(WebElementFacadeImpl.java:289)\r\n\tat com.gdn.qa.module.ui.oxford.pages.ContractListPage.readTableContract(ContractListPage.java:100)\r\n\tat com.gdn.qa.module.ui.oxford.steps.ContractListSteps.oxfordUIUserReadTableContractList(ContractListSteps.java:105)\r\n\tat ✽.[OXFORD-UI] user read table contract list(src/test/resources/features/ContractList.feature:52)\r\n",
+              "duration": 2750128402,
+              "status": "failed"
+            },
+            "line": 52,
+            "name": "[OXFORD-UI] user read table contract list",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserReadTableContractList()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 53,
+            "name": "[OXFORD-UI] user can see all nonactive contract",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserCanSeeAllNonactiveContract()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 54,
+            "name": "[OXFORD-UI] user click one of detail contract",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserClickOneOfDetailContract()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 55,
+            "name": "[OXFORD-UI] user on page detail contract",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserOnPageDetailContract()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 56,
+            "name": "[OXFORD-UI] user can see correct detail contract",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserCanSeeCorrectDetailContract()"
+            },
+            "keyword": "And "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@ListContractFeature"
+          },
+          {
+            "name": "@TestSuiteID\u003d9224119"
+          },
+          {
+            "name": "@Positive"
+          },
+          {
+            "name": "@Done"
+          }
+        ]
+      },
+      {
+        "line": 4,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 9002915707,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "[MTA-UI] user open mta homepage",
+            "match": {
+              "location": "LoginSteps.userOpenWeb()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1155888571,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "[MTA-UI] user login with username \u0027rizkaella.amp@mailinator.com\u0027 and password \u0027Testing12345\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "rizkaella.amp@mailinator.com",
+                  "offset": 35
+                },
+                {
+                  "val": "Testing12345",
+                  "offset": 79
+                }
+              ],
+              "location": "LoginSteps.userInputUsernameAndPassword(String,String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 1416226439,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "[MTA-UI] user click login button",
+            "match": {
+              "location": "LoginSteps.userClickLoginButton()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 596911351,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "[MTA-UI] user click internal button",
+            "match": {
+              "location": "LoginSteps.userClickInternalButton()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 7115648130,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "[MTA-UI] user should see internal dashboard",
+            "match": {
+              "location": "LoginSteps.userShouldSeeInternalDashboard()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 2104444166,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "[MTA-UI] user click menu \"Official\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Official",
+                  "offset": 26
+                }
+              ],
+              "location": "InternalDashboardSteps.mtaUIUserClickMenu(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 379278890,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "[OXFORD-UI] user on oxford internal page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnOxfordInternalPage()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 17458322,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.beforeRun()"
+            }
+          }
+        ],
+        "line": 60,
+        "name": "Show all list contract with filter by official regular contract",
+        "description": "",
+        "id": "list-contract;show-all-list-contract-with-filter-by-official-regular-contract",
+        "after": [
+          {
+            "result": {
+              "duration": 23093,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.afterRun()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 334228259,
+              "status": "passed"
+            },
+            "line": 61,
+            "name": "[OXFORD-UI] user on oxford internal page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnOxfordInternalPage()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 451490761,
+              "status": "passed"
+            },
+            "line": 62,
+            "name": "[OXFORD-UI] user click menu contract",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserClickMenuContract()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 497986845,
+              "status": "passed"
+            },
+            "line": 63,
+            "name": "[OXFORD-UI] user select menu contract",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserSelectMenuContract()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 320699599,
+              "status": "passed"
+            },
+            "line": 64,
+            "name": "[OXFORD-UI] user on contract list page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnContractListPage()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 493120205,
+              "status": "passed"
+            },
+            "line": 65,
+            "name": "[OXFORD-UI] user click menu all contract",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserClickMenuAllContract()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "error_message": "org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {\"method\":\"tag name\",\"selector\":\"a\"}\n  (Session info: chrome\u003d68.0.3440.106)\n  (Driver info: chromedriver\u003d2.41.578737 (49da6702b16031c40d63e5618de03a32ff6c197e),platform\u003dWindows NT 6.1.7601 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)\nCommand duration or timeout: 0 milliseconds\nFor documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html\nBuild info: version: \u00273.11.0\u0027, revision: \u0027e59cfb3\u0027, time: \u00272018-03-11T20:26:55.152Z\u0027\nSystem info: host: \u0027DEV-LTP-073\u0027, ip: \u002710.177.17.18\u0027, os.name: \u0027Windows 7\u0027, os.arch: \u0027amd64\u0027, os.version: \u00276.1\u0027, java.version: \u00271.8.0_91\u0027\nDriver info: org.openqa.selenium.chrome.ChromeDriver\nCapabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.41.578737 (49da6702b16031..., userDataDir: C:\\Users\\RIZKAE~1.SET\\AppDa...}, cssSelectorsEnabled: true, databaseEnabled: false, goog:chromeOptions: {debuggerAddress: localhost:64304}, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 68.0.3440.106, webStorageEnabled: true}\nSession ID: 1499138910f0aa9a07b3483baf25de18\n*** Element info: {Using\u003dtag name, value\u003da}\r\n\tat sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)\r\n\tat sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)\r\n\tat sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)\r\n\tat java.lang.reflect.Constructor.newInstance(Constructor.java:423)\r\n\tat org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:214)\r\n\tat org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:166)\r\n\tat org.openqa.selenium.remote.http.JsonHttpResponseCodec.reconstructValue(JsonHttpResponseCodec.java:40)\r\n\tat org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:80)\r\n\tat org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:44)\r\n\tat org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)\r\n\tat org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)\r\n\tat org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:279)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElement(RemoteWebElement.java:179)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElementByTagName(RemoteWebElement.java:271)\r\n\tat org.openqa.selenium.By$ByTagName.findElement(By.java:334)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElement(RemoteWebElement.java:175)\r\n\tat net.serenitybdd.core.pages.WebElementFacadeImpl.findBy(WebElementFacadeImpl.java:282)\r\n\tat net.serenitybdd.core.pages.WebElementFacadeImpl.find(WebElementFacadeImpl.java:289)\r\n\tat com.gdn.qa.module.ui.oxford.pages.ContractListPage.readTableContract(ContractListPage.java:100)\r\n\tat com.gdn.qa.module.ui.oxford.steps.ContractListSteps.oxfordUIUserReadTableContractList(ContractListSteps.java:105)\r\n\tat ✽.[OXFORD-UI] user read table contract list(src/test/resources/features/ContractList.feature:66)\r\n",
+              "duration": 2677589808,
+              "status": "failed"
+            },
+            "line": 66,
+            "name": "[OXFORD-UI] user read table contract list",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserReadTableContractList()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 67,
+            "name": "[OXFORD-UI] user can see all active and nonactive contract",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserCanSeeAllActiveAndNonactiveContract()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 68,
+            "name": "[OXFORD-UI] user select filter by level \u0027Official Regular\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Official Regular",
+                  "offset": 41
+                }
+              ],
+              "location": "ContractListSteps.oxfordUIUserSelectFilterByLevelOfficialRegular(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 69,
+            "name": "[OXFORD-UI] user click button search",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserClickButtonSearch()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 70,
+            "name": "[OXFORD-UI] user read table contract list",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserReadTableContractList()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 71,
+            "name": "[OXFORD-UI] user can see list contract filter by: \u0027LEVEL\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "LEVEL",
+                  "offset": 51
+                }
+              ],
+              "location": "ContractListSteps.oxfordUIUserCanSeeListContractFilterBy(String\u003e)"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@ListContractFeature"
+          },
+          {
+            "name": "@TestSuiteID\u003d9224119"
+          },
+          {
+            "name": "@Positive"
+          },
+          {
+            "name": "@Filter"
+          },
+          {
+            "name": "@Done"
+          }
+        ]
+      },
+      {
+        "line": 4,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 8994658243,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "[MTA-UI] user open mta homepage",
+            "match": {
+              "location": "LoginSteps.userOpenWeb()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1196476262,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "[MTA-UI] user login with username \u0027rizkaella.amp@mailinator.com\u0027 and password \u0027Testing12345\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "rizkaella.amp@mailinator.com",
+                  "offset": 35
+                },
+                {
+                  "val": "Testing12345",
+                  "offset": 79
+                }
+              ],
+              "location": "LoginSteps.userInputUsernameAndPassword(String,String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 1399996750,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "[MTA-UI] user click login button",
+            "match": {
+              "location": "LoginSteps.userClickLoginButton()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 563858399,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "[MTA-UI] user click internal button",
+            "match": {
+              "location": "LoginSteps.userClickInternalButton()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 8101951403,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "[MTA-UI] user should see internal dashboard",
+            "match": {
+              "location": "LoginSteps.userShouldSeeInternalDashboard()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 2022023043,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "[MTA-UI] user click menu \"Official\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Official",
+                  "offset": 26
+                }
+              ],
+              "location": "InternalDashboardSteps.mtaUIUserClickMenu(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 378645116,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "[OXFORD-UI] user on oxford internal page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnOxfordInternalPage()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 12107584,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.beforeRun()"
+            }
+          }
+        ],
+        "line": 75,
+        "name": "Show all list contract with filter by official premium contract",
+        "description": "",
+        "id": "list-contract;show-all-list-contract-with-filter-by-official-premium-contract",
+        "after": [
+          {
+            "result": {
+              "duration": 23948,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.afterRun()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 366622633,
+              "status": "passed"
+            },
+            "line": 76,
+            "name": "[OXFORD-UI] user on oxford internal page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnOxfordInternalPage()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 484046359,
+              "status": "passed"
+            },
+            "line": 77,
+            "name": "[OXFORD-UI] user click menu contract",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserClickMenuContract()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 493967804,
+              "status": "passed"
+            },
+            "line": 78,
+            "name": "[OXFORD-UI] user select menu contract",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserSelectMenuContract()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 362066466,
+              "status": "passed"
+            },
+            "line": 79,
+            "name": "[OXFORD-UI] user on contract list page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnContractListPage()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 487479949,
+              "status": "passed"
+            },
+            "line": 80,
+            "name": "[OXFORD-UI] user click menu all contract",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserClickMenuAllContract()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "error_message": "org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {\"method\":\"tag name\",\"selector\":\"a\"}\n  (Session info: chrome\u003d68.0.3440.106)\n  (Driver info: chromedriver\u003d2.41.578737 (49da6702b16031c40d63e5618de03a32ff6c197e),platform\u003dWindows NT 6.1.7601 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)\nCommand duration or timeout: 0 milliseconds\nFor documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html\nBuild info: version: \u00273.11.0\u0027, revision: \u0027e59cfb3\u0027, time: \u00272018-03-11T20:26:55.152Z\u0027\nSystem info: host: \u0027DEV-LTP-073\u0027, ip: \u002710.177.17.18\u0027, os.name: \u0027Windows 7\u0027, os.arch: \u0027amd64\u0027, os.version: \u00276.1\u0027, java.version: \u00271.8.0_91\u0027\nDriver info: org.openqa.selenium.chrome.ChromeDriver\nCapabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.41.578737 (49da6702b16031..., userDataDir: C:\\Users\\RIZKAE~1.SET\\AppDa...}, cssSelectorsEnabled: true, databaseEnabled: false, goog:chromeOptions: {debuggerAddress: localhost:64413}, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 68.0.3440.106, webStorageEnabled: true}\nSession ID: 1b5337c143e6006f55d9ded35bb81101\n*** Element info: {Using\u003dtag name, value\u003da}\r\n\tat sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)\r\n\tat sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)\r\n\tat sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)\r\n\tat java.lang.reflect.Constructor.newInstance(Constructor.java:423)\r\n\tat org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:214)\r\n\tat org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:166)\r\n\tat org.openqa.selenium.remote.http.JsonHttpResponseCodec.reconstructValue(JsonHttpResponseCodec.java:40)\r\n\tat org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:80)\r\n\tat org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:44)\r\n\tat org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)\r\n\tat org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)\r\n\tat org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:279)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElement(RemoteWebElement.java:179)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElementByTagName(RemoteWebElement.java:271)\r\n\tat org.openqa.selenium.By$ByTagName.findElement(By.java:334)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElement(RemoteWebElement.java:175)\r\n\tat net.serenitybdd.core.pages.WebElementFacadeImpl.findBy(WebElementFacadeImpl.java:282)\r\n\tat net.serenitybdd.core.pages.WebElementFacadeImpl.find(WebElementFacadeImpl.java:289)\r\n\tat com.gdn.qa.module.ui.oxford.pages.ContractListPage.readTableContract(ContractListPage.java:100)\r\n\tat com.gdn.qa.module.ui.oxford.steps.ContractListSteps.oxfordUIUserReadTableContractList(ContractListSteps.java:105)\r\n\tat ✽.[OXFORD-UI] user read table contract list(src/test/resources/features/ContractList.feature:81)\r\n",
+              "duration": 2644226382,
+              "status": "failed"
+            },
+            "line": 81,
+            "name": "[OXFORD-UI] user read table contract list",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserReadTableContractList()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 82,
+            "name": "[OXFORD-UI] user can see all active and nonactive contract",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserCanSeeAllActiveAndNonactiveContract()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 83,
+            "name": "[OXFORD-UI] user select filter by level \u0027Official Premium\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Official Premium",
+                  "offset": 41
+                }
+              ],
+              "location": "ContractListSteps.oxfordUIUserSelectFilterByLevelOfficialRegular(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 84,
+            "name": "[OXFORD-UI] user click button search",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserClickButtonSearch()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 85,
+            "name": "[OXFORD-UI] user read table contract list",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserReadTableContractList()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 86,
+            "name": "[OXFORD-UI] user can see list contract filter by: \u0027LEVEL\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "LEVEL",
+                  "offset": 51
+                }
+              ],
+              "location": "ContractListSteps.oxfordUIUserCanSeeListContractFilterBy(String\u003e)"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@ListContractFeature"
+          },
+          {
+            "name": "@TestSuiteID\u003d9224119"
+          },
+          {
+            "name": "@Positive"
+          },
+          {
+            "name": "@Filter"
+          },
+          {
+            "name": "@Done"
+          }
+        ]
+      },
+      {
+        "line": 4,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 8440137549,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "[MTA-UI] user open mta homepage",
+            "match": {
+              "location": "LoginSteps.userOpenWeb()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1177002860,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "[MTA-UI] user login with username \u0027rizkaella.amp@mailinator.com\u0027 and password \u0027Testing12345\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "rizkaella.amp@mailinator.com",
+                  "offset": 35
+                },
+                {
+                  "val": "Testing12345",
+                  "offset": 79
+                }
+              ],
+              "location": "LoginSteps.userInputUsernameAndPassword(String,String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 1432042163,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "[MTA-UI] user click login button",
+            "match": {
+              "location": "LoginSteps.userClickLoginButton()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 525367895,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "[MTA-UI] user click internal button",
+            "match": {
+              "location": "LoginSteps.userClickInternalButton()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 7868552397,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "[MTA-UI] user should see internal dashboard",
+            "match": {
+              "location": "LoginSteps.userShouldSeeInternalDashboard()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 1917845729,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "[MTA-UI] user click menu \"Official\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Official",
+                  "offset": 26
+                }
+              ],
+              "location": "InternalDashboardSteps.mtaUIUserClickMenu(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 491107263,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "[OXFORD-UI] user on oxford internal page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnOxfordInternalPage()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 13453394,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.beforeRun()"
+            }
+          }
+        ],
+        "line": 90,
+        "name": "Show all list contract with filter by brand type",
+        "description": "",
+        "id": "list-contract;show-all-list-contract-with-filter-by-brand-type",
+        "after": [
+          {
+            "result": {
+              "duration": 22238,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.afterRun()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 1006202186,
+              "status": "passed"
+            },
+            "line": 91,
+            "name": "[OXFORD-UI] user on oxford internal page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnOxfordInternalPage()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 517485906,
+              "status": "passed"
+            },
+            "line": 92,
+            "name": "[OXFORD-UI] user click menu contract",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserClickMenuContract()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 438772495,
+              "status": "passed"
+            },
+            "line": 93,
+            "name": "[OXFORD-UI] user select menu contract",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserSelectMenuContract()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 339877496,
+              "status": "passed"
+            },
+            "line": 94,
+            "name": "[OXFORD-UI] user on contract list page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnContractListPage()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 502692261,
+              "status": "passed"
+            },
+            "line": 95,
+            "name": "[OXFORD-UI] user click menu all contract",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserClickMenuAllContract()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "error_message": "org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {\"method\":\"tag name\",\"selector\":\"a\"}\n  (Session info: chrome\u003d68.0.3440.106)\n  (Driver info: chromedriver\u003d2.41.578737 (49da6702b16031c40d63e5618de03a32ff6c197e),platform\u003dWindows NT 6.1.7601 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)\nCommand duration or timeout: 0 milliseconds\nFor documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html\nBuild info: version: \u00273.11.0\u0027, revision: \u0027e59cfb3\u0027, time: \u00272018-03-11T20:26:55.152Z\u0027\nSystem info: host: \u0027DEV-LTP-073\u0027, ip: \u002710.177.17.18\u0027, os.name: \u0027Windows 7\u0027, os.arch: \u0027amd64\u0027, os.version: \u00276.1\u0027, java.version: \u00271.8.0_91\u0027\nDriver info: org.openqa.selenium.chrome.ChromeDriver\nCapabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.41.578737 (49da6702b16031..., userDataDir: C:\\Users\\RIZKAE~1.SET\\AppDa...}, cssSelectorsEnabled: true, databaseEnabled: false, goog:chromeOptions: {debuggerAddress: localhost:64518}, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 68.0.3440.106, webStorageEnabled: true}\nSession ID: ea8fb3109ae1a1eefcebde60a9463c52\n*** Element info: {Using\u003dtag name, value\u003da}\r\n\tat sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)\r\n\tat sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)\r\n\tat sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)\r\n\tat java.lang.reflect.Constructor.newInstance(Constructor.java:423)\r\n\tat org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:214)\r\n\tat org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:166)\r\n\tat org.openqa.selenium.remote.http.JsonHttpResponseCodec.reconstructValue(JsonHttpResponseCodec.java:40)\r\n\tat org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:80)\r\n\tat org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:44)\r\n\tat org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)\r\n\tat org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)\r\n\tat org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:279)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElement(RemoteWebElement.java:179)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElementByTagName(RemoteWebElement.java:271)\r\n\tat org.openqa.selenium.By$ByTagName.findElement(By.java:334)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElement(RemoteWebElement.java:175)\r\n\tat net.serenitybdd.core.pages.WebElementFacadeImpl.findBy(WebElementFacadeImpl.java:282)\r\n\tat net.serenitybdd.core.pages.WebElementFacadeImpl.find(WebElementFacadeImpl.java:289)\r\n\tat com.gdn.qa.module.ui.oxford.pages.ContractListPage.readTableContract(ContractListPage.java:100)\r\n\tat com.gdn.qa.module.ui.oxford.steps.ContractListSteps.oxfordUIUserReadTableContractList(ContractListSteps.java:105)\r\n\tat ✽.[OXFORD-UI] user read table contract list(src/test/resources/features/ContractList.feature:96)\r\n",
+              "duration": 2615230102,
+              "status": "failed"
+            },
+            "line": 96,
+            "name": "[OXFORD-UI] user read table contract list",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserReadTableContractList()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 97,
+            "name": "[OXFORD-UI] user can see all active and nonactive contract",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserCanSeeAllActiveAndNonactiveContract()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 98,
+            "name": "[OXFORD-UI] user select filter by type \u0027Brand\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Brand",
+                  "offset": 40
+                }
+              ],
+              "location": "ContractListSteps.oxfordUIUserSelectFilterByType(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 99,
+            "name": "[OXFORD-UI] user click button search",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserClickButtonSearch()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 100,
+            "name": "[OXFORD-UI] user read table contract list",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserReadTableContractList()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 101,
+            "name": "[OXFORD-UI] user can see list contract filter by: \u0027TYPE\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "TYPE",
+                  "offset": 51
+                }
+              ],
+              "location": "ContractListSteps.oxfordUIUserCanSeeListContractFilterBy(String\u003e)"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@ListContractFeature"
+          },
+          {
+            "name": "@TestSuiteID\u003d9224119"
+          },
+          {
+            "name": "@Positive"
+          },
+          {
+            "name": "@Filter"
+          },
+          {
+            "name": "@Done"
+          }
+        ]
+      },
+      {
+        "line": 4,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 8610216779,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "[MTA-UI] user open mta homepage",
+            "match": {
+              "location": "LoginSteps.userOpenWeb()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1472414748,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "[MTA-UI] user login with username \u0027rizkaella.amp@mailinator.com\u0027 and password \u0027Testing12345\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "rizkaella.amp@mailinator.com",
+                  "offset": 35
+                },
+                {
+                  "val": "Testing12345",
+                  "offset": 79
+                }
+              ],
+              "location": "LoginSteps.userInputUsernameAndPassword(String,String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 1712444443,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "[MTA-UI] user click login button",
+            "match": {
+              "location": "LoginSteps.userClickLoginButton()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 782191348,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "[MTA-UI] user click internal button",
+            "match": {
+              "location": "LoginSteps.userClickInternalButton()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 7286502687,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "[MTA-UI] user should see internal dashboard",
+            "match": {
+              "location": "LoginSteps.userShouldSeeInternalDashboard()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 2145627999,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "[MTA-UI] user click menu \"Official\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Official",
+                  "offset": 26
+                }
+              ],
+              "location": "InternalDashboardSteps.mtaUIUserClickMenu(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 407476322,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "[OXFORD-UI] user on oxford internal page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnOxfordInternalPage()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 14792789,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.beforeRun()"
+            }
+          }
+        ],
+        "line": 105,
+        "name": "Show all list contract with filter by store type",
+        "description": "",
+        "id": "list-contract;show-all-list-contract-with-filter-by-store-type",
+        "after": [
+          {
+            "result": {
+              "duration": 24804,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.afterRun()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 296414723,
+              "status": "passed"
+            },
+            "line": 106,
+            "name": "[OXFORD-UI] user on oxford internal page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnOxfordInternalPage()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 481374838,
+              "status": "passed"
+            },
+            "line": 107,
+            "name": "[OXFORD-UI] user click menu contract",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserClickMenuContract()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 533061719,
+              "status": "passed"
+            },
+            "line": 108,
+            "name": "[OXFORD-UI] user select menu contract",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserSelectMenuContract()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 322477333,
+              "status": "passed"
+            },
+            "line": 109,
+            "name": "[OXFORD-UI] user on contract list page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnContractListPage()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 492179378,
+              "status": "passed"
+            },
+            "line": 110,
+            "name": "[OXFORD-UI] user click menu all contract",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserClickMenuAllContract()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "error_message": "org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {\"method\":\"tag name\",\"selector\":\"a\"}\n  (Session info: chrome\u003d68.0.3440.106)\n  (Driver info: chromedriver\u003d2.41.578737 (49da6702b16031c40d63e5618de03a32ff6c197e),platform\u003dWindows NT 6.1.7601 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)\nCommand duration or timeout: 0 milliseconds\nFor documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html\nBuild info: version: \u00273.11.0\u0027, revision: \u0027e59cfb3\u0027, time: \u00272018-03-11T20:26:55.152Z\u0027\nSystem info: host: \u0027DEV-LTP-073\u0027, ip: \u002710.177.17.18\u0027, os.name: \u0027Windows 7\u0027, os.arch: \u0027amd64\u0027, os.version: \u00276.1\u0027, java.version: \u00271.8.0_91\u0027\nDriver info: org.openqa.selenium.chrome.ChromeDriver\nCapabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.41.578737 (49da6702b16031..., userDataDir: C:\\Users\\RIZKAE~1.SET\\AppDa...}, cssSelectorsEnabled: true, databaseEnabled: false, goog:chromeOptions: {debuggerAddress: localhost:64618}, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 68.0.3440.106, webStorageEnabled: true}\nSession ID: 1d7b267e911f254909cb8c87cc1bd698\n*** Element info: {Using\u003dtag name, value\u003da}\r\n\tat sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)\r\n\tat sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)\r\n\tat sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)\r\n\tat java.lang.reflect.Constructor.newInstance(Constructor.java:423)\r\n\tat org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:214)\r\n\tat org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:166)\r\n\tat org.openqa.selenium.remote.http.JsonHttpResponseCodec.reconstructValue(JsonHttpResponseCodec.java:40)\r\n\tat org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:80)\r\n\tat org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:44)\r\n\tat org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)\r\n\tat org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)\r\n\tat org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:279)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElement(RemoteWebElement.java:179)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElementByTagName(RemoteWebElement.java:271)\r\n\tat org.openqa.selenium.By$ByTagName.findElement(By.java:334)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElement(RemoteWebElement.java:175)\r\n\tat net.serenitybdd.core.pages.WebElementFacadeImpl.findBy(WebElementFacadeImpl.java:282)\r\n\tat net.serenitybdd.core.pages.WebElementFacadeImpl.find(WebElementFacadeImpl.java:289)\r\n\tat com.gdn.qa.module.ui.oxford.pages.ContractListPage.readTableContract(ContractListPage.java:100)\r\n\tat com.gdn.qa.module.ui.oxford.steps.ContractListSteps.oxfordUIUserReadTableContractList(ContractListSteps.java:105)\r\n\tat ✽.[OXFORD-UI] user read table contract list(src/test/resources/features/ContractList.feature:111)\r\n",
+              "duration": 2621992936,
+              "status": "failed"
+            },
+            "line": 111,
+            "name": "[OXFORD-UI] user read table contract list",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserReadTableContractList()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 112,
+            "name": "[OXFORD-UI] user can see all active and nonactive contract",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserCanSeeAllActiveAndNonactiveContract()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 113,
+            "name": "[OXFORD-UI] user select filter by type \u0027Store\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Store",
+                  "offset": 40
+                }
+              ],
+              "location": "ContractListSteps.oxfordUIUserSelectFilterByType(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 114,
+            "name": "[OXFORD-UI] user click button search",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserClickButtonSearch()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 115,
+            "name": "[OXFORD-UI] user read table contract list",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserReadTableContractList()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 116,
+            "name": "[OXFORD-UI] user can see list contract filter by: \u0027TYPE\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "TYPE",
+                  "offset": 51
+                }
+              ],
+              "location": "ContractListSteps.oxfordUIUserCanSeeListContractFilterBy(String\u003e)"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@ListContractFeature"
+          },
+          {
+            "name": "@TestSuiteID\u003d9224119"
+          },
+          {
+            "name": "@Positive"
+          },
+          {
+            "name": "@Filter"
+          },
+          {
+            "name": "@Done"
+          }
+        ]
+      },
+      {
+        "line": 4,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 5984013644,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "[MTA-UI] user open mta homepage",
+            "match": {
+              "location": "LoginSteps.userOpenWeb()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1137601893,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "[MTA-UI] user login with username \u0027rizkaella.amp@mailinator.com\u0027 and password \u0027Testing12345\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "rizkaella.amp@mailinator.com",
+                  "offset": 35
+                },
+                {
+                  "val": "Testing12345",
+                  "offset": 79
+                }
+              ],
+              "location": "LoginSteps.userInputUsernameAndPassword(String,String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 1479352917,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "[MTA-UI] user click login button",
+            "match": {
+              "location": "LoginSteps.userClickLoginButton()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 546084044,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "[MTA-UI] user click internal button",
+            "match": {
+              "location": "LoginSteps.userClickInternalButton()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 8125688461,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "[MTA-UI] user should see internal dashboard",
+            "match": {
+              "location": "LoginSteps.userShouldSeeInternalDashboard()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 1790373546,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "[MTA-UI] user click menu \"Official\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Official",
+                  "offset": 26
+                }
+              ],
+              "location": "InternalDashboardSteps.mtaUIUserClickMenu(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 459856849,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "[OXFORD-UI] user on oxford internal page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnOxfordInternalPage()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 9265860,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.beforeRun()"
+            }
+          }
+        ],
+        "line": 120,
+        "name": "Show all list contract with filter by contract number",
+        "description": "",
+        "id": "list-contract;show-all-list-contract-with-filter-by-contract-number",
+        "after": [
+          {
+            "result": {
+              "duration": 22666,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.afterRun()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 384176321,
+              "status": "passed"
+            },
+            "line": 121,
+            "name": "[OXFORD-UI] user on oxford internal page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnOxfordInternalPage()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 488357483,
+              "status": "passed"
+            },
+            "line": 122,
+            "name": "[OXFORD-UI] user click menu contract",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserClickMenuContract()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 462463367,
+              "status": "passed"
+            },
+            "line": 123,
+            "name": "[OXFORD-UI] user select menu contract",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserSelectMenuContract()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 328625209,
+              "status": "passed"
+            },
+            "line": 124,
+            "name": "[OXFORD-UI] user on contract list page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnContractListPage()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 459356072,
+              "status": "passed"
+            },
+            "line": 125,
+            "name": "[OXFORD-UI] user click menu all contract",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserClickMenuAllContract()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "error_message": "org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {\"method\":\"tag name\",\"selector\":\"a\"}\n  (Session info: chrome\u003d68.0.3440.106)\n  (Driver info: chromedriver\u003d2.41.578737 (49da6702b16031c40d63e5618de03a32ff6c197e),platform\u003dWindows NT 6.1.7601 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)\nCommand duration or timeout: 0 milliseconds\nFor documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html\nBuild info: version: \u00273.11.0\u0027, revision: \u0027e59cfb3\u0027, time: \u00272018-03-11T20:26:55.152Z\u0027\nSystem info: host: \u0027DEV-LTP-073\u0027, ip: \u002710.177.17.18\u0027, os.name: \u0027Windows 7\u0027, os.arch: \u0027amd64\u0027, os.version: \u00276.1\u0027, java.version: \u00271.8.0_91\u0027\nDriver info: org.openqa.selenium.chrome.ChromeDriver\nCapabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.41.578737 (49da6702b16031..., userDataDir: C:\\Users\\RIZKAE~1.SET\\AppDa...}, cssSelectorsEnabled: true, databaseEnabled: false, goog:chromeOptions: {debuggerAddress: localhost:64724}, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 68.0.3440.106, webStorageEnabled: true}\nSession ID: 9e237b761ba0b7a28a4aecd6cc53fcb0\n*** Element info: {Using\u003dtag name, value\u003da}\r\n\tat sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)\r\n\tat sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)\r\n\tat sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)\r\n\tat java.lang.reflect.Constructor.newInstance(Constructor.java:423)\r\n\tat org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:214)\r\n\tat org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:166)\r\n\tat org.openqa.selenium.remote.http.JsonHttpResponseCodec.reconstructValue(JsonHttpResponseCodec.java:40)\r\n\tat org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:80)\r\n\tat org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:44)\r\n\tat org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)\r\n\tat org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)\r\n\tat org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:279)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElement(RemoteWebElement.java:179)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElementByTagName(RemoteWebElement.java:271)\r\n\tat org.openqa.selenium.By$ByTagName.findElement(By.java:334)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElement(RemoteWebElement.java:175)\r\n\tat net.serenitybdd.core.pages.WebElementFacadeImpl.findBy(WebElementFacadeImpl.java:282)\r\n\tat net.serenitybdd.core.pages.WebElementFacadeImpl.find(WebElementFacadeImpl.java:289)\r\n\tat com.gdn.qa.module.ui.oxford.pages.ContractListPage.readTableContract(ContractListPage.java:100)\r\n\tat com.gdn.qa.module.ui.oxford.steps.ContractListSteps.oxfordUIUserReadTableContractList(ContractListSteps.java:105)\r\n\tat ✽.[OXFORD-UI] user read table contract list(src/test/resources/features/ContractList.feature:126)\r\n",
+              "duration": 2679296552,
+              "status": "failed"
+            },
+            "line": 126,
+            "name": "[OXFORD-UI] user read table contract list",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserReadTableContractList()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 127,
+            "name": "[OXFORD-UI] user can see all active and nonactive contract",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserCanSeeAllActiveAndNonactiveContract()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 128,
+            "name": "[OXFORD-UI] user input contract number \u0027OXF/TOQ-15129/000092\u0027 in filter",
+            "match": {
+              "arguments": [
+                {
+                  "val": "OXF/TOQ-15129/000092",
+                  "offset": 40
+                }
+              ],
+              "location": "ContractListSteps.oxfordUIUserInputContractNumberInFilter(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 129,
+            "name": "[OXFORD-UI] user click button search",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserClickButtonSearch()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 130,
+            "name": "[OXFORD-UI] user read table contract list",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserReadTableContractList()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 131,
+            "name": "[OXFORD-UI] user can see list contract filter by: \u0027CONTRACT_NUMBER\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "CONTRACT_NUMBER",
+                  "offset": 51
+                }
+              ],
+              "location": "ContractListSteps.oxfordUIUserCanSeeListContractFilterBy(String\u003e)"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@ListContractFeature"
+          },
+          {
+            "name": "@TestSuiteID\u003d9224119"
+          },
+          {
+            "name": "@Positive"
+          },
+          {
+            "name": "@Filter"
+          },
+          {
+            "name": "@Done"
+          }
+        ]
+      },
+      {
+        "line": 4,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 7418486560,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "[MTA-UI] user open mta homepage",
+            "match": {
+              "location": "LoginSteps.userOpenWeb()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1134979552,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "[MTA-UI] user login with username \u0027rizkaella.amp@mailinator.com\u0027 and password \u0027Testing12345\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "rizkaella.amp@mailinator.com",
+                  "offset": 35
+                },
+                {
+                  "val": "Testing12345",
+                  "offset": 79
+                }
+              ],
+              "location": "LoginSteps.userInputUsernameAndPassword(String,String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 1481535635,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "[MTA-UI] user click login button",
+            "match": {
+              "location": "LoginSteps.userClickLoginButton()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 674970460,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "[MTA-UI] user click internal button",
+            "match": {
+              "location": "LoginSteps.userClickInternalButton()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 7657232028,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "[MTA-UI] user should see internal dashboard",
+            "match": {
+              "location": "LoginSteps.userShouldSeeInternalDashboard()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 2111725737,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "[MTA-UI] user click menu \"Official\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Official",
+                  "offset": 26
+                }
+              ],
+              "location": "InternalDashboardSteps.mtaUIUserClickMenu(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 356058005,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "[OXFORD-UI] user on oxford internal page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnOxfordInternalPage()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 13084333,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.beforeRun()"
+            }
+          }
+        ],
+        "line": 134,
+        "name": "Show all list contract with filter by business partner",
+        "description": "",
+        "id": "list-contract;show-all-list-contract-with-filter-by-business-partner",
+        "after": [
+          {
+            "result": {
+              "duration": 23949,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.afterRun()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 308796003,
+              "status": "passed"
+            },
+            "line": 135,
+            "name": "[OXFORD-UI] user on oxford internal page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnOxfordInternalPage()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 474629539,
+              "status": "passed"
+            },
+            "line": 136,
+            "name": "[OXFORD-UI] user click menu contract",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserClickMenuContract()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 489374432,
+              "status": "passed"
+            },
+            "line": 137,
+            "name": "[OXFORD-UI] user select menu contract",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserSelectMenuContract()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 322352460,
+              "status": "passed"
+            },
+            "line": 138,
+            "name": "[OXFORD-UI] user on contract list page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnContractListPage()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 503968792,
+              "status": "passed"
+            },
+            "line": 139,
+            "name": "[OXFORD-UI] user click menu all contract",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserClickMenuAllContract()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "error_message": "org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {\"method\":\"tag name\",\"selector\":\"a\"}\n  (Session info: chrome\u003d68.0.3440.106)\n  (Driver info: chromedriver\u003d2.41.578737 (49da6702b16031c40d63e5618de03a32ff6c197e),platform\u003dWindows NT 6.1.7601 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)\nCommand duration or timeout: 0 milliseconds\nFor documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html\nBuild info: version: \u00273.11.0\u0027, revision: \u0027e59cfb3\u0027, time: \u00272018-03-11T20:26:55.152Z\u0027\nSystem info: host: \u0027DEV-LTP-073\u0027, ip: \u002710.177.17.18\u0027, os.name: \u0027Windows 7\u0027, os.arch: \u0027amd64\u0027, os.version: \u00276.1\u0027, java.version: \u00271.8.0_91\u0027\nDriver info: org.openqa.selenium.chrome.ChromeDriver\nCapabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.41.578737 (49da6702b16031..., userDataDir: C:\\Users\\RIZKAE~1.SET\\AppDa...}, cssSelectorsEnabled: true, databaseEnabled: false, goog:chromeOptions: {debuggerAddress: localhost:64823}, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 68.0.3440.106, webStorageEnabled: true}\nSession ID: 0edfb7b347da0db81377aa976e8a27a3\n*** Element info: {Using\u003dtag name, value\u003da}\r\n\tat sun.reflect.GeneratedConstructorAccessor89.newInstance(Unknown Source)\r\n\tat sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)\r\n\tat java.lang.reflect.Constructor.newInstance(Constructor.java:423)\r\n\tat org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:214)\r\n\tat org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:166)\r\n\tat org.openqa.selenium.remote.http.JsonHttpResponseCodec.reconstructValue(JsonHttpResponseCodec.java:40)\r\n\tat org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:80)\r\n\tat org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:44)\r\n\tat org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)\r\n\tat org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)\r\n\tat org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:279)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElement(RemoteWebElement.java:179)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElementByTagName(RemoteWebElement.java:271)\r\n\tat org.openqa.selenium.By$ByTagName.findElement(By.java:334)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElement(RemoteWebElement.java:175)\r\n\tat net.serenitybdd.core.pages.WebElementFacadeImpl.findBy(WebElementFacadeImpl.java:282)\r\n\tat net.serenitybdd.core.pages.WebElementFacadeImpl.find(WebElementFacadeImpl.java:289)\r\n\tat com.gdn.qa.module.ui.oxford.pages.ContractListPage.readTableContract(ContractListPage.java:100)\r\n\tat com.gdn.qa.module.ui.oxford.steps.ContractListSteps.oxfordUIUserReadTableContractList(ContractListSteps.java:105)\r\n\tat ✽.[OXFORD-UI] user read table contract list(src/test/resources/features/ContractList.feature:140)\r\n",
+              "duration": 2629206084,
+              "status": "failed"
+            },
+            "line": 140,
+            "name": "[OXFORD-UI] user read table contract list",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserReadTableContractList()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 141,
+            "name": "[OXFORD-UI] user can see all active and nonactive contract",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserCanSeeAllActiveAndNonactiveContract()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 142,
+            "name": "[OXFORD-UI] user input business partner \u0027toko\u0027 in filter",
+            "match": {
+              "arguments": [
+                {
+                  "val": "toko",
+                  "offset": 41
+                }
+              ],
+              "location": "ContractListSteps.oxfordUIUserInputBusinessPartnerInFilter(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 143,
+            "name": "[OXFORD-UI] user click button search",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserClickButtonSearch()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 144,
+            "name": "[OXFORD-UI] user read table contract list",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserReadTableContractList()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 145,
+            "name": "[OXFORD-UI] user can see list contract filter by: \u0027BUSINESS_PARTNER\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "BUSINESS_PARTNER",
+                  "offset": 51
+                }
+              ],
+              "location": "ContractListSteps.oxfordUIUserCanSeeListContractFilterBy(String\u003e)"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@ListContractFeature"
+          },
+          {
+            "name": "@TestSuiteID\u003d9224119"
+          },
+          {
+            "name": "@Positive"
+          },
+          {
+            "name": "@Filter"
+          },
+          {
+            "name": "@Done"
+          }
+        ]
+      },
+      {
+        "line": 4,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 8140338843,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "[MTA-UI] user open mta homepage",
+            "match": {
+              "location": "LoginSteps.userOpenWeb()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1181121114,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "[MTA-UI] user login with username \u0027rizkaella.amp@mailinator.com\u0027 and password \u0027Testing12345\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "rizkaella.amp@mailinator.com",
+                  "offset": 35
+                },
+                {
+                  "val": "Testing12345",
+                  "offset": 79
+                }
+              ],
+              "location": "LoginSteps.userInputUsernameAndPassword(String,String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 1602173994,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "[MTA-UI] user click login button",
+            "match": {
+              "location": "LoginSteps.userClickLoginButton()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 556120099,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "[MTA-UI] user click internal button",
+            "match": {
+              "location": "LoginSteps.userClickInternalButton()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 8594764556,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "[MTA-UI] user should see internal dashboard",
+            "match": {
+              "location": "LoginSteps.userShouldSeeInternalDashboard()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 2142802953,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "[MTA-UI] user click menu \"Official\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Official",
+                  "offset": 26
+                }
+              ],
+              "location": "InternalDashboardSteps.mtaUIUserClickMenu(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 384073685,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "[OXFORD-UI] user on oxford internal page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnOxfordInternalPage()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 8806993,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.beforeRun()"
+            }
+          }
+        ],
+        "line": 148,
+        "name": "Show all list contract with filter by business partner and store type",
+        "description": "",
+        "id": "list-contract;show-all-list-contract-with-filter-by-business-partner-and-store-type",
+        "after": [
+          {
+            "result": {
+              "duration": 29935,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.afterRun()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 313553165,
+              "status": "passed"
+            },
+            "line": 149,
+            "name": "[OXFORD-UI] user on oxford internal page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnOxfordInternalPage()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 484677996,
+              "status": "passed"
+            },
+            "line": 150,
+            "name": "[OXFORD-UI] user click menu contract",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserClickMenuContract()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 545160751,
+              "status": "passed"
+            },
+            "line": 151,
+            "name": "[OXFORD-UI] user select menu contract",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserSelectMenuContract()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 334358692,
+              "status": "passed"
+            },
+            "line": 152,
+            "name": "[OXFORD-UI] user on contract list page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnContractListPage()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 468096353,
+              "status": "passed"
+            },
+            "line": 153,
+            "name": "[OXFORD-UI] user click menu all contract",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserClickMenuAllContract()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "error_message": "org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {\"method\":\"tag name\",\"selector\":\"a\"}\n  (Session info: chrome\u003d68.0.3440.106)\n  (Driver info: chromedriver\u003d2.41.578737 (49da6702b16031c40d63e5618de03a32ff6c197e),platform\u003dWindows NT 6.1.7601 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)\nCommand duration or timeout: 0 milliseconds\nFor documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html\nBuild info: version: \u00273.11.0\u0027, revision: \u0027e59cfb3\u0027, time: \u00272018-03-11T20:26:55.152Z\u0027\nSystem info: host: \u0027DEV-LTP-073\u0027, ip: \u002710.177.17.18\u0027, os.name: \u0027Windows 7\u0027, os.arch: \u0027amd64\u0027, os.version: \u00276.1\u0027, java.version: \u00271.8.0_91\u0027\nDriver info: org.openqa.selenium.chrome.ChromeDriver\nCapabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.41.578737 (49da6702b16031..., userDataDir: C:\\Users\\RIZKAE~1.SET\\AppDa...}, cssSelectorsEnabled: true, databaseEnabled: false, goog:chromeOptions: {debuggerAddress: localhost:64929}, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 68.0.3440.106, webStorageEnabled: true}\nSession ID: aeeaba039d5899a71e2d816ccf48ec9b\n*** Element info: {Using\u003dtag name, value\u003da}\r\n\tat sun.reflect.GeneratedConstructorAccessor89.newInstance(Unknown Source)\r\n\tat sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)\r\n\tat java.lang.reflect.Constructor.newInstance(Constructor.java:423)\r\n\tat org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:214)\r\n\tat org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:166)\r\n\tat org.openqa.selenium.remote.http.JsonHttpResponseCodec.reconstructValue(JsonHttpResponseCodec.java:40)\r\n\tat org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:80)\r\n\tat org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:44)\r\n\tat org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)\r\n\tat org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)\r\n\tat org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:279)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElement(RemoteWebElement.java:179)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElementByTagName(RemoteWebElement.java:271)\r\n\tat org.openqa.selenium.By$ByTagName.findElement(By.java:334)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElement(RemoteWebElement.java:175)\r\n\tat net.serenitybdd.core.pages.WebElementFacadeImpl.findBy(WebElementFacadeImpl.java:282)\r\n\tat net.serenitybdd.core.pages.WebElementFacadeImpl.find(WebElementFacadeImpl.java:289)\r\n\tat com.gdn.qa.module.ui.oxford.pages.ContractListPage.readTableContract(ContractListPage.java:100)\r\n\tat com.gdn.qa.module.ui.oxford.steps.ContractListSteps.oxfordUIUserReadTableContractList(ContractListSteps.java:105)\r\n\tat ✽.[OXFORD-UI] user read table contract list(src/test/resources/features/ContractList.feature:154)\r\n",
+              "duration": 2631794640,
+              "status": "failed"
+            },
+            "line": 154,
+            "name": "[OXFORD-UI] user read table contract list",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserReadTableContractList()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 155,
+            "name": "[OXFORD-UI] user can see all active and nonactive contract",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserCanSeeAllActiveAndNonactiveContract()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 156,
+            "name": "[OXFORD-UI] user input business partner \u0027Toko\u0027 in filter",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Toko",
+                  "offset": 41
+                }
+              ],
+              "location": "ContractListSteps.oxfordUIUserInputBusinessPartnerInFilter(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 157,
+            "name": "[OXFORD-UI] user select filter by type \u0027Store\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Store",
+                  "offset": 40
+                }
+              ],
+              "location": "ContractListSteps.oxfordUIUserSelectFilterByType(String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 158,
+            "name": "[OXFORD-UI] user click button search",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserClickButtonSearch()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 159,
+            "name": "[OXFORD-UI] user read table contract list",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserReadTableContractList()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 160,
+            "name": "[OXFORD-UI] user can see list contract filter by: \u0027BUSINESS_PARTNER, TYPE\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "BUSINESS_PARTNER, TYPE",
+                  "offset": 51
+                }
+              ],
+              "location": "ContractListSteps.oxfordUIUserCanSeeListContractFilterBy(String\u003e)"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@ListContractFeature"
+          },
+          {
+            "name": "@TestSuiteID\u003d9224119"
+          },
+          {
+            "name": "@Positive"
+          },
+          {
+            "name": "@Filter"
+          },
+          {
+            "name": "@Done"
+          }
+        ]
+      },
+      {
+        "line": 4,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 7144011916,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "[MTA-UI] user open mta homepage",
+            "match": {
+              "location": "LoginSteps.userOpenWeb()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1143029607,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "[MTA-UI] user login with username \u0027rizkaella.amp@mailinator.com\u0027 and password \u0027Testing12345\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "rizkaella.amp@mailinator.com",
+                  "offset": 35
+                },
+                {
+                  "val": "Testing12345",
+                  "offset": 79
+                }
+              ],
+              "location": "LoginSteps.userInputUsernameAndPassword(String,String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 1423877925,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "[MTA-UI] user click login button",
+            "match": {
+              "location": "LoginSteps.userClickLoginButton()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 557630554,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "[MTA-UI] user click internal button",
+            "match": {
+              "location": "LoginSteps.userClickInternalButton()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 7730403542,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "[MTA-UI] user should see internal dashboard",
+            "match": {
+              "location": "LoginSteps.userShouldSeeInternalDashboard()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 2019963487,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "[MTA-UI] user click menu \"Official\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Official",
+                  "offset": 26
+                }
+              ],
+              "location": "InternalDashboardSteps.mtaUIUserClickMenu(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 344597452,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "[OXFORD-UI] user on oxford internal page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnOxfordInternalPage()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 9761505,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.beforeRun()"
+            }
+          }
+        ],
+        "line": 163,
+        "name": "Show all list contract with filter by contract number and brand type",
+        "description": "",
+        "id": "list-contract;show-all-list-contract-with-filter-by-contract-number-and-brand-type",
+        "after": [
+          {
+            "result": {
+              "duration": 19671,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.afterRun()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 299171773,
+              "status": "passed"
+            },
+            "line": 164,
+            "name": "[OXFORD-UI] user on oxford internal page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnOxfordInternalPage()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 506495340,
+              "status": "passed"
+            },
+            "line": 165,
+            "name": "[OXFORD-UI] user click menu contract",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserClickMenuContract()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 452488893,
+              "status": "passed"
+            },
+            "line": 166,
+            "name": "[OXFORD-UI] user select menu contract",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserSelectMenuContract()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 343760117,
+              "status": "passed"
+            },
+            "line": 167,
+            "name": "[OXFORD-UI] user on contract list page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnContractListPage()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 486836338,
+              "status": "passed"
+            },
+            "line": 168,
+            "name": "[OXFORD-UI] user click menu all contract",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserClickMenuAllContract()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "error_message": "org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {\"method\":\"tag name\",\"selector\":\"a\"}\n  (Session info: chrome\u003d68.0.3440.106)\n  (Driver info: chromedriver\u003d2.41.578737 (49da6702b16031c40d63e5618de03a32ff6c197e),platform\u003dWindows NT 6.1.7601 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)\nCommand duration or timeout: 0 milliseconds\nFor documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html\nBuild info: version: \u00273.11.0\u0027, revision: \u0027e59cfb3\u0027, time: \u00272018-03-11T20:26:55.152Z\u0027\nSystem info: host: \u0027DEV-LTP-073\u0027, ip: \u002710.177.17.18\u0027, os.name: \u0027Windows 7\u0027, os.arch: \u0027amd64\u0027, os.version: \u00276.1\u0027, java.version: \u00271.8.0_91\u0027\nDriver info: org.openqa.selenium.chrome.ChromeDriver\nCapabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.41.578737 (49da6702b16031..., userDataDir: C:\\Users\\RIZKAE~1.SET\\AppDa...}, cssSelectorsEnabled: true, databaseEnabled: false, goog:chromeOptions: {debuggerAddress: localhost:65032}, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 68.0.3440.106, webStorageEnabled: true}\nSession ID: f4b73267fedeef927883c489da5f8db4\n*** Element info: {Using\u003dtag name, value\u003da}\r\n\tat sun.reflect.GeneratedConstructorAccessor89.newInstance(Unknown Source)\r\n\tat sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)\r\n\tat java.lang.reflect.Constructor.newInstance(Constructor.java:423)\r\n\tat org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:214)\r\n\tat org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:166)\r\n\tat org.openqa.selenium.remote.http.JsonHttpResponseCodec.reconstructValue(JsonHttpResponseCodec.java:40)\r\n\tat org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:80)\r\n\tat org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:44)\r\n\tat org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)\r\n\tat org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)\r\n\tat org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:279)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElement(RemoteWebElement.java:179)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElementByTagName(RemoteWebElement.java:271)\r\n\tat org.openqa.selenium.By$ByTagName.findElement(By.java:334)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElement(RemoteWebElement.java:175)\r\n\tat net.serenitybdd.core.pages.WebElementFacadeImpl.findBy(WebElementFacadeImpl.java:282)\r\n\tat net.serenitybdd.core.pages.WebElementFacadeImpl.find(WebElementFacadeImpl.java:289)\r\n\tat com.gdn.qa.module.ui.oxford.pages.ContractListPage.readTableContract(ContractListPage.java:100)\r\n\tat com.gdn.qa.module.ui.oxford.steps.ContractListSteps.oxfordUIUserReadTableContractList(ContractListSteps.java:105)\r\n\tat ✽.[OXFORD-UI] user read table contract list(src/test/resources/features/ContractList.feature:169)\r\n",
+              "duration": 2639535077,
+              "status": "failed"
+            },
+            "line": 169,
+            "name": "[OXFORD-UI] user read table contract list",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserReadTableContractList()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 170,
+            "name": "[OXFORD-UI] user can see all active and nonactive contract",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserCanSeeAllActiveAndNonactiveContract()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 171,
+            "name": "[OXFORD-UI] user input contract number \u0027OXF/TOQ-15121/000323\u0027 in filter",
+            "match": {
+              "arguments": [
+                {
+                  "val": "OXF/TOQ-15121/000323",
+                  "offset": 40
+                }
+              ],
+              "location": "ContractListSteps.oxfordUIUserInputContractNumberInFilter(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 172,
+            "name": "[OXFORD-UI] user select filter by type \u0027Brand\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Brand",
+                  "offset": 40
+                }
+              ],
+              "location": "ContractListSteps.oxfordUIUserSelectFilterByType(String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 173,
+            "name": "[OXFORD-UI] user click button search",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserClickButtonSearch()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 174,
+            "name": "[OXFORD-UI] user read table contract list",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserReadTableContractList()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 175,
+            "name": "[OXFORD-UI] user can see list contract filter by: \u0027CONTRACT_NUMBER, TYPE\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "CONTRACT_NUMBER, TYPE",
+                  "offset": 51
+                }
+              ],
+              "location": "ContractListSteps.oxfordUIUserCanSeeListContractFilterBy(String\u003e)"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@ListContractFeature"
+          },
+          {
+            "name": "@TestSuiteID\u003d9224119"
+          },
+          {
+            "name": "@Positive"
+          },
+          {
+            "name": "@Filter"
+          },
+          {
+            "name": "@Done"
+          }
+        ]
+      },
+      {
+        "line": 4,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 8630068651,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "[MTA-UI] user open mta homepage",
+            "match": {
+              "location": "LoginSteps.userOpenWeb()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1186078416,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "[MTA-UI] user login with username \u0027rizkaella.amp@mailinator.com\u0027 and password \u0027Testing12345\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "rizkaella.amp@mailinator.com",
+                  "offset": 35
+                },
+                {
+                  "val": "Testing12345",
+                  "offset": 79
+                }
+              ],
+              "location": "LoginSteps.userInputUsernameAndPassword(String,String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 1894640239,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "[MTA-UI] user click login button",
+            "match": {
+              "location": "LoginSteps.userClickLoginButton()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 573079784,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "[MTA-UI] user click internal button",
+            "match": {
+              "location": "LoginSteps.userClickInternalButton()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 7682885378,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "[MTA-UI] user should see internal dashboard",
+            "match": {
+              "location": "LoginSteps.userShouldSeeInternalDashboard()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 2285505410,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "[MTA-UI] user click menu \"Official\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Official",
+                  "offset": 26
+                }
+              ],
+              "location": "InternalDashboardSteps.mtaUIUserClickMenu(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 336560226,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "[OXFORD-UI] user on oxford internal page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnOxfordInternalPage()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 8846764,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.beforeRun()"
+            }
+          }
+        ],
+        "line": 178,
+        "name": "Show all list contract with filter by business partner and premium level",
+        "description": "",
+        "id": "list-contract;show-all-list-contract-with-filter-by-business-partner-and-premium-level",
+        "after": [
+          {
+            "result": {
+              "duration": 22238,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.afterRun()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 299529715,
+              "status": "passed"
+            },
+            "line": 179,
+            "name": "[OXFORD-UI] user on oxford internal page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnOxfordInternalPage()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 485940842,
+              "status": "passed"
+            },
+            "line": 180,
+            "name": "[OXFORD-UI] user click menu contract",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserClickMenuContract()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 548600756,
+              "status": "passed"
+            },
+            "line": 181,
+            "name": "[OXFORD-UI] user select menu contract",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserSelectMenuContract()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 346973467,
+              "status": "passed"
+            },
+            "line": 182,
+            "name": "[OXFORD-UI] user on contract list page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnContractListPage()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 471964861,
+              "status": "passed"
+            },
+            "line": 183,
+            "name": "[OXFORD-UI] user click menu all contract",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserClickMenuAllContract()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "error_message": "org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {\"method\":\"tag name\",\"selector\":\"a\"}\n  (Session info: chrome\u003d68.0.3440.106)\n  (Driver info: chromedriver\u003d2.41.578737 (49da6702b16031c40d63e5618de03a32ff6c197e),platform\u003dWindows NT 6.1.7601 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)\nCommand duration or timeout: 0 milliseconds\nFor documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html\nBuild info: version: \u00273.11.0\u0027, revision: \u0027e59cfb3\u0027, time: \u00272018-03-11T20:26:55.152Z\u0027\nSystem info: host: \u0027DEV-LTP-073\u0027, ip: \u002710.177.17.18\u0027, os.name: \u0027Windows 7\u0027, os.arch: \u0027amd64\u0027, os.version: \u00276.1\u0027, java.version: \u00271.8.0_91\u0027\nDriver info: org.openqa.selenium.chrome.ChromeDriver\nCapabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.41.578737 (49da6702b16031..., userDataDir: C:\\Users\\RIZKAE~1.SET\\AppDa...}, cssSelectorsEnabled: true, databaseEnabled: false, goog:chromeOptions: {debuggerAddress: localhost:65136}, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 68.0.3440.106, webStorageEnabled: true}\nSession ID: efb753b74fa4362459ca025fcf21d71f\n*** Element info: {Using\u003dtag name, value\u003da}\r\n\tat sun.reflect.GeneratedConstructorAccessor89.newInstance(Unknown Source)\r\n\tat sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)\r\n\tat java.lang.reflect.Constructor.newInstance(Constructor.java:423)\r\n\tat org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:214)\r\n\tat org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:166)\r\n\tat org.openqa.selenium.remote.http.JsonHttpResponseCodec.reconstructValue(JsonHttpResponseCodec.java:40)\r\n\tat org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:80)\r\n\tat org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:44)\r\n\tat org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)\r\n\tat org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)\r\n\tat org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:279)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElement(RemoteWebElement.java:179)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElementByTagName(RemoteWebElement.java:271)\r\n\tat org.openqa.selenium.By$ByTagName.findElement(By.java:334)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElement(RemoteWebElement.java:175)\r\n\tat net.serenitybdd.core.pages.WebElementFacadeImpl.findBy(WebElementFacadeImpl.java:282)\r\n\tat net.serenitybdd.core.pages.WebElementFacadeImpl.find(WebElementFacadeImpl.java:289)\r\n\tat com.gdn.qa.module.ui.oxford.pages.ContractListPage.readTableContract(ContractListPage.java:100)\r\n\tat com.gdn.qa.module.ui.oxford.steps.ContractListSteps.oxfordUIUserReadTableContractList(ContractListSteps.java:105)\r\n\tat ✽.[OXFORD-UI] user read table contract list(src/test/resources/features/ContractList.feature:184)\r\n",
+              "duration": 2596669303,
+              "status": "failed"
+            },
+            "line": 184,
+            "name": "[OXFORD-UI] user read table contract list",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserReadTableContractList()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 185,
+            "name": "[OXFORD-UI] user can see all active and nonactive contract",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserCanSeeAllActiveAndNonactiveContract()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 186,
+            "name": "[OXFORD-UI] user input business partner \u0027Toko\u0027 in filter",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Toko",
+                  "offset": 41
+                }
+              ],
+              "location": "ContractListSteps.oxfordUIUserInputBusinessPartnerInFilter(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 187,
+            "name": "[OXFORD-UI] user select filter by level \u0027Official Premium\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Official Premium",
+                  "offset": 41
+                }
+              ],
+              "location": "ContractListSteps.oxfordUIUserSelectFilterByLevelOfficialRegular(String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 188,
+            "name": "[OXFORD-UI] user click button search",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserClickButtonSearch()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 189,
+            "name": "[OXFORD-UI] user read table contract list",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserReadTableContractList()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 190,
+            "name": "[OXFORD-UI] user can see list contract filter by: \u0027BUSINESS_PARTNER, LEVEL\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "BUSINESS_PARTNER, LEVEL",
+                  "offset": 51
+                }
+              ],
+              "location": "ContractListSteps.oxfordUIUserCanSeeListContractFilterBy(String\u003e)"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@ListContractFeature"
+          },
+          {
+            "name": "@TestSuiteID\u003d9224119"
+          },
+          {
+            "name": "@Positive"
+          },
+          {
+            "name": "@Filter"
+          },
+          {
+            "name": "@Done"
+          }
+        ]
+      },
+      {
+        "line": 4,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 7256016908,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "[MTA-UI] user open mta homepage",
+            "match": {
+              "location": "LoginSteps.userOpenWeb()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1116038572,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "[MTA-UI] user login with username \u0027rizkaella.amp@mailinator.com\u0027 and password \u0027Testing12345\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "rizkaella.amp@mailinator.com",
+                  "offset": 35
+                },
+                {
+                  "val": "Testing12345",
+                  "offset": 79
+                }
+              ],
+              "location": "LoginSteps.userInputUsernameAndPassword(String,String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 1602349757,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "[MTA-UI] user click login button",
+            "match": {
+              "location": "LoginSteps.userClickLoginButton()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 584061797,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "[MTA-UI] user click internal button",
+            "match": {
+              "location": "LoginSteps.userClickInternalButton()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 4416516811,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "[MTA-UI] user should see internal dashboard",
+            "match": {
+              "location": "LoginSteps.userShouldSeeInternalDashboard()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 1779102443,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "[MTA-UI] user click menu \"Official\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Official",
+                  "offset": 26
+                }
+              ],
+              "location": "InternalDashboardSteps.mtaUIUserClickMenu(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 442971575,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "[OXFORD-UI] user on oxford internal page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnOxfordInternalPage()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 9170922,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.beforeRun()"
+            }
+          }
+        ],
+        "line": 193,
+        "name": "Show all list contract with filter by contract number and regular level",
+        "description": "",
+        "id": "list-contract;show-all-list-contract-with-filter-by-contract-number-and-regular-level",
+        "after": [
+          {
+            "result": {
+              "duration": 47041,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.afterRun()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 318870546,
+              "status": "passed"
+            },
+            "line": 194,
+            "name": "[OXFORD-UI] user on oxford internal page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnOxfordInternalPage()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 517490610,
+              "status": "passed"
+            },
+            "line": 195,
+            "name": "[OXFORD-UI] user click menu contract",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserClickMenuContract()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 495357234,
+              "status": "passed"
+            },
+            "line": 196,
+            "name": "[OXFORD-UI] user select menu contract",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserSelectMenuContract()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 335341428,
+              "status": "passed"
+            },
+            "line": 197,
+            "name": "[OXFORD-UI] user on contract list page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnContractListPage()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 539906234,
+              "status": "passed"
+            },
+            "line": 198,
+            "name": "[OXFORD-UI] user click menu all contract",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserClickMenuAllContract()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "error_message": "org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {\"method\":\"tag name\",\"selector\":\"a\"}\n  (Session info: chrome\u003d68.0.3440.106)\n  (Driver info: chromedriver\u003d2.41.578737 (49da6702b16031c40d63e5618de03a32ff6c197e),platform\u003dWindows NT 6.1.7601 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)\nCommand duration or timeout: 0 milliseconds\nFor documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html\nBuild info: version: \u00273.11.0\u0027, revision: \u0027e59cfb3\u0027, time: \u00272018-03-11T20:26:55.152Z\u0027\nSystem info: host: \u0027DEV-LTP-073\u0027, ip: \u002710.177.17.18\u0027, os.name: \u0027Windows 7\u0027, os.arch: \u0027amd64\u0027, os.version: \u00276.1\u0027, java.version: \u00271.8.0_91\u0027\nDriver info: org.openqa.selenium.chrome.ChromeDriver\nCapabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.41.578737 (49da6702b16031..., userDataDir: C:\\Users\\RIZKAE~1.SET\\AppDa...}, cssSelectorsEnabled: true, databaseEnabled: false, goog:chromeOptions: {debuggerAddress: localhost:65242}, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 68.0.3440.106, webStorageEnabled: true}\nSession ID: 4cdfef664a66aafe7d570b48c89746d6\n*** Element info: {Using\u003dtag name, value\u003da}\r\n\tat sun.reflect.GeneratedConstructorAccessor89.newInstance(Unknown Source)\r\n\tat sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)\r\n\tat java.lang.reflect.Constructor.newInstance(Constructor.java:423)\r\n\tat org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:214)\r\n\tat org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:166)\r\n\tat org.openqa.selenium.remote.http.JsonHttpResponseCodec.reconstructValue(JsonHttpResponseCodec.java:40)\r\n\tat org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:80)\r\n\tat org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:44)\r\n\tat org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)\r\n\tat org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)\r\n\tat org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:279)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElement(RemoteWebElement.java:179)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElementByTagName(RemoteWebElement.java:271)\r\n\tat org.openqa.selenium.By$ByTagName.findElement(By.java:334)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElement(RemoteWebElement.java:175)\r\n\tat net.serenitybdd.core.pages.WebElementFacadeImpl.findBy(WebElementFacadeImpl.java:282)\r\n\tat net.serenitybdd.core.pages.WebElementFacadeImpl.find(WebElementFacadeImpl.java:289)\r\n\tat com.gdn.qa.module.ui.oxford.pages.ContractListPage.readTableContract(ContractListPage.java:100)\r\n\tat com.gdn.qa.module.ui.oxford.steps.ContractListSteps.oxfordUIUserReadTableContractList(ContractListSteps.java:105)\r\n\tat ✽.[OXFORD-UI] user read table contract list(src/test/resources/features/ContractList.feature:199)\r\n",
+              "duration": 2659676894,
+              "status": "failed"
+            },
+            "line": 199,
+            "name": "[OXFORD-UI] user read table contract list",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserReadTableContractList()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 200,
+            "name": "[OXFORD-UI] user can see all active and nonactive contract",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserCanSeeAllActiveAndNonactiveContract()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 201,
+            "name": "[OXFORD-UI] user input contract number \u0027OXF/TOK-60012/000322\u0027 in filter",
+            "match": {
+              "arguments": [
+                {
+                  "val": "OXF/TOK-60012/000322",
+                  "offset": 40
+                }
+              ],
+              "location": "ContractListSteps.oxfordUIUserInputContractNumberInFilter(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 202,
+            "name": "[OXFORD-UI] user select filter by level \u0027Official Regular\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Official Regular",
+                  "offset": 41
+                }
+              ],
+              "location": "ContractListSteps.oxfordUIUserSelectFilterByLevelOfficialRegular(String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 203,
+            "name": "[OXFORD-UI] user click button search",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserClickButtonSearch()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 204,
+            "name": "[OXFORD-UI] user read table contract list",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserReadTableContractList()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 205,
+            "name": "[OXFORD-UI] user can see list contract filter by: \u0027CONTRACT_NUMBER, LEVEL\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "CONTRACT_NUMBER, LEVEL",
+                  "offset": 51
+                }
+              ],
+              "location": "ContractListSteps.oxfordUIUserCanSeeListContractFilterBy(String\u003e)"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@ListContractFeature"
+          },
+          {
+            "name": "@TestSuiteID\u003d9224119"
+          },
+          {
+            "name": "@Positive"
+          },
+          {
+            "name": "@Filter"
+          },
+          {
+            "name": "@Done"
+          }
+        ]
+      },
+      {
+        "line": 4,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 9467984736,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "[MTA-UI] user open mta homepage",
+            "match": {
+              "location": "LoginSteps.userOpenWeb()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1212727333,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "[MTA-UI] user login with username \u0027rizkaella.amp@mailinator.com\u0027 and password \u0027Testing12345\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "rizkaella.amp@mailinator.com",
+                  "offset": 35
+                },
+                {
+                  "val": "Testing12345",
+                  "offset": 79
+                }
+              ],
+              "location": "LoginSteps.userInputUsernameAndPassword(String,String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 1511930324,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "[MTA-UI] user click login button",
+            "match": {
+              "location": "LoginSteps.userClickLoginButton()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 541928155,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "[MTA-UI] user click internal button",
+            "match": {
+              "location": "LoginSteps.userClickInternalButton()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 9287269460,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "[MTA-UI] user should see internal dashboard",
+            "match": {
+              "location": "LoginSteps.userShouldSeeInternalDashboard()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 1994446984,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "[MTA-UI] user click menu \"Official\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Official",
+                  "offset": 26
+                }
+              ],
+              "location": "InternalDashboardSteps.mtaUIUserClickMenu(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 347257426,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "[OXFORD-UI] user on oxford internal page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnOxfordInternalPage()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 9575478,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.beforeRun()"
+            }
+          }
+        ],
+        "line": 208,
+        "name": "Show all list contract with filter by contract number and regular level and brand type",
+        "description": "",
+        "id": "list-contract;show-all-list-contract-with-filter-by-contract-number-and-regular-level-and-brand-type",
+        "after": [
+          {
+            "result": {
+              "duration": 21810,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.afterRun()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 304104271,
+              "status": "passed"
+            },
+            "line": 209,
+            "name": "[OXFORD-UI] user on oxford internal page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnOxfordInternalPage()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 453566139,
+              "status": "passed"
+            },
+            "line": 210,
+            "name": "[OXFORD-UI] user click menu contract",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserClickMenuContract()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 569683826,
+              "status": "passed"
+            },
+            "line": 211,
+            "name": "[OXFORD-UI] user select menu contract",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserSelectMenuContract()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 342272755,
+              "status": "passed"
+            },
+            "line": 212,
+            "name": "[OXFORD-UI] user on contract list page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnContractListPage()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 457914897,
+              "status": "passed"
+            },
+            "line": 213,
+            "name": "[OXFORD-UI] user click menu nonactive contract",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserClickMenuNonactiveContract()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "error_message": "org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {\"method\":\"tag name\",\"selector\":\"a\"}\n  (Session info: chrome\u003d68.0.3440.106)\n  (Driver info: chromedriver\u003d2.41.578737 (49da6702b16031c40d63e5618de03a32ff6c197e),platform\u003dWindows NT 6.1.7601 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)\nCommand duration or timeout: 0 milliseconds\nFor documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html\nBuild info: version: \u00273.11.0\u0027, revision: \u0027e59cfb3\u0027, time: \u00272018-03-11T20:26:55.152Z\u0027\nSystem info: host: \u0027DEV-LTP-073\u0027, ip: \u002710.177.17.18\u0027, os.name: \u0027Windows 7\u0027, os.arch: \u0027amd64\u0027, os.version: \u00276.1\u0027, java.version: \u00271.8.0_91\u0027\nDriver info: org.openqa.selenium.chrome.ChromeDriver\nCapabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.41.578737 (49da6702b16031..., userDataDir: C:\\Users\\RIZKAE~1.SET\\AppDa...}, cssSelectorsEnabled: true, databaseEnabled: false, goog:chromeOptions: {debuggerAddress: localhost:65347}, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 68.0.3440.106, webStorageEnabled: true}\nSession ID: 7f814c02d2d7535d19fab45b7e7a6992\n*** Element info: {Using\u003dtag name, value\u003da}\r\n\tat sun.reflect.GeneratedConstructorAccessor89.newInstance(Unknown Source)\r\n\tat sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)\r\n\tat java.lang.reflect.Constructor.newInstance(Constructor.java:423)\r\n\tat org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:214)\r\n\tat org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:166)\r\n\tat org.openqa.selenium.remote.http.JsonHttpResponseCodec.reconstructValue(JsonHttpResponseCodec.java:40)\r\n\tat org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:80)\r\n\tat org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:44)\r\n\tat org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)\r\n\tat org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)\r\n\tat org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:279)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElement(RemoteWebElement.java:179)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElementByTagName(RemoteWebElement.java:271)\r\n\tat org.openqa.selenium.By$ByTagName.findElement(By.java:334)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElement(RemoteWebElement.java:175)\r\n\tat net.serenitybdd.core.pages.WebElementFacadeImpl.findBy(WebElementFacadeImpl.java:282)\r\n\tat net.serenitybdd.core.pages.WebElementFacadeImpl.find(WebElementFacadeImpl.java:289)\r\n\tat com.gdn.qa.module.ui.oxford.pages.ContractListPage.readTableContract(ContractListPage.java:100)\r\n\tat com.gdn.qa.module.ui.oxford.steps.ContractListSteps.oxfordUIUserReadTableContractList(ContractListSteps.java:105)\r\n\tat ✽.[OXFORD-UI] user read table contract list(src/test/resources/features/ContractList.feature:214)\r\n",
+              "duration": 2643817550,
+              "status": "failed"
+            },
+            "line": 214,
+            "name": "[OXFORD-UI] user read table contract list",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserReadTableContractList()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 215,
+            "name": "[OXFORD-UI] user can see all nonactive contract",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserCanSeeAllNonactiveContract()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 216,
+            "name": "[OXFORD-UI] user input contract number \u0027OXF/DAB-14129/000310\u0027 in filter",
+            "match": {
+              "arguments": [
+                {
+                  "val": "OXF/DAB-14129/000310",
+                  "offset": 40
+                }
+              ],
+              "location": "ContractListSteps.oxfordUIUserInputContractNumberInFilter(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 217,
+            "name": "[OXFORD-UI] user select filter by level \u0027Official Regular\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Official Regular",
+                  "offset": 41
+                }
+              ],
+              "location": "ContractListSteps.oxfordUIUserSelectFilterByLevelOfficialRegular(String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 218,
+            "name": "[OXFORD-UI] user select filter by type \u0027Brand\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Brand",
+                  "offset": 40
+                }
+              ],
+              "location": "ContractListSteps.oxfordUIUserSelectFilterByType(String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 219,
+            "name": "[OXFORD-UI] user click button search",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserClickButtonSearch()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 220,
+            "name": "[OXFORD-UI] user read table contract list",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserReadTableContractList()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 221,
+            "name": "[OXFORD-UI] user can see list contract filter by: \u0027CONTRACT_NUMBER, LEVEL, TYPE\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "CONTRACT_NUMBER, LEVEL, TYPE",
+                  "offset": 51
+                }
+              ],
+              "location": "ContractListSteps.oxfordUIUserCanSeeListContractFilterBy(String\u003e)"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@ListContractFeature"
+          },
+          {
+            "name": "@TestSuiteID\u003d9224119"
+          },
+          {
+            "name": "@Positive"
+          },
+          {
+            "name": "@Filter"
+          },
+          {
+            "name": "@Done"
+          }
+        ]
+      },
+      {
+        "line": 4,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 5955388563,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "[MTA-UI] user open mta homepage",
+            "match": {
+              "location": "LoginSteps.userOpenWeb()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1140526581,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "[MTA-UI] user login with username \u0027rizkaella.amp@mailinator.com\u0027 and password \u0027Testing12345\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "rizkaella.amp@mailinator.com",
+                  "offset": 35
+                },
+                {
+                  "val": "Testing12345",
+                  "offset": 79
+                }
+              ],
+              "location": "LoginSteps.userInputUsernameAndPassword(String,String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 1693787422,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "[MTA-UI] user click login button",
+            "match": {
+              "location": "LoginSteps.userClickLoginButton()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 574881038,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "[MTA-UI] user click internal button",
+            "match": {
+              "location": "LoginSteps.userClickInternalButton()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 7856901542,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "[MTA-UI] user should see internal dashboard",
+            "match": {
+              "location": "LoginSteps.userShouldSeeInternalDashboard()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 1774934153,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "[MTA-UI] user click menu \"Official\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Official",
+                  "offset": 26
+                }
+              ],
+              "location": "InternalDashboardSteps.mtaUIUserClickMenu(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 384583871,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "[OXFORD-UI] user on oxford internal page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnOxfordInternalPage()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 7930741,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.beforeRun()"
+            }
+          }
+        ],
+        "line": 224,
+        "name": "Show all list contract with filter by contract number and business partner and premium level and store type",
+        "description": "",
+        "id": "list-contract;show-all-list-contract-with-filter-by-contract-number-and-business-partner-and-premium-level-and-store-type",
+        "after": [
+          {
+            "result": {
+              "duration": 23948,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.afterRun()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 309479385,
+              "status": "passed"
+            },
+            "line": 225,
+            "name": "[OXFORD-UI] user on oxford internal page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnOxfordInternalPage()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 522715192,
+              "status": "passed"
+            },
+            "line": 226,
+            "name": "[OXFORD-UI] user click menu contract",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserClickMenuContract()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 442933087,
+              "status": "passed"
+            },
+            "line": 227,
+            "name": "[OXFORD-UI] user select menu contract",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserSelectMenuContract()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 333324638,
+              "status": "passed"
+            },
+            "line": 228,
+            "name": "[OXFORD-UI] user on contract list page",
+            "match": {
+              "location": "CreateContractSteps.oxfordUIUserOnContractListPage()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 493382781,
+              "status": "passed"
+            },
+            "line": 229,
+            "name": "[OXFORD-UI] user click menu active contract",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserClickMenuActiveContract()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "error_message": "org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {\"method\":\"tag name\",\"selector\":\"a\"}\n  (Session info: chrome\u003d68.0.3440.106)\n  (Driver info: chromedriver\u003d2.41.578737 (49da6702b16031c40d63e5618de03a32ff6c197e),platform\u003dWindows NT 6.1.7601 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)\nCommand duration or timeout: 0 milliseconds\nFor documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html\nBuild info: version: \u00273.11.0\u0027, revision: \u0027e59cfb3\u0027, time: \u00272018-03-11T20:26:55.152Z\u0027\nSystem info: host: \u0027DEV-LTP-073\u0027, ip: \u002710.177.17.18\u0027, os.name: \u0027Windows 7\u0027, os.arch: \u0027amd64\u0027, os.version: \u00276.1\u0027, java.version: \u00271.8.0_91\u0027\nDriver info: org.openqa.selenium.chrome.ChromeDriver\nCapabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.41.578737 (49da6702b16031..., userDataDir: C:\\Users\\RIZKAE~1.SET\\AppDa...}, cssSelectorsEnabled: true, databaseEnabled: false, goog:chromeOptions: {debuggerAddress: localhost:65446}, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 68.0.3440.106, webStorageEnabled: true}\nSession ID: d0d358b49fb743611dc36a5a4a0950d9\n*** Element info: {Using\u003dtag name, value\u003da}\r\n\tat sun.reflect.GeneratedConstructorAccessor89.newInstance(Unknown Source)\r\n\tat sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)\r\n\tat java.lang.reflect.Constructor.newInstance(Constructor.java:423)\r\n\tat org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:214)\r\n\tat org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:166)\r\n\tat org.openqa.selenium.remote.http.JsonHttpResponseCodec.reconstructValue(JsonHttpResponseCodec.java:40)\r\n\tat org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:80)\r\n\tat org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:44)\r\n\tat org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)\r\n\tat org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)\r\n\tat org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:279)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElement(RemoteWebElement.java:179)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElementByTagName(RemoteWebElement.java:271)\r\n\tat org.openqa.selenium.By$ByTagName.findElement(By.java:334)\r\n\tat org.openqa.selenium.remote.RemoteWebElement.findElement(RemoteWebElement.java:175)\r\n\tat net.serenitybdd.core.pages.WebElementFacadeImpl.findBy(WebElementFacadeImpl.java:282)\r\n\tat net.serenitybdd.core.pages.WebElementFacadeImpl.find(WebElementFacadeImpl.java:289)\r\n\tat com.gdn.qa.module.ui.oxford.pages.ContractListPage.readTableContract(ContractListPage.java:100)\r\n\tat com.gdn.qa.module.ui.oxford.steps.ContractListSteps.oxfordUIUserReadTableContractList(ContractListSteps.java:105)\r\n\tat ✽.[OXFORD-UI] user read table contract list(src/test/resources/features/ContractList.feature:230)\r\n",
+              "duration": 2594341184,
+              "status": "failed"
+            },
+            "line": 230,
+            "name": "[OXFORD-UI] user read table contract list",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserReadTableContractList()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 231,
+            "name": "[OXFORD-UI] user can see all active contract",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserCanSeeAllActiveContract()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 232,
+            "name": "[OXFORD-UI] user input contract number \u0027OXF/TOQ-15129/000092\u0027 in filter",
+            "match": {
+              "arguments": [
+                {
+                  "val": "OXF/TOQ-15129/000092",
+                  "offset": 40
+                }
+              ],
+              "location": "ContractListSteps.oxfordUIUserInputContractNumberInFilter(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 233,
+            "name": "[OXFORD-UI] user input business partner \u0027Toko\u0027 in filter",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Toko",
+                  "offset": 41
+                }
+              ],
+              "location": "ContractListSteps.oxfordUIUserInputBusinessPartnerInFilter(String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 234,
+            "name": "[OXFORD-UI] user select filter by level \u0027Official Premium\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Official Premium",
+                  "offset": 41
+                }
+              ],
+              "location": "ContractListSteps.oxfordUIUserSelectFilterByLevelOfficialRegular(String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 235,
+            "name": "[OXFORD-UI] user select filter by type \u0027Store\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Store",
+                  "offset": 40
+                }
+              ],
+              "location": "ContractListSteps.oxfordUIUserSelectFilterByType(String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 236,
+            "name": "[OXFORD-UI] user click button search",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserClickButtonSearch()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 237,
+            "name": "[OXFORD-UI] user read table contract list",
+            "match": {
+              "location": "ContractListSteps.oxfordUIUserReadTableContractList()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 238,
+            "name": "[OXFORD-UI] user can see list contract filter by: \u0027CONTRACT_NUMBER, BUSINESS_PARTNER, LEVEL, TYPE\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "CONTRACT_NUMBER, BUSINESS_PARTNER, LEVEL, TYPE",
+                  "offset": 51
+                }
+              ],
+              "location": "ContractListSteps.oxfordUIUserCanSeeListContractFilterBy(String\u003e)"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@ListContractFeature"
+          },
+          {
+            "name": "@TestSuiteID\u003d9224119"
+          },
+          {
+            "name": "@Positive"
+          },
+          {
+            "name": "@Filter"
+          },
+          {
+            "name": "@Done"
+          }
+        ]
+      }
+    ],
+    "name": "List Contract",
+    "description": "",
+    "id": "list-contract",
+    "keyword": "Feature",
+    "uri": "src/test/resources/features/ContractList.feature",
+    "tags": [
+      {
+        "name": "@ListContractFeature",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 1
+        }
+      },
+      {
+        "name": "@TestSuiteID\u003d9224119",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 22
+        }
+      }
+    ]
+  }
+]
