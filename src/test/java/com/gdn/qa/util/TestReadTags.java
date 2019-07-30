@@ -202,4 +202,26 @@ public class TestReadTags {
         }
     }*/
 
+  @Test
+  public void testCucumber12() {
+    String testlinkURL = "http://localhost/testlink/lib/api/xmlrpc/v1/xmlrpc.php";
+    String devKey = "b5c1d6045227609983587bc8a4e499cf";
+    String projectName = "Surabaya";
+    String testPlanName = "TEST-PLAN";
+    String buildName = "BUILD-TEST";
+    String platformName = "";
+//    String cucumberPath = System.getProperty("user.dir") + "/src/test/resources/cucumber_fail2.json";
+    String cucumberPath = System.getProperty("user.dir") + "/src/test/resources/cucumber_test.json";
+    System.out.println(cucumberPath);
+
+    TestResultReader testResultReader = new TestResultReader();
+    testResultReader.initialize(testlinkURL, devKey,
+            projectName, testPlanName, buildName, platformName);
+    try {
+      testResultReader.readWithCucumber(cucumberPath);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
 }

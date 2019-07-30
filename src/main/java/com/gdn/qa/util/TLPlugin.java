@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.gdn.qa.util.constant.TestlinkConstant.MAX_LENGTH_TESTLINK;
+
 
 public class TLPlugin {
     //Enter your project API key here.
@@ -189,7 +191,7 @@ public class TLPlugin {
         return true;
     }
 
-    public void createTestCase(ArrayList<String[]> steps) {
+    public void createTestCase(ArrayList<String[]> steps) throws Exception {
 
         //// Create Test Steps
         indexFail = 0;
@@ -243,14 +245,21 @@ public class TLPlugin {
      * @param tsInputted      test step yang diinputkan oleh usser
      * @return bila duplicate akan return object testCase , bila belum ada akan mengembalikan null
      */
-    public TestCase searchTestStepDuplicate(String title, String testProjectName, String testSuiteName, List<TestCaseStep> tsInputted) {
+    public TestCase searchTestStepDuplicate(String title, String testProjectName, String testSuiteName, List<TestCaseStep> tsInputted) throws Exception {
         // 1 Get data from server
         Integer idtcServer;
+        // check caracter length
+        if(title.length() > MAX_LENGTH_TESTLINK)
+            throw new Exception("Please Shorten your title , "+title+" it's should have maximum " + MAX_LENGTH_TESTLINK +" Character");
         try {
-            idtcServer = api.getTestCaseIDByName(title, testSuiteName, testProjectName, null);
+            idtcServer = api.getTestCaseIDByName(title, testSuiteName, testProjectName, "");
         } catch (Exception e) {
             System.out.println("Test Case tidak ditemukan , akan membuat test case baru.....");
             System.out.println(e.getMessage());
+            // perlu buat pengecekan apabila errornya premature file
+            if(e.getMessage().toLowerCase().contains("premature end of file")){
+                throw new Exception("Premature file , Testcase "+title+" will be skipped");
+            }
             return null;
         }
 
@@ -258,7 +267,8 @@ public class TLPlugin {
         // 2 Compare data
         List<TestCaseStep> tsServers = tcServer.getSteps();
         //// Compare Title
-        if (!title.equals(tcServer.getName())) { // Jika tidak sama langsung return false
+//        if (!title.equals(tcServer.getName())) { // Jika tidak sama langsung return false
+        if (!title.substring(0,(tcServer.getName().length())).equals(tcServer.getName())) { // Jika tidak sama langsung return false
             System.out.println("Test case not found, creating new testcase.....");
             return null;
         } else { // Jika sama lanjutkan pengecekan
