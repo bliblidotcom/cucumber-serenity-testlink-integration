@@ -4,7 +4,7 @@
 
     <groupId>com.gdn.qa.util</groupId>
     <artifactId>serenity-testlink-integration</artifactId>
-    <version>3.4.6</version>
+    <version>3.4.7-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
 
     <name>serenity-testlink-integration</name>
@@ -139,6 +139,6 @@
             <id>libs-snapshots-local.artifactory.gdn-app.com</id>
             <name>libs-snapshots-local.artifactory.gdn-app.com</name>
             <url>https://artifactory.gdn-app.com/artifactory/libs-snapshots-local</url>
-        </snapshotRepository>
+		</snapshotRepository>
     </distributionManagement>
 </project>
