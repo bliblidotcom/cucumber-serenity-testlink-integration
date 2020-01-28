@@ -8,6 +8,7 @@ import com.gdn.qa.util.model.earlgrey.EarlGreyModel;
 import com.gdn.qa.util.model.earlgrey.Subtest2;
 import com.gdn.qa.util.model.earlgrey.Subtest3;
 import com.gdn.qa.util.model.earlgrey.TestResult;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -17,9 +18,13 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class TestResultReader {
   private static String DEFAULT_ID_TEST_LINK = "414";
@@ -319,7 +324,7 @@ public class TestResultReader {
       ArrayList<String[]> tempSteps = scenarioOutlineSteps.get(scenario.getName());
       List<TestlinkTags> scenarioTags = TagsReader.readTags(scenario.getTags());
       if (defaultTags.size() != 0 || scenarioTags.size() != 0) {
-        ArrayList<String[]> steps = readSteps(scenario.getSteps());
+        List<String[]> steps = readSteps(scenario.getSteps());
         tempSteps.addAll(steps);
         TestlinkTags tagsToUse = chooseTag(defaultTags, scenarioTags);
         //kalo di scenario gaada maka pake yg default
@@ -359,10 +364,8 @@ public class TestResultReader {
         if (t.getTestLinkId().equalsIgnoreCase(feature.get(0).getTestLinkId()) && !t.getTestLinkId()
             .isEmpty())
           return false;
-        if (t.getTestSuiteId().equalsIgnoreCase(feature.get(0).getTestSuiteId())
-            && !t.getTestSuiteId().equals("0"))
-          return false;
-        return true;
+        return !t.getTestSuiteId().equalsIgnoreCase(feature.get(0).getTestSuiteId())
+            || t.getTestSuiteId().equals("0");
       }).collect(Collectors.toList());
       if (tagsft.size() == 0) {
         tagsToUse = feature.get(0);
@@ -398,40 +401,84 @@ public class TestResultReader {
     }
   }
 
-  private ArrayList<String[]> readSteps(List<Step> steps) {
-    ArrayList<String[]> testCaseSteps = new ArrayList<>();
-    AtomicReference<Integer> counter = new AtomicReference<>(1);
-    steps.forEach(step -> {
-      String[] stepsResult = {step.getKeyword() + step.getName() + (getRowStep(step.getRows())),
-          Boolean.toString((step.getResult().getStatus().equalsIgnoreCase("passed")) ?
-              true :
-              false),
-          (step.getResult().getErrorMessage() == null) ? "" : step.getResult().getErrorMessage()};
-      if (!step.getResult().getStatus().equalsIgnoreCase("passed") && data.getPassed()) {
-        data.setPassed(false);
-        data.setReasonFail(
-            "This Test Case Failed on step " + counter.get() + ",Log: \n" + step.getResult()
-                .getErrorMessage());
-      } else if (data.getPassed()) {
-        data.setReasonFail("");
+  private String[] constructStep(Step step, int counter) {
+    String additionalInfo = step.getRows() == null ?
+        step.getDocString() == null ? "" : "\n" + step.getDocString().getValue() + "\n" :
+        getRowStep(step.getRows());
+    String stepDefinition =
+        String.format("%s%s %s", step.getKeyword(), step.getName(), additionalInfo);
+    String status = String.valueOf(step.getResult().getStatus().equalsIgnoreCase("passed"));
+    String errorMessage =
+        step.getResult().getErrorMessage() == null ? "" : step.getResult().getErrorMessage();
+    if (!step.getResult().getStatus().equalsIgnoreCase("passed") && data.getPassed()) {
+      data.setPassed(false);
+      data.setReasonFail(String.format("This Test Case Failed on step %s\nLog:\n%s",
+          counter,
+          step.getResult().getErrorMessage()));
+    } else if (data.getPassed()) {
+      data.setReasonFail("");
+    }
+    return new String[] {stepDefinition, status, errorMessage};
+  }
+
+  private List<String[]> readSteps(List<Step> steps) {
+    return IntStream.range(0, steps.size())
+        .parallel()
+        .mapToObj(counter -> constructStep(steps.get(counter), counter))
+        .collect(Collectors.toList());
+  }
+
+  private String constructTableHeader(String[] headers) {
+    StringBuilder headerRow = new StringBuilder();
+    if (headers != null) {
+      headerRow.append("<tr>");
+      for (String header : headers) {
+        headerRow.append(String.format("<th>%s</th>", StringEscapeUtils.escapeHtml(header)));
       }
-      counter.set(counter.get() + 1);
-      testCaseSteps.add(stepsResult);
-    });
-    return testCaseSteps;
+      headerRow.append("</tr>");
+    }
+
+    return headerRow.toString();
+  }
+
+  private String constructTableRow(String[] rows, int columnLength) {
+    StringBuilder headerRow = new StringBuilder();
+    if (rows != null) {
+      headerRow.append("<tr>");
+      columnLength = columnLength <= 0 ? rows.length : columnLength;
+      for (int col = 0; col < columnLength; col++) {
+        if (col < rows.length) {
+          headerRow.append(String.format("<td>%s</td>", StringEscapeUtils.escapeHtml(rows[col])));
+        } else {
+          headerRow.append("<td></td>");
+        }
+      }
+      headerRow.append("</tr>");
+    }
+
+    return headerRow.toString();
   }
 
   private String getRowStep(Rows[] rows) {
     StringBuilder addedRow = new StringBuilder();
-    if (rows != null) {
-      for (Rows eachRow : rows) {
-        if (eachRow != null) {
-          addedRow.append("<br>" + Arrays.toString(eachRow.getCells()));
+    try {
+      if (rows != null) {
+        int columnLength = rows[0].getCells().length;
+        addedRow.append("<br><table>");
+        for (int index = 0; index < rows.length; index++) {
+          if (index == 0) {
+            addedRow.append(constructTableHeader(rows[index].getCells()));
+          } else {
+            Rows row = rows[index];
+            addedRow.append(constructTableRow(row.getCells(), columnLength));
+          }
         }
+        addedRow.append("</table><br>");
       }
-      return addedRow.toString();
+    } catch (Exception ignore) {
+
     }
-    return "";
+    return addedRow.toString();
   }
 
   private void printDetail(ArrayList<String[]> steps) {
@@ -483,9 +530,9 @@ public class TestResultReader {
             results.add(tr);
           }
           String testSuiteId = test2.getTestName().split("_")[2];
-          if(test.get(testSuiteId) == null) {
+          if (test.get(testSuiteId) == null) {
             test.put(testSuiteId, results);
-          }else {
+          } else {
             List<TestResult> combineResult = test.get(testSuiteId);
             combineResult.addAll(results);
             test.put(testSuiteId, combineResult);
@@ -494,7 +541,7 @@ public class TestResultReader {
         try {
           test.entrySet().stream().forEach(v -> {
             v.getValue().stream().forEach(t -> {
-              System.out.println("");
+              System.out.println();
               System.out.println("Reading test step...");
               updateTestlinkEarlGrey(v.getKey(), t);
             });

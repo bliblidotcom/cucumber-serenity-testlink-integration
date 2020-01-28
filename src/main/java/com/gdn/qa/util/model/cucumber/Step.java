@@ -12,7 +12,8 @@ import java.util.Map;
         "name",
         "match",
         "keyword",
-        "rows"
+        "rows",
+        "doc_string"
 })
 public class Step {
 
@@ -28,6 +29,8 @@ public class Step {
     private String keyword;
     @JsonProperty("rows")
     private Rows[] rows;
+    @JsonProperty("doc_string")
+    private DocString docString;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -101,4 +104,13 @@ public class Step {
         this.additionalProperties.put(name, value);
     }
 
+    @JsonProperty("doc_string")
+    public DocString getDocString() {
+        return docString;
+    }
+
+    @JsonProperty("doc_string")
+    public void setDocString(DocString docString) {
+        this.docString = docString;
+    }
 }
