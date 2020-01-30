@@ -5,6 +5,7 @@ public class ScenarioData {
     private TestlinkTags testlinkTags;
     private Boolean passed;
     private String reasonFail;
+    private Double duration;
 
     public ScenarioData() {
         this.passed = true;
@@ -41,5 +42,13 @@ public class ScenarioData {
 
     public void setTestlinkTags(TestlinkTags testlinkTags) {
         this.testlinkTags = testlinkTags;
+    }
+
+    public Double getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Double duration) {
+        this.duration = duration;
     }
 }

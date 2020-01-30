@@ -1,5 +1,6 @@
 package com.gdn.qa.util;
 
+import br.eti.kinoshita.testlinkjavaapi.TestLinkAPI;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gdn.qa.util.model.cucumber.CucumberModel;
 import com.gdn.qa.util.model.cucumber.Rows;
@@ -18,10 +19,8 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -44,7 +43,7 @@ public class TestResultReader {
   private String DEVKEY = "1cc94be3bb2e1c3e069fa67f7e9a24e1";
   //Enter your Test Link URL here
   private String urlTestlink = "http://172.17.21.92/testlink/lib/api/xmlrpc/v1/xmlrpc.php";
-  private TLPlugin plugin;
+  private TestLinkAPI connection;
 
   public void initialize(String testLinkURL,
       String testLinkDevKey,
@@ -58,9 +57,8 @@ public class TestResultReader {
     testPlan = testLinkPlanName;
     build = testLinkBuildName;
     platFormName = testLinkPlatFormName;
-    startTLPlugin();
+    connection = connectToTestlink();
   }
-
 
   public void readResult() {
     //        System.out.println(System.getProperty("user.dir"));
@@ -85,7 +83,6 @@ public class TestResultReader {
       }
     }
   }
-
 
   // Run With Jbehave
   public Map<String, String> readXML(String pathFile) {
@@ -199,7 +196,9 @@ public class TestResultReader {
               Element failure = null;
               if (failures.getLength() > 0) {
                 failure = (Element) failures.item(0);
-                reasonFail = failure.getTextContent();
+                reasonFail = String.format("This Test Case Failed on step %s, Log:\n%s",
+                    cSteps + 1,
+                    failure.getTextContent());
               }
               stepsDefinition = stepsDefinition.replace(reasonFail, "");
               passed = false;
@@ -220,28 +219,14 @@ public class TestResultReader {
       }
 
       /// Add Test Suite ID
-      if (result.get("PreConditions") != null) {
-        plugin.setPreCondition(result.get("PreConditions"));
-      }
-      if (result.get("Title") != null) {
-        plugin.setpTitle(result.get("Title"));
-      }
+      TestLinkPlugin plugin =
+          new TestLinkPlugin(connection, testProject, testPlan, build, platFormName);
+      plugin.setSummary(result.getOrDefault("Summary", ""))
+          .setPreCondition(result.getOrDefault("PreConditions", ""))
+          .setTitle(result.get("Title"))
+          .setTestSuiteID(Integer.parseInt(result.getOrDefault("TestSuiteID", "0")));
 
-      if (result.get("Summary") != null) {
-        plugin.setSummary(result.get("Summary"));
-      } else {
-        plugin.setSummary(result.get("Title"));
-      }
-
-      plugin.setJudul(title);
-      plugin.setTestSuiteID(Integer.parseInt(result.get("TestSuiteID")));
-      plugin.linkTestCases(result.get("testLinkID"), testCaseSteps);
-
-      if (passed) {
-        plugin.updateTestcasePassed();
-      } else {
-        plugin.updateTestcaseFail("");
-      }
+      plugin.linkTestCases(result.get("testLinkID"), testCaseSteps, passed, "", null, "");
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -266,86 +251,97 @@ public class TestResultReader {
       throw new Exception(
           "Cucumber Json is not exist can't Post To Testlink , is your setup is right ? ");
     }
-    CucumberModel[] features = objectMapper.readValue(cucumberFile, CucumberModel[].class);
+    List<CucumberModel> features =
+        Arrays.asList(objectMapper.readValue(cucumberFile, CucumberModel[].class));
 
     // Read Read Each Test Feature
-    for (CucumberModel feature : features) {
-      System.out.println("Checking features " + feature.getName());
-      //get default testsuiteid or test case id
-      List<TestlinkTags> defaultTags = TagsReader.readTags(feature.getTags());
-
-      //read background steps
-      data = new ScenarioData();
-      ArrayList<String[]> background = new ArrayList<>();
-      feature.getElements()
-          .stream()
-          .filter(ft -> ft.getKeyword().equalsIgnoreCase("Background"))
-          .findFirst()
-          .ifPresent(b -> {
-            background.addAll(readSteps(b.getSteps()));
-          });
-      this.tempResult = data.getPassed();
-      plugin.setSummary(String.format("Feature : %s\n\t%s",
-          feature.getName(),
-          feature.getDescription()));
-      readCucumberSteps("scenario", defaultTags, feature, background);
-      readCucumberSteps("Scenario Outline", defaultTags, feature, background);
-      System.out.println(String.format("\nSummary: %d passed and %d failed",
-          passed.get(),
-          failed.get()));
-    }
+    features.parallelStream().forEach(this::processFeature);
   }
 
-  private void readCucumberSteps(String keyword,
-      List<TestlinkTags> defaultTags,
-      CucumberModel feature,
-      ArrayList<String[]> background) {
-    HashMap<String, ArrayList<String[]>> scenarioOutlineSteps = new HashMap<>();
-    HashMap<String, ScenarioData> scenarioOutlineData = new HashMap<>();
-    ArrayList<String[]> dw = new ArrayList<>();
-    //loop per scenario outline
-    feature.getElements().stream()
-        //filter to get element with keyword scenario only
-        .filter(ft -> ft.getKeyword().equalsIgnoreCase(keyword) && (defaultTags.size() != 0
-            || TagsReader.readTags(ft.getTags()).size() != 0)).forEach(scenario -> {
-      data.setPassed(tempResult);
-      if (!scenarioOutlineSteps.containsKey(scenario.getName())) {
-        ArrayList<String[]> steps = new ArrayList<>();
-        steps.addAll(0, background);
-        ScenarioData data = new ScenarioData();
-        data.setName(scenario.getName());
-        scenarioOutlineSteps.put(scenario.getName(), steps);
-        scenarioOutlineData.put(scenario.getName(), data);
-      }
-      ScenarioData tempData = scenarioOutlineData.get(scenario.getName());
-      ArrayList<String[]> tempSteps = scenarioOutlineSteps.get(scenario.getName());
-      List<TestlinkTags> scenarioTags = TagsReader.readTags(scenario.getTags());
-      if (defaultTags.size() != 0 || scenarioTags.size() != 0) {
-        List<String[]> steps = readSteps(scenario.getSteps());
-        tempSteps.addAll(steps);
-        TestlinkTags tagsToUse = chooseTag(defaultTags, scenarioTags);
-        //kalo di scenario gaada maka pake yg default
-        tempData.setTestlinkTags(tagsToUse);
-      }
-      tempData.setReasonFail(data.getReasonFail());
-      if (tempData.getPassed())
-        tempData.setPassed(data.getPassed());
-      scenarioOutlineData.put(scenario.getName(), tempData);
-      scenarioOutlineSteps.put(scenario.getName(), tempSteps);
-    });
+  private void processFeature(CucumberModel feature) {
+    System.out.println("Checking features " + feature.getName());
+    //get default testsuiteid or test case id
+    List<TestlinkTags> defaultTags = TagsReader.readTags(feature.getTags());
 
-    scenarioOutlineData.forEach((key, value) -> {
-      if (value.getPassed()) {
-        passed.getAndSet(passed.get() + 1);
-      } else {
-        failed.getAndSet(failed.get() + 1);
-      }
-      data.setPassed(value.getPassed());
-      data.setReasonFail(value.getReasonFail());
-      data.setName(value.getName());
-      data.setTestlinkTags(value.getTestlinkTags());
-      updateTestlink(scenarioOutlineSteps.get(key));
-    });
+    //read background steps
+    data = new ScenarioData();
+    List<String[]> background = new ArrayList<>();
+    feature.getElements()
+        .parallelStream()
+        .filter(ft -> ft.getKeyword().equalsIgnoreCase("Background"))
+        .findFirst()
+        .ifPresent(b -> {
+          background.addAll(readSteps(b.getSteps()));
+        });
+
+    readCucumberSteps(defaultTags, feature, background);
+    System.out.println(String.format("\nSummary: %d passed and %d failed",
+        passed.get(),
+        failed.get()));
+  }
+
+  private void readCucumberSteps(List<TestlinkTags> defaultTags,
+      CucumberModel feature,
+      List<String[]> background) {
+    final String type = "scenario";
+    Map<String, List<String[]>> scenarioOutlineSteps = new ConcurrentHashMap<>();
+    Map<String, ScenarioData> scenarioOutlineData = new ConcurrentHashMap<>();
+
+    //loop per scenario outline
+    //filter to get element with keyword scenario only
+    feature.getElements()
+        .parallelStream()
+        .filter(ft -> ft.getType().equalsIgnoreCase(type) && (defaultTags.size() > 0
+            || TagsReader.readTags(ft.getTags()).size() > 0))
+        .forEach(scenario -> {
+          if (!scenarioOutlineSteps.containsKey(scenario.getName())) {
+            List<String[]> steps = new ArrayList<>();
+            steps.addAll(0, background);
+            ScenarioData data = new ScenarioData();
+            data.setName(scenario.getName());
+            scenarioOutlineSteps.put(scenario.getName(), steps);
+            scenarioOutlineData.put(scenario.getName(), data);
+          }
+          ScenarioData tempData = scenarioOutlineData.get(scenario.getName());
+          List<String[]> tempSteps = scenarioOutlineSteps.get(scenario.getName());
+          List<TestlinkTags> scenarioTags = TagsReader.readTags(scenario.getTags());
+          List<String[]> steps = readSteps(scenario.getSteps());
+          tempSteps.addAll(steps);
+          TestlinkTags tagsToUse = chooseTag(defaultTags, scenarioTags);
+          //kalo di scenario gaada maka pake yg default
+          tempData.setTestlinkTags(tagsToUse);
+          tempData.setDuration(scenario.getSteps()
+              .stream()
+              .mapToDouble(e -> (int) (e.getResult().getDuration().getTime() / 1000000000.0))
+              .sum());
+          Optional<String> reason =
+              steps.stream().filter(a -> !a[3].trim().isEmpty()).findFirst().map(b -> b[3]);
+          if (reason.isPresent()) {
+            tempData.setReasonFail(reason.get());
+            tempData.setPassed(false);
+          } else {
+            tempData.setReasonFail("");
+            tempData.setPassed(true);
+          }
+          scenarioOutlineData.put(scenario.getName(), tempData);
+          scenarioOutlineSteps.put(scenario.getName(), tempSteps);
+        });
+
+    String summary = String.format("Feature : %s, %s", feature.getName(), feature.getDescription());
+    scenarioOutlineData.entrySet()
+        .parallelStream()
+        .forEach(entry -> updateTestlink(entry.getValue().getName(),
+            scenarioOutlineSteps.getOrDefault(entry.getKey(), null),
+            entry.getValue().getTestlinkTags().getTestSuiteId(),
+            entry.getValue().getTestlinkTags().getTestLinkId(),
+            entry.getValue().getPassed(),
+            summary,
+            entry.getValue().getDuration().intValue(),
+            //current api cannot set below 1 minute,
+            // this will only make effect if the execution time is greater than 1 min
+            // So we try to insert the value in the amount of seconds instead of minutes
+            // For that, you may want to divide the Exec (min) by 60.0.
+            entry.getValue().getReasonFail()));
   }
 
   private TestlinkTags chooseTag(List<TestlinkTags> feature, List<TestlinkTags> scenario) {
@@ -374,16 +370,29 @@ public class TestResultReader {
     return tagsToUse;
   }
 
-  private void updateTestlink(ArrayList<String[]> testCaseSteps) {
-    printDetail(testCaseSteps);
+  private void updateTestlink(String title,
+      List<String[]> testCaseSteps,
+      String testSuiteId,
+      String testLinkId,
+      boolean status,
+      String summary,
+      Integer duration,
+      String notes) {
     try {
-      plugin.setJudul(data.getName());
-      plugin.setTestSuiteID(Integer.parseInt(data.getTestlinkTags().getTestSuiteId()));
-      plugin.linkTestCases(data.getTestlinkTags().getTestLinkId(), testCaseSteps);
-      if (data.getPassed()) {
-        plugin.updateTestcasePassed();
+
+      TestLinkPlugin plugin =
+          new TestLinkPlugin(connection, testProject, testPlan, build, platFormName).setSummary(
+              summary).setTitle(title).setTestSuiteID(Integer.parseInt(testSuiteId));
+      plugin.linkTestCases(testLinkId,
+          testCaseSteps,
+          status,
+          notes,
+          duration,
+          printDetail(null, title, status, notes, testSuiteId, testLinkId));
+      if (status) {
+        passed.getAndSet(passed.get() + 1);
       } else {
-        plugin.updateTestcaseFail(data.getReasonFail());
+        failed.getAndSet(failed.get() + 1);
       }
     } catch (Exception e) {
       e.printStackTrace();
@@ -399,15 +408,12 @@ public class TestResultReader {
     String status = String.valueOf(step.getResult().getStatus().equalsIgnoreCase("passed"));
     String errorMessage =
         step.getResult().getErrorMessage() == null ? "" : step.getResult().getErrorMessage();
-    if (!step.getResult().getStatus().equalsIgnoreCase("passed") && data.getPassed()) {
-      data.setPassed(false);
-      data.setReasonFail(String.format("This Test Case Failed on step %s, Log:\n%s",
-          counter + 1,
-          step.getResult().getErrorMessage()));
-    } else if (data.getPassed()) {
-      data.setReasonFail("");
+    String notes = "";
+    if (!step.getResult().getStatus().equalsIgnoreCase("passed")) {
+      notes =
+          String.format("This Test Case Failed on step %s, Log:\n%s", counter + 1, errorMessage);
     }
-    return new String[] {stepDefinition, status, errorMessage};
+    return new String[] {stepDefinition, status, errorMessage, notes};
   }
 
   private List<String[]> readSteps(List<Step> steps) {
@@ -470,19 +476,37 @@ public class TestResultReader {
     return addedRow.toString();
   }
 
-  private void printDetail(ArrayList<String[]> steps) {
-    System.out.println("================================================");
-    System.out.println("Title\t\t: " + data.getName());
-    System.out.println("Passed\t\t: " + data.getPassed());
-    System.out.println("Reason Fail\t: " + data.getReasonFail());
-    System.out.println("TestSuiteId\t: " + data.getTestlinkTags().getTestSuiteId());
-    System.out.println("TestLinkId\t: " + data.getTestlinkTags().getTestLinkId());
-
-    System.out.println("Steps:");
-    steps.forEach(step -> {
-      System.out.println(step[0]);
-    });
-    System.out.println("================================================");
+  private String printDetail(List<String[]> steps,
+      String title,
+      boolean status,
+      String notes,
+      String testSuiteId,
+      String testlinkId) {
+    StringBuilder builder = new StringBuilder();
+    builder.append("\n================================================\n")
+        .append("Title\t\t: ")
+        .append(title)
+        .append("\n")
+        .append("Passed\t\t: ")
+        .append(status)
+        .append("\n")
+        .append("Reason Fail\t: ")
+        .append(notes)
+        .append("\n")
+        .append("TestSuiteId\t: ")
+        .append(testSuiteId)
+        .append("\n")
+        .append("TestLinkId\t: ")
+        .append(testlinkId)
+        .append("\n");
+    if (steps != null && !steps.isEmpty()) {
+      builder.append("Steps\t\t:\n");
+      steps.forEach(step -> {
+        builder.append(String.format("%s\n", step[0]));
+      });
+    }
+    builder.append("================================================\n");
+    return builder.toString();
   }
 
   /**
@@ -549,38 +573,44 @@ public class TestResultReader {
     String stepName = testResult.getTestName();
 
     //set step
-    String pass = testResult.getTestStatus().equalsIgnoreCase("success") ? "true" : "false";
-    String[] step = {stepName, pass, ""};
+    Boolean pass = testResult.getTestStatus().equalsIgnoreCase("success");
+    String[] step = {stepName, pass.toString(), ""};
     steps.add(step);
 
     //set data
     data = new ScenarioData();
-    data.setPassed(Boolean.parseBoolean(pass));
-    data.setReasonFail(Boolean.parseBoolean(pass) ? "" : "Failing on step " + stepName);
+    data.setPassed(pass);
+    data.setReasonFail(pass ? "" : "Failing on step " + stepName);
     data.setName(stepName);
     TestlinkTags tag = new TestlinkTags();
     tag.setTestSuiteId(testSuiteId);
     data.setTestlinkTags(tag);
 
-    printDetail(steps);
+    System.out.println(printDetail(steps,
+        stepName,
+        pass,
+        data.getReasonFail(),
+        testSuiteId,
+        tag.getTestLinkId()));
     try {
-      plugin.setTestSuiteID(Integer.parseInt(testSuiteId));
-      plugin.setJudul(testResult.getTestName());
-      plugin.linkTestCases(tag.getTestLinkId(), steps);
-
-      if (Boolean.parseBoolean(pass)) {
-        plugin.updateTestcasePassed();
-      } else {
-        plugin.updateTestcaseFail("");
-      }
+      TestLinkPlugin plugin =
+          new TestLinkPlugin(connection, testProject, testPlan, build, platFormName).setSummary(
+              String.format("Feature : %s", data.getName()))
+              .setTitle(data.getName())
+              .setTestSuiteID(Integer.parseInt(testSuiteId));
+      plugin.linkTestCases(tag.getTestLinkId(),
+          steps,
+          data.getPassed(),
+          data.getReasonFail(),
+          null,
+          "");
     } catch (Exception e) {
       e.printStackTrace();
     }
   }
 
-  private TLPlugin startTLPlugin() throws Exception {
-    plugin = TLPlugin.getInstance();
-    plugin.initializeTLPlugin(urlTestlink, DEVKEY, testProject, testPlan, build, platFormName);
-    return plugin;
+  private TestLinkAPI connectToTestlink() throws Exception {
+    return TestLinkConnectionController.getInstance().
+        setUrlTestlink(urlTestlink).setDevKey(DEVKEY).connect();
   }
 }

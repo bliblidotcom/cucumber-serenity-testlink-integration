@@ -673,7 +673,7 @@
           {
             "result": {
               "duration": 4817300,
-              "status": "passed"
+              "status": "failed"
             },
             "line": 54,
             "name": "API assign previous response data to data",
@@ -1311,7 +1311,7 @@
               "status": "passed"
             },
             "line": 152,
-            "name": "[x-member] start kafka producer for quest",
+            "name": "[x-member] change start kafka producer for quest",
             "match": {
               "arguments": [
                 {
@@ -1329,7 +1329,7 @@
               "status": "passed"
             },
             "line": 153,
-            "name": "[x-member] ubah send kafka message to topic \"recovery_account_granted\" with data \"request($[\u0027recoveryAccount\u0027][0])\"",
+            "name": "[x-member] send kafka message to topic \"recovery_account_granted\" with data \"request($[\u0027recoveryAccount\u0027][0])\"",
             "match": {
               "arguments": [
                 {

@@ -25,7 +25,7 @@ public class CustomTestlinkService {
     public Execution getLastExecutionResultByBuild(Integer testPlanId, Integer testCaseId, Integer testCaseExternalId , Integer testBuildId) throws TestLinkAPIException {
         Execution execution = null;
         try {
-            Map<String, Object> executionData = new HashMap();
+            Map<String, Object> executionData = new HashMap<>();
             executionData.put(TestLinkParams.TEST_PLAN_ID.toString(), testPlanId);
             executionData.put(TestLinkParams.TEST_CASE_ID.toString(), testCaseId);
             executionData.put(TestLinkParams.TEST_CASE_EXTERNAL_ID.toString(), testCaseExternalId);
@@ -33,7 +33,7 @@ public class CustomTestlinkService {
             Object response = testLinkAPI.executeXmlRpcCall(TestLinkMethods.GET_LAST_EXECUTION_RESULT.toString(), executionData);
             Object[] responseArray = Util.castToArray(response);
             Map<String, Object> responseMap = (Map)responseArray[0];
-            if (responseMap instanceof Map && responseMap.size() > 0) {
+            if (responseMap != null && !responseMap.isEmpty()) {
                 execution = Util.getExecution(responseMap);
             }
 

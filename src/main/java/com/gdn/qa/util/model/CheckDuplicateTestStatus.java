@@ -1,0 +1,11 @@
+package com.gdn.qa.util.model;
+
+/**
+ * @author yunaz.ramadhan on 1/30/2020
+ */
+public enum CheckDuplicateTestStatus {
+  STEPS_CHANGED,
+  STEPS_ADDED,
+  NEW_TEST_CASE,
+  EXISTING_TEST_CASE
+}
