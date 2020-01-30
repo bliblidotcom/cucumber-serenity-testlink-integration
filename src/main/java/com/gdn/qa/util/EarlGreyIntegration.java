@@ -7,27 +7,26 @@ import com.gdn.qa.util.service.Utils;
  * Created by tri.abror on 2/28/2019.
  */
 public class EarlGreyIntegration {
-  public static void main(String[] args) throws InterruptedException{
+  public static void main(String[] args) throws InterruptedException {
     Utils utils = new Utils();
     EGConstant.printTitle();
 
-    try{
+    try {
       EGConstant.readFromArgs(utils.getAllArgs(args));
       EGConstant.initializeTestlinkSetting();
-    }catch (Exception e){
+    } catch (Exception e) {
       e.printStackTrace();
       System.exit(1);
     }
 
     TestResultReader testResultReader = new TestResultReader();
-    testResultReader.initialize(EGConstant.TESTLINK_URL,
-        EGConstant.DEV_KEY,
-        EGConstant.PROJECT_NAME,
-        EGConstant.TESTPLAN_NAME,
-        EGConstant.BUILD_NAME,
-        "");
-
     try {
+      testResultReader.initialize(EGConstant.TESTLINK_URL,
+          EGConstant.DEV_KEY,
+          EGConstant.PROJECT_NAME,
+          EGConstant.TESTPLAN_NAME,
+          EGConstant.BUILD_NAME,
+          "");
       testResultReader.readWithEarlGrey(EGConstant.JSON);
     } catch (Exception e) {
       e.printStackTrace();

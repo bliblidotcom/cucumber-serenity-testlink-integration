@@ -8,6 +8,7 @@ import com.gdn.qa.util.model.earlgrey.EarlGreyModel;
 import com.gdn.qa.util.model.earlgrey.Subtest2;
 import com.gdn.qa.util.model.earlgrey.Subtest3;
 import com.gdn.qa.util.model.earlgrey.TestResult;
+import org.apache.commons.text.StringEscapeUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -17,9 +18,13 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class TestResultReader {
   private static String DEFAULT_ID_TEST_LINK = "414";
@@ -39,19 +44,21 @@ public class TestResultReader {
   private String DEVKEY = "1cc94be3bb2e1c3e069fa67f7e9a24e1";
   //Enter your Test Link URL here
   private String urlTestlink = "http://172.17.21.92/testlink/lib/api/xmlrpc/v1/xmlrpc.php";
+  private TLPlugin plugin;
 
   public void initialize(String testLinkURL,
       String testLinkDevKey,
       String testLinkProjectName,
       String testLinkPlanName,
       String testLinkBuildName,
-      String testLinkPlatFormName) {
+      String testLinkPlatFormName) throws Exception {
     urlTestlink = testLinkURL;
     DEVKEY = testLinkDevKey;
     testProject = testLinkProjectName;
     testPlan = testLinkPlanName;
     build = testLinkBuildName;
     platFormName = testLinkPlatFormName;
+    startTLPlugin();
   }
 
 
@@ -65,17 +72,18 @@ public class TestResultReader {
     File folder = new File(parentDirectory + "/jbehave");
     File[] listOfFiles = folder.listFiles();
 
-    for (int i = 0; i < listOfFiles.length; i++) {
-      if (listOfFiles[i].isFile()) {
-        String filePath = folder.getPath() + "/" + listOfFiles[i].getName();
-        System.out.println("File " + filePath);
-        if (filePath.contains(".xml") && !filePath.contains("AfterStories") && !filePath.contains(
-            "BeforeStories")) {
-          readXML(filePath);
+    if (listOfFiles != null) {
+      for (File listOfFile : listOfFiles) {
+        if (listOfFile.isFile()) {
+          String filePath = folder.getPath() + "/" + listOfFile.getName();
+          System.out.println("File " + filePath);
+          if (filePath.contains(".xml") && !filePath.contains("AfterStories") && !filePath.contains(
+              "BeforeStories")) {
+            readXML(filePath);
+          }
         }
       }
     }
-
   }
 
 
@@ -212,36 +220,27 @@ public class TestResultReader {
       }
 
       /// Add Test Suite ID
-      TLPlugin testLinkPlugin = new TLPlugin();
       if (result.get("PreConditions") != null) {
-        testLinkPlugin.setPreCondition(result.get("PreConditions"));
+        plugin.setPreCondition(result.get("PreConditions"));
       }
       if (result.get("Title") != null) {
-        testLinkPlugin.setpTitle(result.get("Title"));
+        plugin.setpTitle(result.get("Title"));
       }
 
       if (result.get("Summary") != null) {
-        testLinkPlugin.setSummary(result.get("Summary"));
+        plugin.setSummary(result.get("Summary"));
       } else {
-        testLinkPlugin.setSummary(result.get("Title"));
+        plugin.setSummary(result.get("Title"));
       }
 
-      testLinkPlugin.TLPluginInitialize(result.get("testLinkID"),
-          testCaseSteps,
-          Integer.parseInt(result.get("TestSuiteID")),
-          title,
-          urlTestlink,
-          DEVKEY,
-          testProject,
-          testPlan,
-          build,
-          platFormName);
+      plugin.setJudul(title);
+      plugin.setTestSuiteID(Integer.parseInt(result.get("TestSuiteID")));
+      plugin.linkTestCases(result.get("testLinkID"), testCaseSteps);
 
       if (passed) {
-        testLinkPlugin.updateTestcasePassed();
+        plugin.updateTestcasePassed();
       } else {
-        testLinkPlugin.updateTestcaseFail("");
-        System.out.println("Ini Gagal");
+        plugin.updateTestcaseFail("");
       }
     } catch (Exception e) {
       e.printStackTrace();
@@ -257,7 +256,7 @@ public class TestResultReader {
    */
   public void readWithCucumber(String cucumberJsonPath) throws Exception {
     ObjectMapper objectMapper = new ObjectMapper();
-    if (cucumberJsonPath == "" || cucumberJsonPath.isEmpty()) {
+    if (cucumberJsonPath.equals("") || cucumberJsonPath.isEmpty()) {
       cucumberJsonPath = System.getProperty("user.dir") + "/target/destination/cucumber.json";
       //            cucumberJsonPath = System.getProperty("user.dir") + "/main/resource/cucumber3.json";
     }
@@ -286,6 +285,9 @@ public class TestResultReader {
             background.addAll(readSteps(b.getSteps()));
           });
       this.tempResult = data.getPassed();
+      plugin.setSummary(String.format("Feature : %s\n\t%s",
+          feature.getName(),
+          feature.getDescription()));
       readCucumberSteps("scenario", defaultTags, feature, background);
       readCucumberSteps("Scenario Outline", defaultTags, feature, background);
       System.out.println(String.format("\nSummary: %d passed and %d failed",
@@ -319,7 +321,7 @@ public class TestResultReader {
       ArrayList<String[]> tempSteps = scenarioOutlineSteps.get(scenario.getName());
       List<TestlinkTags> scenarioTags = TagsReader.readTags(scenario.getTags());
       if (defaultTags.size() != 0 || scenarioTags.size() != 0) {
-        ArrayList<String[]> steps = readSteps(scenario.getSteps());
+        List<String[]> steps = readSteps(scenario.getSteps());
         tempSteps.addAll(steps);
         TestlinkTags tagsToUse = chooseTag(defaultTags, scenarioTags);
         //kalo di scenario gaada maka pake yg default
@@ -342,7 +344,6 @@ public class TestResultReader {
       data.setReasonFail(value.getReasonFail());
       data.setName(value.getName());
       data.setTestlinkTags(value.getTestlinkTags());
-      printDetail(scenarioOutlineSteps.get(key));
       updateTestlink(scenarioOutlineSteps.get(key));
     });
   }
@@ -353,16 +354,14 @@ public class TestResultReader {
     //kalo di scenario gaada maka pake yg default
     if (scenario.size() == 0) {
       tagsToUse = feature.get(0);
-    } else if (scenario.size() != 0 && feature.size() != 0) {
+    } else if (feature.size() != 0) {
       //must filter because inherit tags
       List<TestlinkTags> tagsft = scenario.stream().filter(t -> {
         if (t.getTestLinkId().equalsIgnoreCase(feature.get(0).getTestLinkId()) && !t.getTestLinkId()
             .isEmpty())
           return false;
-        if (t.getTestSuiteId().equalsIgnoreCase(feature.get(0).getTestSuiteId())
-            && !t.getTestSuiteId().equals("0"))
-          return false;
-        return true;
+        return !t.getTestSuiteId().equalsIgnoreCase(feature.get(0).getTestSuiteId())
+            || t.getTestSuiteId().equals("0");
       }).collect(Collectors.toList());
       if (tagsft.size() == 0) {
         tagsToUse = feature.get(0);
@@ -376,62 +375,99 @@ public class TestResultReader {
   }
 
   private void updateTestlink(ArrayList<String[]> testCaseSteps) {
-    TLPlugin testLinkPlugin = new TLPlugin();
+    printDetail(testCaseSteps);
     try {
-      testLinkPlugin.TLPluginInitialize(data.getTestlinkTags().getTestLinkId(),
-          testCaseSteps,
-          Integer.parseInt(data.getTestlinkTags().getTestSuiteId()),
-          data.getName(),
-          urlTestlink,
-          DEVKEY,
-          testProject,
-          testPlan,
-          build,
-          platFormName);
+      plugin.setJudul(data.getName());
+      plugin.setTestSuiteID(Integer.parseInt(data.getTestlinkTags().getTestSuiteId()));
+      plugin.linkTestCases(data.getTestlinkTags().getTestLinkId(), testCaseSteps);
+      if (data.getPassed()) {
+        plugin.updateTestcasePassed();
+      } else {
+        plugin.updateTestcaseFail(data.getReasonFail());
+      }
     } catch (Exception e) {
       e.printStackTrace();
     }
-    if (data.getPassed()) {
-      testLinkPlugin.updateTestcasePassed();
-    } else {
-      testLinkPlugin.updateTestcaseFail(data.getReasonFail());
-    }
   }
 
-  private ArrayList<String[]> readSteps(List<Step> steps) {
-    ArrayList<String[]> testCaseSteps = new ArrayList<>();
-    AtomicReference<Integer> counter = new AtomicReference<>(1);
-    steps.forEach(step -> {
-      String[] stepsResult = {step.getKeyword() + step.getName() + (getRowStep(step.getRows())),
-          Boolean.toString((step.getResult().getStatus().equalsIgnoreCase("passed")) ?
-              true :
-              false),
-          (step.getResult().getErrorMessage() == null) ? "" : step.getResult().getErrorMessage()};
-      if (!step.getResult().getStatus().equalsIgnoreCase("passed") && data.getPassed()) {
-        data.setPassed(false);
-        data.setReasonFail(
-            "This Test Case Failed on step " + counter.get() + ",Log: \n" + step.getResult()
-                .getErrorMessage());
-      } else if (data.getPassed()) {
-        data.setReasonFail("");
+  private String[] constructStep(Step step, int counter) {
+    String additionalInfo = step.getRows() == null ?
+        step.getDocString() == null ? "" : "\n" + step.getDocString().getValue() + "\n" :
+        getRowStep(step.getRows());
+    String stepDefinition =
+        String.format("%s%s %s", step.getKeyword(), step.getName(), additionalInfo);
+    String status = String.valueOf(step.getResult().getStatus().equalsIgnoreCase("passed"));
+    String errorMessage =
+        step.getResult().getErrorMessage() == null ? "" : step.getResult().getErrorMessage();
+    if (!step.getResult().getStatus().equalsIgnoreCase("passed") && data.getPassed()) {
+      data.setPassed(false);
+      data.setReasonFail(String.format("This Test Case Failed on step %s, Log:\n%s",
+          counter + 1,
+          step.getResult().getErrorMessage()));
+    } else if (data.getPassed()) {
+      data.setReasonFail("");
+    }
+    return new String[] {stepDefinition, status, errorMessage};
+  }
+
+  private List<String[]> readSteps(List<Step> steps) {
+    return IntStream.range(0, steps.size())
+        .parallel()
+        .mapToObj(counter -> constructStep(steps.get(counter), counter))
+        .collect(Collectors.toList());
+  }
+
+  private String constructTableHeader(String[] headers) {
+    StringBuilder headerRow = new StringBuilder();
+    if (headers != null) {
+      headerRow.append("<tr>");
+      for (String header : headers) {
+        headerRow.append(String.format("<th>%s</th>", StringEscapeUtils.escapeHtml4(header)));
       }
-      counter.set(counter.get() + 1);
-      testCaseSteps.add(stepsResult);
-    });
-    return testCaseSteps;
+      headerRow.append("</tr>");
+    }
+
+    return headerRow.toString();
+  }
+
+  private String constructTableRow(String[] rows, int columnLength) {
+    StringBuilder headerRow = new StringBuilder();
+    if (rows != null) {
+      headerRow.append("<tr>");
+      columnLength = columnLength <= 0 ? rows.length : columnLength;
+      for (int col = 0; col < columnLength; col++) {
+        if (col < rows.length) {
+          headerRow.append(String.format("<td>%s</td>", StringEscapeUtils.escapeHtml4(rows[col])));
+        } else {
+          headerRow.append("<td></td>");
+        }
+      }
+      headerRow.append("</tr>");
+    }
+
+    return headerRow.toString();
   }
 
   private String getRowStep(Rows[] rows) {
     StringBuilder addedRow = new StringBuilder();
-    if (rows != null) {
-      for (Rows eachRow : rows) {
-        if (eachRow != null) {
-          addedRow.append("<br>" + Arrays.toString(eachRow.getCells()));
+    try {
+      if (rows != null) {
+        int columnLength = rows[0].getCells().length;
+        addedRow.append("<br><table>");
+        for (int index = 0; index < rows.length; index++) {
+          if (index == 0) {
+            addedRow.append(constructTableHeader(rows[index].getCells()));
+          } else {
+            Rows row = rows[index];
+            addedRow.append(constructTableRow(row.getCells(), columnLength));
+          }
         }
+        addedRow.append("</table><br>");
       }
-      return addedRow.toString();
+    } catch (Exception ignore) {
+
     }
-    return "";
+    return addedRow.toString();
   }
 
   private void printDetail(ArrayList<String[]> steps) {
@@ -483,18 +519,18 @@ public class TestResultReader {
             results.add(tr);
           }
           String testSuiteId = test2.getTestName().split("_")[2];
-          if(test.get(testSuiteId) == null) {
+          if (test.get(testSuiteId) == null) {
             test.put(testSuiteId, results);
-          }else {
+          } else {
             List<TestResult> combineResult = test.get(testSuiteId);
             combineResult.addAll(results);
             test.put(testSuiteId, combineResult);
           }
         }
         try {
-          test.entrySet().stream().forEach(v -> {
-            v.getValue().stream().forEach(t -> {
-              System.out.println("");
+          test.entrySet().forEach(v -> {
+            v.getValue().forEach(t -> {
+              System.out.println();
               System.out.println("Reading test step...");
               updateTestlinkEarlGrey(v.getKey(), t);
             });
@@ -509,7 +545,6 @@ public class TestResultReader {
   }
 
   public void updateTestlinkEarlGrey(String testSuiteId, TestResult testResult) {
-    TLPlugin testLinkPlugin = new TLPlugin();
     ArrayList<String[]> steps = new ArrayList<>();
     String stepName = testResult.getTestName();
 
@@ -529,23 +564,23 @@ public class TestResultReader {
 
     printDetail(steps);
     try {
-      testLinkPlugin.TLPluginInitialize("",
-          steps,
-          Integer.parseInt(testSuiteId),
-          testResult.getTestName(),
-          urlTestlink,
-          DEVKEY,
-          testProject,
-          testPlan,
-          build,
-          platFormName);
+      plugin.setTestSuiteID(Integer.parseInt(testSuiteId));
+      plugin.setJudul(testResult.getTestName());
+      plugin.linkTestCases(tag.getTestLinkId(), steps);
+
+      if (Boolean.parseBoolean(pass)) {
+        plugin.updateTestcasePassed();
+      } else {
+        plugin.updateTestcaseFail("");
+      }
     } catch (Exception e) {
-      System.out.println(e.getMessage());
+      e.printStackTrace();
     }
-    if (Boolean.parseBoolean(pass)) {
-      testLinkPlugin.updateTestcasePassed();
-    } else {
-      testLinkPlugin.updateTestcaseFail("");
-    }
+  }
+
+  private TLPlugin startTLPlugin() throws Exception {
+    plugin = TLPlugin.getInstance();
+    plugin.initializeTLPlugin(urlTestlink, DEVKEY, testProject, testPlan, build, platFormName);
+    return plugin;
   }
 }

@@ -12,8 +12,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CustomTestlinkService {
+    private TestLinkAPI testLinkAPI;
 
-    TestLinkAPI testLinkAPI;
+    public TestLinkAPI getTestLinkAPI() {
+        return testLinkAPI;
+    }
 
     public CustomTestlinkService(TestLinkAPI testLinkAPI) {
         this.testLinkAPI = testLinkAPI;
