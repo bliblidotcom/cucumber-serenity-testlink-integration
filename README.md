@@ -92,7 +92,7 @@ Feature: LookUp A Definition
     Then they should see the definition 'A common, round fruit produced by the tree Malus domestica, cultivated in temperate climates.'
 ```
 
-It will Update Execution ***result only*** without modify your testcase
+It will Update Execution ***result only*** without modify your testcase in your testcase with ID **BLIBLI-123**
 
 #### Running Test And Updating Result
 
