@@ -108,11 +108,7 @@ public class TestLinkPlugin {
   }
 
   public TestLinkPlugin setTestSuiteID(int testSuiteID) {
-    if (testSuiteID < 0) {
-      this.testSuiteID = 414;
-    } else {
-      this.testSuiteID = testSuiteID;
-    }
+    this.testSuiteID = testSuiteID;
     return this;
   }
 
@@ -122,10 +118,10 @@ public class TestLinkPlugin {
       String notes,
       Integer duration,
       String detailToPrint) throws Exception {
-    if (!testLinkID.isEmpty()) {
+    if(testLinkID != null || testLinkID.trim().equals("")) {
       testCases = this.connection.getTestCaseByExternalId(testLinkID, null);
-    } else {
-      createTestCase(steps);
+    }else {
+      tryToUpdateTestCase(steps, status);
     }
     tcExternalID = testCases.getId();
     tcInternalID = testCases.getInternalId();
@@ -136,7 +132,7 @@ public class TestLinkPlugin {
         testCases.getVersion(),
         null,
         testCases.getOrder(),
-        null);
+        1);
     String finalNotes;
     if (status) {
       finalNotes = notes.trim().isEmpty() ? "This test case was executed using automation" : notes;
@@ -147,14 +143,13 @@ public class TestLinkPlugin {
     ReportTCResultResponse reportTCResponse = status ?
         updateStatus(ExecutionStatus.PASSED, stepResults, finalNotes, duration) :
         updateStatus(ExecutionStatus.FAILED, stepResults, finalNotes, duration);
-
     System.out.print(detailToPrint);
     switch (duplicateTestStatus) {
-      case STEPS_ADDED:
-        System.out.println("Test case's steps added changed, updating to new version.....");
-        break;
       case EXISTING_TEST_CASE:
-        System.out.println("Test case not changed, updating the result.....");
+        System.out.println("Test case not changed, updating execution result.....");
+        break;
+      case STEPS_ADDED:
+        System.out.println("Test case's steps added, updating to new version.....");
         break;
       case STEPS_CHANGED:
         System.out.println("Test case's steps changed, updating to new version.....");
@@ -172,27 +167,6 @@ public class TestLinkPlugin {
       List<TestCaseStepResult> result,
       String notes,
       Integer duration) {
-    Execution lastExecution = null;
-    try {
-      lastExecution = this.connection.getLastExecutionResult(tpID.getId(),
-          tcExternalID,
-          tcInternalID.toString(),
-          null,
-          platFormName,
-          buildId,
-          buildName,
-          null);
-    } catch (Exception ignored) {
-
-    }
-    if (lastExecution != null) {
-      if(lastExecution.getBuildId().equals(buildId)) {
-        System.out.println("Found Last Execution Status");
-        System.out.println("Build ID : \t" + lastExecution.getBuildId());
-        this.connection.deleteExecution(lastExecution.getId());
-      }
-    }
-
     return this.connection.reportTCResult(tcExternalID,
         tcInternalID,
         tpID.getId(),
@@ -226,14 +200,14 @@ public class TestLinkPlugin {
         result.setResult(ExecutionStatus.PASSED);
       }
       if (fail) {
-        result.setResult(ExecutionStatus.NOT_RUN);
+        result.setResult(ExecutionStatus.BLOCKED);
       }
       results.add(result);
     }
     return results;
   }
 
-  private void createTestCase(List<String[]> steps) throws Exception {
+  private void tryToUpdateTestCase(List<String[]> steps, boolean status) throws Exception {
     //// Create Test Steps
     List<TestCaseStep> testCaseSteps = new ArrayList<>();
     for (int i = 0; i < steps.size(); i++) {
@@ -258,9 +232,8 @@ public class TestLinkPlugin {
     a.add(testSuiteID);
     TestSuite[] testSuiteTemp = this.connection.getTestSuiteByID(a);
     // Checking duplucate
-    testCases =
-        searchTestStepDuplicate(title, testProject, testSuiteTemp[0].getName(), testCaseSteps);
-    if (testCases == null) {
+    testCases = getTestCaseChanges(title, testProject, testSuiteTemp[0].getName(), testCaseSteps);
+    if (duplicateTestStatus.equals(CheckDuplicateTestStatus.NEW_TEST_CASE)) {
       testCases = this.connection.createTestCase(title,
           testSuiteID,
           projectID,
@@ -275,6 +248,17 @@ public class TestLinkPlugin {
           1,
           true,
           ActionOnDuplicate.CREATE_NEW_VERSION);
+    } else if (duplicateTestStatus.equals(CheckDuplicateTestStatus.STEPS_ADDED)
+        || duplicateTestStatus.equals(CheckDuplicateTestStatus.STEPS_CHANGED)
+        || testCases.getExecutionStatus().equals(ExecutionStatus.NOT_RUN)) {
+      testCases.setSteps(testCaseSteps);
+      testCases.setExecutionType(ExecutionType.AUTOMATED);
+      testCases.setTestImportance(TestImportance.MEDIUM);
+      testCases.setPreconditions(preCondition);
+      testCases.setSummary(summary);
+      testCases.setTestCaseStatus(TestCaseStatus.FINAL);
+      testCases.setExecutionStatus(status ? ExecutionStatus.PASSED : ExecutionStatus.FAILED);
+      this.connection.updateTestCase(testCases);
     }
   }
 
@@ -287,12 +271,12 @@ public class TestLinkPlugin {
    * @param tsInputted      test step yang diinputkan oleh usser
    * @return bila duplicate akan return object testCase , bila belum ada akan mengembalikan null
    */
-  public TestCase searchTestStepDuplicate(String title,
+  public TestCase getTestCaseChanges(String title,
       String testProjectName,
       String testSuiteName,
       List<TestCaseStep> tsInputted) throws Exception {
     // 1 Get data from server
-    Integer idtcServer;
+    Integer idtcServer = null;
     // check caracter length
     if (title.length() > MAX_LENGTH_TESTLINK)
       throw new Exception("Please Shorten your title , " + title + " it's should have maximum "
@@ -305,34 +289,38 @@ public class TestLinkPlugin {
         throw new Exception("Premature file , Testcase " + title + " will be skipped");
       } else {
         duplicateTestStatus = CheckDuplicateTestStatus.NEW_TEST_CASE;
+        return null;
       }
-      return null;
     }
 
-    TestCase tcServer = this.connection.getTestCase(idtcServer, null, null);
-    // Compare data
-    List<TestCaseStep> tsServers = tcServer.getSteps();
-    //// Compare Title
-    if (!title.substring(0, (tcServer.getName().length()))
-        .equals(tcServer.getName())) { // Jika tidak sama langsung return false
-      duplicateTestStatus = CheckDuplicateTestStatus.NEW_TEST_CASE;
-      return null;
-    } else { // Jika sama lanjutkan pengecekan
-      if (tsServers.size() != tsInputted.size()) { // jika ukuran tidak sama langsung lewati
-        duplicateTestStatus = CheckDuplicateTestStatus.STEPS_ADDED;
+    if (idtcServer != null) {
+      TestCase tcServer = this.connection.getTestCase(idtcServer, null, null);
+      // Compare data
+      List<TestCaseStep> tsServers = tcServer.getSteps();
+      //// Compare Title
+      if (!title.substring(0, (tcServer.getName().length()))
+          .equals(tcServer.getName())) { // Jika tidak sama langsung return false
+        duplicateTestStatus = CheckDuplicateTestStatus.NEW_TEST_CASE;
         return null;
-      } else { // jika Ukuran sama lanjutkan pengecekan
-        List<String> actual =
-            tsServers.stream().map(TestCaseStep::getActions).collect(Collectors.toList());
-        List<String> expected =
-            tsInputted.stream().map(TestCaseStep::getActions).collect(Collectors.toList());
-        if (!actual.equals(expected)) {
-          duplicateTestStatus = CheckDuplicateTestStatus.STEPS_CHANGED;
-          return null;
+      } else { // Jika sama lanjutkan pengecekan
+        if (tsServers.size() != tsInputted.size()) { // jika ukuran tidak sama langsung lewati
+          duplicateTestStatus = CheckDuplicateTestStatus.STEPS_ADDED;
+          return tcServer;
+        } else { // jika Ukuran sama lanjutkan pengecekan
+          List<String> actual =
+              tsServers.stream().map(TestCaseStep::getActions).collect(Collectors.toList());
+          List<String> expected =
+              tsInputted.stream().map(TestCaseStep::getActions).collect(Collectors.toList());
+          if (!actual.equals(expected)) {
+            duplicateTestStatus = CheckDuplicateTestStatus.STEPS_CHANGED;
+            return tcServer;
+          }
         }
       }
+      duplicateTestStatus = CheckDuplicateTestStatus.EXISTING_TEST_CASE;
+      return tcServer;
+    } else {
+      throw new Exception("Cannot check test case, Testcase " + title + " will be skipped");
     }
-    duplicateTestStatus = CheckDuplicateTestStatus.EXISTING_TEST_CASE;
-    return tcServer;
   }
 }

@@ -235,7 +235,7 @@ public class TestReadTags {
     String projectName = "Surabaya";
     String testPlanName = "TEST-PLAN";
     String buildName = "BUILD-TEST";
-    String platformName = "";
+    String platformName = "API";
     //        String cucumberPath = System.getProperty("user.dir") + "/src/test/resources/cucumber_fail2.json";
     String cucumberPath = System.getProperty("user.dir") + "/src/test/resources/cucumber13.json";
     System.out.println(cucumberPath);

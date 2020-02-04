@@ -673,7 +673,7 @@
           {
             "result": {
               "duration": 4817300,
-              "status": "failed"
+              "status": "passed"
             },
             "line": 54,
             "name": "API assign previous response data to data",
@@ -1351,7 +1351,7 @@
               "status": "passed"
             },
             "line": 154,
-            "name": "[x-member] stop kafka producer",
+            "name": "[x-member] stop kafka producers",
             "match": {
               "location": "KafkaBaseSteps.stopKafka()"
             },
