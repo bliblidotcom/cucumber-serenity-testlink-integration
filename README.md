@@ -4,6 +4,10 @@ This is a Plugin for integrating your cucumber test to Testlink via API
 
 It will Create, Update , and Report your test Result in testlink based on your cucumber Steps
 
+#### Requirement
+- Testlink With Version 1.9.15 or higher 
+- Java 8 
+
 #### Usage
  
 Add this in your ```pom.xml```
