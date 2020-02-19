@@ -248,12 +248,6 @@ public class TestResultReader {
         return result;
     }
 
-    /**
-     * Run With Cucumber
-     *
-     * @param cucumberJsonPath
-     * @throws Exception
-     */
     public void readWithCucumber(String cucumberJsonPath) throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
         if (cucumberJsonPath.equals("") || cucumberJsonPath.isEmpty()) {
@@ -484,12 +478,7 @@ public class TestResultReader {
         });
         System.out.println("================================================");
     }
-
-    /**
-     * Digunakan untuk Overloading sajah ,
-     *
-     * @throws Exception
-     */
+    
     public void readWithCucumber() throws Exception {
         this.readWithCucumber("");
     }

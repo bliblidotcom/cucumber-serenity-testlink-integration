@@ -9,11 +9,7 @@ import java.util.stream.Collectors;
  * Created by tri.abror on 2/28/2019.
  */
 public class Utils {
-  /**
-   * get all args and save to constants
-   * * @param args
-   * * @return  Map<String, String>
-   */
+
   public Map<String, String> getAllArgs(String[] args) {
     List<String> param = Arrays.asList(args);
     Map<String, String> mapParam = param.stream().collect(Collectors.toMap(key -> {

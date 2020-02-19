@@ -256,11 +256,6 @@ public final class TLPlugin {
         null);
   }
 
-  /**
-   * Create testcase based on steps
-   * @param steps List of Steps
-   * @throws Exception
-   */
   public void createTestCase(ArrayList<String[]> steps) throws Exception {
 
     //// Create Test Steps
@@ -316,16 +311,6 @@ public final class TLPlugin {
     }
   }
 
-
-  /**
-   * Digunakan untuk mengecek apakah ada testCase yang duplicate
-   *
-   * @param title           title dari test casenya
-   * @param testProjectName project name yang digunakan
-   * @param testSuiteName   test suite name yang digunakan
-   * @param tsInputted      test step yang diinputkan oleh usser
-   * @return bila duplicate akan return object testCase , bila belum ada akan mengembalikan null
-   */
   public TestCase searchTestStepDuplicate(String title,
       String testProjectName,
       String testSuiteName,
