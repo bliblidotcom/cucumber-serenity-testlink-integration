@@ -10,9 +10,8 @@
     <name>serenity-testlink-integration</name>
     <url>https://blibli.com</url>
     <scm>
-        <connection>scm:git:git@github.com:bliblidotcom/cucumber-serenity-testlink-integration.git</connection>
-        <developerConnection>scm:git@github.com:bliblidotcom/cucumber-serenity-testlink-integration.git
-        </developerConnection>
+        <connection>scm:https://github.com/bliblidotcom/cucumber-serenity-testlink-integration.git</connection>
+        <developerConnection>scm:https://github.com/bliblidotcom/cucumber-serenity-testlink-integration.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
     <properties>
