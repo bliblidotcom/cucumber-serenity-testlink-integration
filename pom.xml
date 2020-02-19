@@ -4,7 +4,7 @@
 
     <groupId>com.blibli.oss.qa.util</groupId>
     <artifactId>serenity-testlink-integration</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.1-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
 
     <name>serenity-testlink-integration</name>
