@@ -6,7 +6,6 @@ import br.eti.kinoshita.testlinkjavaapi.model.TestCase;
 import br.eti.kinoshita.testlinkjavaapi.model.TestCaseStep;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gdn.qa.util.model.cucumber.CucumberModel;
-import com.gdn.qa.util.model.cucumber.Elements;
 import com.gdn.qa.util.model.cucumber.Rows;
 import com.gdn.qa.util.model.cucumber.Step;
 import com.gdn.qa.util.model.earlgrey.EarlGreyModel;
@@ -259,104 +258,122 @@ public class TestResultReader {
         Arrays.asList(objectMapper.readValue(cucumberFile, CucumberModel[].class));
 
     // Read Read Each Test Feature
-    features.parallelStream().forEach(this::processFeature);
+    groupingScenarios(features);
   }
 
-  private void processFeature(CucumberModel feature) {
-    System.out.println("Checking features " + feature.getName());
-    //get default testsuiteid or test case id
-    List<TestlinkTags> defaultTags = TagsReader.readTags(feature.getTags());
-    Integer testSuiteId = null;
-    try {
-      testSuiteId = Integer.valueOf(defaultTags.stream()
-          .filter(e -> e.getTestSuiteId() != null && !e.getTestSuiteId().trim().isEmpty())
-          .findAny()
-          .map(TestlinkTags::getTestSuiteId)
-          .get());
-    } catch (Exception ignored) {
+  private void groupingScenarios(List<CucumberModel> features) {
+    //    group scenario per test suite id set in feature or scenario
+    //    if no test suite id is set then the scenario will be ignored
 
-    }
+    Map<Integer, Map<String, ScenarioData>> groupedFeature = new ConcurrentHashMap<>();
+    AtomicReference<Integer> totalPassed = new AtomicReference<>(0);
+    AtomicReference<Integer> totalFailed = new AtomicReference<>(0);
+    AtomicReference<Integer> linked = new AtomicReference<>(0);
 
-    if (testSuiteId != null) {
-      //merge background with scenario save to scenario data
+    features.parallelStream().forEach(feature -> {
+      System.out.println("Populating scenarios from feature : " + feature.getName());
       String summary =
           String.format("Feature : %s, %s", feature.getName(), feature.getDescription());
-      Map<String, ScenarioData> scenarios = new ConcurrentHashMap<>();
       List<String[]> steps = new ArrayList<>();
-      for (Elements element : feature.getElements()) {
+      feature.getElements().parallelStream().forEach(element -> {
         ScenarioData scenarioData = new ScenarioData();
         if (element.getType().equalsIgnoreCase("background")) {
           steps.addAll(0, readSteps(element.getSteps()));
         } else if (element.getType().equalsIgnoreCase("scenario")) {
           steps.addAll(readSteps(element.getSteps()));
-          Double duration = element.getSteps()
-              .stream()
-              .mapToDouble(e -> (int) (e.getResult().getDuration().getTime() / 1000000000.0))
-              .sum();
+          Integer testSuiteId = TagsReader.getTestSuiteIdFromTags(element.getTags());
+          String reason = "";
+          Integer indexFail = null;
           boolean status = true;
           for (int j = 0; j < steps.size(); j++) {
             if (!steps.get(j)[3].trim().isEmpty()) {
-              scenarioData.setReasonFail(steps.get(j)[3]);
-              scenarioData.setIndexFail(j);
+              reason = steps.get(j)[3];
+              indexFail = j;
               status = false;
               break;
             }
           }
-          List<TestlinkTags> scenarioTags = TagsReader.readTags(element.getTags());
-          Integer testLinkId = null;
-          try {
-            testLinkId = Integer.valueOf(scenarioTags.stream()
-                .filter(e -> e.getTestLinkId() != null && !e.getTestLinkId().trim().isEmpty())
-                .findAny()
-                .map(TestlinkTags::getTestLinkId)
-                .get());
-          } catch (Exception ignored) {
-
-          }
-
           if (status) {
-            scenarioData.setPassed(true);
-            passed.getAndSet(passed.get() + 1);
+            totalPassed.getAndSet(totalPassed.get() + 1);
           } else {
-            scenarioData.setPassed(false);
-            failed.getAndSet(failed.get() + 1);
+            totalFailed.getAndSet(totalFailed.get() + 1);
           }
-          scenarioData.setName(element.getName());
-          scenarioData.setSummary(summary);
-          scenarioData.setTestCase(constructTestCase(testSuiteId,
-              testLinkId,
-              element.getName(),
-              summary,
-              status,
-              steps));
-          scenarioData.setDuration(duration);
-          scenarioData.setDetailToPrint(printDetail(null,
-              element.getName(),
-              status,
-              scenarioData.getReasonFail(),
-              testSuiteId.toString(),
-              testLinkId == null ? "" : testLinkId.toString()));
-          scenarios.put(element.getName(), scenarioData);
+          if (testSuiteId != null) {
+            Double duration = element.getSteps()
+                .stream()
+                .mapToDouble(e -> (int) (e.getResult().getDuration().getTime() / 1000000000.0))
+                .sum();
+            scenarioData.setReasonFail(reason);
+            scenarioData.setIndexFail(indexFail);
+            scenarioData.setPassed(status);
+            scenarioData.setName(element.getName());
+            scenarioData.setSummary(summary);
+            scenarioData.setTestCase(constructTestCase(testSuiteId,
+                null,
+                element.getName(),
+                summary,
+                status,
+                steps));
+            scenarioData.setDuration(duration);
+            scenarioData.setFeatureName(feature.getName());
+            scenarioData.setDetailToPrint(printDetail(null,
+                feature.getName(),
+                element.getName(),
+                status,
+                scenarioData.getReasonFail(),
+                testSuiteId.toString(),
+                ""));
+            if (groupedFeature.containsKey(testSuiteId)) {
+              Map<String, ScenarioData> scenarios = groupedFeature.get(testSuiteId);
+              scenarios.put(element.getName(), scenarioData);
+              groupedFeature.put(testSuiteId, scenarios);
+            } else {
+              Map<String, ScenarioData> scenarios = new HashMap<>();
+              scenarios.put(element.getName(), scenarioData);
+              groupedFeature.put(testSuiteId, scenarios);
+            }
+          } else {
+            System.out.println(printDetail(null,
+                feature.getName(),
+                element.getName(),
+                status,
+                "",
+                "",
+                ""));
+            System.out.println("Scenario will be skipped");
+          }
           steps.clear();
         }
-      }
+      });
+    });
 
-      try {
-        TestLinkPlugin plugin =
-            new TestLinkPlugin(connection, testProject, testPlan, build, platFormName).setSummary(
-                summary).setTestSuiteID(testSuiteId);
-        plugin.linkTestCases(testSuiteId, scenarios);
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
-
-      System.out.println(String.format("\nSummary: %d passed and %d failed",
-          passed.get(),
-          failed.get()));
-    } else {
-      System.out.println("No test suite id is specified for feature " + feature.getName()
-          + ".\nFeature will be skipped");
+    // Process grouped feature
+    if (!groupedFeature.isEmpty()) {
+      groupedFeature.entrySet().parallelStream().forEach(feature -> {
+        try {
+          TestLinkPlugin plugin = new TestLinkPlugin(connection,
+              testProject,
+              testPlan,
+              build,
+              platFormName).setTestSuiteID(feature.getKey());
+          plugin.linkTestCases(feature.getKey(), feature.getValue());
+          linked.getAndSet(linked.get() + feature.getValue().size());
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      });
     }
+    int total = totalPassed.get() + totalFailed.get();
+    System.out.println("\n================================================");
+    System.out.println("\t\t\t\t\tSummary");
+    System.out.println("================================================");
+    System.out.println(String.format("\nTotal scenario\t\t\t\t: %d \nTotal linked to testlink\t: %d",
+        total,
+        linked.get()));
+    System.out.println(String.format("\n%d scenarios passed\n%d scenarios failed",
+        totalPassed.get(),
+        totalFailed.get()));
+    System.out.println("================================================");
   }
 
   private List<TestCaseStep> constructTestCaseSteps(List<String[]> steps) {
@@ -457,7 +474,7 @@ public class TestResultReader {
           status,
           notes,
           duration,
-          printDetail(null, title, status, notes, testSuiteId, testLinkId));
+          printDetail(null, null, title, status, notes, testSuiteId, testLinkId));
       if (status) {
         passed.getAndSet(passed.get() + 1);
       } else {
@@ -547,14 +564,18 @@ public class TestResultReader {
   }
 
   private String printDetail(List<String[]> steps,
+      String featureName,
       String title,
       boolean status,
       String notes,
       String testSuiteId,
       String testlinkId) {
     StringBuilder builder = new StringBuilder();
-    builder.append("\n================================================\n")
-        .append("Title\t\t: ")
+    builder.append("\n================================================\n");
+    if (featureName != null && !featureName.trim().isEmpty()) {
+      builder.append("Feature\t\t: ").append(featureName).append("\n");
+    }
+    builder.append("Title\t\t: ")
         .append(title)
         .append("\n")
         .append("Passed\t\t: ")
@@ -657,6 +678,7 @@ public class TestResultReader {
     data.setTestlinkTags(tag);
 
     System.out.println(printDetail(steps,
+        null,
         stepName,
         pass,
         data.getReasonFail(),
