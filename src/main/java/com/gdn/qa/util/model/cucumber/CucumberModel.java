@@ -23,7 +23,7 @@ public class CucumberModel {
     @JsonProperty("line")
     private Integer line;
     @JsonProperty("elements")
-    private List<Element> elements = null;
+    private List<Elements> elements = null;
     @JsonProperty("name")
     private String name;
     @JsonProperty("description")
@@ -50,12 +50,12 @@ public class CucumberModel {
     }
 
     @JsonProperty("elements")
-    public List<Element> getElements() {
+    public List<Elements> getElements() {
         return elements;
     }
 
     @JsonProperty("elements")
-    public void setElements(List<Element> elements) {
+    public void setElements(List<Elements> elements) {
         this.elements = elements;
     }
 

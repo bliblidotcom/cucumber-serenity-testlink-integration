@@ -255,6 +255,58 @@ public class TestReadTags {
   }
 
   @Test
+  public void testCucumber15() {
+    String testlinkURL = "https://testlink.gdn-app.com/lib/api/xmlrpc/v1/xmlrpc.php";
+    String devKey = "aa0eb2386227576295d65b753ab60a5f";
+    String projectName = "Surabaya";
+    String testPlanName = "TEST-PLAN";
+    String buildName = "BUILD-TEST";
+    String platformName = "API";
+    //        String cucumberPath = System.getProperty("user.dir") + "/src/test/resources/cucumber_fail2.json";
+    String cucumberPath = System.getProperty("user.dir") + "/src/test/resources/cucumber15.json";
+    System.out.println(cucumberPath);
+
+    try {
+      TestResultReader testResultReader = new TestResultReader();
+      testResultReader.initialize(testlinkURL,
+          devKey,
+          projectName,
+          testPlanName,
+          buildName,
+          platformName);
+      testResultReader.readWithCucumber(cucumberPath);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  @Test
+  public void testCucumberHuge() {
+    String testlinkURL = "https://testlink.gdn-app.com/lib/api/xmlrpc/v1/xmlrpc.php";
+    String devKey = "aa0eb2386227576295d65b753ab60a5f";
+    String projectName = "Neo-Loyalty";
+    String testPlanName = "TEST";
+    String buildName = "Staging";
+    String platformName = "API";
+    //        String cucumberPath = System.getProperty("user.dir") + "/src/test/resources/cucumber_fail2.json";
+    String cucumberPath = System.getProperty("user.dir") + "/src/test/resources/cucumber-huge.json";
+    System.out.println(cucumberPath);
+
+    try {
+      TestResultReader testResultReader = new TestResultReader();
+      testResultReader.initialize(testlinkURL,
+          devKey,
+          projectName,
+          testPlanName,
+          buildName,
+          platformName);
+      testResultReader.readWithCucumber(cucumberPath);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  @Test
   public void testFail() {
     String testlinkURL = "https://testlink.gdn-app.com/lib/api/xmlrpc/v1/xmlrpc.php";
     String devKey = "aa0eb2386227576295d65b753ab60a5f";

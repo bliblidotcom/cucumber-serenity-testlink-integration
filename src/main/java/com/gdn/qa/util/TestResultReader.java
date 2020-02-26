@@ -1,8 +1,12 @@
 package com.gdn.qa.util;
 
 import br.eti.kinoshita.testlinkjavaapi.TestLinkAPI;
+import br.eti.kinoshita.testlinkjavaapi.constants.*;
+import br.eti.kinoshita.testlinkjavaapi.model.TestCase;
+import br.eti.kinoshita.testlinkjavaapi.model.TestCaseStep;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gdn.qa.util.model.cucumber.CucumberModel;
+import com.gdn.qa.util.model.cucumber.Elements;
 import com.gdn.qa.util.model.cucumber.Rows;
 import com.gdn.qa.util.model.cucumber.Step;
 import com.gdn.qa.util.model.earlgrey.EarlGreyModel;
@@ -262,85 +266,151 @@ public class TestResultReader {
     System.out.println("Checking features " + feature.getName());
     //get default testsuiteid or test case id
     List<TestlinkTags> defaultTags = TagsReader.readTags(feature.getTags());
+    Integer testSuiteId = null;
+    try {
+      testSuiteId = Integer.valueOf(defaultTags.stream()
+          .filter(e -> e.getTestSuiteId() != null && !e.getTestSuiteId().trim().isEmpty())
+          .findAny()
+          .map(TestlinkTags::getTestSuiteId)
+          .get());
+    } catch (Exception ignored) {
 
-    //read background steps
-    data = new ScenarioData();
-    List<String[]> background = new ArrayList<>();
-    feature.getElements()
-        .parallelStream()
-        .filter(ft -> ft.getKeyword().equalsIgnoreCase("Background"))
-        .findFirst()
-        .ifPresent(b -> {
-          background.addAll(readSteps(b.getSteps()));
-        });
+    }
 
-    readCucumberSteps(defaultTags, feature, background);
-    System.out.println(String.format("\nSummary: %d passed and %d failed",
-        passed.get(),
-        failed.get()));
-  }
-
-  private void readCucumberSteps(List<TestlinkTags> defaultTags,
-      CucumberModel feature,
-      List<String[]> background) {
-    final String type = "scenario";
-    Map<String, List<String[]>> scenarioOutlineSteps = new ConcurrentHashMap<>();
-    Map<String, ScenarioData> scenarioOutlineData = new ConcurrentHashMap<>();
-
-    //loop per scenario outline
-    //filter to get element with keyword scenario only
-    feature.getElements()
-        .parallelStream()
-        .filter(ft -> ft.getType().equalsIgnoreCase(type) && (defaultTags.size() > 0
-            || TagsReader.readTags(ft.getTags()).size() > 0))
-        .forEach(scenario -> {
-          if (!scenarioOutlineSteps.containsKey(scenario.getName())) {
-            List<String[]> steps = new ArrayList<>();
-            steps.addAll(0, background);
-            ScenarioData data = new ScenarioData();
-            data.setName(scenario.getName());
-            scenarioOutlineSteps.put(scenario.getName(), steps);
-            scenarioOutlineData.put(scenario.getName(), data);
-          }
-          ScenarioData tempData = scenarioOutlineData.get(scenario.getName());
-          List<String[]> tempSteps = scenarioOutlineSteps.get(scenario.getName());
-          List<TestlinkTags> scenarioTags = TagsReader.readTags(scenario.getTags());
-          List<String[]> steps = readSteps(scenario.getSteps());
-          tempSteps.addAll(steps);
-          TestlinkTags tagsToUse = chooseTag(defaultTags, scenarioTags);
-          //kalo di scenario gaada maka pake yg default
-          tempData.setTestlinkTags(tagsToUse);
-          tempData.setDuration(scenario.getSteps()
+    if (testSuiteId != null) {
+      //merge background with scenario save to scenario data
+      String summary =
+          String.format("Feature : %s, %s", feature.getName(), feature.getDescription());
+      Map<String, ScenarioData> scenarios = new ConcurrentHashMap<>();
+      List<String[]> steps = new ArrayList<>();
+      for (Elements element : feature.getElements()) {
+        ScenarioData scenarioData = new ScenarioData();
+        if (element.getType().equalsIgnoreCase("background")) {
+          steps.addAll(0, readSteps(element.getSteps()));
+        } else if (element.getType().equalsIgnoreCase("scenario")) {
+          steps.addAll(readSteps(element.getSteps()));
+          Double duration = element.getSteps()
               .stream()
               .mapToDouble(e -> (int) (e.getResult().getDuration().getTime() / 1000000000.0))
-              .sum());
-          Optional<String> reason =
-              steps.stream().filter(a -> !a[3].trim().isEmpty()).findFirst().map(b -> b[3]);
-          if (reason.isPresent()) {
-            tempData.setReasonFail(reason.get());
-            tempData.setPassed(false);
-          } else {
-            tempData.setReasonFail("");
-            tempData.setPassed(true);
+              .sum();
+          boolean status = true;
+          for (int j = 0; j < steps.size(); j++) {
+            if (!steps.get(j)[3].trim().isEmpty()) {
+              scenarioData.setReasonFail(steps.get(j)[3]);
+              scenarioData.setIndexFail(j);
+              status = false;
+              break;
+            }
           }
-          scenarioOutlineData.put(scenario.getName(), tempData);
-          scenarioOutlineSteps.put(scenario.getName(), tempSteps);
-        });
+          List<TestlinkTags> scenarioTags = TagsReader.readTags(element.getTags());
+          Integer testLinkId = null;
+          try {
+            testLinkId = Integer.valueOf(scenarioTags.stream()
+                .filter(e -> e.getTestLinkId() != null && !e.getTestLinkId().trim().isEmpty())
+                .findAny()
+                .map(TestlinkTags::getTestLinkId)
+                .get());
+          } catch (Exception ignored) {
 
-    String summary = String.format("Feature : %s, %s", feature.getName(), feature.getDescription());
-    scenarioOutlineData.entrySet()
+          }
+
+          if (status) {
+            scenarioData.setPassed(true);
+            passed.getAndSet(passed.get() + 1);
+          } else {
+            scenarioData.setPassed(false);
+            failed.getAndSet(failed.get() + 1);
+          }
+          scenarioData.setName(element.getName());
+          scenarioData.setSummary(summary);
+          scenarioData.setTestCase(constructTestCase(testSuiteId,
+              testLinkId,
+              element.getName(),
+              summary,
+              status,
+              steps));
+          scenarioData.setDuration(duration);
+          scenarioData.setDetailToPrint(printDetail(null,
+              element.getName(),
+              status,
+              scenarioData.getReasonFail(),
+              testSuiteId.toString(),
+              testLinkId == null ? "" : testLinkId.toString()));
+          scenarios.put(element.getName(), scenarioData);
+          steps.clear();
+        }
+      }
+
+      try {
+        TestLinkPlugin plugin =
+            new TestLinkPlugin(connection, testProject, testPlan, build, platFormName).setSummary(
+                summary).setTestSuiteID(testSuiteId);
+        plugin.linkTestCases(testSuiteId, scenarios);
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+
+      System.out.println(String.format("\nSummary: %d passed and %d failed",
+          passed.get(),
+          failed.get()));
+    } else {
+      System.out.println("No test suite id is specified for feature " + feature.getName()
+          + ".\nFeature will be skipped");
+    }
+  }
+
+  private List<TestCaseStep> constructTestCaseSteps(List<String[]> steps) {
+    List<TestCaseStep> testCaseSteps = new ArrayList<>();
+    for (int i = 0; i < steps.size(); i++) {
+      TestCaseStep caseStep = new TestCaseStep();
+      caseStep.setActions(steps.get(i)[0]);
+      caseStep.setNumber(i);
+      caseStep.setExpectedResults("Passed");
+      caseStep.setActive(true);
+      caseStep.setExecutionType(ExecutionType.AUTOMATED);
+      caseStep.setId(i);
+      caseStep.setTestCaseVersionId(null);
+      testCaseSteps.add(caseStep);
+    }
+    return testCaseSteps;
+  }
+
+  private TestCase constructTestCase(Integer testSuiteId,
+      Integer testLinkId,
+      String name,
+      String summary,
+      Boolean status,
+      List<String[]> steps) {
+    TestCase testCase = new TestCase();
+    testCase.setName(name);
+    testCase.setSummary(summary);
+    testCase.setPreconditions(summary);
+    testCase.setSteps(constructTestCaseSteps(steps));
+    testCase.setAuthorLogin("automation-test");
+    testCase.setTestCaseStatus(TestCaseStatus.FINAL);
+    testCase.setTestImportance(TestImportance.MEDIUM);
+    testCase.setActionOnDuplicatedName(ActionOnDuplicate.CREATE_NEW_VERSION);
+    testCase.setExecutionType(ExecutionType.AUTOMATED);
+    testCase.setCheckDuplicatedName(true);
+    testCase.setExecutionOrder(0);
+    testCase.setTestSuiteId(testSuiteId);
+    testCase.setInternalId(testLinkId);
+    testCase.setExternalId(testLinkId);
+    testCase.setExecutionStatus(status ? ExecutionStatus.PASSED : ExecutionStatus.FAILED);
+    return testCase;
+  }
+
+  private void readCucumberSteps(Map<String, ScenarioData> scenarios) {
+
+    scenarios.entrySet()
         .parallelStream()
         .forEach(entry -> updateTestlink(entry.getValue().getName(),
-            scenarioOutlineSteps.getOrDefault(entry.getKey(), null),
+            null,
             entry.getValue().getTestlinkTags().getTestSuiteId(),
             entry.getValue().getTestlinkTags().getTestLinkId(),
             entry.getValue().getPassed(),
-            summary,
+            entry.getValue().getSummary(),
             entry.getValue().getDuration().intValue(),
-            //current api cannot set below 1 minute,
-            // this will only make effect if the execution time is greater than 1 min
-            // So we try to insert the value in the amount of seconds instead of minutes
-            // For that, you may want to divide the Exec (min) by 60.0.
             entry.getValue().getReasonFail()));
   }
 
@@ -348,9 +418,9 @@ public class TestResultReader {
 
     TestlinkTags tagsToUse;
     //kalo di scenario gaada maka pake yg default
-    if (scenario.size() == 0) {
+    if (scenario.isEmpty() && !feature.isEmpty()) {
       tagsToUse = feature.get(0);
-    } else if (feature.size() != 0) {
+    } else if (!scenario.isEmpty() && !feature.isEmpty()) {
       //must filter because inherit tags
       List<TestlinkTags> tagsft = scenario.stream().filter(t -> {
         if (t.getTestLinkId().equalsIgnoreCase(feature.get(0).getTestLinkId()) && !t.getTestLinkId()
@@ -379,7 +449,6 @@ public class TestResultReader {
       Integer duration,
       String notes) {
     try {
-
       TestLinkPlugin plugin =
           new TestLinkPlugin(connection, testProject, testPlan, build, platFormName).setSummary(
               summary).setTitle(title).setTestSuiteID(Integer.parseInt(testSuiteId));
@@ -413,6 +482,7 @@ public class TestResultReader {
       notes =
           String.format("This Test Case Failed on step %s, Log:\n%s", counter + 1, errorMessage);
     }
+
     return new String[] {stepDefinition, status, errorMessage, notes};
   }
 

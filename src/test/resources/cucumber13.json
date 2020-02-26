@@ -1351,7 +1351,7 @@
               "status": "passed"
             },
             "line": 154,
-            "name": "[x-member] stop kafka producers",
+            "name": "[x-member] stop kafka producers as",
             "match": {
               "location": "KafkaBaseSteps.stopKafka()"
             },

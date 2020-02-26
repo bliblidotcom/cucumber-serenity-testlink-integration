@@ -20,7 +20,7 @@ import java.util.Map;
         "steps",
         "tags"
 })
-public class Element {
+public class Elements {
 
     @JsonProperty("before")
     private List<Before> before = null;
