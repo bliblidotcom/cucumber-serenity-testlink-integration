@@ -66,7 +66,7 @@ public class Main extends AbstractMojo {
   /**
    * @parameter
    */
-  @Parameter
+  @Parameter(defaultValue = "CUCUMBER")
   private String reportsFrom;
 
   /**
@@ -89,7 +89,7 @@ public class Main extends AbstractMojo {
       if (type == null) {
         type = SupportedReports.CUCUMBER;
       }
-      if (reportsPath.trim().isEmpty()) {
+      if (reportsPath == null || reportsPath.trim().isEmpty()) {
         BadakReporter.getReader(type, testLinkData).writeToTestLink();
       } else {
         BadakReporter.getReader(type, testLinkData, reportsPath).writeToTestLink();
