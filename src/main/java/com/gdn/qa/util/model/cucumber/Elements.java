@@ -9,35 +9,51 @@ import java.util.Map;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "line",
-    "elements",
-    "name",
-    "description",
-    "id",
-    "keyword",
-    "uri",
-    "tags"
+        "before",
+        "line",
+        "name",
+        "description",
+        "id",
+        "after",
+        "type",
+        "keyword",
+        "steps",
+        "tags"
 })
-public class CucumberModel {
+public class Elements {
 
+    @JsonProperty("before")
+    private List<Before> before = null;
     @JsonProperty("line")
     private Integer line;
-    @JsonProperty("elements")
-    private List<Elements> elements = null;
     @JsonProperty("name")
     private String name;
     @JsonProperty("description")
     private String description;
     @JsonProperty("id")
     private String id;
+    @JsonProperty("after")
+    private List<After> after = null;
+    @JsonProperty("type")
+    private String type;
     @JsonProperty("keyword")
     private String keyword;
-    @JsonProperty("uri")
-    private String uri;
+    @JsonProperty("steps")
+    private List<Step> steps = null;
     @JsonProperty("tags")
     private List<Tags> tags = null;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    @JsonProperty("before")
+    public List<Before> getBefore() {
+        return before;
+    }
+
+    @JsonProperty("before")
+    public void setBefore(List<Before> before) {
+        this.before = before;
+    }
 
     @JsonProperty("line")
     public Integer getLine() {
@@ -47,16 +63,6 @@ public class CucumberModel {
     @JsonProperty("line")
     public void setLine(Integer line) {
         this.line = line;
-    }
-
-    @JsonProperty("elements")
-    public List<Elements> getElements() {
-        return elements;
-    }
-
-    @JsonProperty("elements")
-    public void setElements(List<Elements> elements) {
-        this.elements = elements;
     }
 
     @JsonProperty("name")
@@ -89,6 +95,26 @@ public class CucumberModel {
         this.id = id;
     }
 
+    @JsonProperty("after")
+    public List<After> getAfter() {
+        return after;
+    }
+
+    @JsonProperty("after")
+    public void setAfter(List<After> after) {
+        this.after = after;
+    }
+
+    @JsonProperty("type")
+    public String getType() {
+        return type;
+    }
+
+    @JsonProperty("type")
+    public void setType(String type) {
+        this.type = type;
+    }
+
     @JsonProperty("keyword")
     public String getKeyword() {
         return keyword;
@@ -99,19 +125,19 @@ public class CucumberModel {
         this.keyword = keyword;
     }
 
-    @JsonProperty("uri")
-    public String getUri() {
-        return uri;
+    @JsonProperty("steps")
+    public List<Step> getSteps() {
+        return steps;
     }
 
-    @JsonProperty("uri")
-    public void setUri(String uri) {
-        this.uri = uri;
+    @JsonProperty("steps")
+    public void setSteps(List<Step> steps) {
+        this.steps = steps;
     }
 
-    @JsonProperty("tags")
-    public List<Tags> getTags() {
-        return tags;
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
     }
 
     @JsonProperty("tags")
@@ -119,9 +145,9 @@ public class CucumberModel {
         this.tags = tags;
     }
 
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
+    @JsonProperty("tags")
+    public List<Tags> getTags() {
+        return tags;
     }
 
     @JsonAnySetter

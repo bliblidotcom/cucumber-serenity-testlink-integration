@@ -1,12 +1,12 @@
 package com.gdn.qa.util;
 
+import com.gdn.qa.util.constant.SupportedReports;
+import com.gdn.qa.util.model.TestLinkData;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-
-import java.io.File;
 
 /**
  * Created by hendri.antomy on 8/2/2017.
@@ -63,52 +63,40 @@ public class Main extends AbstractMojo {
   @Parameter
   private String platformName;
 
+  /**
+   * @parameter
+   */
+  @Parameter
+  private String reportsFrom;
+
+  /**
+   * @parameter
+   */
+  @Parameter
+  private String reportsPath;
+
   @Override
   public void execute() throws MojoExecutionException, MojoFailureException {
-    Banner.loadBanner();
-    System.out.println("===Config===");
-    System.out.println("Source Directory: " + sourceDir);
-    System.out.println("testlink URL : " + testlinkURL);
-    System.out.println("DevKey : " + devKey);
-    System.out.println("Project Name : " + projectName);
-    System.out.println("Test Plan Name : " + testPlanName);
-    System.out.println("Build Name : " + buildName);
-    System.out.println("Platform Name : " + platformName);
-    System.out.println("===End Of Config===");
     System.out.println("===Process Started===");
-
-    String cucumberPath;
-    if (sourceDir == null || sourceDir.isEmpty()) {
-      cucumberPath =
-          System.getProperty("user.dir") + File.separator + "target/destination/cucumber.json";
-    } else {
-      cucumberPath = sourceDir;
-    }
-
-    // check if cucumebr json exist
-
-    System.out.println("Cucumber Path : " + cucumberPath);
-    File cucumberFile = new File(cucumberPath);
+    TestLinkData testLinkData = new TestLinkData().setUrlTestlink(testlinkURL)
+        .setDEVKEY(devKey)
+        .setTestProject(projectName)
+        .setTestPlan(testPlanName)
+        .setBuild(buildName)
+        .setPlatFormName(platformName);
     try {
-      TestResultReader testResultReader = new TestResultReader();
-      testResultReader.initialize(testlinkURL,
-          devKey,
-          projectName,
-          testPlanName,
-          buildName,
-          platformName);
-
-      if (!cucumberFile.exists()) {
-        System.out.println("=== Run with Jbehave ===");
-        testResultReader.readResult();
+      SupportedReports type = BadakReporter.searchEnum(SupportedReports.class, reportsFrom);
+      if (type == null) {
+        type = SupportedReports.CUCUMBER;
+      }
+      if (reportsPath.trim().isEmpty()) {
+        BadakReporter.getReader(type, testLinkData).writeToTestLink();
       } else {
-        System.out.println("=== Run with Cucumber ===");
-        testResultReader.readWithCucumber(cucumberPath);
+        BadakReporter.getReader(type, testLinkData, reportsPath).writeToTestLink();
       }
     } catch (Exception e) {
       e.printStackTrace();
     }
-
     System.out.println("===Process Ended===");
   }
 }

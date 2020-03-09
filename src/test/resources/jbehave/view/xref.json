@@ -1,0 +1,2127 @@
+{"xref": {
+  "stories": [
+    {
+      "story": {
+        "path": "stories/consult_dictionary/LookUpBanana.story",
+        "description": {
+          "descriptionAsString": ""
+        },
+        "narrative": {
+          "inOrderTo": "talk better",
+          "asA": "n English student",
+          "iWantTo": "look up word definitions",
+          "soThat": ""
+        },
+        "meta": {
+          "properties": [
+            {
+              "@name": "TestSuiteId",
+              "@value": "10921024"
+            }
+          ]
+        },
+        "givenStories": {
+          "givenStories": [],
+          "givenStoriesAsString": "",
+          "examplesTable": {
+            "tableAsString": "",
+            "tableTransformers": {
+              "transformers": [
+                [
+                  "FORMATTING",
+                  {}
+                ],
+                [
+                  "REPLACING",
+                  {}
+                ],
+                [
+                  "FROM_LANDSCAPE",
+                  {}
+                ]
+              ]
+            },
+            "headers": [],
+            "data": [],
+            "properties": {
+              "properties": [
+                {
+                  "@name": "headerSeparator",
+                  "@value": "|"
+                },
+                {
+                  "@name": "valueSeparator",
+                  "@value": "|"
+                },
+                {
+                  "@name": "ignorableSeparator",
+                  "@value": "|--"
+                }
+              ]
+            },
+            "propertiesAsString": "",
+            "namedParameters": []
+          }
+        },
+        "lifecycle": {
+          "before": {
+            "steps": [
+              []
+            ]
+          },
+          "after": []
+        },
+        "scenarios": [
+          {
+            "title": "Looking up the definition of 'banana'",
+            "meta": {
+              "properties": []
+            },
+            "givenStories": {
+              "givenStories": [],
+              "givenStoriesAsString": "",
+              "examplesTable": {
+                "tableAsString": "",
+                "tableTransformers": {
+                  "transformers": [
+                    [
+                      "FORMATTING",
+                      {}
+                    ],
+                    [
+                      "REPLACING",
+                      {}
+                    ],
+                    [
+                      "FROM_LANDSCAPE",
+                      {}
+                    ]
+                  ]
+                },
+                "headers": [],
+                "data": [],
+                "properties": {
+                  "properties": [
+                    {
+                      "@name": "headerSeparator",
+                      "@value": "|"
+                    },
+                    {
+                      "@name": "valueSeparator",
+                      "@value": "|"
+                    },
+                    {
+                      "@name": "ignorableSeparator",
+                      "@value": "|--"
+                    }
+                  ]
+                },
+                "propertiesAsString": "",
+                "namedParameters": []
+              }
+            },
+            "examplesTable": {
+              "tableAsString": "",
+              "tableTransformers": {
+                "transformers": [
+                  [
+                    "FORMATTING",
+                    {}
+                  ],
+                  [
+                    "REPLACING",
+                    {}
+                  ],
+                  [
+                    "FROM_LANDSCAPE",
+                    {}
+                  ]
+                ]
+              },
+              "headers": [],
+              "data": [],
+              "properties": {
+                "properties": [
+                  {
+                    "@name": "headerSeparator",
+                    "@value": "|"
+                  },
+                  {
+                    "@name": "valueSeparator",
+                    "@value": "|"
+                  },
+                  {
+                    "@name": "ignorableSeparator",
+                    "@value": "|--"
+                  }
+                ]
+              },
+              "propertiesAsString": "",
+              "namedParameters": []
+            },
+            "steps": [
+              "Given the user is on the Wikionary home page",
+              "When the user looks up the definition of the word 'banana'",
+              "Then they should see the definition 'Wrong answer dude'"
+            ]
+          }
+        ],
+        "name": "LookUpBanana.story"
+      },
+      "localizedNarrative": "In order to talk better\nAs a n English student\nI want to look up word definitions",
+      "allowed": true,
+      "status": "FAILED",
+      "givenStories": [],
+      "scenarios": [
+        {
+          "scenario": {
+            "title": "Looking up the definition of 'banana'",
+            "meta": {
+              "properties": []
+            },
+            "givenStories": {
+              "givenStories": [],
+              "givenStoriesAsString": "",
+              "examplesTable": {
+                "tableAsString": "",
+                "tableTransformers": {
+                  "transformers": [
+                    [
+                      "FORMATTING",
+                      {}
+                    ],
+                    [
+                      "REPLACING",
+                      {}
+                    ],
+                    [
+                      "FROM_LANDSCAPE",
+                      {}
+                    ]
+                  ]
+                },
+                "headers": [],
+                "data": [],
+                "properties": {
+                  "properties": [
+                    {
+                      "@name": "headerSeparator",
+                      "@value": "|"
+                    },
+                    {
+                      "@name": "valueSeparator",
+                      "@value": "|"
+                    },
+                    {
+                      "@name": "ignorableSeparator",
+                      "@value": "|--"
+                    }
+                  ]
+                },
+                "propertiesAsString": "",
+                "namedParameters": []
+              }
+            },
+            "examplesTable": {
+              "tableAsString": "",
+              "tableTransformers": {
+                "transformers": [
+                  [
+                    "FORMATTING",
+                    {}
+                  ],
+                  [
+                    "REPLACING",
+                    {}
+                  ],
+                  [
+                    "FROM_LANDSCAPE",
+                    {}
+                  ]
+                ]
+              },
+              "headers": [],
+              "data": [],
+              "properties": {
+                "properties": [
+                  {
+                    "@name": "headerSeparator",
+                    "@value": "|"
+                  },
+                  {
+                    "@name": "valueSeparator",
+                    "@value": "|"
+                  },
+                  {
+                    "@name": "ignorableSeparator",
+                    "@value": "|--"
+                  }
+                ]
+              },
+              "propertiesAsString": "",
+              "namedParameters": []
+            },
+            "steps": [
+              "Given the user is on the Wikionary home page",
+              "When the user looks up the definition of the word 'banana'",
+              "Then they should see the definition 'Wrong answer dude'"
+            ]
+          },
+          "storyPath": "stories/consult_dictionary/LookUpBanana.story",
+          "allowed": true,
+          "normalPerformableScenario": {
+            "parameters": [],
+            "givenStories": [],
+            "beforeSteps": {
+              "matches": []
+            },
+            "steps": {
+              "matches": [],
+              "results": [
+                {
+                  "step": "Given the user is on the Wikionary home page",
+                  "type": "SUCCESSFUL",
+                  "parametrisedStep": "Given the user is on the Wikionary home page",
+                  "durationInMillis": 5809,
+                  "start": 1583600654229,
+                  "end": 1583600660038
+                },
+                {
+                  "step": "When the user looks up the definition of the word 'banana'",
+                  "type": "SUCCESSFUL",
+                  "parametrisedStep": "When the user looks up the definition of the word 'banana'",
+                  "durationInMillis": 4500,
+                  "start": 1583600660761,
+                  "end": 1583600665261
+                },
+                {
+                  "step": "Then they should see the definition 'Wrong answer dude'",
+                  "type": "FAILED",
+                  "throwable": {
+                    "detailMessage": "Then they should see the definition 'Wrong answer dude'",
+                    "cause": {
+                      "@class": "java.lang.AssertionError",
+                      "detailMessage": "\nExpected: a collection containing a string containing \"Wrong answer dude\"\n     but: was \"An elongated curved tropical fruit that grows in bunches and has a creamy flesh and a smooth skin.\n(Canada, US, Britain, Ireland) Especially, the sweet, yellow fruit of the Cavendish banana cultivar.\", was \"(Canada, US, Britain, Ireland) Especially, the sweet, yellow fruit of the Cavendish banana cultivar.\", was \"The tropical tree-like plant which bears clusters of bananas. The plant, usually of the genus Musa but sometimes also including plants from Ensete, has large, elongated leaves and is related to the plantain.\", was \"(uncountable) A yellow colour, like that of a banana's skin.\nbanana colour:  \", was \"(mildly derogatory, slang, ethnic slur) A person of Asian descent, especially a Chinese American, who has assimilated into Western culture or married a Caucasian (from the \"yellow\" outside and \"white\" inside). Compare coconut (“assimilated Hispanic or Black”) or Oreo (“Black person who is \"black outside\" and \"white inside\"”).\", was \"(nuclear physics) A banana equivalent dose.\", was \"(colloquial) A catamorphism (from the use of banana brackets in the notation).\", was \"(informal) a penis quotations ▼\", was \"\", was \"\", was \"\", was \"\", was \"\", was \"\"",
+                      "stackTrace": [
+                        "org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)",
+                        "org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:8)",
+                        "com.gdn.qa.modules.ui.training.behaviour.EndUserBehaviour.should_see_definition(EndUserBehaviour.java:27)",
+                        "com.gdn.qa.modules.ui.training.behaviour.EndUserBehaviour$$EnhancerByCGLIB$$c2d61b23.CGLIB$should_see_definition$4(<generated>)",
+                        "com.gdn.qa.modules.ui.training.behaviour.EndUserBehaviour$$EnhancerByCGLIB$$c2d61b23$$FastClassByCGLIB$$6fa069fc.invoke(<generated>)",
+                        "net.sf.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:228)",
+                        "net.thucydides.core.steps.StepInterceptor.invokeMethod(StepInterceptor.java:395)",
+                        "net.thucydides.core.steps.StepInterceptor.executeTestStepMethod(StepInterceptor.java:380)",
+                        "net.thucydides.core.steps.StepInterceptor.runTestStep(StepInterceptor.java:355)",
+                        "net.thucydides.core.steps.StepInterceptor.testStepResult(StepInterceptor.java:132)",
+                        "net.thucydides.core.steps.StepInterceptor.intercept(StepInterceptor.java:61)",
+                        "com.gdn.qa.modules.ui.training.behaviour.EndUserBehaviour$$EnhancerByCGLIB$$c2d61b23.should_see_definition(<generated>)",
+                        "com.gdn.qa.modules.ui.training.scenario.DefinitionScenario.thenTheyShouldSeeADefinitionContainingTheWords(DefinitionScenario.java:27)",
+                        "sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)",
+                        "sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)",
+                        "sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)",
+                        "java.lang.reflect.Method.invoke(Method.java:498)",
+                        "org.jbehave.core.steps.StepCreator$ParametrisedStep.perform(StepCreator.java:733)",
+                        "org.jbehave.core.embedder.PerformableTree$FineSoFar.run(PerformableTree.java:346)",
+                        "org.jbehave.core.embedder.PerformableTree$PerformableSteps.perform(PerformableTree.java:1090)",
+                        "org.jbehave.core.embedder.PerformableTree$AbstractPerformableScenario.performRestartableSteps(PerformableTree.java:955)",
+                        "org.jbehave.core.embedder.PerformableTree$NormalPerformableScenario.perform(PerformableTree.java:994)",
+                        "org.jbehave.core.embedder.PerformableTree$PerformableScenario.perform(PerformableTree.java:904)",
+                        "org.jbehave.core.embedder.PerformableTree$PerformableStory.performScenarios(PerformableTree.java:825)",
+                        "org.jbehave.core.embedder.PerformableTree$PerformableStory.perform(PerformableTree.java:798)",
+                        "org.jbehave.core.embedder.PerformableTree.performCancellable(PerformableTree.java:422)",
+                        "org.jbehave.core.embedder.PerformableTree.perform(PerformableTree.java:393)",
+                        "org.jbehave.core.embedder.StoryManager$EnqueuedStory.call(StoryManager.java:292)",
+                        "org.jbehave.core.embedder.StoryManager$EnqueuedStory.call(StoryManager.java:266)",
+                        "java.util.concurrent.FutureTask.run(FutureTask.java:266)",
+                        "java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)",
+                        "java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)",
+                        "java.lang.Thread.run(Thread.java:748)"
+                      ],
+                      "suppressedExceptions": [
+                        [],
+                        []
+                      ]
+                    },
+                    "stackTrace": [
+                      "org.jbehave.core.steps.StepCreator$ParametrisedStep.perform(StepCreator.java:752)",
+                      "org.jbehave.core.embedder.PerformableTree$FineSoFar.run(PerformableTree.java:346)",
+                      "org.jbehave.core.embedder.PerformableTree$PerformableSteps.perform(PerformableTree.java:1090)",
+                      "org.jbehave.core.embedder.PerformableTree$AbstractPerformableScenario.performRestartableSteps(PerformableTree.java:955)",
+                      "org.jbehave.core.embedder.PerformableTree$NormalPerformableScenario.perform(PerformableTree.java:994)",
+                      "org.jbehave.core.embedder.PerformableTree$PerformableScenario.perform(PerformableTree.java:904)",
+                      "org.jbehave.core.embedder.PerformableTree$PerformableStory.performScenarios(PerformableTree.java:825)",
+                      "org.jbehave.core.embedder.PerformableTree$PerformableStory.perform(PerformableTree.java:798)",
+                      "org.jbehave.core.embedder.PerformableTree.performCancellable(PerformableTree.java:422)",
+                      "org.jbehave.core.embedder.PerformableTree.perform(PerformableTree.java:393)",
+                      "org.jbehave.core.embedder.StoryManager$EnqueuedStory.call(StoryManager.java:292)",
+                      "org.jbehave.core.embedder.StoryManager$EnqueuedStory.call(StoryManager.java:266)",
+                      "java.util.concurrent.FutureTask.run(FutureTask.java:266)",
+                      "java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)",
+                      "java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)",
+                      "java.lang.Thread.run(Thread.java:748)"
+                    ],
+                    "suppressedExceptions": [
+                      [],
+                      []
+                    ],
+                    "uuid": "8da8bd48-31de-4033-95c3-7766e1086306"
+                  },
+                  "parametrisedStep": "Then they should see the definition 'Wrong answer dude'",
+                  "durationInMillis": 1131,
+                  "start": 1583600665959,
+                  "end": 1583600667090
+                }
+              ]
+            },
+            "afterSteps": {
+              "matches": []
+            },
+            "storyAndScenarioMeta": {
+              "properties": [
+                {
+                  "@name": "TestSuiteId",
+                  "@value": "10921024"
+                }
+              ]
+            },
+            "scenario": {
+              "title": "Looking up the definition of 'banana'",
+              "meta": {
+                "properties": []
+              },
+              "givenStories": {
+                "givenStories": [],
+                "givenStoriesAsString": "",
+                "examplesTable": {
+                  "tableAsString": "",
+                  "tableTransformers": {
+                    "transformers": [
+                      [
+                        "FORMATTING",
+                        {}
+                      ],
+                      [
+                        "REPLACING",
+                        {}
+                      ],
+                      [
+                        "FROM_LANDSCAPE",
+                        {}
+                      ]
+                    ]
+                  },
+                  "headers": [],
+                  "data": [],
+                  "properties": {
+                    "properties": [
+                      {
+                        "@name": "headerSeparator",
+                        "@value": "|"
+                      },
+                      {
+                        "@name": "valueSeparator",
+                        "@value": "|"
+                      },
+                      {
+                        "@name": "ignorableSeparator",
+                        "@value": "|--"
+                      }
+                    ]
+                  },
+                  "propertiesAsString": "",
+                  "namedParameters": []
+                }
+              },
+              "examplesTable": {
+                "tableAsString": "",
+                "tableTransformers": {
+                  "transformers": [
+                    [
+                      "FORMATTING",
+                      {}
+                    ],
+                    [
+                      "REPLACING",
+                      {}
+                    ],
+                    [
+                      "FROM_LANDSCAPE",
+                      {}
+                    ]
+                  ]
+                },
+                "headers": [],
+                "data": [],
+                "properties": {
+                  "properties": [
+                    {
+                      "@name": "headerSeparator",
+                      "@value": "|"
+                    },
+                    {
+                      "@name": "valueSeparator",
+                      "@value": "|"
+                    },
+                    {
+                      "@name": "ignorableSeparator",
+                      "@value": "|--"
+                    }
+                  ]
+                },
+                "propertiesAsString": "",
+                "namedParameters": []
+              },
+              "steps": [
+                "Given the user is on the Wikionary home page",
+                "When the user looks up the definition of the word 'banana'",
+                "Then they should see the definition 'Wrong answer dude'"
+              ]
+            }
+          },
+          "examplePerformableScenarios": [],
+          "status": "FAILED"
+        }
+      ],
+      "beforeSteps": {},
+      "afterSteps": {},
+      "timing": {
+        "durationInMillis": 13315,
+        "start": 1583600654113,
+        "end": 1583600667428
+      },
+      "givenStory": false
+    },
+    {
+      "story": {
+        "path": "stories/consult_dictionary/LookUpMango.story",
+        "description": {
+          "descriptionAsString": ""
+        },
+        "narrative": {
+          "inOrderTo": "talk better",
+          "asA": "n English student",
+          "iWantTo": "look up word definitions",
+          "soThat": ""
+        },
+        "meta": {
+          "properties": [
+            {
+              "@name": "TestSuiteId",
+              "@value": "10921024"
+            }
+          ]
+        },
+        "givenStories": {
+          "givenStories": [],
+          "givenStoriesAsString": "",
+          "examplesTable": {
+            "tableAsString": "",
+            "tableTransformers": {
+              "transformers": [
+                [
+                  "FORMATTING",
+                  {}
+                ],
+                [
+                  "REPLACING",
+                  {}
+                ],
+                [
+                  "FROM_LANDSCAPE",
+                  {}
+                ]
+              ]
+            },
+            "headers": [],
+            "data": [],
+            "properties": {
+              "properties": [
+                {
+                  "@name": "headerSeparator",
+                  "@value": "|"
+                },
+                {
+                  "@name": "valueSeparator",
+                  "@value": "|"
+                },
+                {
+                  "@name": "ignorableSeparator",
+                  "@value": "|--"
+                }
+              ]
+            },
+            "propertiesAsString": "",
+            "namedParameters": []
+          }
+        },
+        "lifecycle": {
+          "before": {
+            "steps": [
+              []
+            ]
+          },
+          "after": []
+        },
+        "scenarios": [
+          {
+            "title": "Looking up the definition of 'mango'",
+            "meta": {
+              "properties": []
+            },
+            "givenStories": {
+              "givenStories": [],
+              "givenStoriesAsString": "",
+              "examplesTable": {
+                "tableAsString": "",
+                "tableTransformers": {
+                  "transformers": [
+                    [
+                      "FORMATTING",
+                      {}
+                    ],
+                    [
+                      "REPLACING",
+                      {}
+                    ],
+                    [
+                      "FROM_LANDSCAPE",
+                      {}
+                    ]
+                  ]
+                },
+                "headers": [],
+                "data": [],
+                "properties": {
+                  "properties": [
+                    {
+                      "@name": "headerSeparator",
+                      "@value": "|"
+                    },
+                    {
+                      "@name": "valueSeparator",
+                      "@value": "|"
+                    },
+                    {
+                      "@name": "ignorableSeparator",
+                      "@value": "|--"
+                    }
+                  ]
+                },
+                "propertiesAsString": "",
+                "namedParameters": []
+              }
+            },
+            "examplesTable": {
+              "tableAsString": "",
+              "tableTransformers": {
+                "transformers": [
+                  [
+                    "FORMATTING",
+                    {}
+                  ],
+                  [
+                    "REPLACING",
+                    {}
+                  ],
+                  [
+                    "FROM_LANDSCAPE",
+                    {}
+                  ]
+                ]
+              },
+              "headers": [],
+              "data": [],
+              "properties": {
+                "properties": [
+                  {
+                    "@name": "headerSeparator",
+                    "@value": "|"
+                  },
+                  {
+                    "@name": "valueSeparator",
+                    "@value": "|"
+                  },
+                  {
+                    "@name": "ignorableSeparator",
+                    "@value": "|--"
+                  }
+                ]
+              },
+              "propertiesAsString": "",
+              "namedParameters": []
+            },
+            "steps": [
+              "Given the user is on the Wikionary home page",
+              "When the user looks up the definition of the word 'mango'",
+              "Then they should see the definition 'A tropical Asian fruit tree, Mangifera indica.'"
+            ]
+          }
+        ],
+        "name": "LookUpMango.story"
+      },
+      "localizedNarrative": "In order to talk better\nAs a n English student\nI want to look up word definitions",
+      "allowed": true,
+      "status": "SUCCESSFUL",
+      "givenStories": [],
+      "scenarios": [
+        {
+          "scenario": {
+            "title": "Looking up the definition of 'mango'",
+            "meta": {
+              "properties": []
+            },
+            "givenStories": {
+              "givenStories": [],
+              "givenStoriesAsString": "",
+              "examplesTable": {
+                "tableAsString": "",
+                "tableTransformers": {
+                  "transformers": [
+                    [
+                      "FORMATTING",
+                      {}
+                    ],
+                    [
+                      "REPLACING",
+                      {}
+                    ],
+                    [
+                      "FROM_LANDSCAPE",
+                      {}
+                    ]
+                  ]
+                },
+                "headers": [],
+                "data": [],
+                "properties": {
+                  "properties": [
+                    {
+                      "@name": "headerSeparator",
+                      "@value": "|"
+                    },
+                    {
+                      "@name": "valueSeparator",
+                      "@value": "|"
+                    },
+                    {
+                      "@name": "ignorableSeparator",
+                      "@value": "|--"
+                    }
+                  ]
+                },
+                "propertiesAsString": "",
+                "namedParameters": []
+              }
+            },
+            "examplesTable": {
+              "tableAsString": "",
+              "tableTransformers": {
+                "transformers": [
+                  [
+                    "FORMATTING",
+                    {}
+                  ],
+                  [
+                    "REPLACING",
+                    {}
+                  ],
+                  [
+                    "FROM_LANDSCAPE",
+                    {}
+                  ]
+                ]
+              },
+              "headers": [],
+              "data": [],
+              "properties": {
+                "properties": [
+                  {
+                    "@name": "headerSeparator",
+                    "@value": "|"
+                  },
+                  {
+                    "@name": "valueSeparator",
+                    "@value": "|"
+                  },
+                  {
+                    "@name": "ignorableSeparator",
+                    "@value": "|--"
+                  }
+                ]
+              },
+              "propertiesAsString": "",
+              "namedParameters": []
+            },
+            "steps": [
+              "Given the user is on the Wikionary home page",
+              "When the user looks up the definition of the word 'mango'",
+              "Then they should see the definition 'A tropical Asian fruit tree, Mangifera indica.'"
+            ]
+          },
+          "storyPath": "stories/consult_dictionary/LookUpMango.story",
+          "allowed": true,
+          "normalPerformableScenario": {
+            "parameters": [],
+            "givenStories": [],
+            "beforeSteps": {
+              "matches": []
+            },
+            "steps": {
+              "matches": [],
+              "results": [
+                {
+                  "step": "Given the user is on the Wikionary home page",
+                  "type": "SUCCESSFUL",
+                  "parametrisedStep": "Given the user is on the Wikionary home page",
+                  "durationInMillis": 6437,
+                  "start": 1583600667441,
+                  "end": 1583600673878
+                },
+                {
+                  "step": "When the user looks up the definition of the word 'mango'",
+                  "type": "SUCCESSFUL",
+                  "parametrisedStep": "When the user looks up the definition of the word 'mango'",
+                  "durationInMillis": 6325,
+                  "start": 1583600674983,
+                  "end": 1583600681308
+                },
+                {
+                  "step": "Then they should see the definition 'A tropical Asian fruit tree, Mangifera indica.'",
+                  "type": "SUCCESSFUL",
+                  "parametrisedStep": "Then they should see the definition 'A tropical Asian fruit tree, Mangifera indica.'",
+                  "durationInMillis": 1021,
+                  "start": 1583600682179,
+                  "end": 1583600683200
+                }
+              ]
+            },
+            "afterSteps": {
+              "matches": []
+            },
+            "storyAndScenarioMeta": {
+              "properties": [
+                {
+                  "@name": "TestSuiteId",
+                  "@value": "10921024"
+                }
+              ]
+            },
+            "scenario": {
+              "title": "Looking up the definition of 'mango'",
+              "meta": {
+                "properties": []
+              },
+              "givenStories": {
+                "givenStories": [],
+                "givenStoriesAsString": "",
+                "examplesTable": {
+                  "tableAsString": "",
+                  "tableTransformers": {
+                    "transformers": [
+                      [
+                        "FORMATTING",
+                        {}
+                      ],
+                      [
+                        "REPLACING",
+                        {}
+                      ],
+                      [
+                        "FROM_LANDSCAPE",
+                        {}
+                      ]
+                    ]
+                  },
+                  "headers": [],
+                  "data": [],
+                  "properties": {
+                    "properties": [
+                      {
+                        "@name": "headerSeparator",
+                        "@value": "|"
+                      },
+                      {
+                        "@name": "valueSeparator",
+                        "@value": "|"
+                      },
+                      {
+                        "@name": "ignorableSeparator",
+                        "@value": "|--"
+                      }
+                    ]
+                  },
+                  "propertiesAsString": "",
+                  "namedParameters": []
+                }
+              },
+              "examplesTable": {
+                "tableAsString": "",
+                "tableTransformers": {
+                  "transformers": [
+                    [
+                      "FORMATTING",
+                      {}
+                    ],
+                    [
+                      "REPLACING",
+                      {}
+                    ],
+                    [
+                      "FROM_LANDSCAPE",
+                      {}
+                    ]
+                  ]
+                },
+                "headers": [],
+                "data": [],
+                "properties": {
+                  "properties": [
+                    {
+                      "@name": "headerSeparator",
+                      "@value": "|"
+                    },
+                    {
+                      "@name": "valueSeparator",
+                      "@value": "|"
+                    },
+                    {
+                      "@name": "ignorableSeparator",
+                      "@value": "|--"
+                    }
+                  ]
+                },
+                "propertiesAsString": "",
+                "namedParameters": []
+              },
+              "steps": [
+                "Given the user is on the Wikionary home page",
+                "When the user looks up the definition of the word 'mango'",
+                "Then they should see the definition 'A tropical Asian fruit tree, Mangifera indica.'"
+              ]
+            }
+          },
+          "examplePerformableScenarios": [],
+          "status": "SUCCESSFUL"
+        }
+      ],
+      "beforeSteps": {},
+      "afterSteps": {},
+      "timing": {
+        "durationInMillis": 16198,
+        "start": 1583600667439,
+        "end": 1583600683637
+      },
+      "givenStory": false
+    },
+    {
+      "story": {
+        "path": "stories/consult_dictionary/LookUpPear.story",
+        "description": {
+          "descriptionAsString": ""
+        },
+        "narrative": {
+          "inOrderTo": "talk better",
+          "asA": "n English student",
+          "iWantTo": "look up word definitions",
+          "soThat": ""
+        },
+        "meta": {
+          "properties": [
+            {
+              "@name": "TestSuiteId",
+              "@value": "10921024"
+            }
+          ]
+        },
+        "givenStories": {
+          "givenStories": [],
+          "givenStoriesAsString": "",
+          "examplesTable": {
+            "tableAsString": "",
+            "tableTransformers": {
+              "transformers": [
+                [
+                  "FORMATTING",
+                  {}
+                ],
+                [
+                  "REPLACING",
+                  {}
+                ],
+                [
+                  "FROM_LANDSCAPE",
+                  {}
+                ]
+              ]
+            },
+            "headers": [],
+            "data": [],
+            "properties": {
+              "properties": [
+                {
+                  "@name": "headerSeparator",
+                  "@value": "|"
+                },
+                {
+                  "@name": "valueSeparator",
+                  "@value": "|"
+                },
+                {
+                  "@name": "ignorableSeparator",
+                  "@value": "|--"
+                }
+              ]
+            },
+            "propertiesAsString": "",
+            "namedParameters": []
+          }
+        },
+        "lifecycle": {
+          "before": {
+            "steps": [
+              []
+            ]
+          },
+          "after": []
+        },
+        "scenarios": [
+          {
+            "title": "Looking up the definition of 'pear'",
+            "meta": {
+              "properties": []
+            },
+            "givenStories": {
+              "givenStories": [],
+              "givenStoriesAsString": "",
+              "examplesTable": {
+                "tableAsString": "",
+                "tableTransformers": {
+                  "transformers": [
+                    [
+                      "FORMATTING",
+                      {}
+                    ],
+                    [
+                      "REPLACING",
+                      {}
+                    ],
+                    [
+                      "FROM_LANDSCAPE",
+                      {}
+                    ]
+                  ]
+                },
+                "headers": [],
+                "data": [],
+                "properties": {
+                  "properties": [
+                    {
+                      "@name": "headerSeparator",
+                      "@value": "|"
+                    },
+                    {
+                      "@name": "valueSeparator",
+                      "@value": "|"
+                    },
+                    {
+                      "@name": "ignorableSeparator",
+                      "@value": "|--"
+                    }
+                  ]
+                },
+                "propertiesAsString": "",
+                "namedParameters": []
+              }
+            },
+            "examplesTable": {
+              "tableAsString": "",
+              "tableTransformers": {
+                "transformers": [
+                  [
+                    "FORMATTING",
+                    {}
+                  ],
+                  [
+                    "REPLACING",
+                    {}
+                  ],
+                  [
+                    "FROM_LANDSCAPE",
+                    {}
+                  ]
+                ]
+              },
+              "headers": [],
+              "data": [],
+              "properties": {
+                "properties": [
+                  {
+                    "@name": "headerSeparator",
+                    "@value": "|"
+                  },
+                  {
+                    "@name": "valueSeparator",
+                    "@value": "|"
+                  },
+                  {
+                    "@name": "ignorableSeparator",
+                    "@value": "|--"
+                  }
+                ]
+              },
+              "propertiesAsString": "",
+              "namedParameters": []
+            },
+            "steps": [
+              "Given the user is on the Wikionary home page",
+              "When the user looks up the definition of the word 'pear'",
+              "Then they should see the definition 'An edible fruit produced by the pear tree, similar to an apple but elongated towards the stem.'"
+            ]
+          }
+        ],
+        "name": "LookUpPear.story"
+      },
+      "localizedNarrative": "In order to talk better\nAs a n English student\nI want to look up word definitions",
+      "allowed": true,
+      "status": "SUCCESSFUL",
+      "givenStories": [],
+      "scenarios": [
+        {
+          "scenario": {
+            "title": "Looking up the definition of 'pear'",
+            "meta": {
+              "properties": []
+            },
+            "givenStories": {
+              "givenStories": [],
+              "givenStoriesAsString": "",
+              "examplesTable": {
+                "tableAsString": "",
+                "tableTransformers": {
+                  "transformers": [
+                    [
+                      "FORMATTING",
+                      {}
+                    ],
+                    [
+                      "REPLACING",
+                      {}
+                    ],
+                    [
+                      "FROM_LANDSCAPE",
+                      {}
+                    ]
+                  ]
+                },
+                "headers": [],
+                "data": [],
+                "properties": {
+                  "properties": [
+                    {
+                      "@name": "headerSeparator",
+                      "@value": "|"
+                    },
+                    {
+                      "@name": "valueSeparator",
+                      "@value": "|"
+                    },
+                    {
+                      "@name": "ignorableSeparator",
+                      "@value": "|--"
+                    }
+                  ]
+                },
+                "propertiesAsString": "",
+                "namedParameters": []
+              }
+            },
+            "examplesTable": {
+              "tableAsString": "",
+              "tableTransformers": {
+                "transformers": [
+                  [
+                    "FORMATTING",
+                    {}
+                  ],
+                  [
+                    "REPLACING",
+                    {}
+                  ],
+                  [
+                    "FROM_LANDSCAPE",
+                    {}
+                  ]
+                ]
+              },
+              "headers": [],
+              "data": [],
+              "properties": {
+                "properties": [
+                  {
+                    "@name": "headerSeparator",
+                    "@value": "|"
+                  },
+                  {
+                    "@name": "valueSeparator",
+                    "@value": "|"
+                  },
+                  {
+                    "@name": "ignorableSeparator",
+                    "@value": "|--"
+                  }
+                ]
+              },
+              "propertiesAsString": "",
+              "namedParameters": []
+            },
+            "steps": [
+              "Given the user is on the Wikionary home page",
+              "When the user looks up the definition of the word 'pear'",
+              "Then they should see the definition 'An edible fruit produced by the pear tree, similar to an apple but elongated towards the stem.'"
+            ]
+          },
+          "storyPath": "stories/consult_dictionary/LookUpPear.story",
+          "allowed": true,
+          "normalPerformableScenario": {
+            "parameters": [],
+            "givenStories": [],
+            "beforeSteps": {
+              "matches": []
+            },
+            "steps": {
+              "matches": [],
+              "results": [
+                {
+                  "step": "Given the user is on the Wikionary home page",
+                  "type": "SUCCESSFUL",
+                  "parametrisedStep": "Given the user is on the Wikionary home page",
+                  "durationInMillis": 5870,
+                  "start": 1583600683661,
+                  "end": 1583600689531
+                },
+                {
+                  "step": "When the user looks up the definition of the word 'pear'",
+                  "type": "SUCCESSFUL",
+                  "parametrisedStep": "When the user looks up the definition of the word 'pear'",
+                  "durationInMillis": 3865,
+                  "start": 1583600690326,
+                  "end": 1583600694191
+                },
+                {
+                  "step": "Then they should see the definition 'An edible fruit produced by the pear tree, similar to an apple but elongated towards the stem.'",
+                  "type": "SUCCESSFUL",
+                  "parametrisedStep": "Then they should see the definition 'An edible fruit produced by the pear tree, similar to an apple but elongated towards the stem.'",
+                  "durationInMillis": 819,
+                  "start": 1583600694880,
+                  "end": 1583600695699
+                }
+              ]
+            },
+            "afterSteps": {
+              "matches": []
+            },
+            "storyAndScenarioMeta": {
+              "properties": [
+                {
+                  "@name": "TestSuiteId",
+                  "@value": "10921024"
+                }
+              ]
+            },
+            "scenario": {
+              "title": "Looking up the definition of 'pear'",
+              "meta": {
+                "properties": []
+              },
+              "givenStories": {
+                "givenStories": [],
+                "givenStoriesAsString": "",
+                "examplesTable": {
+                  "tableAsString": "",
+                  "tableTransformers": {
+                    "transformers": [
+                      [
+                        "FORMATTING",
+                        {}
+                      ],
+                      [
+                        "REPLACING",
+                        {}
+                      ],
+                      [
+                        "FROM_LANDSCAPE",
+                        {}
+                      ]
+                    ]
+                  },
+                  "headers": [],
+                  "data": [],
+                  "properties": {
+                    "properties": [
+                      {
+                        "@name": "headerSeparator",
+                        "@value": "|"
+                      },
+                      {
+                        "@name": "valueSeparator",
+                        "@value": "|"
+                      },
+                      {
+                        "@name": "ignorableSeparator",
+                        "@value": "|--"
+                      }
+                    ]
+                  },
+                  "propertiesAsString": "",
+                  "namedParameters": []
+                }
+              },
+              "examplesTable": {
+                "tableAsString": "",
+                "tableTransformers": {
+                  "transformers": [
+                    [
+                      "FORMATTING",
+                      {}
+                    ],
+                    [
+                      "REPLACING",
+                      {}
+                    ],
+                    [
+                      "FROM_LANDSCAPE",
+                      {}
+                    ]
+                  ]
+                },
+                "headers": [],
+                "data": [],
+                "properties": {
+                  "properties": [
+                    {
+                      "@name": "headerSeparator",
+                      "@value": "|"
+                    },
+                    {
+                      "@name": "valueSeparator",
+                      "@value": "|"
+                    },
+                    {
+                      "@name": "ignorableSeparator",
+                      "@value": "|--"
+                    }
+                  ]
+                },
+                "propertiesAsString": "",
+                "namedParameters": []
+              },
+              "steps": [
+                "Given the user is on the Wikionary home page",
+                "When the user looks up the definition of the word 'pear'",
+                "Then they should see the definition 'An edible fruit produced by the pear tree, similar to an apple but elongated towards the stem.'"
+              ]
+            }
+          },
+          "examplePerformableScenarios": [],
+          "status": "SUCCESSFUL"
+        }
+      ],
+      "beforeSteps": {},
+      "afterSteps": {},
+      "timing": {
+        "durationInMillis": 12472,
+        "start": 1583600683659,
+        "end": 1583600696131
+      },
+      "givenStory": false
+    }
+  ],
+  "scenarios": [
+    {
+      "scenario": {
+        "title": "Looking up the definition of 'banana'",
+        "meta": {
+          "properties": []
+        },
+        "givenStories": {
+          "givenStories": [],
+          "givenStoriesAsString": "",
+          "examplesTable": {
+            "tableAsString": "",
+            "tableTransformers": {
+              "transformers": [
+                [
+                  "FORMATTING",
+                  {}
+                ],
+                [
+                  "REPLACING",
+                  {}
+                ],
+                [
+                  "FROM_LANDSCAPE",
+                  {}
+                ]
+              ]
+            },
+            "headers": [],
+            "data": [],
+            "properties": {
+              "properties": [
+                {
+                  "@name": "headerSeparator",
+                  "@value": "|"
+                },
+                {
+                  "@name": "valueSeparator",
+                  "@value": "|"
+                },
+                {
+                  "@name": "ignorableSeparator",
+                  "@value": "|--"
+                }
+              ]
+            },
+            "propertiesAsString": "",
+            "namedParameters": []
+          }
+        },
+        "examplesTable": {
+          "tableAsString": "",
+          "tableTransformers": {
+            "transformers": [
+              [
+                "FORMATTING",
+                {}
+              ],
+              [
+                "REPLACING",
+                {}
+              ],
+              [
+                "FROM_LANDSCAPE",
+                {}
+              ]
+            ]
+          },
+          "headers": [],
+          "data": [],
+          "properties": {
+            "properties": [
+              {
+                "@name": "headerSeparator",
+                "@value": "|"
+              },
+              {
+                "@name": "valueSeparator",
+                "@value": "|"
+              },
+              {
+                "@name": "ignorableSeparator",
+                "@value": "|--"
+              }
+            ]
+          },
+          "propertiesAsString": "",
+          "namedParameters": []
+        },
+        "steps": [
+          "Given the user is on the Wikionary home page",
+          "When the user looks up the definition of the word 'banana'",
+          "Then they should see the definition 'Wrong answer dude'"
+        ]
+      },
+      "storyPath": "stories/consult_dictionary/LookUpBanana.story",
+      "allowed": true,
+      "normalPerformableScenario": {
+        "parameters": [],
+        "givenStories": [],
+        "beforeSteps": {
+          "matches": []
+        },
+        "steps": {
+          "matches": [],
+          "results": [
+            {
+              "step": "Given the user is on the Wikionary home page",
+              "type": "SUCCESSFUL",
+              "parametrisedStep": "Given the user is on the Wikionary home page",
+              "durationInMillis": 5809,
+              "start": 1583600654229,
+              "end": 1583600660038
+            },
+            {
+              "step": "When the user looks up the definition of the word 'banana'",
+              "type": "SUCCESSFUL",
+              "parametrisedStep": "When the user looks up the definition of the word 'banana'",
+              "durationInMillis": 4500,
+              "start": 1583600660761,
+              "end": 1583600665261
+            },
+            {
+              "step": "Then they should see the definition 'Wrong answer dude'",
+              "type": "FAILED",
+              "throwable": {
+                "detailMessage": "Then they should see the definition 'Wrong answer dude'",
+                "cause": {
+                  "@class": "java.lang.AssertionError",
+                  "detailMessage": "\nExpected: a collection containing a string containing \"Wrong answer dude\"\n     but: was \"An elongated curved tropical fruit that grows in bunches and has a creamy flesh and a smooth skin.\n(Canada, US, Britain, Ireland) Especially, the sweet, yellow fruit of the Cavendish banana cultivar.\", was \"(Canada, US, Britain, Ireland) Especially, the sweet, yellow fruit of the Cavendish banana cultivar.\", was \"The tropical tree-like plant which bears clusters of bananas. The plant, usually of the genus Musa but sometimes also including plants from Ensete, has large, elongated leaves and is related to the plantain.\", was \"(uncountable) A yellow colour, like that of a banana's skin.\nbanana colour:  \", was \"(mildly derogatory, slang, ethnic slur) A person of Asian descent, especially a Chinese American, who has assimilated into Western culture or married a Caucasian (from the \"yellow\" outside and \"white\" inside). Compare coconut (“assimilated Hispanic or Black”) or Oreo (“Black person who is \"black outside\" and \"white inside\"”).\", was \"(nuclear physics) A banana equivalent dose.\", was \"(colloquial) A catamorphism (from the use of banana brackets in the notation).\", was \"(informal) a penis quotations ▼\", was \"\", was \"\", was \"\", was \"\", was \"\", was \"\"",
+                  "stackTrace": [
+                    "org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)",
+                    "org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:8)",
+                    "com.gdn.qa.modules.ui.training.behaviour.EndUserBehaviour.should_see_definition(EndUserBehaviour.java:27)",
+                    "com.gdn.qa.modules.ui.training.behaviour.EndUserBehaviour$$EnhancerByCGLIB$$c2d61b23.CGLIB$should_see_definition$4(<generated>)",
+                    "com.gdn.qa.modules.ui.training.behaviour.EndUserBehaviour$$EnhancerByCGLIB$$c2d61b23$$FastClassByCGLIB$$6fa069fc.invoke(<generated>)",
+                    "net.sf.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:228)",
+                    "net.thucydides.core.steps.StepInterceptor.invokeMethod(StepInterceptor.java:395)",
+                    "net.thucydides.core.steps.StepInterceptor.executeTestStepMethod(StepInterceptor.java:380)",
+                    "net.thucydides.core.steps.StepInterceptor.runTestStep(StepInterceptor.java:355)",
+                    "net.thucydides.core.steps.StepInterceptor.testStepResult(StepInterceptor.java:132)",
+                    "net.thucydides.core.steps.StepInterceptor.intercept(StepInterceptor.java:61)",
+                    "com.gdn.qa.modules.ui.training.behaviour.EndUserBehaviour$$EnhancerByCGLIB$$c2d61b23.should_see_definition(<generated>)",
+                    "com.gdn.qa.modules.ui.training.scenario.DefinitionScenario.thenTheyShouldSeeADefinitionContainingTheWords(DefinitionScenario.java:27)",
+                    "sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)",
+                    "sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)",
+                    "sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)",
+                    "java.lang.reflect.Method.invoke(Method.java:498)",
+                    "org.jbehave.core.steps.StepCreator$ParametrisedStep.perform(StepCreator.java:733)",
+                    "org.jbehave.core.embedder.PerformableTree$FineSoFar.run(PerformableTree.java:346)",
+                    "org.jbehave.core.embedder.PerformableTree$PerformableSteps.perform(PerformableTree.java:1090)",
+                    "org.jbehave.core.embedder.PerformableTree$AbstractPerformableScenario.performRestartableSteps(PerformableTree.java:955)",
+                    "org.jbehave.core.embedder.PerformableTree$NormalPerformableScenario.perform(PerformableTree.java:994)",
+                    "org.jbehave.core.embedder.PerformableTree$PerformableScenario.perform(PerformableTree.java:904)",
+                    "org.jbehave.core.embedder.PerformableTree$PerformableStory.performScenarios(PerformableTree.java:825)",
+                    "org.jbehave.core.embedder.PerformableTree$PerformableStory.perform(PerformableTree.java:798)",
+                    "org.jbehave.core.embedder.PerformableTree.performCancellable(PerformableTree.java:422)",
+                    "org.jbehave.core.embedder.PerformableTree.perform(PerformableTree.java:393)",
+                    "org.jbehave.core.embedder.StoryManager$EnqueuedStory.call(StoryManager.java:292)",
+                    "org.jbehave.core.embedder.StoryManager$EnqueuedStory.call(StoryManager.java:266)",
+                    "java.util.concurrent.FutureTask.run(FutureTask.java:266)",
+                    "java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)",
+                    "java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)",
+                    "java.lang.Thread.run(Thread.java:748)"
+                  ],
+                  "suppressedExceptions": [
+                    [],
+                    []
+                  ]
+                },
+                "stackTrace": [
+                  "org.jbehave.core.steps.StepCreator$ParametrisedStep.perform(StepCreator.java:752)",
+                  "org.jbehave.core.embedder.PerformableTree$FineSoFar.run(PerformableTree.java:346)",
+                  "org.jbehave.core.embedder.PerformableTree$PerformableSteps.perform(PerformableTree.java:1090)",
+                  "org.jbehave.core.embedder.PerformableTree$AbstractPerformableScenario.performRestartableSteps(PerformableTree.java:955)",
+                  "org.jbehave.core.embedder.PerformableTree$NormalPerformableScenario.perform(PerformableTree.java:994)",
+                  "org.jbehave.core.embedder.PerformableTree$PerformableScenario.perform(PerformableTree.java:904)",
+                  "org.jbehave.core.embedder.PerformableTree$PerformableStory.performScenarios(PerformableTree.java:825)",
+                  "org.jbehave.core.embedder.PerformableTree$PerformableStory.perform(PerformableTree.java:798)",
+                  "org.jbehave.core.embedder.PerformableTree.performCancellable(PerformableTree.java:422)",
+                  "org.jbehave.core.embedder.PerformableTree.perform(PerformableTree.java:393)",
+                  "org.jbehave.core.embedder.StoryManager$EnqueuedStory.call(StoryManager.java:292)",
+                  "org.jbehave.core.embedder.StoryManager$EnqueuedStory.call(StoryManager.java:266)",
+                  "java.util.concurrent.FutureTask.run(FutureTask.java:266)",
+                  "java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)",
+                  "java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)",
+                  "java.lang.Thread.run(Thread.java:748)"
+                ],
+                "suppressedExceptions": [
+                  [],
+                  []
+                ],
+                "uuid": "8da8bd48-31de-4033-95c3-7766e1086306"
+              },
+              "parametrisedStep": "Then they should see the definition 'Wrong answer dude'",
+              "durationInMillis": 1131,
+              "start": 1583600665959,
+              "end": 1583600667090
+            }
+          ]
+        },
+        "afterSteps": {
+          "matches": []
+        },
+        "storyAndScenarioMeta": {
+          "properties": [
+            {
+              "@name": "TestSuiteId",
+              "@value": "10921024"
+            }
+          ]
+        },
+        "scenario": {
+          "title": "Looking up the definition of 'banana'",
+          "meta": {
+            "properties": []
+          },
+          "givenStories": {
+            "givenStories": [],
+            "givenStoriesAsString": "",
+            "examplesTable": {
+              "tableAsString": "",
+              "tableTransformers": {
+                "transformers": [
+                  [
+                    "FORMATTING",
+                    {}
+                  ],
+                  [
+                    "REPLACING",
+                    {}
+                  ],
+                  [
+                    "FROM_LANDSCAPE",
+                    {}
+                  ]
+                ]
+              },
+              "headers": [],
+              "data": [],
+              "properties": {
+                "properties": [
+                  {
+                    "@name": "headerSeparator",
+                    "@value": "|"
+                  },
+                  {
+                    "@name": "valueSeparator",
+                    "@value": "|"
+                  },
+                  {
+                    "@name": "ignorableSeparator",
+                    "@value": "|--"
+                  }
+                ]
+              },
+              "propertiesAsString": "",
+              "namedParameters": []
+            }
+          },
+          "examplesTable": {
+            "tableAsString": "",
+            "tableTransformers": {
+              "transformers": [
+                [
+                  "FORMATTING",
+                  {}
+                ],
+                [
+                  "REPLACING",
+                  {}
+                ],
+                [
+                  "FROM_LANDSCAPE",
+                  {}
+                ]
+              ]
+            },
+            "headers": [],
+            "data": [],
+            "properties": {
+              "properties": [
+                {
+                  "@name": "headerSeparator",
+                  "@value": "|"
+                },
+                {
+                  "@name": "valueSeparator",
+                  "@value": "|"
+                },
+                {
+                  "@name": "ignorableSeparator",
+                  "@value": "|--"
+                }
+              ]
+            },
+            "propertiesAsString": "",
+            "namedParameters": []
+          },
+          "steps": [
+            "Given the user is on the Wikionary home page",
+            "When the user looks up the definition of the word 'banana'",
+            "Then they should see the definition 'Wrong answer dude'"
+          ]
+        }
+      },
+      "examplePerformableScenarios": [],
+      "status": "FAILED"
+    },
+    {
+      "scenario": {
+        "title": "Looking up the definition of 'mango'",
+        "meta": {
+          "properties": []
+        },
+        "givenStories": {
+          "givenStories": [],
+          "givenStoriesAsString": "",
+          "examplesTable": {
+            "tableAsString": "",
+            "tableTransformers": {
+              "transformers": [
+                [
+                  "FORMATTING",
+                  {}
+                ],
+                [
+                  "REPLACING",
+                  {}
+                ],
+                [
+                  "FROM_LANDSCAPE",
+                  {}
+                ]
+              ]
+            },
+            "headers": [],
+            "data": [],
+            "properties": {
+              "properties": [
+                {
+                  "@name": "headerSeparator",
+                  "@value": "|"
+                },
+                {
+                  "@name": "valueSeparator",
+                  "@value": "|"
+                },
+                {
+                  "@name": "ignorableSeparator",
+                  "@value": "|--"
+                }
+              ]
+            },
+            "propertiesAsString": "",
+            "namedParameters": []
+          }
+        },
+        "examplesTable": {
+          "tableAsString": "",
+          "tableTransformers": {
+            "transformers": [
+              [
+                "FORMATTING",
+                {}
+              ],
+              [
+                "REPLACING",
+                {}
+              ],
+              [
+                "FROM_LANDSCAPE",
+                {}
+              ]
+            ]
+          },
+          "headers": [],
+          "data": [],
+          "properties": {
+            "properties": [
+              {
+                "@name": "headerSeparator",
+                "@value": "|"
+              },
+              {
+                "@name": "valueSeparator",
+                "@value": "|"
+              },
+              {
+                "@name": "ignorableSeparator",
+                "@value": "|--"
+              }
+            ]
+          },
+          "propertiesAsString": "",
+          "namedParameters": []
+        },
+        "steps": [
+          "Given the user is on the Wikionary home page",
+          "When the user looks up the definition of the word 'mango'",
+          "Then they should see the definition 'A tropical Asian fruit tree, Mangifera indica.'"
+        ]
+      },
+      "storyPath": "stories/consult_dictionary/LookUpMango.story",
+      "allowed": true,
+      "normalPerformableScenario": {
+        "parameters": [],
+        "givenStories": [],
+        "beforeSteps": {
+          "matches": []
+        },
+        "steps": {
+          "matches": [],
+          "results": [
+            {
+              "step": "Given the user is on the Wikionary home page",
+              "type": "SUCCESSFUL",
+              "parametrisedStep": "Given the user is on the Wikionary home page",
+              "durationInMillis": 6437,
+              "start": 1583600667441,
+              "end": 1583600673878
+            },
+            {
+              "step": "When the user looks up the definition of the word 'mango'",
+              "type": "SUCCESSFUL",
+              "parametrisedStep": "When the user looks up the definition of the word 'mango'",
+              "durationInMillis": 6325,
+              "start": 1583600674983,
+              "end": 1583600681308
+            },
+            {
+              "step": "Then they should see the definition 'A tropical Asian fruit tree, Mangifera indica.'",
+              "type": "SUCCESSFUL",
+              "parametrisedStep": "Then they should see the definition 'A tropical Asian fruit tree, Mangifera indica.'",
+              "durationInMillis": 1021,
+              "start": 1583600682179,
+              "end": 1583600683200
+            }
+          ]
+        },
+        "afterSteps": {
+          "matches": []
+        },
+        "storyAndScenarioMeta": {
+          "properties": [
+            {
+              "@name": "TestSuiteId",
+              "@value": "10921024"
+            }
+          ]
+        },
+        "scenario": {
+          "title": "Looking up the definition of 'mango'",
+          "meta": {
+            "properties": []
+          },
+          "givenStories": {
+            "givenStories": [],
+            "givenStoriesAsString": "",
+            "examplesTable": {
+              "tableAsString": "",
+              "tableTransformers": {
+                "transformers": [
+                  [
+                    "FORMATTING",
+                    {}
+                  ],
+                  [
+                    "REPLACING",
+                    {}
+                  ],
+                  [
+                    "FROM_LANDSCAPE",
+                    {}
+                  ]
+                ]
+              },
+              "headers": [],
+              "data": [],
+              "properties": {
+                "properties": [
+                  {
+                    "@name": "headerSeparator",
+                    "@value": "|"
+                  },
+                  {
+                    "@name": "valueSeparator",
+                    "@value": "|"
+                  },
+                  {
+                    "@name": "ignorableSeparator",
+                    "@value": "|--"
+                  }
+                ]
+              },
+              "propertiesAsString": "",
+              "namedParameters": []
+            }
+          },
+          "examplesTable": {
+            "tableAsString": "",
+            "tableTransformers": {
+              "transformers": [
+                [
+                  "FORMATTING",
+                  {}
+                ],
+                [
+                  "REPLACING",
+                  {}
+                ],
+                [
+                  "FROM_LANDSCAPE",
+                  {}
+                ]
+              ]
+            },
+            "headers": [],
+            "data": [],
+            "properties": {
+              "properties": [
+                {
+                  "@name": "headerSeparator",
+                  "@value": "|"
+                },
+                {
+                  "@name": "valueSeparator",
+                  "@value": "|"
+                },
+                {
+                  "@name": "ignorableSeparator",
+                  "@value": "|--"
+                }
+              ]
+            },
+            "propertiesAsString": "",
+            "namedParameters": []
+          },
+          "steps": [
+            "Given the user is on the Wikionary home page",
+            "When the user looks up the definition of the word 'mango'",
+            "Then they should see the definition 'A tropical Asian fruit tree, Mangifera indica.'"
+          ]
+        }
+      },
+      "examplePerformableScenarios": [],
+      "status": "SUCCESSFUL"
+    },
+    {
+      "scenario": {
+        "title": "Looking up the definition of 'pear'",
+        "meta": {
+          "properties": []
+        },
+        "givenStories": {
+          "givenStories": [],
+          "givenStoriesAsString": "",
+          "examplesTable": {
+            "tableAsString": "",
+            "tableTransformers": {
+              "transformers": [
+                [
+                  "FORMATTING",
+                  {}
+                ],
+                [
+                  "REPLACING",
+                  {}
+                ],
+                [
+                  "FROM_LANDSCAPE",
+                  {}
+                ]
+              ]
+            },
+            "headers": [],
+            "data": [],
+            "properties": {
+              "properties": [
+                {
+                  "@name": "headerSeparator",
+                  "@value": "|"
+                },
+                {
+                  "@name": "valueSeparator",
+                  "@value": "|"
+                },
+                {
+                  "@name": "ignorableSeparator",
+                  "@value": "|--"
+                }
+              ]
+            },
+            "propertiesAsString": "",
+            "namedParameters": []
+          }
+        },
+        "examplesTable": {
+          "tableAsString": "",
+          "tableTransformers": {
+            "transformers": [
+              [
+                "FORMATTING",
+                {}
+              ],
+              [
+                "REPLACING",
+                {}
+              ],
+              [
+                "FROM_LANDSCAPE",
+                {}
+              ]
+            ]
+          },
+          "headers": [],
+          "data": [],
+          "properties": {
+            "properties": [
+              {
+                "@name": "headerSeparator",
+                "@value": "|"
+              },
+              {
+                "@name": "valueSeparator",
+                "@value": "|"
+              },
+              {
+                "@name": "ignorableSeparator",
+                "@value": "|--"
+              }
+            ]
+          },
+          "propertiesAsString": "",
+          "namedParameters": []
+        },
+        "steps": [
+          "Given the user is on the Wikionary home page",
+          "When the user looks up the definition of the word 'pear'",
+          "Then they should see the definition 'An edible fruit produced by the pear tree, similar to an apple but elongated towards the stem.'"
+        ]
+      },
+      "storyPath": "stories/consult_dictionary/LookUpPear.story",
+      "allowed": true,
+      "normalPerformableScenario": {
+        "parameters": [],
+        "givenStories": [],
+        "beforeSteps": {
+          "matches": []
+        },
+        "steps": {
+          "matches": [],
+          "results": [
+            {
+              "step": "Given the user is on the Wikionary home page",
+              "type": "SUCCESSFUL",
+              "parametrisedStep": "Given the user is on the Wikionary home page",
+              "durationInMillis": 5870,
+              "start": 1583600683661,
+              "end": 1583600689531
+            },
+            {
+              "step": "When the user looks up the definition of the word 'pear'",
+              "type": "SUCCESSFUL",
+              "parametrisedStep": "When the user looks up the definition of the word 'pear'",
+              "durationInMillis": 3865,
+              "start": 1583600690326,
+              "end": 1583600694191
+            },
+            {
+              "step": "Then they should see the definition 'An edible fruit produced by the pear tree, similar to an apple but elongated towards the stem.'",
+              "type": "SUCCESSFUL",
+              "parametrisedStep": "Then they should see the definition 'An edible fruit produced by the pear tree, similar to an apple but elongated towards the stem.'",
+              "durationInMillis": 819,
+              "start": 1583600694880,
+              "end": 1583600695699
+            }
+          ]
+        },
+        "afterSteps": {
+          "matches": []
+        },
+        "storyAndScenarioMeta": {
+          "properties": [
+            {
+              "@name": "TestSuiteId",
+              "@value": "10921024"
+            }
+          ]
+        },
+        "scenario": {
+          "title": "Looking up the definition of 'pear'",
+          "meta": {
+            "properties": []
+          },
+          "givenStories": {
+            "givenStories": [],
+            "givenStoriesAsString": "",
+            "examplesTable": {
+              "tableAsString": "",
+              "tableTransformers": {
+                "transformers": [
+                  [
+                    "FORMATTING",
+                    {}
+                  ],
+                  [
+                    "REPLACING",
+                    {}
+                  ],
+                  [
+                    "FROM_LANDSCAPE",
+                    {}
+                  ]
+                ]
+              },
+              "headers": [],
+              "data": [],
+              "properties": {
+                "properties": [
+                  {
+                    "@name": "headerSeparator",
+                    "@value": "|"
+                  },
+                  {
+                    "@name": "valueSeparator",
+                    "@value": "|"
+                  },
+                  {
+                    "@name": "ignorableSeparator",
+                    "@value": "|--"
+                  }
+                ]
+              },
+              "propertiesAsString": "",
+              "namedParameters": []
+            }
+          },
+          "examplesTable": {
+            "tableAsString": "",
+            "tableTransformers": {
+              "transformers": [
+                [
+                  "FORMATTING",
+                  {}
+                ],
+                [
+                  "REPLACING",
+                  {}
+                ],
+                [
+                  "FROM_LANDSCAPE",
+                  {}
+                ]
+              ]
+            },
+            "headers": [],
+            "data": [],
+            "properties": {
+              "properties": [
+                {
+                  "@name": "headerSeparator",
+                  "@value": "|"
+                },
+                {
+                  "@name": "valueSeparator",
+                  "@value": "|"
+                },
+                {
+                  "@name": "ignorableSeparator",
+                  "@value": "|--"
+                }
+              ]
+            },
+            "propertiesAsString": "",
+            "namedParameters": []
+          },
+          "steps": [
+            "Given the user is on the Wikionary home page",
+            "When the user looks up the definition of the word 'pear'",
+            "Then they should see the definition 'An edible fruit produced by the pear tree, similar to an apple but elongated towards the stem.'"
+          ]
+        }
+      },
+      "examplePerformableScenarios": [],
+      "status": "SUCCESSFUL"
+    }
+  ]
+}}
