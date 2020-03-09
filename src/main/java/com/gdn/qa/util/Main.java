@@ -69,12 +69,6 @@ public class Main extends AbstractMojo {
   @Parameter(defaultValue = "CUCUMBER")
   private String reportsFrom;
 
-  /**
-   * @parameter
-   */
-  @Parameter
-  private String reportsPath;
-
   @Override
   public void execute() throws MojoExecutionException, MojoFailureException {
     System.out.println("===Process Started===");
@@ -89,10 +83,10 @@ public class Main extends AbstractMojo {
       if (type == null) {
         type = SupportedReports.CUCUMBER;
       }
-      if (reportsPath == null || reportsPath.trim().isEmpty()) {
+      if (sourceDir == null || sourceDir.trim().isEmpty()) {
         BadakReporter.getReader(type, testLinkData).writeToTestLink();
       } else {
-        BadakReporter.getReader(type, testLinkData, reportsPath).writeToTestLink();
+        BadakReporter.getReader(type, testLinkData, sourceDir).writeToTestLink();
       }
     } catch (Exception e) {
       e.printStackTrace();

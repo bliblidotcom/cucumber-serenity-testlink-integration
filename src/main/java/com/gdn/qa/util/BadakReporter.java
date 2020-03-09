@@ -15,11 +15,11 @@ import java.io.File;
 public class BadakReporter {
   private static final String DEFAULT_FOLDER = System.getProperty("user.dir");
   private static final String CUCUMBER_FOLDER =
-      DEFAULT_FOLDER + File.separator + "target/destination/";
+      "target/destination/";
   private static final String EARLGREY_FOLDER =
-      DEFAULT_FOLDER + File.separator + "target/destination/";
+       "target/destination/";
   private static final String JBEHAVE_FOLDER =
-      DEFAULT_FOLDER + File.separator + "target/jbehave/view/";
+      "target/jbehave/view/";
 
   public static void printBanner() {
     System.out.println(
