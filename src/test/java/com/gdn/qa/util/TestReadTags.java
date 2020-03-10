@@ -5,7 +5,7 @@ import com.gdn.qa.util.model.TestLinkData;
 import org.junit.Test;
 
 public class TestReadTags {
-  @Test
+ /* @Test
   public void testCucumberFromFolder() throws Exception {
     String testlinkURL = "https://testlink.gdn-app.com/lib/api/xmlrpc/v1/xmlrpc.php";
     String devKey = "aa0eb2386227576295d65b753ab60a5f";
@@ -23,7 +23,7 @@ public class TestReadTags {
     BadakReporter.getReader(SupportedReports.CUCUMBER, testLinkData, cucumberPath)
         .writeToTestLink();
   }
-
+*//*
   @Test
   public void testCucumberWithBackground() throws Exception {
     String testlinkURL = "https://testlink.gdn-app.com/lib/api/xmlrpc/v1/xmlrpc.php";
@@ -41,7 +41,7 @@ public class TestReadTags {
         .setPlatFormName(platformName);
     BadakReporter.getReader(SupportedReports.CUCUMBER, testLinkData, cucumberPath)
         .writeToTestLink();
-  }
+  }*//*
 
   @Test
   public void testCucumberWithFailure() throws Exception {
@@ -80,6 +80,6 @@ public class TestReadTags {
         .setPlatFormName(platformName);
     BadakReporter.getReader(SupportedReports.CUCUMBER, testLinkData, cucumberPath)
         .writeToTestLink();
-  }
+  }*/
 
 }
