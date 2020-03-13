@@ -1,5 +1,6 @@
 Cucumber Serenity Testlink Integration
 --------------------------
+[![Build Status](https://travis-ci.org/bliblidotcom/cucumber-serenity-testlink-integration.svg?branch=master)](https://travis-ci.org/bliblidotcom/cucumber-serenity-testlink-integration)
 This is a Plugin for integrating your cucumber test to Testlink via API 
 
 It will Create, Update , and Report your test Result in testlink based on your cucumber Steps
