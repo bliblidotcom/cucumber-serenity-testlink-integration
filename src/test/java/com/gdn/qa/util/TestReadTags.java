@@ -5,8 +5,9 @@ import com.gdn.qa.util.model.TestLinkData;
 import org.junit.Test;
 
 public class TestReadTags {
- /* @Test
+  @Test
   public void testCucumberFromFolder() throws Exception {
+    long startTime = System.nanoTime();
     String testlinkURL = "https://testlink.gdn-app.com/lib/api/xmlrpc/v1/xmlrpc.php";
     String devKey = "aa0eb2386227576295d65b753ab60a5f";
     String projectName = "Surabaya";
@@ -22,10 +23,14 @@ public class TestReadTags {
         .setPlatFormName(platformName);
     BadakReporter.getReader(SupportedReports.CUCUMBER, testLinkData, cucumberPath)
         .writeToTestLink();
+
+    long endTime = System.nanoTime();
+    System.out.println("Total execution time in second : " + (endTime - startTime) / 1000000000);
   }
-*//*
+
   @Test
   public void testCucumberWithBackground() throws Exception {
+    long startTime = System.nanoTime();
     String testlinkURL = "https://testlink.gdn-app.com/lib/api/xmlrpc/v1/xmlrpc.php";
     String devKey = "aa0eb2386227576295d65b753ab60a5f";
     String projectName = "Surabaya";
@@ -41,10 +46,14 @@ public class TestReadTags {
         .setPlatFormName(platformName);
     BadakReporter.getReader(SupportedReports.CUCUMBER, testLinkData, cucumberPath)
         .writeToTestLink();
-  }*//*
+
+    long endTime = System.nanoTime();
+    System.out.println("Total execution time in second : " + (endTime - startTime) / 1000000000);
+  }
 
   @Test
   public void testCucumberWithFailure() throws Exception {
+    long startTime = System.nanoTime();
     String testlinkURL = "https://testlink.gdn-app.com/lib/api/xmlrpc/v1/xmlrpc.php";
     String devKey = "aa0eb2386227576295d65b753ab60a5f";
     String projectName = "Surabaya";
@@ -60,17 +69,21 @@ public class TestReadTags {
         .setPlatFormName(platformName);
     BadakReporter.getReader(SupportedReports.CUCUMBER, testLinkData, cucumberPath)
         .writeToTestLink();
+
+    long endTime = System.nanoTime();
+    System.out.println("Total execution time in second : " + (endTime - startTime) / 1000000000);
   }
 
   @Test
   public void testCucumberHuge() throws Exception {
+    long startTime = System.nanoTime();
     String testlinkURL = "https://testlink.gdn-app.com/lib/api/xmlrpc/v1/xmlrpc.php";
     String devKey = "aa0eb2386227576295d65b753ab60a5f";
     String projectName = "Neo-Loyalty";
     String testPlanName = "TEST";
     String buildName = "Staging";
     String platformName = "API";
-    String cucumberPath = "/src/test/resources/cucumber-huge.json";
+    String cucumberPath = "/src/test/resources/cucumber/cucumber-huge.json";
     System.out.println(cucumberPath);
     TestLinkData testLinkData = new TestLinkData().setUrlTestlink(testlinkURL)
         .setDEVKEY(devKey)
@@ -80,6 +93,9 @@ public class TestReadTags {
         .setPlatFormName(platformName);
     BadakReporter.getReader(SupportedReports.CUCUMBER, testLinkData, cucumberPath)
         .writeToTestLink();
-  }*/
+
+    long endTime = System.nanoTime();
+    System.out.println("Total execution time in second : " + (endTime - startTime) / 1000000000);
+  }
 
 }
