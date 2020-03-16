@@ -29,12 +29,12 @@ public class CucumberTestResultReader extends BaseTestResultReader<List<Cucumber
     Map<Integer, Map<String, ScenarioData>> groupedFeature = new ConcurrentHashMap<>();
 
     System.out.println("Populating scenarios from feature :");
-    reports.parallelStream().forEach(feature -> {
+    reports.parallelStream().forEachOrdered(feature -> {
       System.out.println(feature.getName());
       String summary =
           String.format("Feature : %s, %s", feature.getName(), feature.getDescription());
       List<String[]> steps = new ArrayList<>();
-      feature.getElements().parallelStream().forEach(element -> {
+      feature.getElements().parallelStream().forEachOrdered(element -> {
         ScenarioData scenarioData = new ScenarioData();
         if (element.getType().equalsIgnoreCase("background")) {
           steps.addAll(0, readSteps(element.getSteps()));
