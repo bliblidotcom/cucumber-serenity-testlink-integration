@@ -106,8 +106,7 @@ public abstract class BaseTestResultReader<T> {
           if (testSuiteId != null && testSuiteId > 0) {
             TestLinkPlugin plugin =
                 new TestLinkPlugin(connection, testProject, testPlan, build, platFormName);
-            plugin.linkTestCases(testSuiteId, groupedFeature.get(testSuiteId));
-            linked += groupedFeature.get(testSuiteId).size();
+            linked += plugin.linkTestCases(testSuiteId, groupedFeature.get(testSuiteId));
           } else {
             for (String name : groupedFeature.get(testSuiteId).keySet()) {
               System.out.println(groupedFeature.get(testSuiteId).get(name).getDetailToPrint());

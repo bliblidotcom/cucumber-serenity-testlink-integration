@@ -17,7 +17,7 @@
         <junit.version>4.12</junit.version>
         <schema.validator.version>1.3.0</schema.validator.version>
         <fasterxml.jackson.version>2.9.7</fasterxml.jackson.version>
-        <testlink.java.api.version>1.9.19-0</testlink.java.api.version>
+        <testlink.java.api.version>1.9.20-0</testlink.java.api.version>
     </properties>
 
     <scm>
