@@ -1,6 +1,7 @@
 package com.gdn.qa.util.reader;
 
 import com.gdn.qa.util.model.ScenarioData;
+import com.gdn.qa.util.model.TagsReader;
 import com.gdn.qa.util.model.TestLinkData;
 import com.gdn.qa.util.model.jbehave.JbehaveReport;
 import com.gdn.qa.util.model.jbehave.Property;
@@ -15,7 +16,8 @@ import java.util.stream.IntStream;
 /**
  * @author yunaz.ramadhan on 3/7/2020
  */
-public class JBehaveTestResultReader extends BaseTestResultReader<JbehaveReport> {
+public class JBehaveTestResultReader extends BaseTestResultReader<JbehaveReport>
+    implements TagsReader<List<Property>> {
   public JBehaveTestResultReader(TestLinkData testLinkData, String reportFolder) throws Exception {
     super(testLinkData, reportFolder);
   }
@@ -33,9 +35,10 @@ public class JBehaveTestResultReader extends BaseTestResultReader<JbehaveReport>
 
         story.getScenarios().parallelStream().forEach(scenario -> {
           ScenarioData scenarioData = new ScenarioData();
-          Integer testSuiteId = getTestSuiteId(scenario.getNormalPerformableScenario()
-              .getStoryAndScenarioMeta()
-              .getProperties());
+          Integer testSuiteId = getIdNumberFromString(getValueFromTags("testsuiteid",
+              scenario.getNormalPerformableScenario().getStoryAndScenarioMeta().getProperties()));
+          String testLinkId = getValueFromTags("testlinkid",
+              scenario.getNormalPerformableScenario().getStoryAndScenarioMeta().getProperties());
           testSuiteId = testSuiteId == null ? -1 : testSuiteId;
 
           List<String[]> steps = new ArrayList<>();
@@ -67,7 +70,7 @@ public class JBehaveTestResultReader extends BaseTestResultReader<JbehaveReport>
           scenarioData.setName(scenario.getScenario().getTitle());
           scenarioData.setSummary(summary);
           scenarioData.setTestCase(constructTestCase(testSuiteId,
-              null,
+              testLinkId,
               scenario.getScenario().getTitle(),
               summary,
               status,
@@ -80,7 +83,7 @@ public class JBehaveTestResultReader extends BaseTestResultReader<JbehaveReport>
               status,
               scenarioData.getReasonFail(),
               testSuiteId.toString(),
-              ""));
+              testLinkId));
           if (groupedFeature.containsKey(testSuiteId)) {
             Map<String, ScenarioData> scenarios = groupedFeature.get(testSuiteId);
             scenarios.put(scenario.getScenario().getTitle(), scenarioData);
@@ -94,21 +97,6 @@ public class JBehaveTestResultReader extends BaseTestResultReader<JbehaveReport>
       });
     }
     return groupedFeature;
-  }
-
-  private Integer getTestSuiteId(List<Property> properties) {
-    Integer testSuiteId = null;
-    try {
-      Optional<Property> selected = properties.parallelStream()
-          .filter(e -> e.getName().equalsIgnoreCase("testsuiteid"))
-          .findFirst();
-      if (selected.isPresent()) {
-        testSuiteId = Integer.valueOf(selected.get().getValue());
-      }
-    } catch (Exception ignored) {
-      return null;
-    }
-    return testSuiteId;
   }
 
   private List<String[]> readSteps(List<Result> steps) {
@@ -147,6 +135,22 @@ public class JBehaveTestResultReader extends BaseTestResultReader<JbehaveReport>
 
         }
       }
+    }
+    return result;
+  }
+
+  @Override
+  public String getValueFromTags(String tagName, List<Property> tags) {
+    String result = null;
+    try {
+      Optional<Property> selected = tags.parallelStream()
+          .filter(e -> e.getName().equalsIgnoreCase(tagName.toLowerCase()))
+          .findFirst();
+      if (selected.isPresent()) {
+        result = selected.get().getValue().trim();
+      }
+    } catch (Exception ignored) {
+      return null;
     }
     return result;
   }

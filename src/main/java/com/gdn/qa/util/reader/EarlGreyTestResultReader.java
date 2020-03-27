@@ -41,7 +41,7 @@ public class EarlGreyTestResultReader extends BaseTestResultReader<EarlGreyModel
           reports.getTestableSummaries().get(0).getTestName().split("_")[1].replace("()", "");
       resultTest.parallelStream().forEach(subTest -> {
         System.out.println("Test " + subTest.getTestName());
-        Integer testSuiteId = -1;
+        Integer testSuiteId;
         try {
           testSuiteId = Integer.valueOf(subTest.getTestName().split("_")[2]);
         } catch (Exception ignored) {

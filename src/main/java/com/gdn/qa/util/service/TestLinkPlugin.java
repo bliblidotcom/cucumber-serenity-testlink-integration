@@ -83,6 +83,65 @@ public class TestLinkPlugin {
         null);
   }
 
+  private boolean checkDuplicateState(TestCase previous, ScenarioData currentData) {
+    boolean updated = false;
+    if (previous != null && currentData != null) {
+      if (previous.getSteps().size() == currentData.getTestCase().getSteps().size()) {
+        //check test steps definition
+        List<String> actual =
+            previous.getSteps().stream().map(TestCaseStep::getActions).collect(Collectors.toList());
+        List<String> expected = currentData.getTestCase()
+            .getSteps()
+            .stream()
+            .map(TestCaseStep::getActions)
+            .collect(Collectors.toList());
+        if (!actual.equals(expected)) {
+          //test step definition changed
+          updated = updateTestCaseDataToTestLink(previous,
+              currentData,
+              CheckDuplicateTestStatus.STEPS_CHANGED);
+        } else {
+          //nothing changed update the result
+          updated = updateTestCaseDataToTestLink(previous,
+              currentData,
+              CheckDuplicateTestStatus.EXISTING_TEST_CASE);
+        }
+      } else {
+        //test step added
+        updated = updateTestCaseDataToTestLink(previous,
+            currentData,
+            CheckDuplicateTestStatus.STEPS_ADDED);
+      }
+    }
+    return updated;
+  }
+
+  public Integer linkTestCasesUsingTestLinkId(Map<String, ScenarioData> scenariosData) {
+    AtomicReference<Integer> result = new AtomicReference<>(0);
+    scenariosData.entrySet().parallelStream().forEach(entry -> {
+      System.out.println(entry.getValue().getDetailToPrint());
+      String fullExternalId = entry.getValue().getTestCase().getFullExternalId();
+      if (fullExternalId != null && !fullExternalId.trim().isEmpty()) {
+        try {
+          ScenarioData currentData = entry.getValue();
+          TestCase previous = this.connection.getTestCaseByExternalId(currentData.getTestCase()
+              .getFullExternalId()
+              .trim()
+              .toUpperCase(), null);
+          if (checkDuplicateState(previous, currentData)) {
+            result.getAndSet(result.get() + 1);
+          }
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      } else {
+        System.out.println("Scenario will be skipped");
+      }
+    });
+
+    return result.get();
+  }
+
   public Integer linkTestCases(Integer testSuiteID, Map<String, ScenarioData> scenariosData) {
     Integer result = 0;
     if (testSuiteID != null) {
@@ -119,38 +178,9 @@ public class TestLinkPlugin {
           //compare the rest
           for (TestCase previous : existingTestCases) {
             ScenarioData currentData = scenariosData.getOrDefault(previous.getName(), null);
-            boolean updated = false;
             if (currentData != null) {
               System.out.println(currentData.getDetailToPrint());
-              if (previous.getSteps().size() == currentData.getTestCase().getSteps().size()) {
-                //check test steps definition
-                List<String> actual = previous.getSteps()
-                    .stream()
-                    .map(TestCaseStep::getActions)
-                    .collect(Collectors.toList());
-                List<String> expected = currentData.getTestCase()
-                    .getSteps()
-                    .stream()
-                    .map(TestCaseStep::getActions)
-                    .collect(Collectors.toList());
-                if (!actual.equals(expected)) {
-                  //test step definition changed
-                  updated = updateTestCaseDataToTestLink(previous,
-                      currentData,
-                      CheckDuplicateTestStatus.STEPS_CHANGED);
-                } else {
-                  //nothing changed update the result
-                  updated = updateTestCaseDataToTestLink(previous,
-                      currentData,
-                      CheckDuplicateTestStatus.EXISTING_TEST_CASE);
-                }
-              } else {
-                //test step added
-                updated = updateTestCaseDataToTestLink(previous,
-                    currentData,
-                    CheckDuplicateTestStatus.STEPS_ADDED);
-              }
-              if (updated) {
+              if (checkDuplicateState(previous, currentData)) {
                 result++;
               }
             }
@@ -223,22 +253,35 @@ public class TestLinkPlugin {
         break;
     }
 
-    result = this.connection.updateTestCase(previous);
-    if (Boolean.parseBoolean(result.get("status_ok").toString())) {
-      System.out.println("Done updating!");
+    try {
+      result = this.connection.updateTestCase(previous);
+      if (Boolean.parseBoolean(result.get("status_ok").toString())) {
+        System.out.println("Done updating!");
+      } else {
+        System.out.println("Error updating!");
+        return false;
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+      return false;
     }
 
-    Execution last = this.connection.getLastExecutionResult(tpID.getId(),
-        previous.getId(),
-        previous.getFullExternalId(),
-        null,
-        null,
-        buildId,
-        buildName,
-        null);
-    if (last != null) {
-      this.connection.deleteExecution(last.getId());
+    try {
+      Execution last = this.connection.getLastExecutionResult(tpID.getId(),
+          previous.getId(),
+          previous.getFullExternalId(),
+          null,
+          null,
+          buildId,
+          buildName,
+          null);
+      if (last != null) {
+        this.connection.deleteExecution(last.getId());
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
     }
+    addTestCaseToTestPlan(previous);
     return updateTestCaseResult(scenarioData, previous);
   }
 
@@ -246,30 +289,32 @@ public class TestLinkPlugin {
       Map<String, ScenarioData> scenariosData) {
     AtomicReference<Integer> result = new AtomicReference<>(0);
     if (scenariosData != null && !scenariosData.isEmpty()) {
-      scenariosData.entrySet().parallelStream().forEach(entry -> {
-        System.out.println(entry.getValue().getDetailToPrint());
-        System.out.println("Test case not found, creating new test case.....");
-        TestCase testCase = this.connection.createTestCase(entry.getValue().getName(),
-            testSuiteID,
-            projectID,
-            entry.getValue().getTestCase().getAuthorLogin(),
-            entry.getValue().getSummary(),
-            entry.getValue().getTestCase().getSteps(),
-            entry.getValue().getTestCase().getPreconditions(),
-            TestCaseStatus.FINAL,
-            TestImportance.MEDIUM,
-            ExecutionType.AUTOMATED,
-            1,
-            null,
-            true,
-            ActionOnDuplicate.CREATE_NEW_VERSION);
+      if (testSuiteID != null) {
+        scenariosData.entrySet().parallelStream().forEach(entry -> {
+          System.out.println(entry.getValue().getDetailToPrint());
+          System.out.println("Test case not found, creating new test case.....");
+          TestCase testCase = this.connection.createTestCase(entry.getValue().getName(),
+              testSuiteID,
+              projectID,
+              entry.getValue().getTestCase().getAuthorLogin(),
+              entry.getValue().getSummary(),
+              entry.getValue().getTestCase().getSteps(),
+              entry.getValue().getTestCase().getPreconditions(),
+              TestCaseStatus.FINAL,
+              TestImportance.MEDIUM,
+              ExecutionType.AUTOMATED,
+              1,
+              null,
+              true,
+              ActionOnDuplicate.CREATE_NEW_VERSION);
 
-        testCase = this.connection.getTestCase(testCase.getId(), null, testCase.getVersion());
-        addTestCaseToTestPlan(testCase);
-        if (updateTestCaseResult(entry.getValue(), testCase)) {
-          result.getAndSet(result.get() + 1);
-        }
-      });
+          testCase = this.connection.getTestCase(testCase.getId(), null, testCase.getVersion());
+          addTestCaseToTestPlan(testCase);
+          if (updateTestCaseResult(entry.getValue(), testCase)) {
+            result.getAndSet(result.get() + 1);
+          }
+        });
+      }
     }
     return result.get();
   }
