@@ -3,7 +3,7 @@
 
     <groupId>com.blibli.oss.qa.util</groupId>
     <artifactId>cucumber-serenity-testlink-integration</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <packaging>maven-plugin</packaging>
 
     <name>cucumber-serenity-testlink-integration</name>
