@@ -7,6 +7,12 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Integrating with serenity
@@ -49,35 +55,47 @@ public class Main extends AbstractMojo {
         System.out.println("===End Of Config===");
         System.out.println("===Process Started===");
 
-        String cucumberPath;
+        // Scanning File under destination folder
+        String cucumberFolder;
         if (sourceDir == null || sourceDir.isEmpty()) {
-            cucumberPath =
-                    System.getProperty("user.dir") + File.separator + "target/destination/cucumber.json";
+            cucumberFolder =
+                    System.getProperty("user.dir") + File.separator + "target/destination/";
         } else {
-            cucumberPath = sourceDir;
+            cucumberFolder = sourceDir;
         }
 
-        // check if cucumebr json exist
+        try (Stream<Path> walk = Files.walk(Paths.get(cucumberFolder))) {
+            List<String> cucumberPaths = walk.filter(Files::isRegularFile)
+                    .map(x -> x.toString()).filter(s -> s.toLowerCase().endsWith(".json")).collect(Collectors.toList());
+            // check if cucumebr json exist
+            System.out.print(" File Scanned : ");
+            cucumberPaths.forEach(System.out::println);
+            System.out.println("=================================================");
+            cucumberPaths.parallelStream().forEach(cucumberPath -> {
+                try {
+                    System.out.println("Cucumber Path : " + cucumberPath);
+                    File cucumberFile = new File(cucumberPath);
+                    TestResultReader testResultReader = new TestResultReader();
+                    testResultReader.initialize(testlinkURL,
+                            devKey,
+                            projectName,
+                            testPlanName,
+                            buildName,
+                            platformName);
 
-        System.out.println("Cucumber Path : " + cucumberPath);
-        File cucumberFile = new File(cucumberPath);
-        try {
-            TestResultReader testResultReader = new TestResultReader();
-            testResultReader.initialize(testlinkURL,
-                    devKey,
-                    projectName,
-                    testPlanName,
-                    buildName,
-                    platformName);
+                    if (!cucumberFile.exists()) {
+                        System.out.println("=== Run with Jbehave ===");
+                        testResultReader.readResult();
+                    } else {
+                        System.out.println("=== Run with Cucumber ===");
+                        testResultReader.readWithCucumber(cucumberPath);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
 
-            if (!cucumberFile.exists()) {
-                System.out.println("=== Run with Jbehave ===");
-                testResultReader.readResult();
-            } else {
-                System.out.println("=== Run with Cucumber ===");
-                testResultReader.readWithCucumber(cucumberPath);
-            }
-        } catch (Exception e) {
+        }catch (Exception e){
             e.printStackTrace();
         }
 
