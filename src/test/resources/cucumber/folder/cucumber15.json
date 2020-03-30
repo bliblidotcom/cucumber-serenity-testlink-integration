@@ -197,6 +197,9 @@
           },
           {
             "name": "@TestSuiteId\u003d"
+          },
+          {
+            "name": "@TestLinkId\u003dSBY-280"
           }
         ]
       },
@@ -379,7 +382,7 @@
             "name": "@WishlistComponentFeature"
           },
           {
-            "name": "@TestSuiteId\u003d10921024"
+            "name": "@TestSuiteId\u003d14231950"
           },
           {
             "name": "@13Feb"
@@ -394,13 +397,13 @@
             "name": "@Incomplete"
           },
           {
-            "name": "@TestSuiteId\u003d10921024"
+            "name": "@TestSuiteId\u003d14231950"
           }
         ]
       }
     ],
     "name": "Verify the functionality in wishlist page",
-    "description": "Ability: User has the ability to test wishlist\nBusiness Need:\n  We are specifying the need of bla bla bla",
+    "description": "Ability: User has the ability to test wishlist\nBusiness Need:\n  We are specifying the need of aku bla bla",
     "id": "verify-the-functionality-in-wishlist-page",
     "keyword": "Feature",
     "uri": "src/test/resources/features/Component Test/Wishlist/Wishlist.feature",
@@ -414,7 +417,7 @@
         }
       },
       {
-        "name": "@TestSuiteId\u003d10921024",
+        "name": "@TestSuiteId\u003d14231950",
         "type": "Tag",
         "location": {
           "line": 1,

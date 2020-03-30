@@ -1,6 +1,7 @@
 package com.gdn.qa.util.reader;
 
 import com.gdn.qa.util.model.ScenarioData;
+import com.gdn.qa.util.model.TagsReader;
 import com.gdn.qa.util.model.TestLinkData;
 import com.gdn.qa.util.model.cucumber.CucumberModel;
 import com.gdn.qa.util.model.cucumber.Rows;
@@ -18,7 +19,8 @@ import java.util.stream.IntStream;
 /**
  * @author yunaz.ramadhan on 3/1/2020
  */
-public class CucumberTestResultReader extends BaseTestResultReader<List<CucumberModel>> {
+public class CucumberTestResultReader extends BaseTestResultReader<List<CucumberModel>>
+    implements TagsReader<List<Tags>> {
   public CucumberTestResultReader(TestLinkData testLinkData, String reportFolder) throws Exception {
     super(testLinkData, reportFolder);
   }
@@ -40,7 +42,15 @@ public class CucumberTestResultReader extends BaseTestResultReader<List<Cucumber
           steps.addAll(0, readSteps(element.getSteps()));
         } else if (element.getType().equalsIgnoreCase("scenario")) {
           steps.addAll(readSteps(element.getSteps()));
-          Integer testSuiteId = getTestSuiteIdFromTags(element.getTags());
+          Integer testSuiteId =
+              getIdNumberFromString(getValueFromTags("testsuiteid", element.getTags()));
+          String testLinkId = null;
+          try {
+            String[] externalIdWithTag =
+                getValueFromTags("testlinkid", element.getTags()).split("=");
+            testLinkId = externalIdWithTag.length < 2 ? null : externalIdWithTag[1];
+          } catch (Exception ignored) {
+          }
           testSuiteId = testSuiteId == null ? -1 : testSuiteId;
           String reason = "";
           Integer indexFail = null;
@@ -63,7 +73,7 @@ public class CucumberTestResultReader extends BaseTestResultReader<List<Cucumber
           scenarioData.setName(element.getName());
           scenarioData.setSummary(summary);
           scenarioData.setTestCase(constructTestCase(testSuiteId,
-              null,
+              testLinkId,
               element.getName(),
               summary,
               status,
@@ -75,8 +85,8 @@ public class CucumberTestResultReader extends BaseTestResultReader<List<Cucumber
               element.getName(),
               status,
               scenarioData.getReasonFail(),
-              String.valueOf(testSuiteId),
-              ""));
+              testSuiteId < 0 ? "" : String.valueOf(testSuiteId),
+              testLinkId == null ? "" : testLinkId));
           if (groupedFeature.containsKey(testSuiteId)) {
             Map<String, ScenarioData> scenarios = groupedFeature.get(testSuiteId);
             scenarios.put(element.getName(), scenarioData);
@@ -193,22 +203,17 @@ public class CucumberTestResultReader extends BaseTestResultReader<List<Cucumber
     return addedRow.toString();
   }
 
-  private Integer getTestSuiteIdFromTags(List<Tags> tags) {
+  @Override
+  public String getValueFromTags(String tagName, List<Tags> tags) {
     try {
-      AtomicReference<Integer> result = new AtomicReference<>();
+      AtomicReference<String> result = new AtomicReference<>();
       if (tags != null && !tags.isEmpty()) {
         List<Tags> filteredTags = tags.parallelStream()
-            .filter(e -> e.getName().toLowerCase().contains("testsuiteid"))
+            .filter(e -> e.getName().toLowerCase().contains(tagName.toLowerCase()))
             .collect(Collectors.toList());
         if (!filteredTags.isEmpty()) {
           filteredTags.forEach(tag -> {
-            String testSuiteIdInString = tag.getName().replaceAll("[^\\d.]", "");
-            testSuiteIdInString = testSuiteIdInString.trim();
-            if (!testSuiteIdInString.isEmpty()) {
-              result.set(Integer.valueOf(testSuiteIdInString));
-            } else {
-              result.set(null);
-            }
+            result.set(tag.getName().trim());
           });
         }
       }

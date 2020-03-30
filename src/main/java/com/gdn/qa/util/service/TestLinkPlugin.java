@@ -7,6 +7,7 @@ import com.gdn.qa.util.constant.CheckDuplicateTestStatus;
 import com.gdn.qa.util.model.ScenarioData;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 /**
@@ -82,7 +83,67 @@ public class TestLinkPlugin {
         null);
   }
 
-  public void linkTestCases(Integer testSuiteID, Map<String, ScenarioData> scenariosData) {
+  private boolean checkDuplicateState(TestCase previous, ScenarioData currentData) {
+    boolean updated = false;
+    if (previous != null && currentData != null) {
+      if (previous.getSteps().size() == currentData.getTestCase().getSteps().size()) {
+        //check test steps definition
+        List<String> actual =
+            previous.getSteps().stream().map(TestCaseStep::getActions).collect(Collectors.toList());
+        List<String> expected = currentData.getTestCase()
+            .getSteps()
+            .stream()
+            .map(TestCaseStep::getActions)
+            .collect(Collectors.toList());
+        if (!actual.equals(expected)) {
+          //test step definition changed
+          updated = updateTestCaseDataToTestLink(previous,
+              currentData,
+              CheckDuplicateTestStatus.STEPS_CHANGED);
+        } else {
+          //nothing changed update the result
+          updated = updateTestCaseDataToTestLink(previous,
+              currentData,
+              CheckDuplicateTestStatus.EXISTING_TEST_CASE);
+        }
+      } else {
+        //test step added
+        updated = updateTestCaseDataToTestLink(previous,
+            currentData,
+            CheckDuplicateTestStatus.STEPS_ADDED);
+      }
+    }
+    return updated;
+  }
+
+  public Integer linkTestCasesUsingTestLinkId(Map<String, ScenarioData> scenariosData) {
+    AtomicReference<Integer> result = new AtomicReference<>(0);
+    scenariosData.entrySet().parallelStream().forEach(entry -> {
+      System.out.println(entry.getValue().getDetailToPrint());
+      String fullExternalId = entry.getValue().getTestCase().getFullExternalId();
+      if (fullExternalId != null && !fullExternalId.trim().isEmpty()) {
+        try {
+          ScenarioData currentData = entry.getValue();
+          TestCase previous = this.connection.getTestCaseByExternalId(currentData.getTestCase()
+              .getFullExternalId()
+              .trim()
+              .toUpperCase(), null);
+          if (checkDuplicateState(previous, currentData)) {
+            result.getAndSet(result.get() + 1);
+          }
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      } else {
+        System.out.println("Scenario will be skipped");
+      }
+    });
+
+    return result.get();
+  }
+
+  public Integer linkTestCases(Integer testSuiteID, Map<String, ScenarioData> scenariosData) {
+    Integer result = 0;
     if (testSuiteID != null) {
       boolean isTestSuiteExists = false;
       try {
@@ -103,13 +164,13 @@ public class TestLinkPlugin {
         }
         if (existingTestCases.isEmpty()) {
           //No duplicate insert all test cases
-          insertScenarioDataToTestLink(testSuiteID, scenariosData);
+          result += insertScenarioDataToTestLink(testSuiteID, scenariosData);
         } else {
           //May contain duplicate, check the test cases
           Set<String> existingTestCaseName =
               existingTestCases.stream().map(TestCase::getName).collect(Collectors.toSet());
           //insert non existing test case to test suite
-          insertScenarioDataToTestLink(testSuiteID,
+          result += insertScenarioDataToTestLink(testSuiteID,
               scenariosData.entrySet()
                   .parallelStream()
                   .filter(e -> !existingTestCaseName.contains(e.getKey()))
@@ -119,33 +180,8 @@ public class TestLinkPlugin {
             ScenarioData currentData = scenariosData.getOrDefault(previous.getName(), null);
             if (currentData != null) {
               System.out.println(currentData.getDetailToPrint());
-              if (previous.getSteps().size() == currentData.getTestCase().getSteps().size()) {
-                //check test steps definition
-                List<String> actual = previous.getSteps()
-                    .stream()
-                    .map(TestCaseStep::getActions)
-                    .collect(Collectors.toList());
-                List<String> expected = currentData.getTestCase()
-                    .getSteps()
-                    .stream()
-                    .map(TestCaseStep::getActions)
-                    .collect(Collectors.toList());
-                if (!actual.equals(expected)) {
-                  //test step definition changed
-                  updateTestCaseDataToTestLink(previous,
-                      currentData,
-                      CheckDuplicateTestStatus.STEPS_CHANGED);
-                } else {
-                  //nothing changed update the result
-                  updateTestCaseDataToTestLink(previous,
-                      currentData,
-                      CheckDuplicateTestStatus.EXISTING_TEST_CASE);
-                }
-              } else {
-                //test step added
-                updateTestCaseDataToTestLink(previous,
-                    currentData,
-                    CheckDuplicateTestStatus.STEPS_ADDED);
+              if (checkDuplicateState(previous, currentData)) {
+                result++;
               }
             }
           }
@@ -154,6 +190,7 @@ public class TestLinkPlugin {
     } else {
       System.out.println("No testSuite ID defined, process will be terminated");
     }
+    return result;
   }
 
   private void addTestCaseToTestPlan(TestCase testCase) {
@@ -166,7 +203,7 @@ public class TestLinkPlugin {
         1);
   }
 
-  private void updateTestCaseResult(ScenarioData scenarioData, TestCase testCase) {
+  private Boolean updateTestCaseResult(ScenarioData scenarioData, TestCase testCase) {
     Integer internal = testCase.getId();
     Integer external = testCase.getExternalId();
 
@@ -179,14 +216,28 @@ public class TestLinkPlugin {
           scenarioData.getTestCase().getAuthorLogin(),
           scenarioData.getDuration().intValue());
       System.out.println(reportTCResponse.getMessage());
+      return reportTCResponse.getMessage().toLowerCase().contains("success");
     } catch (Exception e) {
       e.printStackTrace();
+      return false;
     }
   }
 
-  private void updateTestCaseDataToTestLink(TestCase previous,
+  private Boolean updateTestCaseDataToTestLink(TestCase previous,
       ScenarioData scenarioData,
       CheckDuplicateTestStatus duplicate) {
+    previous.setExecutionStatus(scenarioData.getTestCase().getExecutionStatus());
+    previous.setExecutionType(scenarioData.getTestCase().getExecutionType());
+    previous.setTestImportance(scenarioData.getTestCase().getTestImportance());
+    previous.setTestCaseStatus(scenarioData.getTestCase().getTestCaseStatus());
+    previous.setSteps(scenarioData.getTestCase().getSteps());
+    previous.setCheckDuplicatedName(scenarioData.getTestCase().getCheckDuplicatedName());
+    previous.setActionOnDuplicatedName(scenarioData.getTestCase().getActionOnDuplicatedName());
+    previous.setSummary(scenarioData.getTestCase().getSummary());
+    previous.setPreconditions(scenarioData.getTestCase().getPreconditions());
+    previous.setAuthorLogin(scenarioData.getTestCase().getAuthorLogin());
+
+    Map<String, Object> result;
     switch (duplicate) {
       case EXISTING_TEST_CASE:
         System.out.println("Test case not changed, updating execution result.....");
@@ -201,47 +252,71 @@ public class TestLinkPlugin {
         System.out.println("Test case not found, creating new test case.....");
         break;
     }
-    previous.setExecutionStatus(scenarioData.getTestCase().getExecutionStatus());
-    previous.setExecutionType(scenarioData.getTestCase().getExecutionType());
-    previous.setTestImportance(scenarioData.getTestCase().getTestImportance());
-    previous.setTestCaseStatus(scenarioData.getTestCase().getTestCaseStatus());
-    previous.setSteps(scenarioData.getTestCase().getSteps());
-    previous.setCheckDuplicatedName(scenarioData.getTestCase().getCheckDuplicatedName());
-    previous.setActionOnDuplicatedName(scenarioData.getTestCase().getActionOnDuplicatedName());
-    previous.setSummary(scenarioData.getTestCase().getSummary());
-    previous.setPreconditions(scenarioData.getTestCase().getPreconditions());
-    previous.setAuthorLogin(scenarioData.getTestCase().getAuthorLogin());
-    this.connection.updateTestCase(previous);
+
+    try {
+      result = this.connection.updateTestCase(previous);
+      if (Boolean.parseBoolean(result.get("status_ok").toString())) {
+        System.out.println("Done updating!");
+      } else {
+        System.out.println("Error updating!");
+        return false;
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+      return false;
+    }
+
+    try {
+      Execution last = this.connection.getLastExecutionResult(tpID.getId(),
+          previous.getId(),
+          previous.getFullExternalId(),
+          null,
+          null,
+          buildId,
+          buildName,
+          null);
+      if (last != null) {
+        this.connection.deleteExecution(last.getId());
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
     addTestCaseToTestPlan(previous);
-    updateTestCaseResult(scenarioData, previous);
+    return updateTestCaseResult(scenarioData, previous);
   }
 
-  private void insertScenarioDataToTestLink(Integer testSuiteID,
+  private Integer insertScenarioDataToTestLink(Integer testSuiteID,
       Map<String, ScenarioData> scenariosData) {
+    AtomicReference<Integer> result = new AtomicReference<>(0);
     if (scenariosData != null && !scenariosData.isEmpty()) {
-      scenariosData.entrySet().parallelStream().forEach(entry -> {
-        System.out.println(entry.getValue().getDetailToPrint());
-        System.out.println("Test case not found, creating new test case.....");
-        TestCase testCase = this.connection.createTestCase(entry.getValue().getName(),
-            testSuiteID,
-            projectID,
-            entry.getValue().getTestCase().getAuthorLogin(),
-            entry.getValue().getSummary(),
-            entry.getValue().getTestCase().getSteps(),
-            entry.getValue().getTestCase().getPreconditions(),
-            TestCaseStatus.FINAL,
-            TestImportance.MEDIUM,
-            ExecutionType.AUTOMATED,
-            1,
-            null,
-            true,
-            ActionOnDuplicate.CREATE_NEW_VERSION);
+      if (testSuiteID != null) {
+        scenariosData.entrySet().parallelStream().forEach(entry -> {
+          System.out.println(entry.getValue().getDetailToPrint());
+          System.out.println("Test case not found, creating new test case.....");
+          TestCase testCase = this.connection.createTestCase(entry.getValue().getName(),
+              testSuiteID,
+              projectID,
+              entry.getValue().getTestCase().getAuthorLogin(),
+              entry.getValue().getSummary(),
+              entry.getValue().getTestCase().getSteps(),
+              entry.getValue().getTestCase().getPreconditions(),
+              TestCaseStatus.FINAL,
+              TestImportance.MEDIUM,
+              ExecutionType.AUTOMATED,
+              1,
+              null,
+              true,
+              ActionOnDuplicate.CREATE_NEW_VERSION);
 
-        testCase = this.connection.getTestCase(testCase.getId(), null, testCase.getVersion());
-        addTestCaseToTestPlan(testCase);
-        updateTestCaseResult(entry.getValue(), testCase);
-      });
+          testCase = this.connection.getTestCase(testCase.getId(), null, testCase.getVersion());
+          addTestCaseToTestPlan(testCase);
+          if (updateTestCaseResult(entry.getValue(), testCase)) {
+            result.getAndSet(result.get() + 1);
+          }
+        });
+      }
     }
+    return result.get();
   }
 
   private List<TestCaseStepResult> parseTestCaseResult(TestCase testCase, Integer indexFail) {

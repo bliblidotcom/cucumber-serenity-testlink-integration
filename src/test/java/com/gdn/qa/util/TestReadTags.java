@@ -97,5 +97,4 @@ public class TestReadTags {
     long endTime = System.nanoTime();
     System.out.println("Total execution time in second : " + (endTime - startTime) / 1000000000);
   }
-
 }

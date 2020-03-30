@@ -54,7 +54,7 @@ public abstract class BaseTestResultReader<T> {
   }
 
   TestCase constructTestCase(Integer testSuiteId,
-      Integer testLinkId,
+      String fullExternalId,
       String name,
       String summary,
       Boolean status,
@@ -72,8 +72,9 @@ public abstract class BaseTestResultReader<T> {
     testCase.setCheckDuplicatedName(true);
     testCase.setExecutionOrder(0);
     testCase.setTestSuiteId(testSuiteId);
-    testCase.setInternalId(testLinkId);
-    testCase.setExternalId(testLinkId);
+    testCase.setInternalId(null);
+    testCase.setExternalId(getIdNumberFromString(fullExternalId));
+    testCase.setFullExternalId(fullExternalId);
     testCase.setExecutionStatus(status ? ExecutionStatus.PASSED : ExecutionStatus.FAILED);
     return testCase;
   }
@@ -103,16 +104,12 @@ public abstract class BaseTestResultReader<T> {
       for (Integer testSuiteId : groupedFeature.keySet()) {
         try {
           countTestCaseResult(groupedFeature.get(testSuiteId));
+          TestLinkPlugin plugin =
+              new TestLinkPlugin(connection, testProject, testPlan, build, platFormName);
           if (testSuiteId != null && testSuiteId > 0) {
-            TestLinkPlugin plugin =
-                new TestLinkPlugin(connection, testProject, testPlan, build, platFormName);
-            plugin.linkTestCases(testSuiteId, groupedFeature.get(testSuiteId));
-            linked += groupedFeature.get(testSuiteId).size();
+            linked += plugin.linkTestCases(testSuiteId, groupedFeature.get(testSuiteId));
           } else {
-            for (String name : groupedFeature.get(testSuiteId).keySet()) {
-              System.out.println(groupedFeature.get(testSuiteId).get(name).getDetailToPrint());
-              System.out.println("Scenario will be skipped");
-            }
+            linked += plugin.linkTestCasesUsingTestLinkId(groupedFeature.get(testSuiteId));
           }
         } catch (Exception e) {
           e.printStackTrace();
@@ -154,6 +151,17 @@ public abstract class BaseTestResultReader<T> {
     long temp = data.values().stream().filter(ScenarioData::getPassed).count();
     totalPass += temp;
     totalFail += data.size() - temp;
+  }
+
+  Integer getIdNumberFromString(String fullExternalId) {
+    if (fullExternalId != null && !fullExternalId.trim().isEmpty()) {
+      try {
+        return Integer.valueOf(fullExternalId.replaceAll("[^\\d.]", ""));
+      }catch (Exception e){
+        return null;
+      }
+    }
+    return null;
   }
 
   String printDetail(List<String[]> steps,
