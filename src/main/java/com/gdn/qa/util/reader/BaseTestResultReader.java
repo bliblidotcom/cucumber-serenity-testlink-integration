@@ -85,7 +85,6 @@ public abstract class BaseTestResultReader<T> {
       TestCaseStep caseStep = new TestCaseStep();
       caseStep.setActions(steps.get(i)[0]);
       caseStep.setNumber(i + 1);
-      caseStep.setExpectedResults(" ");
       caseStep.setActive(true);
       caseStep.setExecutionType(ExecutionType.AUTOMATED);
       caseStep.setId(i + 1);
@@ -157,7 +156,7 @@ public abstract class BaseTestResultReader<T> {
     if (fullExternalId != null && !fullExternalId.trim().isEmpty()) {
       try {
         return Integer.valueOf(fullExternalId.replaceAll("[^\\d.]", ""));
-      }catch (Exception e){
+      } catch (Exception e) {
         return null;
       }
     }

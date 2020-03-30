@@ -244,9 +244,11 @@ public class TestLinkPlugin {
         break;
       case STEPS_ADDED:
         System.out.println("Test case's steps added, updating to new version.....");
+        previous.setVersion(previous.getVersion() + 1);
         break;
       case STEPS_CHANGED:
         System.out.println("Test case's steps changed, updating to new version.....");
+        previous.setVersion(previous.getVersion() + 1);
         break;
       default:
         System.out.println("Test case not found, creating new test case.....");
