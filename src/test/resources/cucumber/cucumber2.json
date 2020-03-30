@@ -1,0 +1,86 @@
+[
+  {
+    "line": 2,
+    "elements": [
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 9381740528,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.startingAppium()"
+            }
+          }
+        ],
+        "line": 5,
+        "name": "test athens",
+        "description": "",
+        "id": "test-athens;test-athens",
+        "after": [
+          {
+            "result": {
+              "duration": 437490,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.teardownAppium()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 566540665,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "User open home page",
+            "match": {
+              "location": "SeoulSteps.test()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1296648,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "User open home page 222",
+            "match": {
+              "location": "SeoulSteps.test2()"
+            },
+            "keyword": "Given "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@TestsuiteId\u003d12076109"
+          },
+          {
+            "name": "@testAthens"
+          }
+        ]
+      }
+    ],
+    "name": "test athens",
+    "description": "",
+    "id": "test-athens",
+    "keyword": "Feature",
+    "uri": "src/test/resources/features/athensTest.feature",
+    "tags": [
+      {
+        "name": "@TestsuiteId\u003d12076109",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 1
+        }
+      }
+    ]
+  }
+]

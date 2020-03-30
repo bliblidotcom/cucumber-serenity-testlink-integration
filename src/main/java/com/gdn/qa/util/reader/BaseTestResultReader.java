@@ -84,11 +84,11 @@ public abstract class BaseTestResultReader<T> {
     for (int i = 0; i < steps.size(); i++) {
       TestCaseStep caseStep = new TestCaseStep();
       caseStep.setActions(steps.get(i)[0]);
-      caseStep.setNumber(i);
+      caseStep.setNumber(i + 1);
       caseStep.setExpectedResults("Passed");
       caseStep.setActive(true);
       caseStep.setExecutionType(ExecutionType.AUTOMATED);
-      caseStep.setId(i);
+      caseStep.setId(i + 1);
       caseStep.setTestCaseVersionId(null);
       testCaseSteps.add(caseStep);
     }
