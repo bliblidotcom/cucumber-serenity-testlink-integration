@@ -85,7 +85,7 @@ public abstract class BaseTestResultReader<T> {
       TestCaseStep caseStep = new TestCaseStep();
       caseStep.setActions(steps.get(i)[0]);
       caseStep.setNumber(i + 1);
-      caseStep.setExpectedResults("Passed");
+      caseStep.setExpectedResults(" ");
       caseStep.setActive(true);
       caseStep.setExecutionType(ExecutionType.AUTOMATED);
       caseStep.setId(i + 1);

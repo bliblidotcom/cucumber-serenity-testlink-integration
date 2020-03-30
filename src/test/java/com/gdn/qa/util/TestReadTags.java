@@ -98,7 +98,7 @@ public class TestReadTags {
 //    System.out.println("Total execution time in second : " + (endTime - startTime) / 1000000000);
 //  }
     @Test
-    public void testIndexNumbe() throws Exception {
+    public void testIndexNumber() throws Exception {
         long startTime = System.nanoTime();
         String testlinkURL = "https://testlink.gdn-app.com/lib/api/xmlrpc/v1/xmlrpc.php";
         String devKey = "aa0eb2386227576295d65b753ab60a5f";
