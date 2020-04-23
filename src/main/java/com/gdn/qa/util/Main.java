@@ -69,6 +69,24 @@ public class Main extends AbstractMojo {
   @Parameter(defaultValue = "CUCUMBER")
   private String reportsFrom;
 
+  /**
+   * @parameter
+   */
+  @Parameter(defaultValue = "false")
+  private String auto;
+
+  /**
+   * @parameter
+   */
+  @Parameter(defaultValue = "REGRESSION")
+  private String releaseType;
+
+  /**
+   * @parameter
+   */
+  @Parameter
+  private String releaseDate;
+
   @Override
   public void execute() throws MojoExecutionException, MojoFailureException {
     System.out.println("===Process Started===");
@@ -77,6 +95,7 @@ public class Main extends AbstractMojo {
         .setTestProject(projectName)
         .setTestPlan(testPlanName)
         .setBuild(buildName)
+        .setAuto(auto)
         .setPlatFormName(platformName);
     try {
       SupportedReports type = BadakReporter.searchEnum(SupportedReports.class, reportsFrom);

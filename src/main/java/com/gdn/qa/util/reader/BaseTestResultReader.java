@@ -31,6 +31,7 @@ public abstract class BaseTestResultReader<T> {
   Long totalPass;
   Long totalFail;
   Long linked;
+  boolean auto;
   private ObjectMapper mapper;
 
   public BaseTestResultReader(TestLinkData testLinkData, String reportFolder) throws Exception {
@@ -43,6 +44,7 @@ public abstract class BaseTestResultReader<T> {
     testReportFolder = reportFolder;
     printConfiguration(testLinkData, reportFolder);
     connection = connectToTestlink();
+    this.auto = testLinkData.isAuto();
     totalPass = 0L;
     totalFail = 0L;
     linked = 0L;
@@ -100,18 +102,25 @@ public abstract class BaseTestResultReader<T> {
 
     // Process grouped feature
     if (!groupedFeature.isEmpty()) {
-      for (Integer testSuiteId : groupedFeature.keySet()) {
-        try {
+      TestLinkPlugin plugin =
+          new TestLinkPlugin(connection, testProject, testPlan, build, platFormName, auto);
+      if (auto) {
+        for (Integer testSuiteId : groupedFeature.keySet()) {
           countTestCaseResult(groupedFeature.get(testSuiteId));
-          TestLinkPlugin plugin =
-              new TestLinkPlugin(connection, testProject, testPlan, build, platFormName);
-          if (testSuiteId != null && testSuiteId > 0) {
-            linked += plugin.linkTestCases(testSuiteId, groupedFeature.get(testSuiteId));
-          } else {
-            linked += plugin.linkTestCasesUsingTestLinkId(groupedFeature.get(testSuiteId));
+        }
+        linked += plugin.linkTestCaseWithAutomaticTestSuiteAssignment(groupedFeature);
+      } else {
+        for (Integer testSuiteId : groupedFeature.keySet()) {
+          try {
+            countTestCaseResult(groupedFeature.get(testSuiteId));
+            if (testSuiteId != null && testSuiteId > 0) {
+              linked += plugin.linkTestCases(testSuiteId, groupedFeature.get(testSuiteId));
+            } else {
+              linked += plugin.linkTestCasesUsingTestLinkId(groupedFeature.get(testSuiteId));
+            }
+          } catch (Exception e) {
+            e.printStackTrace();
           }
-        } catch (Exception e) {
-          e.printStackTrace();
         }
       }
     }

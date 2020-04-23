@@ -9,6 +9,8 @@ public class TestLinkData {
   private String build;
   private String platFormName;
   private String DEVKEY;
+  private boolean auto;
+
 
   public String getTestProject() {
     return testProject;
@@ -53,6 +55,20 @@ public class TestLinkData {
   public TestLinkData setDEVKEY(String DEVKEY) {
     this.DEVKEY = DEVKEY;
     return this;
+  }
+
+  public TestLinkData setAuto(String auto){
+    try {
+      this.auto = Boolean.parseBoolean(auto);
+    }catch (Exception ignored){
+      this.auto = false;
+    }
+
+    return this;
+  }
+
+  public boolean isAuto(){
+    return this.auto;
   }
 
   private String urlTestlink;

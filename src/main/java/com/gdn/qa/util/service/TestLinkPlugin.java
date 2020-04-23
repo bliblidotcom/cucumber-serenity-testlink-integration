@@ -21,12 +21,14 @@ public class TestLinkPlugin {
   private String platFormName;
   private TestPlan tpID;
   private Integer projectID;
+  private Map<String, Integer> lastNodeChecked;
 
   public TestLinkPlugin(TestLinkAPI connection,
       String testProject,
       String testPlan,
       String buildName,
-      String platFormName) throws Exception {
+      String platFormName,
+      Boolean auto) throws Exception {
     this.connection = connection;
     this.buildName = buildName;
     this.platFormName = platFormName;
@@ -34,26 +36,43 @@ public class TestLinkPlugin {
     if (this.connection == null) {
       throw new Exception("No connection to testlink");
     }
-    tpID = this.connection.getTestPlanByName(testPlan, testProject);
-    projectID = this.connection.getTestProjectByName(testProject).getId();
-    Build[] builds = this.connection.getBuildsForTestPlan(tpID.getId());
-    if (builds == null || builds.length == 0) {
-      throw new Exception("Can't find Build on " + testProject + " / testplan " + tpID.getName()
-          + " Please Create build first. ");
+    try {
+      projectID = this.connection.getTestProjectByName(testProject).getId();
+    } catch (Exception e) {
+      throw new Exception("Cannot find projec : " + testProject, e);
     }
-    boolean buildFound = false;
-    for (Build build : builds) {
-      if (build.getName().equalsIgnoreCase(buildName)) {
-        this.buildId = build.getId();
-        buildFound = true;
-        break;
-      }
-    }
+    if (projectID != null) {
+      try {
+        tpID = this.connection.getTestPlanByName(testPlan, testProject);
+      } catch (Exception ignored) {
 
-    if (!buildFound) {
-      throw new Exception(
-          "Can't find Build " + buildName + " on " + testProject + " / testplan " + tpID.getName()
-              + " . Builds avaiable " + Arrays.toString(builds));
+      }
+      if (tpID == null && auto) {
+        tpID = this.connection.createTestPlan(testPlan, testProject, null, true, true);
+      } else if (tpID == null) {
+        throw new Exception("Cannot find test plan " + testPlan);
+      }
+
+      boolean buildFound = false;
+      Build[] builds = this.connection.getBuildsForTestPlan(tpID.getId());
+      if (builds != null) {
+        for (Build build : builds) {
+          if (build.getName().equalsIgnoreCase(buildName)) {
+            this.buildId = build.getId();
+            buildFound = true;
+            break;
+          }
+        }
+      }
+
+      if (!buildFound && auto) {
+        Build build = this.connection.createBuild(tpID.getId(), buildName, null);
+        buildId = build.getId();
+      } else if (!buildFound) {
+        throw new Exception(
+            "Can't find Build " + buildName + " on " + testProject + " / testplan " + tpID.getName()
+                + " . Builds avaiable " + Arrays.toString(builds));
+      }
     }
   }
 
@@ -142,6 +161,100 @@ public class TestLinkPlugin {
     return result.get();
   }
 
+  public Integer linkTestCaseWithAutomaticTestSuiteAssignment(Map<Integer, Map<String, ScenarioData>> grouped) {
+    Integer result = 0;
+    Map<Integer, Map<String, ScenarioData>> groupedFeature = new HashMap<>();
+    List<String> lastNodeToCheck = new ArrayList<>();
+    Integer currentId = null;
+    this.lastNodeChecked = new HashMap<>();
+    for (Integer dummy : grouped.keySet()) {
+      Map<String, ScenarioData> scenariosData = grouped.get(dummy);
+      for (String key : scenariosData.keySet()) {
+        ScenarioData scenario = scenariosData.get(key);
+        if (!lastNodeToCheck.equals(scenario.getTreeNode())) {
+          currentId = getOrCreateTreeNodeSuiteId(scenario.getTreeNode());
+        }
+        if (currentId != null) {
+          lastNodeToCheck = scenario.getTreeNode();
+          Map<String, ScenarioData> scenarios =
+              groupedFeature.getOrDefault(currentId, new HashMap<>());
+          scenarios.put(key, scenario);
+          groupedFeature.put(currentId, scenarios);
+        }
+      }
+    }
+    if (groupedFeature.isEmpty()) {
+      groupedFeature.putAll(grouped);
+    }
+    for (Integer testSuiteId : groupedFeature.keySet()) {
+      if (testSuiteId != null && testSuiteId > 0) {
+        result += linkTestCases(testSuiteId, groupedFeature.get(testSuiteId));
+      } else {
+        result += linkTestCasesUsingTestLinkId(groupedFeature.get(testSuiteId));
+      }
+    }
+    return result;
+  }
+
+  private Integer getOrCreateTreeNodeSuiteId(List<String> nodes) {
+    Integer result = null;
+    if (nodes != null && !nodes.isEmpty()) {
+      if (this.lastNodeChecked.containsKey(nodes.toString())) {
+        return this.lastNodeChecked.get(nodes.toString());
+      }
+      for (int i = 0; i < nodes.size(); i++) {
+        String node = nodes.get(i);
+        if (i == 0) {
+          List<TestSuite> subNodes =
+              Arrays.asList(this.connection.getFirstLevelTestSuitesForTestProject(projectID));
+          Optional<TestSuite> suite =
+              subNodes.stream().filter(e -> e.getName().equals(node)).findFirst();
+          if (suite.isPresent()) {
+            result = suite.get().getId();
+          } else {
+            System.out.println("Creating new node : "+node+" in "+nodes);
+            try {
+              TestSuite testSuite = this.connection.createTestSuite(projectID,
+                  node,
+                  null,
+                  result,
+                  null,
+                  true,
+                  ActionOnDuplicate.CREATE_NEW_VERSION);
+              result = testSuite.getId();
+            } catch (Exception ignored) {
+              System.out.println("Fail to create node " + node + " from nodes " + nodes);
+            }
+          }
+        } else {
+          List<TestSuite> subNodes =
+              Arrays.asList(this.connection.getTestSuitesForTestSuite(result));
+          Optional<TestSuite> suite =
+              subNodes.stream().filter(e -> e.getName().equals(node)).findFirst();
+          if (suite.isPresent()) {
+            result = suite.get().getId();
+          } else {
+            System.out.println("Creating new node : "+node+" in "+nodes);
+            try {
+              TestSuite testSuite = this.connection.createTestSuite(projectID,
+                  node,
+                  null,
+                  result,
+                  null,
+                  true,
+                  ActionOnDuplicate.CREATE_NEW_VERSION);
+              result = testSuite.getId();
+            } catch (Exception ignored) {
+              System.out.println("Fail to create node " + node + " from nodes " + nodes);
+            }
+          }
+        }
+      }
+      this.lastNodeChecked.put(nodes.toString(), result);
+    }
+    return result;
+  }
+
   public Integer linkTestCases(Integer testSuiteID, Map<String, ScenarioData> scenariosData) {
     Integer result = 0;
     if (testSuiteID != null) {
@@ -213,7 +326,7 @@ public class TestLinkPlugin {
           scenarioData.getTestCase().getExecutionStatus(),
           parseTestCaseResult(scenarioData.getTestCase(), scenarioData.getIndexFail()),
           scenarioData.getReasonFail(),
-          scenarioData.getTestCase().getAuthorLogin(),
+          testCase.getAuthorLogin(),
           scenarioData.getDuration().intValue());
       System.out.println(reportTCResponse.getMessage());
       return reportTCResponse.getMessage().toLowerCase().contains("success");
