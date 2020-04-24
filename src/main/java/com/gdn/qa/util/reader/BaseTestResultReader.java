@@ -10,6 +10,7 @@ import com.gdn.qa.util.model.ScenarioData;
 import com.gdn.qa.util.model.TestLinkData;
 import com.gdn.qa.util.service.TestLinkConnectionController;
 import com.gdn.qa.util.service.TestLinkPlugin;
+import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
 import java.util.*;
@@ -249,6 +250,31 @@ public abstract class BaseTestResultReader<T> {
       throw new Exception("Unknown file type, ignore");
     }
     return this.mapper.readValue(file, tClass);
+  }
+
+  public List<String> getTreeNode(String uri) {
+    List<String> result = new ArrayList<>();
+    String[] ignoredNodes = new String[] {"src", "test", "resources", "features", "feature"};
+    File file = new File(uri);
+    boolean isTopNode = false;
+    do {
+      String node = FilenameUtils.removeExtension(file.getAbsoluteFile().getName()).trim();
+      if (file.isFile()) {
+        result.add(node);
+      } else if (!Arrays.asList(ignoredNodes).contains(node.toLowerCase())) {
+        result.add(node);
+      }
+      try {
+        file = file.getParentFile();
+        if (file == null) {
+          isTopNode = true;
+        }
+      } catch (Exception ignored) {
+      }
+    } while (!isTopNode);
+
+    Collections.reverse(result);
+    return result;
   }
 
   abstract Map<Integer, Map<String, ScenarioData>> groupingScenariosByTestSuiteId(T reports)

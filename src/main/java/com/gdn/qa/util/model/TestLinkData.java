@@ -1,5 +1,7 @@
 package com.gdn.qa.util.model;
 
+import com.gdn.qa.util.constant.ReportGeneratorPolicy;
+
 /**
  * @author yunaz.ramadhan on 3/2/2020
  */
@@ -9,8 +11,8 @@ public class TestLinkData {
   private String build;
   private String platFormName;
   private String DEVKEY;
-  private boolean auto;
-
+  private ReportGeneratorPolicy policy;
+  private String urlTestlink;
 
   public String getTestProject() {
     return testProject;
@@ -57,21 +59,21 @@ public class TestLinkData {
     return this;
   }
 
-  public TestLinkData setAuto(String auto){
-    try {
-      this.auto = Boolean.parseBoolean(auto);
-    }catch (Exception ignored){
-      this.auto = false;
-    }
+  public ReportGeneratorPolicy getReportPolicy() {
+    return this.policy;
+  }
 
+  public TestLinkData setReportPolicy(ReportGeneratorPolicy reportPolicy) {
+    this.policy = reportPolicy;
     return this;
   }
 
-  public boolean isAuto(){
-    return this.auto;
+  public boolean isAuto() {
+    if (this.policy == null) {
+      return false;
+    }
+    return this.policy.equals(ReportGeneratorPolicy.AUTO);
   }
-
-  private String urlTestlink;
 
   public String getUrlTestlink() {
     return urlTestlink;
@@ -82,7 +84,7 @@ public class TestLinkData {
     return this;
   }
 
-  public TestLinkData build(){
+  public TestLinkData build() {
     return this;
   }
 }

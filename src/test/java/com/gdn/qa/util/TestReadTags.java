@@ -1,5 +1,6 @@
 package com.gdn.qa.util;
 
+import com.gdn.qa.util.constant.ReportGeneratorPolicy;
 import com.gdn.qa.util.constant.SupportedReports;
 import com.gdn.qa.util.model.TestLinkData;
 import org.junit.Test;
@@ -40,7 +41,7 @@ public class TestReadTags {
     String cucumberPath = "/src/test/resources/cucumber/cucumber15.json";
     TestLinkData testLinkData = new TestLinkData().setUrlTestlink(testlinkURL)
         .setDEVKEY(devKey)
-        .setAuto("true")
+        .setReportPolicy(ReportGeneratorPolicy.AUTO)
         .setTestProject(projectName)
         .setTestPlan(testPlanName)
         .setBuild(buildName)
@@ -90,7 +91,7 @@ public class TestReadTags {
         .setDEVKEY(devKey)
         .setTestProject(projectName)
         .setTestPlan(testPlanName)
-        .setAuto("true")
+        .setReportPolicy(ReportGeneratorPolicy.AUTO)
         .setBuild(buildName)
         .setPlatFormName(platformName);
     BadakReporter.getReader(SupportedReports.CUCUMBER, testLinkData, cucumberPath)

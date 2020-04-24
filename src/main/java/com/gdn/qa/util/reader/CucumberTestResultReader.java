@@ -120,29 +120,6 @@ public class CucumberTestResultReader extends BaseTestResultReader<List<Cucumber
     return result;
   }
 
-  private List<String> getTreeNode(String uri) {
-    List<String> result = new ArrayList<>();
-    uri = uri.replaceAll("src/", "");
-    uri = uri.replaceAll("test/", "");
-    uri = uri.replaceAll("resources/", "");
-    uri = uri.replaceAll("features/", "");
-    File file = new File(uri);
-    boolean isTopNode = false;
-    do {
-      result.add(FilenameUtils.removeExtension(file.getAbsoluteFile().getName()));
-      try {
-        file = file.getParentFile();
-        if (file == null) {
-          isTopNode = true;
-        }
-      } catch (Exception ignored) {
-      }
-    } while (!isTopNode);
-
-    Collections.reverse(result);
-    return result;
-  }
-
   private String[] constructStep(Step step, int counter) {
     String additionalInfo = step.getRows() == null ?
         step.getDocString() == null ? "" : "\n" + step.getDocString().getValue() + "\n" :
