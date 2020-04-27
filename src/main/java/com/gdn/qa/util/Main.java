@@ -81,6 +81,10 @@ public class Main extends AbstractMojo {
     System.out.println("===Process Started===");
     ReportGeneratorPolicy policy =
         BadakReporter.searchEnum(ReportGeneratorPolicy.class, reportPolicy);
+    if (policy == null) {
+      policy = ReportGeneratorPolicy.STRICT;
+    }
+
     TestLinkData testLinkData = new TestLinkData().setUrlTestlink(testlinkURL)
         .setDEVKEY(devKey)
         .setTestProject(projectName)
