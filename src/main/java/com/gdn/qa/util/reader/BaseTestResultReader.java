@@ -6,6 +6,7 @@ import br.eti.kinoshita.testlinkjavaapi.model.TestCase;
 import br.eti.kinoshita.testlinkjavaapi.model.TestCaseStep;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.gdn.qa.util.constant.ReportGeneratorPolicy;
 import com.gdn.qa.util.model.ScenarioData;
 import com.gdn.qa.util.model.TestLinkData;
 import com.gdn.qa.util.service.TestLinkConnectionController;
@@ -32,7 +33,7 @@ public abstract class BaseTestResultReader<T> {
   Long totalPass;
   Long totalFail;
   Long linked;
-  boolean auto;
+  ReportGeneratorPolicy POLICY;
   private ObjectMapper mapper;
 
   public BaseTestResultReader(TestLinkData testLinkData, String reportFolder) throws Exception {
@@ -43,12 +44,14 @@ public abstract class BaseTestResultReader<T> {
     build = testLinkData.getBuild();
     platFormName = testLinkData.getPlatFormName();
     testReportFolder = reportFolder;
-    printConfiguration(testLinkData, reportFolder);
     connection = connectToTestlink();
-    this.auto = testLinkData.isAuto();
+    POLICY = testLinkData.getReportPolicy() == null ?
+        ReportGeneratorPolicy.STRICT :
+        testLinkData.getReportPolicy();
     totalPass = 0L;
     totalFail = 0L;
     linked = 0L;
+    printConfiguration(testLinkData, reportFolder);
   }
 
   private TestLinkAPI connectToTestlink() throws Exception {
@@ -104,8 +107,8 @@ public abstract class BaseTestResultReader<T> {
     // Process grouped feature
     if (!groupedFeature.isEmpty()) {
       TestLinkPlugin plugin =
-          new TestLinkPlugin(connection, testProject, testPlan, build, platFormName, auto);
-      if (auto) {
+          new TestLinkPlugin(connection, testProject, testPlan, build, platFormName, POLICY);
+      if (POLICY.equals(ReportGeneratorPolicy.AUTO)) {
         for (Integer testSuiteId : groupedFeature.keySet()) {
           countTestCaseResult(groupedFeature.get(testSuiteId));
         }

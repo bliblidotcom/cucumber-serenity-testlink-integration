@@ -68,13 +68,6 @@ public class TestLinkData {
     return this;
   }
 
-  public boolean isAuto() {
-    if (this.policy == null) {
-      return false;
-    }
-    return this.policy.equals(ReportGeneratorPolicy.AUTO);
-  }
-
   public String getUrlTestlink() {
     return urlTestlink;
   }

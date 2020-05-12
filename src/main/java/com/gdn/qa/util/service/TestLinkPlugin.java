@@ -4,6 +4,7 @@ import br.eti.kinoshita.testlinkjavaapi.TestLinkAPI;
 import br.eti.kinoshita.testlinkjavaapi.constants.*;
 import br.eti.kinoshita.testlinkjavaapi.model.*;
 import com.gdn.qa.util.constant.CheckDuplicateTestStatus;
+import com.gdn.qa.util.constant.ReportGeneratorPolicy;
 import com.gdn.qa.util.model.ScenarioData;
 
 import java.util.*;
@@ -28,7 +29,7 @@ public class TestLinkPlugin {
       String testPlan,
       String buildName,
       String platFormName,
-      Boolean auto) throws Exception {
+      ReportGeneratorPolicy policy) throws Exception {
     this.connection = connection;
     this.buildName = buildName;
     this.platFormName = platFormName;
@@ -47,7 +48,8 @@ public class TestLinkPlugin {
       } catch (Exception ignored) {
 
       }
-      if (tpID == null && auto) {
+      if ((policy.equals(ReportGeneratorPolicy.AUTO)
+          || policy.equals(ReportGeneratorPolicy.MODERATE)) && tpID == null) {
         tpID = this.connection.createTestPlan(testPlan, testProject, null, true, true);
       } else if (tpID == null) {
         throw new Exception("Cannot find test plan " + testPlan);
@@ -65,7 +67,8 @@ public class TestLinkPlugin {
         }
       }
 
-      if (!buildFound && auto) {
+      if ((policy.equals(ReportGeneratorPolicy.AUTO)
+          || policy.equals(ReportGeneratorPolicy.MODERATE)) && !buildFound) {
         Build build = this.connection.createBuild(tpID.getId(), buildName, null);
         buildId = build.getId();
       } else if (!buildFound) {
@@ -212,7 +215,7 @@ public class TestLinkPlugin {
           if (suite.isPresent()) {
             result = suite.get().getId();
           } else {
-            System.out.println("Creating new node : "+node+" in "+nodes);
+            System.out.println("Creating new node : " + node + " in " + nodes);
             try {
               TestSuite testSuite = this.connection.createTestSuite(projectID,
                   node,
@@ -234,7 +237,7 @@ public class TestLinkPlugin {
           if (suite.isPresent()) {
             result = suite.get().getId();
           } else {
-            System.out.println("Creating new node : "+node+" in "+nodes);
+            System.out.println("Creating new node : " + node + " in " + nodes);
             try {
               TestSuite testSuite = this.connection.createTestSuite(projectID,
                   node,

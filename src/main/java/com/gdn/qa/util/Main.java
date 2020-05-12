@@ -79,8 +79,12 @@ public class Main extends AbstractMojo {
   @Override
   public void execute() throws MojoExecutionException, MojoFailureException {
     System.out.println("===Process Started===");
-    ReportGeneratorPolicy policy =
-        BadakReporter.searchEnum(ReportGeneratorPolicy.class, reportPolicy);
+    ReportGeneratorPolicy policy = null;
+    try {
+      policy = BadakReporter.searchEnum(ReportGeneratorPolicy.class, reportPolicy);
+    }catch (Exception e){
+      e.printStackTrace();
+    }
     if (policy == null) {
       policy = ReportGeneratorPolicy.STRICT;
     }
