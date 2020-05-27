@@ -2,6 +2,8 @@ package com.gdn.qa.util.model;
 
 import br.eti.kinoshita.testlinkjavaapi.model.TestCase;
 
+import java.util.List;
+
 public class ScenarioData {
   private String name;
   private Boolean passed;
@@ -12,6 +14,7 @@ public class ScenarioData {
   private TestCase testCase;
   private String detailToPrint;
   private String featureName;
+  private List<String> treeNode;
 
   public ScenarioData() {
     this.passed = true;
@@ -88,5 +91,13 @@ public class ScenarioData {
 
   public void setFeatureName(String featureName) {
     this.featureName = featureName;
+  }
+
+  public List<String> getTreeNode() {
+    return this.treeNode;
+  }
+
+  public void setTreeNode(List<String> treeNode) {
+    this.treeNode = treeNode;
   }
 }

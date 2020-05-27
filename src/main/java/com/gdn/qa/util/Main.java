@@ -1,5 +1,6 @@
 package com.gdn.qa.util;
 
+import com.gdn.qa.util.constant.ReportGeneratorPolicy;
 import com.gdn.qa.util.constant.SupportedReports;
 import com.gdn.qa.util.model.TestLinkData;
 import org.apache.maven.plugin.AbstractMojo;
@@ -69,14 +70,31 @@ public class Main extends AbstractMojo {
   @Parameter(defaultValue = "CUCUMBER")
   private String reportsFrom;
 
+  /**
+   * @parameter
+   */
+  @Parameter(defaultValue = "STRICT")
+  private String reportPolicy;
+
   @Override
   public void execute() throws MojoExecutionException, MojoFailureException {
     System.out.println("===Process Started===");
+    ReportGeneratorPolicy policy = null;
+    try {
+      policy = BadakReporter.searchEnum(ReportGeneratorPolicy.class, reportPolicy);
+    }catch (Exception e){
+      e.printStackTrace();
+    }
+    if (policy == null) {
+      policy = ReportGeneratorPolicy.STRICT;
+    }
+
     TestLinkData testLinkData = new TestLinkData().setUrlTestlink(testlinkURL)
         .setDEVKEY(devKey)
         .setTestProject(projectName)
         .setTestPlan(testPlanName)
         .setBuild(buildName)
+        .setReportPolicy(policy)
         .setPlatFormName(platformName);
     try {
       SupportedReports type = BadakReporter.searchEnum(SupportedReports.class, reportsFrom);
