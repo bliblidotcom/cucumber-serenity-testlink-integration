@@ -6,10 +6,12 @@ import br.eti.kinoshita.testlinkjavaapi.model.TestCase;
 import br.eti.kinoshita.testlinkjavaapi.model.TestCaseStep;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.gdn.qa.util.constant.ReportGeneratorPolicy;
 import com.gdn.qa.util.model.ScenarioData;
 import com.gdn.qa.util.model.TestLinkData;
 import com.gdn.qa.util.service.TestLinkConnectionController;
 import com.gdn.qa.util.service.TestLinkPlugin;
+import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
 import java.util.*;
@@ -31,6 +33,7 @@ public abstract class BaseTestResultReader<T> {
   Long totalPass;
   Long totalFail;
   Long linked;
+  ReportGeneratorPolicy POLICY;
   private ObjectMapper mapper;
 
   public BaseTestResultReader(TestLinkData testLinkData, String reportFolder) throws Exception {
@@ -41,11 +44,14 @@ public abstract class BaseTestResultReader<T> {
     build = testLinkData.getBuild();
     platFormName = testLinkData.getPlatFormName();
     testReportFolder = reportFolder;
-    printConfiguration(testLinkData, reportFolder);
     connection = connectToTestlink();
+    POLICY = testLinkData.getReportPolicy() == null ?
+        ReportGeneratorPolicy.STRICT :
+        testLinkData.getReportPolicy();
     totalPass = 0L;
     totalFail = 0L;
     linked = 0L;
+    printConfiguration(testLinkData, reportFolder);
   }
 
   private TestLinkAPI connectToTestlink() throws Exception {
@@ -100,18 +106,25 @@ public abstract class BaseTestResultReader<T> {
 
     // Process grouped feature
     if (!groupedFeature.isEmpty()) {
-      for (Integer testSuiteId : groupedFeature.keySet()) {
-        try {
+      TestLinkPlugin plugin =
+          new TestLinkPlugin(connection, testProject, testPlan, build, platFormName, POLICY);
+      if (POLICY.equals(ReportGeneratorPolicy.AUTO)) {
+        for (Integer testSuiteId : groupedFeature.keySet()) {
           countTestCaseResult(groupedFeature.get(testSuiteId));
-          TestLinkPlugin plugin =
-              new TestLinkPlugin(connection, testProject, testPlan, build, platFormName);
-          if (testSuiteId != null && testSuiteId > 0) {
-            linked += plugin.linkTestCases(testSuiteId, groupedFeature.get(testSuiteId));
-          } else {
-            linked += plugin.linkTestCasesUsingTestLinkId(groupedFeature.get(testSuiteId));
+        }
+        linked += plugin.linkTestCaseWithAutomaticTestSuiteAssignment(groupedFeature);
+      } else {
+        for (Integer testSuiteId : groupedFeature.keySet()) {
+          try {
+            countTestCaseResult(groupedFeature.get(testSuiteId));
+            if (testSuiteId != null && testSuiteId > 0) {
+              linked += plugin.linkTestCases(testSuiteId, groupedFeature.get(testSuiteId));
+            } else {
+              linked += plugin.linkTestCasesUsingTestLinkId(groupedFeature.get(testSuiteId));
+            }
+          } catch (Exception e) {
+            e.printStackTrace();
           }
-        } catch (Exception e) {
-          e.printStackTrace();
         }
       }
     }
@@ -240,6 +253,31 @@ public abstract class BaseTestResultReader<T> {
       throw new Exception("Unknown file type, ignore");
     }
     return this.mapper.readValue(file, tClass);
+  }
+
+  public List<String> getTreeNode(String uri) {
+    List<String> result = new ArrayList<>();
+    String[] ignoredNodes = new String[] {"src", "test", "resources", "features", "feature"};
+    File file = new File(uri);
+    boolean isTopNode = false;
+    do {
+      String node = FilenameUtils.removeExtension(file.getAbsoluteFile().getName()).trim();
+      if (file.isFile()) {
+        result.add(node);
+      } else if (!Arrays.asList(ignoredNodes).contains(node.toLowerCase())) {
+        result.add(node);
+      }
+      try {
+        file = file.getParentFile();
+        if (file == null) {
+          isTopNode = true;
+        }
+      } catch (Exception ignored) {
+      }
+    } while (!isTopNode);
+
+    Collections.reverse(result);
+    return result;
   }
 
   abstract Map<Integer, Map<String, ScenarioData>> groupingScenariosByTestSuiteId(T reports)

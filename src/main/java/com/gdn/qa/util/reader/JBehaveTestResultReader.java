@@ -35,6 +35,7 @@ public class JBehaveTestResultReader extends BaseTestResultReader<JbehaveReport>
 
         story.getScenarios().parallelStream().forEach(scenario -> {
           ScenarioData scenarioData = new ScenarioData();
+          scenarioData.setTreeNode(getTreeNode(scenario.getStoryPath()));
           Integer testSuiteId = getIdNumberFromString(getValueFromTags("testsuiteid",
               scenario.getNormalPerformableScenario().getStoryAndScenarioMeta().getProperties()));
           String testLinkId = getValueFromTags("testlinkid",

@@ -3,15 +3,12 @@ package com.gdn.qa.util.reader;
 import com.gdn.qa.util.model.ScenarioData;
 import com.gdn.qa.util.model.TagsReader;
 import com.gdn.qa.util.model.TestLinkData;
-import com.gdn.qa.util.model.cucumber.CucumberModel;
-import com.gdn.qa.util.model.cucumber.Rows;
-import com.gdn.qa.util.model.cucumber.Step;
-import com.gdn.qa.util.model.cucumber.Tags;
+import com.gdn.qa.util.model.cucumber.*;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.text.StringEscapeUtils;
 
 import java.io.File;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -28,16 +25,17 @@ public class CucumberTestResultReader extends BaseTestResultReader<List<Cucumber
   @Override
   Map<Integer, Map<String, ScenarioData>> groupingScenariosByTestSuiteId(List<CucumberModel> reports)
       throws Exception {
-    Map<Integer, Map<String, ScenarioData>> groupedFeature = new ConcurrentHashMap<>();
+    Map<Integer, Map<String, ScenarioData>> groupedFeature = new HashMap<>();
 
     System.out.println("Populating scenarios from feature :");
-    reports.parallelStream().forEachOrdered(feature -> {
+    for (CucumberModel feature : reports) {
       System.out.println(feature.getName());
       String summary =
           String.format("Feature : %s, %s", feature.getName(), feature.getDescription());
       List<String[]> steps = new ArrayList<>();
-      feature.getElements().parallelStream().forEachOrdered(element -> {
+      for (Elements element : feature.getElements()) {
         ScenarioData scenarioData = new ScenarioData();
+        scenarioData.setTreeNode(getTreeNode(feature.getUri()));
         if (element.getType().equalsIgnoreCase("background")) {
           steps.addAll(0, readSteps(element.getSteps()));
         } else if (element.getType().equalsIgnoreCase("scenario")) {
@@ -90,20 +88,17 @@ public class CucumberTestResultReader extends BaseTestResultReader<List<Cucumber
               scenarioData.getReasonFail(),
               testSuiteId < 0 ? "" : String.valueOf(testSuiteId),
               testLinkId == null ? "" : testLinkId));
-          if (groupedFeature.containsKey(testSuiteId)) {
-            Map<String, ScenarioData> scenarios = groupedFeature.get(testSuiteId);
-            scenarios.put(element.getName(), scenarioData);
-            groupedFeature.put(testSuiteId, scenarios);
-          } else {
-            Map<String, ScenarioData> scenarios = new HashMap<>();
-            scenarios.put(element.getName(), scenarioData);
-            groupedFeature.put(testSuiteId, scenarios);
-          }
+
+          Map<String, ScenarioData> scenarios =
+              groupedFeature.getOrDefault(testSuiteId, new HashMap<>());
+          scenarios.put(element.getName(), scenarioData);
+          groupedFeature.put(testSuiteId, scenarios);
 
           steps.clear();
         }
-      });
-    });
+      }
+    }
+
     return groupedFeature;
   }
 
