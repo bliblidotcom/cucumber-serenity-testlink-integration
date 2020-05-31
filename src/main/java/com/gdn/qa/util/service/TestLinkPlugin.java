@@ -310,13 +310,17 @@ public class TestLinkPlugin {
   }
 
   private void addTestCaseToTestPlan(TestCase testCase) {
-    this.connection.addTestCaseToTestPlan(projectID,
-        tpID.getId(),
-        testCase.getId(),
-        testCase.getVersion(),
-        null,
-        testCase.getOrder(),
-        1);
+    try {
+      this.connection.addTestCaseToTestPlan(projectID,
+          tpID.getId(),
+          testCase.getId(),
+          testCase.getVersion(),
+          null,
+          testCase.getOrder(),
+          1);
+    }catch (Exception e){
+      e.printStackTrace();
+    }
   }
 
   private Boolean updateTestCaseResult(ScenarioData scenarioData, TestCase testCase) {
@@ -372,19 +376,6 @@ public class TestLinkPlugin {
     }
 
     try {
-      result = this.connection.updateTestCase(previous);
-      if (Boolean.parseBoolean(result.get("status_ok").toString())) {
-        System.out.println("Done updating!");
-      } else {
-        System.out.println("Error updating!");
-        return false;
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
-      return false;
-    }
-
-    try {
       Execution last = this.connection.getLastExecutionResult(tpID.getId(),
           previous.getId(),
           previous.getFullExternalId(),
@@ -399,6 +390,20 @@ public class TestLinkPlugin {
     } catch (Exception e) {
       e.printStackTrace();
     }
+
+    try {
+      result = this.connection.updateTestCase(previous);
+      if (Boolean.parseBoolean(result.get("status_ok").toString())) {
+        System.out.println("Done updating!");
+      } else {
+        System.out.println("Error updating!");
+        return false;
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+      return false;
+    }
+
     addTestCaseToTestPlan(previous);
     return updateTestCaseResult(scenarioData, previous);
   }

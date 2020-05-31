@@ -14,6 +14,8 @@ import com.gdn.qa.util.service.TestLinkPlugin;
 import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 import static com.gdn.qa.util.BadakReporter.printConfiguration;
@@ -258,6 +260,11 @@ public abstract class BaseTestResultReader<T> {
   public List<String> getTreeNode(String uri) {
     List<String> result = new ArrayList<>();
     String[] ignoredNodes = new String[] {"src", "test", "resources", "features", "feature"};
+    try {
+      uri = URLDecoder.decode(uri, StandardCharsets.UTF_8.name());
+    } catch (Exception ignored) {
+
+    }
     File file = new File(uri);
     boolean isTopNode = false;
     do {
@@ -266,6 +273,8 @@ public abstract class BaseTestResultReader<T> {
         result.add(node);
       } else if (!Arrays.asList(ignoredNodes).contains(node.toLowerCase())) {
         result.add(node);
+      } else {
+        isTopNode = true;
       }
       try {
         file = file.getParentFile();
