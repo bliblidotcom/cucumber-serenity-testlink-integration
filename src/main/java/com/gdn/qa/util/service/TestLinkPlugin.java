@@ -347,9 +347,11 @@ public class TestLinkPlugin {
   private Boolean updateTestCaseDataToTestLink(TestCase previous,
       ScenarioData scenarioData,
       CheckDuplicateTestStatus duplicate) {
+    Boolean needCreated = true;
     switch (duplicate) {
       case EXISTING_TEST_CASE:
         System.out.println("Test case not changed, updating execution result.....");
+        needCreated = false;
         break;
       case STEPS_ADDED:
         System.out.println("Test case's steps added, updating to new version.....");
@@ -379,21 +381,24 @@ public class TestLinkPlugin {
     } catch (Exception e) {
       e.printStackTrace();
     }
+    TestCase testCase = previous;
+    if(needCreated){
+      testCase = this.connection.createTestCase(scenarioData.getTestCase().getName(),
+              scenarioData.getTestCase().getTestSuiteId(),
+              projectID,
+              scenarioData.getTestCase().getAuthorLogin(),
+              scenarioData.getTestCase().getSummary(),
+              scenarioData.getTestCase().getSteps(),
+              scenarioData.getTestCase().getPreconditions(),
+              TestCaseStatus.FINAL,
+              TestImportance.MEDIUM,
+              ExecutionType.AUTOMATED,
+              previous.getOrder(),
+              previous.getInternalId(),
+              true,
+              ActionOnDuplicate.CREATE_NEW_VERSION);
+    }
 
-    TestCase testCase = this.connection.createTestCase(scenarioData.getTestCase().getName(),
-        scenarioData.getTestCase().getTestSuiteId(),
-        projectID,
-        scenarioData.getTestCase().getAuthorLogin(),
-        scenarioData.getTestCase().getSummary(),
-        scenarioData.getTestCase().getSteps(),
-        scenarioData.getTestCase().getPreconditions(),
-        TestCaseStatus.FINAL,
-        TestImportance.MEDIUM,
-        ExecutionType.AUTOMATED,
-        previous.getOrder(),
-        previous.getInternalId(),
-        true,
-        ActionOnDuplicate.CREATE_NEW_VERSION);
     addTestCaseToTestPlan(testCase);
 
     return updateTestCaseResult(scenarioData, testCase);
