@@ -63,8 +63,11 @@ public class CucumberTestResultReader extends BaseTestResultReader<List<Cucumber
           }
           Double duration = element.getSteps()
               .stream()
-              .mapToDouble(e -> (int) (e.getResult().getDuration().getTime() / 1000000000.0))
+              .mapToDouble(e -> (int) (
+                              (e.getResult().getDuration() == null)? 0 :
+                                      e.getResult().getDuration().getTime() / 1000000000.0))
               .sum();
+
           scenarioData.setReasonFail(reason);
           scenarioData.setIndexFail(indexFail);
           scenarioData.setPassed(status);
