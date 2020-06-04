@@ -6,7 +6,7 @@ import com.gdn.qa.util.model.TestLinkData;
 import org.junit.Test;
 
 public class TestReadTags {
-  @Test
+ /* @Test
   public void testCucumberFromFolder() throws Exception {
     long startTime = System.nanoTime();
     String testlinkURL = "https://testlink.gdn-app.com/lib/api/xmlrpc/v1/xmlrpc.php";
@@ -218,5 +218,26 @@ public class TestReadTags {
 
     long endTime = System.nanoTime();
     System.out.println("Total execution time in second : " + (endTime - startTime) / 1000000000);
+  }*/
+
+  @Test
+  public void testbugFixing() throws Exception {
+    String testlinkURL = "https://testlink.gdn-app.com/lib/api/xmlrpc/v1/xmlrpc.php";
+    String devKey = "aa0eb2386227576295d65b753ab60a5f";
+    String projectName = "Surabaya";
+    String testPlanName = "TEST-PLAN";
+    String buildName = "BUILD-TEST";
+    String platformName = "";
+    String cucumberPath = "/src/test/resources/cucumber/cucumber2_emptyTestSuite.json";
+    System.out.println(cucumberPath);
+    TestLinkData testLinkData = new TestLinkData().setUrlTestlink(testlinkURL)
+            .setDEVKEY(devKey)
+            .setTestProject(projectName)
+            .setTestPlan(testPlanName)
+            .setBuild(buildName)
+            .setPlatFormName(platformName);
+    BadakReporter.getReader(SupportedReports.CUCUMBER, testLinkData, cucumberPath)
+            .writeToTestLink();
+
   }
 }

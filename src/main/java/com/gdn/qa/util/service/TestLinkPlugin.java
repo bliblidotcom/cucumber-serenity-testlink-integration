@@ -86,7 +86,7 @@ public class TestLinkPlugin {
       String notes,
       String user,
       Integer duration) {
-    return this.connection.reportTCResult(tcExternalID,
+    return this.connection.setTestCaseExecutionResult(tcExternalID,
         tcInternalID,
         tpID.getId(),
         status,
@@ -98,7 +98,7 @@ public class TestLinkPlugin {
         true,
         null,
         null,
-        platFormName,
+        null,
         null,
         true,
         user,
@@ -309,24 +309,25 @@ public class TestLinkPlugin {
     return result;
   }
 
-  private void addTestCaseToTestPlan(TestCase testCase) {
+  private Integer addTestCaseToTestPlan(TestCase testCase) {
     try {
-      this.connection.addTestCaseToTestPlan(projectID,
+      return this.connection.addTestCaseToTestPlan(projectID,
           tpID.getId(),
           testCase.getId(),
           testCase.getVersion(),
           null,
-          testCase.getOrder(),
-          1);
-    }catch (Exception e){
+          null,
+          null);
+    } catch (Exception e) {
       e.printStackTrace();
     }
+    return null;
   }
 
   private Boolean updateTestCaseResult(ScenarioData scenarioData, TestCase testCase) {
     Integer internal = testCase.getId();
     Integer external = testCase.getExternalId();
-
+    System.out.println("Update result for " + scenarioData.getName());
     try {
       ReportTCResultResponse reportTCResponse = updateStatus(internal,
           external,
@@ -346,21 +347,11 @@ public class TestLinkPlugin {
   private Boolean updateTestCaseDataToTestLink(TestCase previous,
       ScenarioData scenarioData,
       CheckDuplicateTestStatus duplicate) {
-    previous.setExecutionStatus(scenarioData.getTestCase().getExecutionStatus());
-    previous.setExecutionType(scenarioData.getTestCase().getExecutionType());
-    previous.setTestImportance(scenarioData.getTestCase().getTestImportance());
-    previous.setTestCaseStatus(scenarioData.getTestCase().getTestCaseStatus());
-    previous.setSteps(scenarioData.getTestCase().getSteps());
-    previous.setCheckDuplicatedName(scenarioData.getTestCase().getCheckDuplicatedName());
-    previous.setActionOnDuplicatedName(scenarioData.getTestCase().getActionOnDuplicatedName());
-    previous.setSummary(scenarioData.getTestCase().getSummary());
-    previous.setPreconditions(scenarioData.getTestCase().getPreconditions());
-    previous.setAuthorLogin(scenarioData.getTestCase().getAuthorLogin());
-
-    Map<String, Object> result;
+    Boolean needCreated = true;
     switch (duplicate) {
       case EXISTING_TEST_CASE:
         System.out.println("Test case not changed, updating execution result.....");
+        needCreated = false;
         break;
       case STEPS_ADDED:
         System.out.println("Test case's steps added, updating to new version.....");
@@ -376,36 +367,41 @@ public class TestLinkPlugin {
     }
 
     try {
-      Execution last = this.connection.getLastExecutionResult(tpID.getId(),
+      Execution lastExecutionResult = this.connection.getLastExecutionResult(tpID.getId(),
           previous.getId(),
           previous.getFullExternalId(),
           null,
           null,
-          buildId,
-          buildName,
+          null,
+          null,
           null);
-      if (last != null) {
-        this.connection.deleteExecution(last.getId());
+      if (lastExecutionResult != null) {
+        this.connection.deleteExecution(lastExecutionResult.getId());
       }
     } catch (Exception e) {
       e.printStackTrace();
     }
-
-    try {
-      result = this.connection.updateTestCase(previous);
-      if (Boolean.parseBoolean(result.get("status_ok").toString())) {
-        System.out.println("Done updating!");
-      } else {
-        System.out.println("Error updating!");
-        return false;
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
-      return false;
+    TestCase testCase = previous;
+    if(needCreated){
+      testCase = this.connection.createTestCase(scenarioData.getTestCase().getName(),
+              scenarioData.getTestCase().getTestSuiteId(),
+              projectID,
+              scenarioData.getTestCase().getAuthorLogin(),
+              scenarioData.getTestCase().getSummary(),
+              scenarioData.getTestCase().getSteps(),
+              scenarioData.getTestCase().getPreconditions(),
+              TestCaseStatus.FINAL,
+              TestImportance.MEDIUM,
+              ExecutionType.AUTOMATED,
+              previous.getOrder(),
+              previous.getInternalId(),
+              true,
+              ActionOnDuplicate.CREATE_NEW_VERSION);
     }
 
-    addTestCaseToTestPlan(previous);
-    return updateTestCaseResult(scenarioData, previous);
+    addTestCaseToTestPlan(testCase);
+
+    return updateTestCaseResult(scenarioData, testCase);
   }
 
   private Integer insertScenarioDataToTestLink(Integer testSuiteID,
@@ -431,7 +427,6 @@ public class TestLinkPlugin {
               true,
               ActionOnDuplicate.CREATE_NEW_VERSION);
 
-          testCase = this.connection.getTestCase(testCase.getId(), null, testCase.getVersion());
           addTestCaseToTestPlan(testCase);
           if (updateTestCaseResult(entry.getValue(), testCase)) {
             result.getAndSet(result.get() + 1);
