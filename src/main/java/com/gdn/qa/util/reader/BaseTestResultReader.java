@@ -36,6 +36,7 @@ public abstract class BaseTestResultReader<T> {
   Long totalFail;
   Long linked;
   ReportGeneratorPolicy POLICY;
+  private String username;
   private ObjectMapper mapper;
 
   public BaseTestResultReader(TestLinkData testLinkData, String reportFolder) throws Exception {
@@ -54,6 +55,10 @@ public abstract class BaseTestResultReader<T> {
     totalFail = 0L;
     linked = 0L;
     printConfiguration(testLinkData, reportFolder);
+    this.username = System.getProperty("user.name", "automation-test");
+    if (!connection.doesUserExist(this.username)) {
+      username = "automation-test";
+    }
   }
 
   private TestLinkAPI connectToTestlink() throws Exception {
@@ -72,7 +77,7 @@ public abstract class BaseTestResultReader<T> {
     testCase.setSummary(summary);
     testCase.setPreconditions(summary);
     testCase.setSteps(constructTestCaseSteps(steps));
-    testCase.setAuthorLogin("automation-test");
+    testCase.setAuthorLogin(this.username);
     testCase.setTestCaseStatus(TestCaseStatus.FINAL);
     testCase.setTestImportance(TestImportance.MEDIUM);
     testCase.setActionOnDuplicatedName(ActionOnDuplicate.CREATE_NEW_VERSION);
