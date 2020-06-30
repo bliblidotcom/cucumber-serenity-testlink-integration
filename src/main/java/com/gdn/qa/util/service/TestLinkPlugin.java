@@ -16,12 +16,11 @@ import java.util.stream.Collectors;
  * Updated by yunaz.ramadhan on 1/30/2020
  */
 public class TestLinkPlugin {
-  private TestLinkAPI connection;
+  private final TestLinkAPI connection;
+  private final String buildName;
+  private final Integer projectID;
   private Integer buildId;
-  private String buildName;
-  private String platFormName;
   private TestPlan tpID;
-  private Integer projectID;
   private Map<String, Integer> lastNodeChecked;
 
   public TestLinkPlugin(TestLinkAPI connection,
@@ -32,7 +31,6 @@ public class TestLinkPlugin {
       ReportGeneratorPolicy policy) throws Exception {
     this.connection = connection;
     this.buildName = buildName;
-    this.platFormName = platFormName;
 
     if (this.connection == null) {
       throw new Exception("No connection to testlink");
@@ -181,6 +179,7 @@ public class TestLinkPlugin {
           lastNodeToCheck = scenario.getTreeNode();
           Map<String, ScenarioData> scenarios =
               groupedFeature.getOrDefault(currentId, new HashMap<>());
+          scenario.getTestCase().setTestSuiteId(currentId);
           scenarios.put(key, scenario);
           groupedFeature.put(currentId, scenarios);
         }
@@ -382,21 +381,21 @@ public class TestLinkPlugin {
       e.printStackTrace();
     }
     TestCase testCase = previous;
-    if(needCreated){
+    if (needCreated) {
       testCase = this.connection.createTestCase(scenarioData.getTestCase().getName(),
-              scenarioData.getTestCase().getTestSuiteId(),
-              projectID,
-              scenarioData.getTestCase().getAuthorLogin(),
-              scenarioData.getTestCase().getSummary(),
-              scenarioData.getTestCase().getSteps(),
-              scenarioData.getTestCase().getPreconditions(),
-              TestCaseStatus.FINAL,
-              TestImportance.MEDIUM,
-              ExecutionType.AUTOMATED,
-              previous.getOrder(),
-              previous.getInternalId(),
-              true,
-              ActionOnDuplicate.CREATE_NEW_VERSION);
+          scenarioData.getTestCase().getTestSuiteId(),
+          projectID,
+          scenarioData.getTestCase().getAuthorLogin(),
+          scenarioData.getTestCase().getSummary(),
+          scenarioData.getTestCase().getSteps(),
+          scenarioData.getTestCase().getPreconditions(),
+          TestCaseStatus.FINAL,
+          TestImportance.MEDIUM,
+          ExecutionType.AUTOMATED,
+          previous.getOrder(),
+          previous.getInternalId(),
+          true,
+          ActionOnDuplicate.CREATE_NEW_VERSION);
     }
 
     addTestCaseToTestPlan(testCase);
