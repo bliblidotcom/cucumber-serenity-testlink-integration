@@ -346,7 +346,7 @@ public class TestLinkPlugin {
   private Boolean updateTestCaseDataToTestLink(TestCase previous,
       ScenarioData scenarioData,
       CheckDuplicateTestStatus duplicate) {
-    Boolean needCreated = true;
+    boolean needCreated = true;
     switch (duplicate) {
       case EXISTING_TEST_CASE:
         System.out.println("Test case not changed, updating execution result.....");
@@ -354,11 +354,9 @@ public class TestLinkPlugin {
         break;
       case STEPS_ADDED:
         System.out.println("Test case's steps added, updating to new version.....");
-        previous.setVersion(previous.getVersion() + 1);
         break;
       case STEPS_CHANGED:
         System.out.println("Test case's steps changed, updating to new version.....");
-        previous.setVersion(previous.getVersion() + 1);
         break;
       default:
         System.out.println("Test case not found, creating new test case.....");
@@ -383,7 +381,7 @@ public class TestLinkPlugin {
     TestCase testCase = previous;
     if (needCreated) {
       testCase = this.connection.createTestCase(scenarioData.getTestCase().getName(),
-          scenarioData.getTestCase().getTestSuiteId(),
+          previous.getTestSuiteId(),
           projectID,
           scenarioData.getTestCase().getAuthorLogin(),
           scenarioData.getTestCase().getSummary(),
