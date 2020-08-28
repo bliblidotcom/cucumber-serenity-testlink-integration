@@ -1,0 +1,45 @@
+<div class="story">
+<h1></h1>
+<div class="path">stories/consult_dictionary/LookUpBanana.story</div>
+<div class="meta">
+<div class="keyword">Meta:</div>
+<div class="property">@TestSuiteId 10921024</div>
+</div>
+<div class="narrative"><h2>Narrative:</h2>
+<div class="element inOrderTo"><span class="keyword inOrderTo">In order to</span> talk better</div>
+<div class="element asA"><span class="keyword asA">As a</span> n English student</div>
+<div class="element iWantTo"><span class="keyword iWantTo">I want to</span> look up word definitions</div>
+</div>
+<div class="scenario">
+<h2>Scenario: Looking up the definition of 'banana'</h2>
+<div class="step successful">Given the user is on the Wikionary home page</div>
+<div class="step successful">When the user looks up the definition of the word 'banana'</div>
+<div class="step failed">Then they should see the definition 'Wrong answer dude' <span class="keyword failed">(FAILED)</span><br/><span class="message failed">java.lang.AssertionError: 
+Expected: a collection containing a string containing &quot;Wrong answer dude&quot;
+     but: was &quot;An elongated curved tropical fruit that grows in bunches and has a creamy flesh and a smooth skin.
+(Canada, US, Britain, Ireland) Especially, the sweet, yellow fruit of the Cavendish banana cultivar.&quot;, was &quot;(Canada, US, Britain, Ireland) Especially, the sweet, yellow fruit of the Cavendish banana cultivar.&quot;, was &quot;The tropical tree-like plant which bears clusters of bananas. The plant, usually of the genus Musa but sometimes also including plants from Ensete, has large, elongated leaves and is related to the plantain.&quot;, was &quot;(uncountable) A yellow colour, like that of a banana's skin.
+banana colour:  &quot;, was &quot;(mildly derogatory, slang, ethnic slur) A person of Asian descent, especially a Chinese American, who has assimilated into Western culture or married a Caucasian (from the &quot;yellow&quot; outside and &quot;white&quot; inside). Compare coconut (&ldquo;assimilated Hispanic or Black&rdquo;) or Oreo (&ldquo;Black person who is &quot;black outside&quot; and &quot;white inside&quot;&rdquo;).&quot;, was &quot;(nuclear physics) A banana equivalent dose.&quot;, was &quot;(colloquial) A catamorphism (from the use of banana brackets in the notation).&quot;, was &quot;(informal) a penis quotations ▼&quot;, was &quot;&quot;, was &quot;&quot;, was &quot;&quot;, was &quot;&quot;, was &quot;&quot;, was &quot;&quot;</span></div>
+<pre class="failure">java.lang.AssertionError: 
+Expected: a collection containing a string containing &quot;Wrong answer dude&quot;
+     but: was &quot;An elongated curved tropical fruit that grows in bunches and has a creamy flesh and a smooth skin.
+(Canada, US, Britain, Ireland) Especially, the sweet, yellow fruit of the Cavendish banana cultivar.&quot;, was &quot;(Canada, US, Britain, Ireland) Especially, the sweet, yellow fruit of the Cavendish banana cultivar.&quot;, was &quot;The tropical tree-like plant which bears clusters of bananas. The plant, usually of the genus Musa but sometimes also including plants from Ensete, has large, elongated leaves and is related to the plantain.&quot;, was &quot;(uncountable) A yellow colour, like that of a banana's skin.
+banana colour:  &quot;, was &quot;(mildly derogatory, slang, ethnic slur) A person of Asian descent, especially a Chinese American, who has assimilated into Western culture or married a Caucasian (from the &quot;yellow&quot; outside and &quot;white&quot; inside). Compare coconut (&ldquo;assimilated Hispanic or Black&rdquo;) or Oreo (&ldquo;Black person who is &quot;black outside&quot; and &quot;white inside&quot;&rdquo;).&quot;, was &quot;(nuclear physics) A banana equivalent dose.&quot;, was &quot;(colloquial) A catamorphism (from the use of banana brackets in the notation).&quot;, was &quot;(informal) a penis quotations ▼&quot;, was &quot;&quot;, was &quot;&quot;, was &quot;&quot;, was &quot;&quot;, was &quot;&quot;, was &quot;&quot;
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:8)
+	at com.gdn.qa.modules.ui.training.behaviour.EndUserBehaviour.should_see_definition(EndUserBehaviour.java:27)
+	at com.gdn.qa.modules.ui.training.behaviour.EndUserBehaviour$$EnhancerByCGLIB$$c2d61b23.CGLIB$should_see_definition$4(&lt;generated&gt;)
+	at com.gdn.qa.modules.ui.training.behaviour.EndUserBehaviour$$EnhancerByCGLIB$$c2d61b23$$FastClassByCGLIB$$6fa069fc.invoke(&lt;generated&gt;)
+	at net.sf.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:228)
+	at net.thucydides.core.steps.StepInterceptor.invokeMethod(StepInterceptor.java:395)
+	at net.thucydides.core.steps.StepInterceptor.executeTestStepMethod(StepInterceptor.java:380)
+	at net.thucydides.core.steps.StepInterceptor.runTestStep(StepInterceptor.java:355)
+	at net.thucydides.core.steps.StepInterceptor.testStepResult(StepInterceptor.java:132)
+	at net.thucydides.core.steps.StepInterceptor.intercept(StepInterceptor.java:61)
+	at com.gdn.qa.modules.ui.training.behaviour.EndUserBehaviour$$EnhancerByCGLIB$$c2d61b23.should_see_definition(&lt;generated&gt;)
+	at com.gdn.qa.modules.ui.training.scenario.DefinitionScenario.thenTheyShouldSeeADefinitionContainingTheWords(DefinitionScenario.java:27)
+	(reflection-invoke)
+	at org.jbehave.core.steps.StepCreator$ParametrisedStep.perform(StepCreator.java:733)
+	at org.jbehave.core.embedder.PerformableTree$FineSoFar.run(PerformableTree.java:346)
+...</pre>
+</div>
+</div>

@@ -3,7 +3,6 @@ package com.blibli.oss.qa.util.model.earlgrey;
 import com.fasterxml.jackson.annotation.*;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**

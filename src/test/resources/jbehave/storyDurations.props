@@ -1,0 +1,8 @@
+#org.jbehave.core.embedder.StoryManager
+#Sun Mar 08 00:04:56 ICT 2020
+stories/consult_dictionary/LookUpPear.story=12000
+stories/consult_dictionary/LookUpBanana.story=13000
+threads=1
+total=41000
+stories/consult_dictionary/LookUpMango.story=16000
+threadAverage=41000
