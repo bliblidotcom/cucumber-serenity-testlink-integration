@@ -4,6 +4,7 @@ import br.eti.kinoshita.testlinkjavaapi.TestLinkAPI;
 import br.eti.kinoshita.testlinkjavaapi.constants.*;
 import br.eti.kinoshita.testlinkjavaapi.model.TestCase;
 import br.eti.kinoshita.testlinkjavaapi.model.TestCaseStep;
+import br.eti.kinoshita.testlinkjavaapi.model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.gdn.qa.util.constant.ReportGeneratorPolicy;
@@ -58,6 +59,11 @@ public abstract class BaseTestResultReader<T> {
     this.username = System.getProperty("user.name", "automation-test");
     if (!connection.doesUserExist(this.username)) {
       username = "automation-test";
+    }
+    User user = connection.getUserByLogin(this.username);
+    if (user.getIsActive() != 1) {
+      throw new Exception("Your user " + username
+          + " is not active or you are not authorized to do this operation");
     }
   }
 
