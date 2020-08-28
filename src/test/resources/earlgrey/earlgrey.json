@@ -1,0 +1,79 @@
+{
+  "FormatVersion": "1.1",
+  "TestableSummaries": [
+    {
+      "DiagnosticsDirectory": "BlibliMobileUITests-F0E28B14-7735-4AF8-BE08-6CACB81AEEB3",
+      "ProjectPath": "BlibliMobile-iOS.xcodeproj",
+      "TargetName": "BlibliMobileUITests",
+      "TestKind": "app hosted",
+      "TestName": "BlibliMobileUITests",
+      "TestObjectClass": "IDESchemeActionTestableSummary",
+      "Tests": [
+        {
+          "Duration": 163.699140072,
+          "Subtests": [
+            {
+              "Duration": 163.696141005,
+              "Subtests": [
+                {
+                  "Duration": 90.2584819794,
+                  "Subtests": [
+                    {
+                      "Duration": 53.9193220139,
+                      "TestIdentifier": "S001_Sanity/test001_signUpUser()",
+                      "TestName": "test001_SignUpUser()",
+                      "TestObjectClass": "IDESchemeActionTestSummary",
+                      "TestStatus": "Success",
+                      "TestSummaryGUID": "CB520B93-A52E-4927-8B99-BFB2AF035674"
+                    },
+                    {
+                      "Duration": 36.3363090754,
+                      "TestIdentifier": "S001_Sanity/test002_loginUser()",
+                      "TestName": "test002_LoginUser()",
+                      "TestObjectClass": "IDESchemeActionTestSummary",
+                      "TestStatus": "Success",
+                      "TestSummaryGUID": "ACAD0B08-1A82-4B5D-BDB0-905FA1AA6B5E"
+                    }
+                  ],
+                  "TestIdentifier": "S001_Sanity",
+                  "TestName": "S001_Sanity_10952507",
+                  "TestObjectClass": "IDESchemeActionTestSummaryGroup"
+                },
+                {
+                  "Duration": 73.434081912,
+                  "Subtests": [
+                    {
+                      "Duration": 37.499861002,
+                      "TestIdentifier": "S002_PhoneCredit/test001_LoginUser1()",
+                      "TestName": "test001_LoginUser1()",
+                      "TestObjectClass": "IDESchemeActionTestSummary",
+                      "TestStatus": "Failure",
+                      "TestSummaryGUID": "1449195F-F757-4BC7-B350-2276F73FD432"
+                    },
+                    {
+                      "Duration": 35.9299609661,
+                      "TestIdentifier": "S002_PhoneCredit/test002_LoginUser2()",
+                      "TestName": "test002_LoginUser3()",
+                      "TestObjectClass": "IDESchemeActionTestSummary",
+                      "TestStatus": "Failure",
+                      "TestSummaryGUID": "04306787-F2F3-4CB6-B187-576E31178292"
+                    }
+                  ],
+                  "TestIdentifier": "S002_PhoneCredit",
+                  "TestName": "S002_PhoneCredit_10952508",
+                  "TestObjectClass": "IDESchemeActionTestSummaryGroup"
+                }
+              ],
+              "TestIdentifier": "BlibliMobileUITests.xctest",
+              "TestName": "BlibliMobileUITests.xctest",
+              "TestObjectClass": "IDESchemeActionTestSummaryGroup"
+            }
+          ],
+          "TestIdentifier": "All tests",
+          "TestName": "All tests",
+          "TestObjectClass": "IDESchemeActionTestSummaryGroup"
+        }
+      ]
+    }
+  ]
+}

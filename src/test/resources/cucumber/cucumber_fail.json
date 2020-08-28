@@ -1,0 +1,125 @@
+[
+  {
+    "line": 2,
+    "elements": [
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 7593758226,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.beforeRun()"
+            }
+          }
+        ],
+        "line": 5,
+        "name": "Looking up the definition of \u0027apple\u0027",
+        "description": "",
+        "id": "lookup-a-definition;looking-up-the-definition-of--apple-",
+        "after": [
+          {
+            "result": {
+              "duration": 83645,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberHooks.afterRun()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 4810005154,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "the user is on the Wikionary home page",
+            "match": {
+              "location": "DefinitionSteps.theUserIsOnWikionaryHomePage()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 2339972610,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "the user looks up the definition of the word \u0027apple\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "apple",
+                  "offset": 46
+                }
+              ],
+              "location": "DefinitionSteps.theUserLooksUpTheDefinitionOfTheWordString(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "error_message": "java.lang.AssertionError: \nExpected: a collection containing a string containing \"Error A common, round fruit produced by the tree Malus domestica, cultivated in temperate climates.\"\n     but: was \"A common, round fruit produced by the tree Malus domestica, cultivated in temperate climates. [from 9th c.] quotations ▼\", was \"\", was \"\", was \"\", was \"Any of various tree-borne fruits or vegetables especially considered as resembling an apple; also (with qualifying words) used to form the names of other specific fruits such as custard apple, rose apple, thorn apple etc. [from 9th c.] quotations ▼\", was \"\", was \"\", was \"\", was \"The fruit of the Tree of Knowledge, eaten by Adam and Eve according to post-Biblical Christian tradition; the forbidden fruit. [from 11th c.] quotations ▼\", was \"\", was \"\", was \"A tree of the genus Malus, especially one cultivated for its edible fruit; the apple tree. [from 15th c.] quotations ▼\", was \"\", was \"\", was \"\", was \"\", was \"The wood of the apple tree. [from 19th c.]\", was \"(in the plural, Cockney rhyming slang) Short for apples and pears, slang for stairs. [from 20th c.]\", was \"(baseball, slang, obsolete) The ball in baseball. [from 20th c.]\", was \"(informal) When smiling, the round, fleshy part of the cheeks between the eyes and the corners of the mouth.\", was \"(pejorative, ethnic slur) A Native American or red-skinned person who acts and/or thinks like a white (Caucasian) person. quotations ▼\", was \"\", was \"\", was \"(ice hockey slang) An assist.\"\n\tat org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)\n\tat org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:8)\n\tat com.gdn.qa.module.test.steps.DefinitionSteps.theyShouldSeeTheDefinitionString(DefinitionSteps.java:38)\n\tat ✽.they should see the definition \u0027Error A common, round fruit produced by the tree Malus domestica, cultivated in temperate climates.\u0027(src/test/resources/features/LookUp.feature:8)\n",
+              "duration": 856945280,
+              "status": "failed"
+            },
+            "line": 8,
+            "name": "they should see the definition \u0027Error A common, round fruit produced by the tree Malus domestica, cultivated in temperate climates.\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Error A common, round fruit produced by the tree Malus domestica, cultivated in temperate climates.",
+                  "offset": 32
+                }
+              ],
+              "location": "DefinitionSteps.theyShouldSeeTheDefinitionString(String)"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@LookUpFeature"
+          },
+          {
+            "name": "@TestSuiteId\u003d9245424"
+          },
+          {
+            "name": "@Positive"
+          },
+          {
+            "name": "@apple"
+          }
+        ]
+      }
+    ],
+    "name": "LookUp A Definition",
+    "description": "",
+    "id": "lookup-a-definition",
+    "keyword": "Feature",
+    "uri": "src/test/resources/features/LookUp.feature",
+    "tags": [
+      {
+        "name": "@LookUpFeature",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 1
+        }
+      },
+      {
+        "name": "@TestSuiteId\u003d9245424",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 16
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,437 @@
+[
+  {
+    "line": 2,
+    "elements": [
+      {
+        "line": 7,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 14776514700,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "user go to blibli homepage",
+            "match": {
+              "location": "LoginSteps.userGoToHomePageBlibli()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 2603444700,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "user click login button",
+            "match": {
+              "location": "LoginSteps.userClickMasukButtonOnHomePage()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 706315500,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "user click username field",
+            "match": {
+              "location": "LoginSteps.userClickUsernameFieldOnLoginPage()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 1454654900,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "user input username with value \"properties(pnv.member.email)\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "properties(pnv.member.email)",
+                  "offset": 32
+                }
+              ],
+              "location": "LoginSteps.userInputUsernameWithValue(String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 577953000,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "user click password field",
+            "match": {
+              "location": "LoginSteps.userClickPasswordFieldOnLoginPage()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 632581700,
+              "status": "passed"
+            },
+            "line": 13,
+            "name": "user input password with value \"properties(pnv.member.password)\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "properties(pnv.member.password)",
+                  "offset": 32
+                }
+              ],
+              "location": "LoginSteps.userInputPasswordWithValue(String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 583212500,
+              "status": "passed"
+            },
+            "line": 14,
+            "name": "user click masuk button",
+            "match": {
+              "location": "LoginSteps.userClickMasukButtonOnLoginPage()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 5495327400,
+              "status": "passed"
+            },
+            "line": 15,
+            "name": "user already login",
+            "match": {
+              "location": "LoginSteps.userAlreadyLogin()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 2514841600,
+              "status": "passed"
+            },
+            "line": 16,
+            "name": "refresh page to avoid stale error",
+            "match": {
+              "location": "TrackerSteps.mainUiHomepageRefreshPageToAvoidStaleError()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "line": 75,
+        "name": "User should see error when exceeding cart limit after adding wishlist item to cart mobile",
+        "description": "",
+        "id": "verify-the-functionality-in-wishlist-page;user-should-see-error-when-exceeding-cart-limit-after-adding-wishlist-item-to-cart-mobile",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 1337584200,
+              "status": "passed"
+            },
+            "line": 76,
+            "name": "system get cart item limit per user",
+            "match": {
+              "location": "OtherSteps.systemGetCartItemLimitPerUser()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 979467900,
+              "status": "passed"
+            },
+            "line": 77,
+            "name": "user add item more than cart limit",
+            "match": {
+              "location": "WishlistSteps.userAddItemMoreThanCartLimit()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 923036400,
+              "status": "passed"
+            },
+            "line": 78,
+            "name": "user should see error popup",
+            "match": {
+              "location": "WishlistSteps.userShouldSeeErrorPopup()"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@WishlistComponentFeature"
+          },
+          {
+            "name": "@TestSuiteId\u003d10921024"
+          },
+          {
+            "name": "@13Feb"
+          },
+          {
+            "name": "@Positive"
+          },
+          {
+            "name": "@Component"
+          },
+          {
+            "name": "@Incomplete"
+          },
+          {
+            "name": "@TestSuiteId\u003d"
+          },
+          {
+            "name": "@TestLinkId\u003dSBY-280"
+          }
+        ]
+      },
+      {
+        "line": 7,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 6431665700,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "user go to blibli homepage",
+            "match": {
+              "location": "LoginSteps.userGoToHomePageBlibli()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 2337801700,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "user click login button",
+            "match": {
+              "location": "LoginSteps.userClickMasukButtonOnHomePage()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 722249700,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "user click username field",
+            "match": {
+              "location": "LoginSteps.userClickUsernameFieldOnLoginPage()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 1085824300,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "user input username with value \"properties(pnv.member.email)\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "properties(pnv.member.email)",
+                  "offset": 32
+                }
+              ],
+              "location": "LoginSteps.userInputUsernameWithValue(String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 697568300,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "user click password field",
+            "match": {
+              "location": "LoginSteps.userClickPasswordFieldOnLoginPage()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 697663600,
+              "status": "passed"
+            },
+            "line": 13,
+            "name": "user input password with value \"properties(pnv.member.password)\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "properties(pnv.member.password)",
+                  "offset": 32
+                }
+              ],
+              "location": "LoginSteps.userInputPasswordWithValue(String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 596080400,
+              "status": "passed"
+            },
+            "line": 14,
+            "name": "user click masuk button",
+            "match": {
+              "location": "LoginSteps.userClickMasukButtonOnLoginPage()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 5523692000,
+              "status": "passed"
+            },
+            "line": 15,
+            "name": "user already login",
+            "match": {
+              "location": "LoginSteps.userAlreadyLogin()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 2525045500,
+              "status": "passed"
+            },
+            "line": 16,
+            "name": "refresh page to avoid stale error",
+            "match": {
+              "location": "TrackerSteps.mainUiHomepageRefreshPageToAvoidStaleError()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "line": 81,
+        "name": "User should see error when exceeding cart limit after adding wishlist item to cart desktop",
+        "description": "",
+        "id": "verify-the-functionality-in-wishlist-page;user-should-see-error-when-exceeding-cart-limit-after-adding-wishlist-item-to-cart-desktop",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 1396170600,
+              "status": "passed"
+            },
+            "line": 82,
+            "name": "system get cart item limit per user",
+            "match": {
+              "location": "OtherSteps.systemGetCartItemLimitPerUser()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 965453700,
+              "status": "passed"
+            },
+            "line": 83,
+            "name": "user add item more than cart limit",
+            "match": {
+              "location": "WishlistSteps.userAddItemMoreThanCartLimit()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 947523900,
+              "status": "passed"
+            },
+            "line": 84,
+            "name": "user should see error popup",
+            "match": {
+              "location": "WishlistSteps.userShouldSeeErrorPopup()"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@WishlistComponentFeature"
+          },
+          {
+            "name": "@TestSuiteId\u003d14231950"
+          },
+          {
+            "name": "@13Feb"
+          },
+          {
+            "name": "@Positive"
+          },
+          {
+            "name": "@Component"
+          },
+          {
+            "name": "@Incomplete"
+          },
+          {
+            "name": "@TestSuiteId\u003d14231950"
+          }
+        ]
+      }
+    ],
+    "name": "Verify the functionality in wishlist page",
+    "description": "Ability: User has the ability to test wishlist\nBusiness Need:\n  We are specifying the need of aku bla bla",
+    "id": "verify-the-functionality-in-wishlist-page",
+    "keyword": "Feature",
+    "uri": "src/test/resources/features/Component Test/Wishlist/Wishlist.feature",
+    "tags": [
+      {
+        "name": "@WishlistComponentFeature",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 1
+        }
+      },
+      {
+        "name": "@TestSuiteId\u003d14231950",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 27
+        }
+      },
+      {
+        "name": "@13Feb",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 49
+        }
+      }
+    ]
+  }
+]
