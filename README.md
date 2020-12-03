@@ -40,6 +40,23 @@ Add this in your ```pom.xml```
                 ...........Your Other Plugin.......
               </plugins>
 ``` 
+Don't Forget to add our blibli.com Open Source Plugin Repository 
+
+```xml
+<pluginRepositories>
+................... Your other plugin Repositories .............
+<pluginRepository>
+    <snapshots>
+        <enabled>false</enabled>
+    </snapshots>
+    <id>bintray-bliblidotcom-maven</id>
+    <name>bintray</name>
+    <url>https://dl.bintray.com/bliblidotcom/maven</url>
+</pluginRepository>
+```
+
+Add new user with name and username **automation-test** in your testlink account and makesure it's able to read , write , update and execute any testcase , this user is used for updating the testcase and also for execution the testcase.
+
 And Add plugin to generate file called **cucumber.json** in your folder **target/destination/cucumber.json** this in your Cucumber Options
 ```java
 @CucumberOptions(features = "src/test/resources/features/"
