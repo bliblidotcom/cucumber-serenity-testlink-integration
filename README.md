@@ -16,27 +16,27 @@ Add this in your ```pom.xml```
 ```xml
                 <plugins>
                    ...........Your Other Plugin.......
-                 <plugin>
-                    <groupId>ccom.github.bliblidotcom</groupId>
-                    <artifactId>cucumber-serenity-testlink-integration</artifactId>
-                    <version>${serenity.testlink.integration.version}</version>
-                    <executions>
-                        <execution>
-                            <phase>post-integration-test</phase>
-                            <goals>
-                                <goal>testlink-serenity</goal>
-                            </goals>
-                            <configuration>
-                                <testlinkURL>[Your Testlink URL]/lib/api/xmlrpc/v1/xmlrpc.php</testlinkURL>
-                                <devKey>Your Testlink Dev Key</devKey>
-                                <projectName>Your Project Name in testlink (Ex Finance , Android Apps)</projectName>
-                                <testPlanName>Your Test Plan Name</testPlanName>
-                                <buildName>Your Build Name in Your Test Plan Name</buildName>
-                                <platformName>Your Platform Name(Optional)</platformName>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
+                <plugin>
+                <groupId>com.blibli.oss.qa.util</groupId>
+                <artifactId>cucumber-serenity-testlink-integration</artifactId>
+                <version>4.0.0</version>
+                <executions>
+                    	<execution>
+                        	<phase>post-integration-test</phase>
+                        		<goals>
+                            			<goal>testlink-serenity</goal>
+                        		</goals>
+                        	<configuration>
+                            		<testlinkURL>[Your Testlink URL]/lib/api/xmlrpc/v1/xmlrpc.php</testlinkURL>
+                            		<devKey>Your Testlink Dev Key</devKey>
+                            		<projectName>Your Project Name in testlink (Ex Finance , Android Apps)</projectName>
+               	            		<testPlanName>Your Test Plan Name</testPlanName>
+              		        	<buildName>Your Build Name in Your Test Plan Name</buildName>
+                 	        	<platformName>Your Platform Name(Optional)</platformName>
+              		 	</configuration>
+                	</execution>
+             	   </executions>
+            	</plugin>
                 ...........Your Other Plugin.......
               </plugins>
 ``` 
@@ -46,11 +46,11 @@ Don't Forget to add our blibli.com Open Source Plugin Repository
 <pluginRepositories>
 ................... Your other plugin Repositories .............
 <pluginRepository>
-    <snapshots>
-        <enabled>false</enabled>
-    </snapshots>
-		  <id>jitpack.io</id>
-    <url>https://jitpack.io</url>
+    	<snapshots>
+        	<enabled>false</enabled>
+    	</snapshots>
+	<id>jitpack.io</id>
+    	<url>https://jitpack.io</url>
 </pluginRepository>
 ```
 
