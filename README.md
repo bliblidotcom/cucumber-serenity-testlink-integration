@@ -17,7 +17,7 @@ Add this in your ```pom.xml```
                 <plugins>
                    ...........Your Other Plugin.......
                  <plugin>
-                    <groupId>com.blibli.oss.qa.util</groupId>
+                    <groupId>ccom.github.bliblidotcom</groupId>
                     <artifactId>cucumber-serenity-testlink-integration</artifactId>
                     <version>${serenity.testlink.integration.version}</version>
                     <executions>
@@ -49,9 +49,8 @@ Don't Forget to add our blibli.com Open Source Plugin Repository
     <snapshots>
         <enabled>false</enabled>
     </snapshots>
-    <id>bintray-bliblidotcom-maven</id>
-    <name>bintray</name>
-    <url>https://dl.bintray.com/bliblidotcom/maven</url>
+		  <id>jitpack.io</id>
+    <url>https://jitpack.io</url>
 </pluginRepository>
 ```
 
