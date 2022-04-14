@@ -19,7 +19,7 @@
         <maven.plugin.annotations.version>3.4</maven.plugin.annotations.version>
         <junit.version>4.12</junit.version>
         <schema.validator.version>1.3.0</schema.validator.version>
-        <fasterxml.jackson.version>2.12.0</fasterxml.jackson.version>
+        <fasterxml.jackson.version>2.12.6.1</fasterxml.jackson.version>
         <testlink.java.api.version>1.9.20-0</testlink.java.api.version>
         <github.global.server>github</github.global.server>
     </properties>
