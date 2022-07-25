@@ -17,9 +17,9 @@ Add this in your ```pom.xml```
                 <plugins>
                    ...........Your Other Plugin.......
                 <plugin>
-                <groupId>com.blibli.oss.qa.util</groupId>
-                <artifactId>cucumber-serenity-testlink-integration</artifactId>
-                <version>4.0.0</version>
+	    	<groupId>com.github.bliblidotcom</groupId>
+	    	<artifactId>cucumber-serenity-testlink-integration</artifactId>
+                <version>4.0.1</version>
                 <executions>
                     	<execution>
                         	<phase>post-integration-test</phase>
